@@ -31,9 +31,10 @@
 
   html { scroll-behavior: smooth; }
 
+  html { background: var(--bg-lo); }
+
   body {
     background: linear-gradient(175deg, var(--bg-hi) 0%, var(--bg-lo) 100%);
-    background-attachment: fixed;
     color: var(--ink);
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size: 16px;
@@ -250,9 +251,13 @@
   /* lists */
 
   ol.rules { margin: 26px 0 0 0; list-style: none; counter-reset: r; display: grid; gap: 14px; max-width: 50em; }
-  ol.rules li { counter-increment: r; display: grid; grid-template-columns: 40px 1fr; gap: 14px; color: var(--muted); font-size: 0.98rem; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 54px; color: var(--muted); font-size: 0.98rem; }
   ol.rules li::before {
     content: counter(r);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 36px;
     font-family: 'Gambarino', Georgia, serif;
     font-size: 1.35rem;
     color: var(--gold-deep);
@@ -337,7 +342,9 @@
     .phases { grid-template-columns: 1fr; }
     .principle { grid-template-columns: 52px 1fr; gap: 16px; }
     .principle .pn { font-size: 2.4rem; }
-    .topbar .meta { font-size: 0.78rem; }
+    .topbar { flex-direction: column; gap: 4px; }
+    .topbar .meta { font-size: 0.8rem; }
+    .fan { display: none; }
   }
 </style>
 </head>
