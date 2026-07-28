@@ -1,0 +1,10 @@
+{
+  "name": "rise-of-a-nation-proposal",
+  "compatibility_date": "2026-07-01",
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "account_id": "0b01374e269cd80008534b2efebe3c58",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  }
+}

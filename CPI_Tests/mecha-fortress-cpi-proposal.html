@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mecha Fortress - CPI Theme Test Proposal | NOXGAMES</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap');
+
+    :root {
+      --nox-blue-dark: #001a33;
+      --nox-blue: #003366;
+      --nox-blue-light: #004d99;
+      --nox-accent: #007BFF;
+      --nox-cyan: #00d2ff;
+      --nox-magenta: #ff00ff;
+      --ink: #ffffff;
+      --muted: rgba(255, 255, 255, 0.68);
+      --line: rgba(255, 255, 255, 0.1);
+      --paper: #001a33;
+      --white: #ffffff;
+      --navy: #001a33;
+      --green: #27b978;
+      --amber: #ffbd4a;
+      --red: #f75d5d;
+      --purple: #8c6dff;
+      --glass: rgba(5, 16, 31, 0.72);
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: #00060d;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(0, 123, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 85% 15%, rgba(0, 210, 255, 0.12), transparent 26%),
+        radial-gradient(circle at 50% 100%, rgba(255, 0, 255, 0.08), transparent 32%),
+        linear-gradient(180deg, #02101f 0%, #000c17 45%, #00060d 100%);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.62), transparent 92%);
+      z-index: -1;
+    }
+
+    a { color: inherit; }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(2, 10, 20, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      padding: 3px;
+      background: #000;
+      border-radius: 9999px;
+    }
+
+    .brand span {
+      font-size: 1rem;
+      font-family: Montserrat, Inter, sans-serif;
+      letter-spacing: 0.08em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 0.86rem;
+      font-weight: 800;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    nav a {
+      text-decoration: none;
+      padding: 9px 10px;
+      border-radius: 9999px;
+    }
+
+    nav a:hover {
+      background: rgba(0, 123, 255, 0.22);
+      color: var(--nox-cyan);
+    }
+
+    .hero {
+      padding: 74px 0 38px;
+      min-height: calc(100vh - 72px);
+      display: grid;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 0.78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--nox-cyan), var(--nox-accent));
+      box-shadow: 0 0 16px rgba(0, 210, 255, 0.65);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin: 22px 0 20px;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.91;
+      letter-spacing: 0;
+      max-width: 10ch;
+      font-family: Montserrat, Inter, sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    h1::after {
+      content: "";
+      display: block;
+      width: min(420px, 70%);
+      height: 3px;
+      margin-top: 18px;
+      background: linear-gradient(90deg, var(--nox-cyan), var(--nox-accent), transparent);
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 1.12rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink);
+      font-weight: 900;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      box-shadow: 0 0 0 rgba(0, 123, 255, 0);
+    }
+
+    .button.primary {
+      background: var(--nox-accent);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.45);
+    }
+
+    .button:hover {
+      border-color: rgba(0, 210, 255, 0.55);
+      background: rgba(0, 123, 255, 0.24);
+    }
+
+    .hero-panel {
+      position: relative;
+      min-height: 640px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.72)),
+        radial-gradient(circle at center, var(--nox-blue) 0%, var(--nox-blue-dark) 100%);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0 46%, rgba(0, 210, 255, 0.2) 46% 47%, transparent 47%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 38px);
+      z-index: -1;
+    }
+
+    .phone-stack {
+      position: absolute;
+      inset: 44px 42px 44px auto;
+      width: min(360px, 72%);
+      border-radius: 28px;
+      background: #071c2e;
+      border: 10px solid #000;
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.34);
+      overflow: hidden;
+    }
+
+    .phone-stage {
+      position: absolute;
+      inset: 0;
+      padding: 18px;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(4, 18, 31, 0.18), rgba(4, 18, 31, 0.86)),
+        radial-gradient(circle at 50% 38%, rgba(0, 210, 255, 0.48), transparent 10rem),
+        linear-gradient(160deg, #102d46 0%, #4a1b1f 52%, #08111d 100%);
+    }
+
+    .fake-ui {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .fake-ui div {
+      padding: 8px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+    }
+
+    .battlefield {
+      position: absolute;
+      inset: 94px 20px 152px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      align-items: end;
+      justify-items: center;
+    }
+
+    .horde {
+      width: 100%;
+      height: 60%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: end;
+      gap: 8px;
+    }
+
+    .unit {
+      height: var(--h);
+      border-radius: 999px 999px 12px 12px;
+      background: linear-gradient(180deg, var(--c), #1b2530);
+      border: 2px solid rgba(255,255,255,0.22);
+      box-shadow: 0 0 22px color-mix(in srgb, var(--c), transparent 50%);
+    }
+
+    .fortress {
+      width: 94%;
+      height: 92px;
+      border: 2px solid rgba(255,255,255,0.24);
+      border-radius: 8px 8px 0 0;
+      background:
+        linear-gradient(90deg, transparent 0 18%, rgba(255,255,255,0.12) 18% 19%, transparent 19% 39%, rgba(255,255,255,0.12) 39% 40%, transparent 40% 60%, rgba(255,255,255,0.12) 60% 61%, transparent 61% 82%, rgba(255,255,255,0.12) 82% 83%, transparent 83%),
+        linear-gradient(180deg, var(--nox-cyan) 0%, var(--nox-blue-light) 100%);
+      box-shadow: inset 0 18px 0 rgba(255,255,255,0.16);
+    }
+
+    .cards {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .mini-card {
+      min-height: 110px;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(5, 16, 31, 0.78);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 850;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .mini-icon {
+      height: 42px;
+      margin-bottom: 8px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, var(--nox-cyan), var(--nox-magenta));
+    }
+
+    .floating-note {
+      position: absolute;
+      left: 32px;
+      bottom: 34px;
+      max-width: 210px;
+      padding: 16px;
+      border-radius: var(--radius);
+      background: rgba(5, 16, 31, 0.86);
+      color: #fff;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .floating-note strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+
+    section {
+      padding: 54px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1;
+      letter-spacing: 0;
+      margin-bottom: 0;
+      font-family: Montserrat, Inter, sans-serif;
+      font-weight: 900;
+    }
+
+    h3 {
+      color: #fff;
+    }
+
+    .section-kicker {
+      margin-bottom: 8px;
+      color: var(--nox-cyan);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .section-note {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    strong {
+      color: #fff;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .grid.four { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+
+    .pad { padding: 22px; }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 170px;
+    }
+
+    .metric .value {
+      font-size: 2.1rem;
+      line-height: 1;
+      font-weight: 950;
+      color: var(--nox-cyan);
+      font-family: Montserrat, Inter, sans-serif;
+    }
+
+    .metric .label {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(0, 123, 255, 0.18);
+      color: var(--nox-cyan);
+      font-size: 0.75rem;
+      font-weight: 850;
+      border: 1px solid rgba(0, 210, 255, 0.32);
+    }
+
+    .decision-band {
+      padding: 26px;
+      color: #eaf8ff;
+      background:
+        radial-gradient(circle at top left, rgba(0, 123, 255, 0.28), transparent 38%),
+        radial-gradient(circle at 90% 15%, rgba(255, 0, 255, 0.12), transparent 28%),
+        linear-gradient(135deg, #020a14, #001a33 70%, #003366);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .decision-band h2,
+    .decision-band p {
+      color: inherit;
+    }
+
+    .decision-band p {
+      margin-bottom: 0;
+      max-width: 860px;
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .reference-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .reference-card {
+      position: relative;
+      min-height: 430px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #0d2030;
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .reference-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .reference-card .fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: end;
+      padding: 20px;
+      background:
+        linear-gradient(180deg, transparent 38%, rgba(0, 26, 51, 0.9) 100%);
+    }
+
+    .fallback h3 {
+      margin-bottom: 8px;
+      font-size: 1.35rem;
+    }
+
+    .fallback p {
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.92rem;
+    }
+
+    .theme-card {
+      display: grid;
+      grid-template-rows: 220px auto;
+      min-height: 100%;
+    }
+
+    .theme-visual {
+      position: relative;
+      overflow: hidden;
+      background: var(--theme-bg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .theme-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 26, 51, 0.86)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.12) 0 1px, transparent 1px 52px);
+    }
+
+    .theme-visual::after {
+      content: attr(data-title);
+      position: absolute;
+      left: 18px;
+      bottom: 16px;
+      right: 18px;
+      color: #fff;
+      font-size: 1.45rem;
+      line-height: 1;
+      font-weight: 950;
+      text-shadow: 0 3px 16px rgba(0,0,0,0.55);
+      font-family: Montserrat, Inter, sans-serif;
+      text-transform: uppercase;
+    }
+
+    .silhouette {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      width: 54%;
+      height: 46%;
+      transform: translateX(-50%);
+      border-radius: 50% 50% 8px 8px;
+      background: var(--shape);
+      box-shadow: 0 0 40px rgba(255,255,255,0.22);
+      display: none;
+    }
+
+    .theme-body h3 {
+      margin-bottom: 10px;
+      font-size: 1.35rem;
+    }
+
+    .theme-body p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding-top: 12px;
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .score {
+      display: grid;
+      place-items: center;
+      height: 52px;
+      border-radius: 8px;
+      background: rgba(0, 123, 255, 0.2);
+      color: var(--nox-cyan);
+      font-weight: 950;
+      font-size: 1.2rem;
+      border: 1px solid rgba(0, 210, 255, 0.35);
+    }
+
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: rgba(5, 16, 31, 0.72);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+
+    .matrix th,
+    .matrix td {
+      padding: 15px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      font-size: 0.94rem;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .matrix th {
+      color: #fff;
+      background: rgba(0, 123, 255, 0.24);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .matrix tr:last-child td { border-bottom: 0; }
+
+    .tag {
+      display: inline-flex;
+      padding: 5px 8px;
+      margin: 2px 4px 2px 0;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--nox-cyan);
+      font-size: 0.72rem;
+      font-weight: 850;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .priority {
+      border-left: 5px solid var(--nox-cyan);
+    }
+
+    .flow {
+      counter-reset: step;
+    }
+
+    .flow .card {
+      position: relative;
+    }
+
+    .flow .card::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      right: 18px;
+      top: 16px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 99px;
+      background: linear-gradient(135deg, var(--nox-cyan), var(--nox-accent));
+      color: #001a33;
+      font-weight: 950;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .list li + li { margin-top: 8px; }
+
+    .quote {
+      padding: 18px;
+      border-left: 5px solid var(--nox-cyan);
+      background: rgba(0, 123, 255, 0.18);
+      color: rgba(255, 255, 255, 0.86);
+      border-radius: 0 8px 8px 0;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .phase {
+      min-height: 190px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .phase strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    .phase span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      padding: 40px 0 56px;
+      color: rgba(255, 255, 255, 0.48);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid.two,
+      .grid.three,
+      .grid.four,
+      .reference-grid,
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 46px;
+      }
+
+      .hero-panel {
+        min-height: 560px;
+      }
+
+      .phone-stack {
+        right: 24px;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .page-shell {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .topbar-inner {
+        height: auto;
+        padding: 14px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 15vw, 4.5rem);
+      }
+
+      .hero-panel {
+        min-height: 500px;
+      }
+
+      .phone-stack {
+        inset: 24px 18px 24px auto;
+        width: calc(100% - 36px);
+      }
+
+      .floating-note {
+        display: none;
+      }
+
+      .matrix {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="page-shell topbar-inner">
+      <a class="brand" href="#top" aria-label="NOXGAMES">
+        <img src="assets/noxgames-logo.png" alt="NOXGAMES logo" />
+        <span>NOXGAMES</span>
+      </a>
+      <nav aria-label="Navigace proposalu">
+        <a href="#summary">Shrnutí</a>
+        <a href="#references">Reference</a>
+        <a href="#round-one">Round 1</a>
+        <a href="#nostalgia-bridges">Nostalgia</a>
+        <a href="#casual">Casual CPI</a>
+        <a href="#production">Produkce</a>
+        <a href="#decisions">Rozhodnutí</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="page-shell hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>CPI Theme Test Proposal · Mecha Fortress</div>
+          <h1>Theme test bez drahého pivotu.</h1>
+          <p class="hero-copy">
+            Návrh propojuje Kubův Growth brief se směrem od CEO / Jirky / Peťka: nejdřív otestovat tři silné reskiny,
+            paralelně ale připravit levnější casual signál pro minimální CPI typu We Are Warriors, Kingdom Rush, Rush Royale
+            a Wittle Defender.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#decisions">Přejít na meeting rozhodnutí</a>
+            <a class="button" href="#production">Produkční plán</a>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-label="Stylizovaný mobilní battle mockup">
+          <div class="phone-stack">
+            <div class="phone-stage">
+              <div class="fake-ui">
+                <div>Wave 8/20</div>
+                <div>Wall 68%</div>
+                <div>XP 24,750</div>
+                <div>CPI Test</div>
+              </div>
+              <div class="battlefield">
+                <div class="horde">
+                  <span class="unit" style="--h: 74px; --c: #ff7d3f"></span>
+                  <span class="unit" style="--h: 118px; --c: #00d2ff"></span>
+                  <span class="unit" style="--h: 158px; --c: #ffbd4a"></span>
+                  <span class="unit" style="--h: 106px; --c: #27b978"></span>
+                  <span class="unit" style="--h: 130px; --c: #8c6dff"></span>
+                </div>
+                <div class="fortress"></div>
+              </div>
+              <div class="cards">
+                <div class="mini-card"><div class="mini-icon"></div>Landing page only</div>
+                <div class="mini-card"><div class="mini-icon"></div>Playable only</div>
+                <div class="mini-card"><div class="mini-icon"></div>Combo creative</div>
+              </div>
+            </div>
+          </div>
+          <div class="floating-note">
+            <strong>Recommended framing</strong>
+            Start simple: fast theme read, cheap art reuse, clear CPI kill rules.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="summary">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Meeting stance</div>
+            <h2>Doporučený směr</h2>
+          </div>
+          <p class="section-note">
+            Neuzavírat se hned do high-production fantasy. Bez potvrzeného LTV má větší smysl nejdřív získat levný CPI signál,
+            a až potom zvedat rozpočet na plný art rebuild.
+          </p>
+        </div>
+
+        <div class="grid three">
+          <article class="card pad metric">
+            <div class="value">1.</div>
+            <h3>Kubova iterace jako baseline</h3>
+            <p class="label">Wyrm's Lair, The Bunker a Realm's Keep otestovat jako první CPI mapu proti aktuálnímu MF baseline.</p>
+            <div class="pill-row">
+              <span class="pill">3 témata</span>
+              <span class="pill">5 geo</span>
+              <span class="pill">72h kill rule</span>
+            </div>
+          </article>
+          <article class="card pad metric priority">
+            <div class="value">2.</div>
+            <h3>Casual CPI směr prioritně</h3>
+            <p class="label">Do druhé iterace připravit We Are Warriors / Kingdom Rush / Rush Royale / Wittle Defender varianty s nižší výrobní náročností.</p>
+            <div class="pill-row">
+              <span class="pill">min CPI</span>
+              <span class="pill">cartoon fantasy</span>
+              <span class="pill">simple read</span>
+            </div>
+          </article>
+          <article class="card pad metric">
+            <div class="value">3.</div>
+            <h3>3 typy kreativy</h3>
+            <p class="label">Každé vybrané téma rozdělit na landing page only, playable only a kombinaci. Tím oddělíme theme appeal od gameplay proofu.</p>
+            <div class="pill-row">
+              <span class="pill">LP only</span>
+              <span class="pill">Playable</span>
+              <span class="pill">Hybrid</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="references">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Dodané vizuální reference</div>
+            <h2>Creative north stars</h2>
+          </div>
+          <p class="section-note">
+            Dodané CPI vizuály jsou načtené přímo z assetů a záměrně prezentované jako NOX game-card panely:
+            silný obrázek, tmavý overlay, cyan/magenta akcenty a krátký produkční komentář.
+          </p>
+        </div>
+
+        <div class="reference-grid">
+          <figure class="reference-card" style="--fallback-bg: linear-gradient(145deg, #0c1118, #a33c19 48%, #4c278f);">
+            <img src="assets/T1-CPI.png" alt="Wyrm's Lair dark dragon fantasy visual reference" />
+            <figcaption class="fallback">
+              <h3>T1 · Wyrm's Lair</h3>
+              <p>Dark premium dragon defender, lair vitality, elemental dragons, volcanic platforms. Nejvyšší production value.</p>
+            </figcaption>
+          </figure>
+          <figure class="reference-card" style="--fallback-bg: linear-gradient(145deg, #2f3338, #df853a 50%, #222b35);">
+            <img src="assets/T2-CPI.png" alt="The Bunker zombie outpost visual reference" />
+            <figcaption class="fallback">
+              <h3>T2 · The Bunker</h3>
+              <p>Mil-spec zombie bunker, wall integrity, field manuals, horde clarity. Nejnižší reskin friction vůči MF.</p>
+            </figcaption>
+          </figure>
+          <figure class="reference-card" style="--fallback-bg: linear-gradient(145deg, #88d75f, #f7a24b 45%, #315ad6);">
+            <img src="assets/T3-CPI.png" alt="Realm's Keep cartoon fantasy visual reference" />
+            <figcaption class="fallback">
+              <h3>T3 · Realm's Keep</h3>
+              <p>Cartoon fantasy, hrdinové na hradbách, summon karty, bright greenfields. Nejbližší Peťko/Jirka casual směr.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="round-one">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Round 1 · Kubův Growth brief</div>
+            <h2>Tři theme testy paralelně</h2>
+          </div>
+          <p class="section-note">
+            Cíl není rozhodnout finální produkt. Cíl je levně zjistit, který fantasy / zombie / cartoon wrapper zlepší CPI proti MF baseline
+            v US, DE, KR, SE a JP.
+          </p>
+        </div>
+
+        <div class="grid three">
+          <article class="card theme-card">
+            <div class="theme-visual" data-title="Wyrm's Lair" style="--theme-bg: url('assets/T1-CPI.png'); --shape: linear-gradient(180deg, #ffb458, #5a150d);">
+              <span class="silhouette"></span>
+            </div>
+            <div class="theme-body pad">
+              <h3>Fantasy dragon defender</h3>
+              <p>Nejsilnější dlouhodobý pivot potenciál: dragon collection, mother-and-brood hook, premium painted-realism. Výroba je ale dražší a méně CPI-minimalistická.</p>
+              <div class="score-row">
+                <div class="score">19/20</div>
+                <div><span class="tag">High appeal</span><span class="tag">High art cost</span><span class="tag">IAP-ready</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card theme-card">
+            <div class="theme-visual" data-title="The Bunker" style="--theme-bg: url('assets/T2-CPI.png'); --shape: linear-gradient(180deg, #c8d3d8, #46505b);">
+              <span class="silhouette"></span>
+            </div>
+            <div class="theme-body pad">
+              <h3>Zombie horde defense</h3>
+              <p>Nejlevnější cesta pro produkční validaci: MF DNA se zachová, mění se framing. Dobré pro male 28-45, jasný 3sekundový read, nízká mechanická změna.</p>
+              <div class="score-row">
+                <div class="score">19/20</div>
+                <div><span class="tag">Low friction</span><span class="tag">Strong clarity</span><span class="tag">Fast ship</span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card theme-card">
+            <div class="theme-visual" data-title="Realm's Keep" style="--theme-bg: url('assets/T3-CPI.png'); --shape: linear-gradient(180deg, #fff1ad, #3a73e8);">
+              <span class="silhouette"></span>
+            </div>
+            <div class="theme-body pad">
+              <h3>Cartoon fantasy TD</h3>
+              <p>Nejrelevantnější pro aktuální CEO/Jirka/Peťko signál. Rush Royale / Kingdom Rush proximity, hero summon psychologie, ale konflikt s gritty MF brand stance.</p>
+              <div class="score-row">
+                <div class="score">Test</div>
+                <div><span class="tag">Casual CPI</span><span class="tag">Hero summon</span><span class="tag">Brand fork</span></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="nostalgia-bridges">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Bridge ideas · nostalgic game themes</div>
+            <h2>Další nápady mezi koncepty</h2>
+          </div>
+          <p class="section-note">
+            Tyhle směry berou známou herní nostalgii jako CPI shortcut, ne jako kopii IP. Cílem je rychle ověřit, jestli funguje
+            monster collection, age-up RTS progress, tactics board nebo loot fantasy silněji než čistý MF wrapper.
+          </p>
+        </div>
+
+        <div class="grid three">
+          <article class="card pad">
+            <h3>Monster trainer defense</h3>
+            <p>Pokemon-style hook bez přímé IP: hráč brání arénu pomocí elementálních creature evolucí. Každá wave ukáže capture, evolve nebo type advantage moment.</p>
+            <div class="pill-row"><span class="pill">collection</span><span class="pill">evolution</span><span class="pill">broad nostalgia</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Empire ages defense</h3>
+            <p>Age of Empires-like směr: vesnice roste do pevnosti, workers sbírají zdroje, archers/cavalry/siege drží wall a velké tlačítko age-up dává instant power spike.</p>
+            <div class="pill-row"><span class="pill">RTS nostalgia</span><span class="pill">age-up</span><span class="pill">clear progress</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Dungeon commander</h3>
+            <p>Dungeon Keeper / old-school fantasy feeling: hráč staví místnosti, summony a pasti pod pevností. CPI hook je obrácený defender: chráníme dark core před hrdiny.</p>
+            <div class="pill-row"><span class="pill">builder</span><span class="pill">villain fantasy</span><span class="pill">strong twist</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Tactics battlefield</h3>
+            <p>Advance Wars / Heroes map vibe: malé jednotky na čitelné grid mapě, commander ability a jednoduché counter matchupy. Vhodné pro statiky i playable.</p>
+            <div class="pill-row"><span class="pill">strategy read</span><span class="pill">grid clarity</span><span class="pill">commander hook</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Arcade toy soldiers</h3>
+            <p>Army Men / Worms-style nostalgia: tabletop battlefield, plastové jednotky, destructible barricades a slapstick explosions. Levnější styl než premium fantasy.</p>
+            <div class="pill-row"><span class="pill">toy scale</span><span class="pill">low art cost</span><span class="pill">fun damage</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Loot fortress ARPG</h3>
+            <p>Diablo-like progression bez temného heavy art scope: waves drop gear, shrine upgrades a legendary tower pieces. Dobré pro meta/IAP promise v jednom screenu.</p>
+            <div class="pill-row"><span class="pill">loot drops</span><span class="pill">gear meta</span><span class="pill">IAP-ready</span></div>
+          </article>
+        </div>
+
+        <div style="height: 18px"></div>
+
+        <div class="grid four">
+          <article class="card pad">
+            <h3>Fantasy cartoon cluster</h3>
+            <p>Jirka input: Kingdom Rush, Rush Royale, Warcraft a Clash Royale jako jeden cartoon-fantasy bucket. Testovat jako hero/tower/summon wrapper, ne jako oddělené produkce.</p>
+            <div class="pill-row"><span class="pill">Jirka</span><span class="pill">fantasy cartoon</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Low-CPI simple cluster</h3>
+            <p>WeAreWarriors, Potato a Stickman jsou nejrychlejší cheap-read směr: pár jednotek, jasná evoluce, velké numbers, minimum art detailu.</p>
+            <div class="pill-row"><span class="pill">Jirka</span><span class="pill">cheap variants</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Warhammer grim fantasy</h3>
+            <p>Masivní armor, factions, siege a dark battlefield. Silné pro male audience, ale držet vlastní frakce a nepadat do příliš drahého production looku.</p>
+            <div class="pill-row"><span class="pill">grimdark</span><span class="pill">factions</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Arc Riders sci-fi squad</h3>
+            <p>Extraction/squad sci-fi wrapper jako kontrast k fantasy: shield base, drones, scavenged weapons, outdoor raids. Dává šanci ověřit, jestli sci-fi selhává jen kvůli MF framingu.</p>
+            <div class="pill-row"><span class="pill">sci-fi</span><span class="pill">squad raid</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Survivor arena</h3>
+            <p>Vampire Survivors-like horda: auto-attack, XP gems, upgrade draft a přežití 30 sekund. Hodí se pro playable, kde se CPI opře o okamžitý power fantasy loop.</p>
+            <div class="pill-row"><span class="pill">auto attack</span><span class="pill">power curve</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Brainrot meme defense</h3>
+            <p>Krátkodobý viral CPI test: absurdní enemies, meme naming, hyper-readable chaos. Použít jen jako isolated creative experiment, ne jako produktový pivot.</p>
+            <div class="pill-row"><span class="pill">viral</span><span class="pill">high risk</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Roblox block battler</h3>
+            <p>Blocky UGC look, jednoduché combat toys, barevné ability drops. Dává šanci levně testovat mladší casual signal bez drahých character sheets.</p>
+            <div class="pill-row"><span class="pill">UGC look</span><span class="pill">blocky</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Zombie fallback</h3>
+            <p>Zůstává nejčistší reskin MF DNA: bunker, wall, horde, weapons. Pokud chceme rychlý reality check proti fantasy, zombie je pořád nejlevnější kontrolní varianta.</p>
+            <div class="pill-row"><span class="pill">control test</span><span class="pill">fast ship</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="casual">
+      <div class="page-shell">
+        <div class="decision-band">
+          <div class="section-kicker">Strategická korekce</div>
+          <h2>Priorita: casual vizuál pro minimální CPI</h2>
+          <p>
+            Protože zatím nemáme potvrzené LTV, nejbezpečnější next step je nehonit nejdražší premium fantasy,
+            ale připravit druhou iteraci, která se agresivně ptá: kolik stojí nejlevnější srozumitelný install pro stejný core loop?
+          </p>
+        </div>
+
+        <div style="height: 18px"></div>
+
+        <div class="grid two">
+          <article class="card pad">
+            <h3>CEO / Jirka / Peťko input</h3>
+            <ul class="list">
+              <li>Fantasy cartoon a případně Wittle Defender twist.</li>
+              <li>Kingdom Rush / Rush Royale / Warcraft jako čitelný fantasy signal.</li>
+              <li>We Are Warriors / Potato / Stickman jako low-CPI, jednoduchý, okamžitě pochopitelný wrapper.</li>
+              <li>Další návrhy z inputu: Brainrot, Warhammer, Age of Empires, Arc Riders, Survivor, Clash Royale, Roblox a Zombie.</li>
+              <li>Peťko konkrétně zmiňuje gameplay styl podle Wittle Defendera.</li>
+            </ul>
+          </article>
+
+          <article class="card pad">
+            <h3>Moje pozice pro meeting</h3>
+            <div class="quote">
+              První iterace stojí na Kubových konceptech, protože jsou připravené pro srovnatelný test.
+              Druhá iterace má validovat levnější casual CPI směr, než začneme investovat do plného art rebuild/pivotu.
+            </div>
+          </article>
+        </div>
+
+        <div style="height: 18px"></div>
+
+        <table class="matrix" aria-label="Casual theme prioritization matrix">
+          <thead>
+            <tr>
+              <th>Směr</th>
+              <th>Proč testovat</th>
+              <th>Vizuální pravidlo</th>
+              <th>Riziko</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Kingdom Rush / Realm TD</strong></td>
+              <td>Nejbližší kompromis mezi fantasy CPI a tower-defense očekáváním.</td>
+              <td>Heroic adult cartoon, výrazné obrysy, žádné chibi.</td>
+              <td>Vyšší asset náročnost než stickman / warriors.</td>
+            </tr>
+            <tr>
+              <td><strong>We Are Warriors-like</strong></td>
+              <td>Extrémně rychlý ad read, jednoduchý progression fantasy, levná výroba variant.</td>
+              <td>Velké armády, evoluce jednotek, čistý battlefield, minimální UI šum.</td>
+              <td>Méně premium signál, horší přenos do dlouhodobé meta hry.</td>
+            </tr>
+            <tr>
+              <td><strong>Wittle Defender twist</strong></td>
+              <td>Peťkův konkrétní input: jasný defender loop, casual-friendly, vhodné pro playable.</td>
+              <td>Jedna pevnost, jednoduché upgrade volby, viditelné power spikes.</td>
+              <td>Nutné odlišit od compů a nepůsobit jako kopie.</td>
+            </tr>
+            <tr>
+              <td><strong>Monster trainer / Empire ages</strong></td>
+              <td>Nostalgické game hooks mohou dát silnější okamžitý read než obecná fantasy: capture/evolve nebo age-up jsou známé motivace.</td>
+              <td>Vlastní creatures/factions, jasná evoluce nebo civilizační upgrade, žádný přímý IP lookalike.</td>
+              <td>Je potřeba držet reference jako inspiraci, ne jako vizuální kopii.</td>
+            </tr>
+            <tr>
+              <td><strong>Warcraft / Warhammer / Clash cluster</strong></td>
+              <td>Fantasy boj, frakce a hero/tower archetypy mají nejsilnější tržní signál z konkurence.</td>
+              <td>Vlastní frakce, výrazné silhouettes, cartoon až grim fantasy podle testované creative line.</td>
+              <td>Nejvyšší riziko drahého art scope a IP-lookalike interpretace.</td>
+            </tr>
+            <tr>
+              <td><strong>Brainrot / Roblox / Survivor</strong></td>
+              <td>Levné, hyperčitelně casual hooks pro rychlý CPI reality check mimo fantasy core.</td>
+              <td>Jedna silná gag nebo loop mechanika: meme enemy, block battler, auto-attack survival.</td>
+              <td>Může přinést levný install, ale slabší fit pro dlouhodobou MF meta.</td>
+            </tr>
+            <tr>
+              <td><strong>Arc Riders / Zombie control</strong></td>
+              <td>Ověříme, jestli problém sci-fi je obecný, nebo jen aktuální framing; zombie zůstává low-friction kontrola.</td>
+              <td>Squad raid sci-fi versus bunker horde, oboje s jasnou base-defense kompozicí.</td>
+              <td>Sci-fi může znovu dopadnout blízko baseline; zombie může být příliš generická.</td>
+            </tr>
+            <tr>
+              <td><strong>JirCore meta game</strong></td>
+              <td>Druhá iterace pro kombinace: jednoduchý CPI hook + hlubší collection/meta slib.</td>
+              <td>Map progression, hero unlock, squad merge/evolve, resource loop.</td>
+              <td>Nesmí rozbít čistotu prvního CPI signálu.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="creative-types">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Test architecture</div>
+            <h2>3 creative typy na každé téma</h2>
+          </div>
+          <p class="section-note">
+            Jednoduché rozdělení sníží interpretační šum: víme, jestli táhne samotný theme promise, interaktivní gameplay, nebo až jejich kombinace.
+          </p>
+        </div>
+
+        <div class="grid three">
+          <article class="card pad">
+            <h3>Landing page only</h3>
+            <p>Statické/video kreativy vedou na jednoduchý store-like nebo web LP claim. Měří čistý theme appeal bez nutnosti dokončovat playable.</p>
+            <div class="pill-row"><span class="pill">nejrychlejší</span><span class="pill">levný A/B</span></div>
+          </article>
+          <article class="card pad">
+            <h3>Playable only</h3>
+            <p>Krátký core loop: výběr jedné ze tří karet, instant upgrade, obrana proti wave. Měří, jestli gameplay wrapper přenáší install intent.</p>
+            <div class="pill-row"><span class="pill">proof of play</span><span class="pill">stronger intent</span></div>
+          </article>
+          <article class="card pad">
+            <h3>LP + playable combo</h3>
+            <p>Hook video nebo statika otevře téma, playable potvrdí mechanic. Nejlepší kandidát pro winner scaling po prvním cutu.</p>
+            <div class="pill-row"><span class="pill">scale candidate</span><span class="pill">best read</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="production">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Production model</div>
+            <h2>Jak to vyrobit bez přepálení scope</h2>
+          </div>
+          <p class="section-note">
+            Ondra separuje základní assety; já na ně navážu GPT Image workflow pro spritesheety, varianty a rychlé creative iterace.
+          </p>
+        </div>
+
+        <div class="roadmap">
+          <div class="phase">
+            <strong>1 · Asset base</strong>
+            <span>Ondra vygeneruje a vyseparuje units, backgrounds, UI fragments a hlavní silhouettes pro vybraná témata.</span>
+          </div>
+          <div class="phase">
+            <strong>2 · Creative pack</strong>
+            <span>Ze základních assetů vzniknou statics, short video cuts a jednoduché playable spritesheety.</span>
+          </div>
+          <div class="phase">
+            <strong>3 · Round 1 launch</strong>
+            <span>Kuba/Growth koncepty běží v paralelním testu proti MF baseline s jasným soft kill pravidlem.</span>
+          </div>
+          <div class="phase">
+            <strong>4 · Round 2 casual</strong>
+            <span>Na základě výsledků a CEO inputu spustit Jirka/Peťko casual CPI a JirCore meta kombinace.</span>
+          </div>
+        </div>
+
+        <div style="height: 18px"></div>
+
+        <div class="grid two flow">
+          <article class="card pad">
+            <h3>První iterace: Kubovy koncepce</h3>
+            <ul class="list">
+              <li>Wyrm's Lair pro high-appeal premium fantasy.</li>
+              <li>The Bunker pro nejnižší reskin friction a nejrychlejší produkční validaci.</li>
+              <li>Realm's Keep jako bridge ke cartoon fantasy compům.</li>
+            </ul>
+          </article>
+          <article class="card pad">
+            <h3>Druhá iterace: Jirka / Peťko / casual</h3>
+            <ul class="list">
+              <li>Kingdom Rush / Rush Royale style jako čitelný fantasy TD.</li>
+              <li>We Are Warriors / Potato / Stickman jako low-CPI experiment.</li>
+              <li>Monster trainer, empire age-up a další nostalgické game hooks jako bridge mezi CPI jednoduchostí a silnější meta motivací.</li>
+              <li>Brainrot, Roblox, Survivor, Arc Riders a Warhammer držet jako backlog pro rychlé isolated CPI shots.</li>
+              <li>Wittle Defender twist a JirCore meta game kombinace.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <div class="page-shell">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Decision summary</div>
+            <h2>Co potřebujeme rozhodnout</h2>
+          </div>
+          <p class="section-note">
+            Meeting by měl skončit ne debatou o nejhezčím tématu, ale jasným zadáním pro production lock a UA měření.
+          </p>
+        </div>
+
+        <table class="matrix" aria-label="Meeting decisions">
+          <thead>
+            <tr>
+              <th>Rozhodnutí</th>
+              <th>Doporučení</th>
+              <th>Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Greenlight všech 3 testů v Round 1?</strong></td>
+              <td>Ano, ale explicitně s druhou casual iterací jako navazující větví.</td>
+              <td>CEO + Growth</td>
+            </tr>
+            <tr>
+              <td><strong>Budget split</strong></td>
+              <td>35% Wyrm's Lair, 30% Bunker, 25% Realm's Keep, 10% reserve pro winner/casual fast follow.</td>
+              <td>Growth + Finance</td>
+            </tr>
+            <tr>
+              <td><strong>Brand stance pro cartoon fantasy</strong></td>
+              <td>Schválit jako CPI experiment, ne jako závazný product pivot.</td>
+              <td>Brand lead</td>
+            </tr>
+            <tr>
+              <td><strong>Baseline CPI + geo split</strong></td>
+              <td>UA dodá aktuální MF benchmark, minimum installs a 72h kill authority.</td>
+              <td>UA lead</td>
+            </tr>
+            <tr>
+              <td><strong>Asset workflow</strong></td>
+              <td>Ondra připraví separované assety, následně GPT Image spritesheets a creative varianty.</td>
+              <td>MKT art + David</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="page-shell footer-inner">
+      <div>Mecha Fortress · CPI Round 1 Proposal · NOXGAMES</div>
+      <div>Verze pro diskuzi · 2026-05-11</div>
+    </div>
+  </footer>
+</body>
+</html>

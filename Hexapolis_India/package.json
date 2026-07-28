@@ -1,0 +1,8 @@
+{
+  "name": "rise-of-a-nation-proposal",
+  "private": true,
+  "scripts": {
+    "cf:deploy": "wrangler deploy",
+    "cf:preview": "wrangler dev"
+  }
+}

@@ -1,0 +1,11 @@
+Area,Owner/Note,Hours,Mandays,USD
+"Scope lock, design pass, playtest planning","David + Jirka",4,0.50,76
+"Code polish, fixes, MF monetization sync","Mirec",10,1.25,190
+"UI cleanup and placeholder removal","Petko",6,0.75,114
+"Release setup: IAPs, localization, prerelease","Akimo",12,1.50,228
+"QA smoke test and final release checks","Akimo / team",4,0.50,76
+"MKT: ASO, creatives, campaign setup, analytics","Buri / Richi",16,2.00,304
+"PM coordination and submission buffer","David",2,0.25,38
+"People cost total","Hard cap below 7 MD",54,6.75,1026
+"UA cap","1:2 against people cost; approx 42.5k CZK at 20.7 CZK/USD",,,"2052"
+"Total initial exposure","People cost + UA cap",,,"3078"

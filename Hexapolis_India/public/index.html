@@ -1,0 +1,3234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0b1424" />
+  <title>Rise of a Nation | Development Proposal | NOXGAMES</title>
+  <meta name="description" content="A detailed NOXGAMES development proposal for Rise of a Nation, a youth-focused strategy game about building India's future." />
+  <link rel="icon" href="assets/noxgames-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <style>
+    :root {
+      --navy-950: #08101d;
+      --navy-900: #0b1424;
+      --navy-850: #101b2c;
+      --navy-800: #152238;
+      --gold: #d8aa4e;
+      --gold-bright: #f0ca73;
+      --gold-soft: #f4e3bd;
+      --ivory: #f4f0e8;
+      --ivory-deep: #e9e2d6;
+      --ink: #172033;
+      --muted-dark: #576173;
+      --muted-light: #aeb8c7;
+      --cyan: #49b8ce;
+      --saffron: #e58235;
+      --green: #5ea57e;
+      --white: #ffffff;
+      --line-dark: rgba(216, 170, 78, 0.24);
+      --line-light: rgba(23, 32, 51, 0.14);
+      --shadow: 0 18px 50px rgba(2, 7, 14, 0.22), 0 4px 12px rgba(2, 7, 14, 0.12);
+      --content: 1200px;
+      --nav-height: 76px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 22px);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ivory);
+      background: var(--navy-900);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.locked {
+      overflow: hidden;
+    }
+
+    ::selection {
+      color: var(--navy-950);
+      background: var(--gold-bright);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      text-wrap: balance;
+    }
+
+    p {
+      text-wrap: pretty;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 880px;
+      margin-bottom: 22px;
+      color: var(--gold-bright);
+      font-size: 86px;
+      line-height: 0.88;
+      text-shadow: 0 3px 18px rgba(0, 0, 0, 0.34);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 56px;
+      line-height: 0.98;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 30px;
+      line-height: 1.08;
+    }
+
+    h4 {
+      margin-bottom: 7px;
+      font-family: Inter, sans-serif;
+      font-size: 16px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .shell {
+      width: min(var(--content), calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 112px 0;
+    }
+
+    .section-compact {
+      padding: 76px 0;
+    }
+
+    .light {
+      color: var(--ink);
+      background: var(--ivory);
+    }
+
+    .white {
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    .deep {
+      background: var(--navy-950);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(320px, 0.42fr);
+      gap: 72px;
+      align-items: end;
+      margin-bottom: 52px;
+    }
+
+    .section-head > p {
+      margin-bottom: 2px;
+      color: var(--muted-light);
+      font-size: 16px;
+    }
+
+    .light .section-head > p,
+    .white .section-head > p {
+      color: var(--muted-dark);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 18px;
+      color: var(--gold-bright);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+
+    .eyebrow::before {
+      width: 32px;
+    }
+
+    .eyebrow::after {
+      width: 8px;
+      opacity: 0.5;
+    }
+
+    .light .eyebrow,
+    .white .eyebrow {
+      color: #9b6d18;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted-light);
+      font-size: 19px;
+      line-height: 1.65;
+    }
+
+    .light .lead,
+    .white .lead {
+      color: var(--muted-dark);
+    }
+
+    .gold {
+      color: var(--gold-bright);
+    }
+
+    .muted {
+      color: var(--muted-light);
+    }
+
+    .light .muted,
+    .white .muted {
+      color: var(--muted-dark);
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 19px;
+      border: 0;
+      border-radius: 5px;
+      color: var(--navy-950);
+      background: var(--gold-bright);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition-property: transform, background-color, box-shadow;
+      transition-duration: 180ms;
+      transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .button:hover {
+      background: #f7d88d;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+      transform: translateY(-2px);
+    }
+
+    .button:active,
+    .icon-button:active {
+      transform: scale(0.96);
+    }
+
+    .button svg,
+    .icon-button svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+    }
+
+    .button-ghost {
+      color: var(--ivory);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: inset 0 0 0 1px rgba(216, 170, 78, 0.45);
+      backdrop-filter: blur(8px);
+    }
+
+    .button-ghost:hover {
+      background: rgba(216, 170, 78, 0.13);
+    }
+
+    .icon-button {
+      display: inline-grid;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      border-radius: 5px;
+      place-items: center;
+      cursor: pointer;
+      transition-property: transform, background-color;
+      transition-duration: 180ms;
+      transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .progress {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 120;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.06);
+      pointer-events: none;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: var(--gold-bright);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 110;
+      height: var(--nav-height);
+      color: var(--ivory);
+      transition-property: background-color, box-shadow;
+      transition-duration: 220ms;
+      transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .nav.scrolled {
+      background: rgba(8, 16, 29, 0.95);
+      box-shadow: 0 1px 0 rgba(216, 170, 78, 0.18), 0 14px 36px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-inner {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      gap: 11px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .brand-project {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--gold-soft);
+    }
+
+    .brand-project::before {
+      width: 1px;
+      height: 19px;
+      background: var(--gold);
+      opacity: 0.6;
+      content: "";
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 12px 0;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-links a::after {
+      position: absolute;
+      right: 0;
+      bottom: 7px;
+      left: 0;
+      height: 1px;
+      background: var(--gold-bright);
+      content: "";
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 180ms cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .menu-button {
+      display: none;
+      color: var(--ivory);
+      background: transparent;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 88svh;
+      padding: calc(var(--nav-height) + 44px) 0 54px;
+      background:
+        linear-gradient(90deg, rgba(7, 13, 25, 0.97) 0%, rgba(7, 13, 25, 0.86) 42%, rgba(7, 13, 25, 0.26) 78%, rgba(7, 13, 25, 0.18) 100%),
+        linear-gradient(0deg, rgba(8, 16, 29, 0.7), transparent 45%),
+        url("assets/rise-hero.png") center / cover;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      position: absolute;
+      inset: var(--nav-height) auto auto 0;
+      width: 42%;
+      height: 1px;
+      background: var(--gold);
+      content: "";
+      opacity: 0.7;
+    }
+
+    .hero-inner {
+      display: flex;
+      min-height: calc(88svh - var(--nav-height) - 98px);
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .hero-mark {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      color: var(--gold-soft);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .hero-mark span {
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-sub {
+      max-width: 680px;
+      margin-bottom: 32px;
+      color: rgba(244, 240, 232, 0.8);
+      font-size: 19px;
+    }
+
+    .hero-sub strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      position: absolute;
+      right: 24px;
+      bottom: 18px;
+      color: rgba(244, 240, 232, 0.48);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Project snapshot */
+    .snapshot {
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+      background: var(--navy-950);
+    }
+
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .snapshot-item {
+      min-height: 128px;
+      padding: 27px 24px;
+      border-left: 1px solid var(--line-dark);
+    }
+
+    .snapshot-item:last-child {
+      border-right: 1px solid var(--line-dark);
+    }
+
+    .snapshot-item svg {
+      width: 21px;
+      height: 21px;
+      margin-bottom: 14px;
+      color: var(--gold-bright);
+    }
+
+    .snapshot-item strong,
+    .snapshot-item span {
+      display: block;
+    }
+
+    .snapshot-item strong {
+      margin-bottom: 3px;
+      color: var(--ivory);
+      font-size: 15px;
+    }
+
+    .snapshot-item span {
+      color: var(--muted-light);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    /* Vision */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.68fr) minmax(470px, 1fr);
+      gap: 76px;
+      align-items: center;
+    }
+
+    .vision-copy blockquote {
+      margin: 0 0 26px;
+      color: var(--ink);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 46px;
+      font-weight: 600;
+      line-height: 1.06;
+      text-wrap: balance;
+    }
+
+    .vision-copy blockquote em {
+      color: #a37018;
+      font-style: normal;
+    }
+
+    .vision-copy p {
+      color: var(--muted-dark);
+      font-size: 16px;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 22px;
+      margin-top: 30px;
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line-light);
+    }
+
+    .principle svg {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      color: #9b6d18;
+    }
+
+    .principle strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    .principle span {
+      display: block;
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .framed-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: 7px;
+      background: var(--navy-950);
+      box-shadow: var(--shadow);
+    }
+
+    .framed-media::before {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border: 1px solid rgba(216, 170, 78, 0.38);
+      border-radius: inherit;
+      content: "";
+      pointer-events: none;
+    }
+
+    .framed-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      outline: 1px solid rgba(0, 0, 0, 0.1);
+      outline-offset: -1px;
+    }
+
+    .expand-button {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 2;
+      color: var(--navy-950);
+      background: rgba(244, 240, 232, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    /* Product structure */
+    .player-journey {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      margin-top: 48px;
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .journey-step {
+      position: relative;
+      min-height: 250px;
+      padding: 26px 22px;
+      border-left: 1px solid var(--line-dark);
+    }
+
+    .journey-step:last-child {
+      border-right: 1px solid var(--line-dark);
+    }
+
+    .journey-number {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 46px;
+      color: var(--gold-bright);
+      font-size: 11px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .journey-number svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .journey-step h4 {
+      color: var(--ivory);
+    }
+
+    .journey-step p {
+      margin-bottom: 0;
+      color: var(--muted-light);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .systems-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.55fr) 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .systems-map {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .system-row {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      min-height: 104px;
+      align-items: center;
+      padding: 16px;
+      border-radius: 6px;
+      background: var(--white);
+      box-shadow: 0 4px 16px rgba(23, 32, 51, 0.06);
+    }
+
+    .system-row:nth-child(3n + 1) .system-icon {
+      color: #8b6113;
+      background: #f7ebcf;
+    }
+
+    .system-row:nth-child(3n + 2) .system-icon {
+      color: #227b8e;
+      background: #def0f4;
+    }
+
+    .system-row:nth-child(3n + 3) .system-icon {
+      color: #347653;
+      background: #e0eee5;
+    }
+
+    .system-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      border-radius: 5px;
+      place-items: center;
+    }
+
+    .system-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .system-row strong,
+    .system-row span {
+      display: block;
+    }
+
+    .system-row strong {
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    .system-row span {
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .balance-note {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-left: 3px solid var(--gold);
+      color: var(--muted-dark);
+      background: var(--white);
+      font-size: 13px;
+      box-shadow: 0 4px 16px rgba(23, 32, 51, 0.06);
+    }
+
+    /* Missions */
+    .missions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .mission {
+      position: relative;
+      min-height: 380px;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+      border-radius: 7px;
+      color: var(--ivory);
+      background: var(--navy-950);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .mission img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      outline: 1px solid rgba(255, 255, 255, 0.1);
+      outline-offset: -1px;
+      transition: transform 360ms cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .mission::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(6, 12, 22, 0.96), rgba(6, 12, 22, 0.06) 68%);
+      content: "";
+    }
+
+    .mission:hover img {
+      transform: scale(1.035);
+    }
+
+    .mission:active {
+      transform: scale(0.96);
+    }
+
+    .mission-copy {
+      position: absolute;
+      right: 22px;
+      bottom: 21px;
+      left: 22px;
+      z-index: 1;
+    }
+
+    .mission-copy strong,
+    .mission-copy span {
+      display: block;
+    }
+
+    .mission-copy strong {
+      margin-bottom: 4px;
+      color: var(--gold-soft);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .mission-copy span {
+      color: rgba(244, 240, 232, 0.64);
+      font-size: 12px;
+    }
+
+    .mission .expand-button {
+      top: 12px;
+      right: 12px;
+      bottom: auto;
+    }
+
+    /* Variant chapters */
+    .variant-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 108px 0 90px;
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+      background: var(--navy-950);
+    }
+
+    .variant-hero::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 38%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(216, 170, 78, 0.045));
+      content: "";
+    }
+
+    .variant-heading {
+      display: grid;
+      grid-template-columns: 190px 1fr minmax(280px, 0.42fr);
+      gap: 46px;
+      align-items: end;
+    }
+
+    .variant-number {
+      color: var(--gold-bright);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 126px;
+      font-weight: 600;
+      line-height: 0.7;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .variant-heading h2 {
+      margin-bottom: 0;
+      color: var(--ivory);
+      font-size: 66px;
+    }
+
+    .variant-heading p {
+      margin-bottom: 0;
+      color: var(--muted-light);
+      font-size: 15px;
+    }
+
+    .variant-tag {
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 7px 10px;
+      border-radius: 4px;
+      color: var(--gold-soft);
+      background: rgba(216, 170, 78, 0.1);
+      box-shadow: inset 0 0 0 1px rgba(216, 170, 78, 0.32);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .variant-tag svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .variant-overview {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(460px, 1fr);
+      gap: 74px;
+      align-items: center;
+    }
+
+    .variant-copy h3 {
+      font-size: 42px;
+    }
+
+    .variant-copy > p {
+      color: var(--muted-light);
+      font-size: 16px;
+    }
+
+    .light .variant-copy > p {
+      color: var(--muted-dark);
+    }
+
+    .key-points {
+      display: grid;
+      gap: 12px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .key-points li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 11px;
+      color: var(--muted-light);
+      font-size: 13px;
+    }
+
+    .light .key-points li {
+      color: var(--muted-dark);
+    }
+
+    .key-points svg {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      color: var(--gold-bright);
+    }
+
+    .light .key-points svg {
+      color: #9b6d18;
+    }
+
+    .media-label {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      left: 14px;
+      padding: 14px 16px;
+      border-radius: 5px;
+      color: var(--muted-light);
+      background: rgba(8, 16, 29, 0.84);
+      box-shadow: inset 0 0 0 1px rgba(216, 170, 78, 0.24);
+      backdrop-filter: blur(10px);
+      font-size: 11px;
+    }
+
+    .media-label strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--gold-soft);
+      font-size: 13px;
+    }
+
+    .session-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      margin-top: 48px;
+      border-top: 1px solid var(--line-light);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .session-step {
+      min-height: 250px;
+      padding: 25px 20px;
+      border-left: 1px solid var(--line-light);
+    }
+
+    .session-step:last-child {
+      border-right: 1px solid var(--line-light);
+    }
+
+    .session-step b {
+      display: block;
+      margin-bottom: 44px;
+      color: #9b6d18;
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .session-step h4 {
+      color: var(--ink);
+    }
+
+    .session-step p {
+      margin-bottom: 0;
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .build-split {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .build-column {
+      padding: 28px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.045);
+      box-shadow: inset 0 0 0 1px var(--line-dark);
+    }
+
+    .build-column h3 {
+      margin-bottom: 18px;
+      color: var(--gold-soft);
+      font-size: 28px;
+    }
+
+    .build-column ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .build-column li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 9px;
+      color: var(--muted-light);
+      font-size: 12px;
+    }
+
+    .build-column li::before {
+      margin-top: 1px;
+      color: var(--gold-bright);
+      content: "—";
+    }
+
+    .progression-map {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr 64px 1fr;
+      gap: 14px;
+      align-items: center;
+      margin-top: 42px;
+    }
+
+    .progression-stage {
+      min-height: 176px;
+      padding: 24px;
+      border-radius: 7px;
+      background: var(--white);
+      box-shadow: 0 5px 18px rgba(23, 32, 51, 0.07);
+    }
+
+    .progression-stage span {
+      display: block;
+      margin-bottom: 30px;
+      color: #9b6d18;
+      font-size: 11px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progression-stage h4 {
+      font-size: 15px;
+    }
+
+    .progression-stage p {
+      margin-bottom: 0;
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .progression-arrow {
+      display: grid;
+      color: #9b6d18;
+      place-items: center;
+    }
+
+    .progression-arrow svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .boundary {
+      display: grid;
+      grid-template-columns: 0.72fr 1fr;
+      gap: 64px;
+      align-items: start;
+      padding: 36px;
+      border-radius: 7px;
+      color: var(--ivory);
+      background: var(--navy-850);
+      box-shadow: inset 0 0 0 1px var(--line-dark);
+    }
+
+    .boundary h3 {
+      color: var(--gold-soft);
+      font-size: 32px;
+    }
+
+    .boundary p {
+      margin-bottom: 0;
+      color: var(--muted-light);
+      font-size: 13px;
+    }
+
+    .boundary-points {
+      display: grid;
+      gap: 14px;
+    }
+
+    .boundary-point {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+    }
+
+    .boundary-point svg {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      color: var(--gold-bright);
+    }
+
+    .boundary-point strong,
+    .boundary-point span {
+      display: block;
+    }
+
+    .boundary-point strong {
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    .boundary-point span {
+      color: var(--muted-light);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    /* Bespoke systems */
+    .dashboard {
+      aspect-ratio: 3 / 2;
+    }
+
+    .dashboard img {
+      object-position: center;
+    }
+
+    .management-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .management-item {
+      min-height: 220px;
+      padding: 24px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.045);
+      box-shadow: inset 0 0 0 1px var(--line-dark);
+    }
+
+    .management-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 32px;
+      border-radius: 5px;
+      color: var(--gold-bright);
+      background: rgba(216, 170, 78, 0.1);
+      place-items: center;
+    }
+
+    .management-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .management-item h4 {
+      color: var(--gold-soft);
+    }
+
+    .management-item p {
+      margin-bottom: 0;
+      color: var(--muted-light);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 0.6fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .architecture-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .architecture-layer {
+      display: grid;
+      grid-template-columns: 46px 140px 1fr;
+      gap: 16px;
+      min-height: 92px;
+      align-items: center;
+      padding: 15px 18px;
+      border-radius: 6px;
+      background: var(--white);
+      box-shadow: 0 4px 16px rgba(23, 32, 51, 0.06);
+    }
+
+    .architecture-layer svg {
+      width: 22px;
+      height: 22px;
+      color: #9b6d18;
+    }
+
+    .architecture-layer strong {
+      font-size: 13px;
+    }
+
+    .architecture-layer span {
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    /* Comparison */
+    .comparison-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line-dark);
+      border-radius: 7px;
+    }
+
+    .comparison {
+      width: 100%;
+      min-width: 820px;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .comparison th,
+    .comparison td {
+      padding: 17px 19px;
+      border-bottom: 1px solid var(--line-dark);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .comparison tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .comparison th {
+      color: var(--gold-soft);
+      background: rgba(216, 170, 78, 0.08);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .comparison th:first-child,
+    .comparison td:first-child {
+      width: 24%;
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    .comparison td {
+      color: var(--muted-light);
+    }
+
+    .recommendation {
+      display: grid;
+      grid-template-columns: 0.72fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 36px;
+      padding: 34px;
+      border-radius: 7px;
+      background: rgba(216, 170, 78, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(216, 170, 78, 0.28);
+    }
+
+    .recommendation h3 {
+      margin-bottom: 0;
+      color: var(--gold-soft);
+      font-size: 32px;
+    }
+
+    .recommendation p {
+      margin-bottom: 0;
+      color: var(--muted-light);
+      font-size: 13px;
+    }
+
+    /* Scope and delivery */
+    .workstreams {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line-light);
+      border-left: 1px solid var(--line-light);
+    }
+
+    .workstream {
+      min-height: 270px;
+      padding: 26px;
+      border-right: 1px solid var(--line-light);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .workstream svg {
+      width: 23px;
+      height: 23px;
+      margin-bottom: 34px;
+      color: #9b6d18;
+    }
+
+    .workstream h4 {
+      margin-bottom: 9px;
+      font-size: 15px;
+    }
+
+    .workstream p {
+      margin-bottom: 13px;
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .workstream small {
+      display: block;
+      color: #7d6640;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .commercial-grid {
+      display: grid;
+      grid-template-columns: 0.68fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .investment {
+      position: sticky;
+      top: 110px;
+    }
+
+    .price {
+      margin: 12px 0 14px;
+      color: var(--gold-bright);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 76px;
+      font-weight: 600;
+      line-height: 0.9;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .investment p {
+      color: var(--muted-light);
+      font-size: 13px;
+    }
+
+    .timeline {
+      display: grid;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 110px 34px 1fr;
+      gap: 18px;
+      min-height: 164px;
+    }
+
+    .phase time {
+      color: var(--gold-bright);
+      font-size: 12px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .phase-track {
+      position: relative;
+    }
+
+    .phase-track::after {
+      position: absolute;
+      top: 17px;
+      bottom: -20px;
+      left: 16px;
+      width: 1px;
+      background: var(--line-dark);
+      content: "";
+    }
+
+    .phase:last-child .phase-track::after {
+      display: none;
+    }
+
+    .phase-dot {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 33px;
+      height: 33px;
+      border-radius: 50%;
+      color: var(--navy-950);
+      background: var(--gold-bright);
+      place-items: center;
+      box-shadow: 0 0 0 6px rgba(216, 170, 78, 0.12);
+    }
+
+    .phase-dot svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .phase-copy h4 {
+      color: var(--ivory);
+      font-size: 15px;
+    }
+
+    .phase-copy p {
+      margin-bottom: 8px;
+      color: var(--muted-light);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .phase-copy small {
+      color: var(--gold-soft);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .assumptions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .assumption {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: inset 0 0 0 1px var(--line-dark);
+    }
+
+    .assumption svg {
+      width: 20px;
+      height: 20px;
+      color: var(--gold-bright);
+    }
+
+    .assumption strong,
+    .assumption span {
+      display: block;
+    }
+
+    .assumption strong {
+      margin-bottom: 2px;
+      font-size: 12px;
+    }
+
+    .assumption span {
+      color: var(--muted-light);
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    /* Execution and payment */
+    .execution-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin-top: 48px;
+      border-top: 1px solid var(--line-light);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    .execution-step {
+      position: relative;
+      min-height: 294px;
+      padding: 25px 21px;
+      border-left: 1px solid var(--line-light);
+    }
+
+    .execution-step:last-child {
+      border-right: 1px solid var(--line-light);
+    }
+
+    .execution-step::after {
+      position: absolute;
+      top: 45px;
+      right: -9px;
+      z-index: 2;
+      width: 18px;
+      height: 18px;
+      color: #9b6d18;
+      background: var(--white);
+      content: "→";
+      font-size: 13px;
+      line-height: 17px;
+      text-align: center;
+    }
+
+    .execution-step:last-child::after {
+      display: none;
+    }
+
+    .execution-number {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 42px;
+      color: #9b6d18;
+      font-size: 11px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .execution-number svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .execution-step h4 {
+      min-height: 42px;
+      color: var(--ink);
+    }
+
+    .execution-step p {
+      margin-bottom: 16px;
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .payment-trigger {
+      display: inline-flex;
+      min-height: 29px;
+      align-items: center;
+      padding: 6px 9px;
+      border-radius: 4px;
+      color: #75500f;
+      background: #f6e8c8;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .payment-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 54px;
+    }
+
+    .payment-ledger {
+      overflow: hidden;
+      border-radius: 7px;
+      background: var(--navy-900);
+      box-shadow: var(--shadow);
+    }
+
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      min-height: 78px;
+      align-items: center;
+      padding: 17px 21px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .ledger-row:last-child {
+      border-bottom: 0;
+      background: rgba(216, 170, 78, 0.08);
+    }
+
+    .ledger-row strong,
+    .ledger-row span {
+      display: block;
+    }
+
+    .ledger-row strong {
+      margin-bottom: 2px;
+      color: var(--ivory);
+      font-size: 12px;
+    }
+
+    .ledger-row span {
+      color: var(--muted-light);
+      font-size: 10px;
+    }
+
+    .ledger-amount {
+      color: var(--gold-bright);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .deadline-terms {
+      padding: 29px;
+      border-radius: 7px;
+      background: var(--ivory);
+      box-shadow: inset 0 0 0 1px var(--line-light);
+    }
+
+    .deadline-terms h3 {
+      margin-bottom: 12px;
+      color: var(--ink);
+      font-size: 31px;
+    }
+
+    .deadline-terms > p {
+      color: var(--muted-dark);
+      font-size: 13px;
+    }
+
+    .deadline-points {
+      display: grid;
+      gap: 12px;
+      margin-top: 21px;
+    }
+
+    .deadline-point {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      color: var(--muted-dark);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .deadline-point svg {
+      width: 17px;
+      height: 17px;
+      margin-top: 2px;
+      color: #9b6d18;
+    }
+
+    .legal-note {
+      margin-top: 24px;
+      padding-top: 15px;
+      border-top: 1px solid var(--line-light);
+      color: #756d60;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    /* CTA and footer */
+    .cta {
+      position: relative;
+      overflow: hidden;
+      padding: 112px 0;
+      background:
+        linear-gradient(90deg, rgba(8, 16, 29, 0.97), rgba(8, 16, 29, 0.76) 62%, rgba(8, 16, 29, 0.42)),
+        url("assets/rise-hero.png") center 58% / cover;
+    }
+
+    .cta::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 1px;
+      background: var(--gold);
+      content: "";
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .cta h2 {
+      max-width: 880px;
+      color: var(--gold-soft);
+    }
+
+    .cta p {
+      max-width: 720px;
+      margin-bottom: 0;
+      color: var(--muted-light);
+      font-size: 16px;
+    }
+
+    .footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--line-dark);
+      color: rgba(244, 240, 232, 0.48);
+      background: #050a12;
+      font-size: 10px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ivory);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .footer-brand img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    /* Lightbox */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      padding: 24px;
+      background: rgba(3, 7, 13, 0.9);
+      opacity: 0;
+      place-items: center;
+      pointer-events: none;
+      transition: opacity 180ms cubic-bezier(0.2, 0, 0, 1);
+      backdrop-filter: blur(12px);
+    }
+
+    .modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-figure {
+      position: relative;
+      width: min(1180px, 100%);
+      max-height: calc(100svh - 48px);
+      margin: 0;
+      overflow: hidden;
+      border-radius: 7px;
+      background: var(--navy-950);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-image {
+      width: 100%;
+      max-height: calc(100svh - 108px);
+      object-fit: contain;
+      outline: 1px solid rgba(255, 255, 255, 0.1);
+      outline-offset: -1px;
+    }
+
+    .modal-caption {
+      min-height: 48px;
+      padding: 13px 58px 13px 17px;
+      color: var(--muted-light);
+      font-size: 11px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
+      color: var(--ivory);
+      background: rgba(8, 16, 29, 0.8);
+      backdrop-filter: blur(8px);
+    }
+
+    @media (max-width: 1100px) {
+      h1 {
+        font-size: 72px;
+      }
+
+      h2 {
+        font-size: 50px;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .snapshot-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .snapshot-item:nth-child(4),
+      .snapshot-item:nth-child(5) {
+        border-top: 1px solid var(--line-dark);
+      }
+
+      .player-journey,
+      .session-flow,
+      .execution-flow {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .journey-step:nth-child(n + 4),
+      .session-step:nth-child(n + 4),
+      .execution-step:nth-child(n + 4) {
+        border-top: 1px solid var(--line-dark);
+      }
+
+      .session-step:nth-child(n + 4) {
+        border-top-color: var(--line-light);
+      }
+
+      .execution-step:nth-child(n + 4) {
+        border-top-color: var(--line-light);
+      }
+
+      .execution-step:nth-child(3)::after {
+        display: none;
+      }
+
+      .variant-heading {
+        grid-template-columns: 150px 1fr;
+      }
+
+      .variant-heading > p {
+        grid-column: 2;
+      }
+
+      .variant-number {
+        font-size: 105px;
+      }
+
+      .variant-overview,
+      .vision-grid {
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --nav-height: 68px;
+      }
+
+      .section {
+        padding: 86px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        inset: var(--nav-height) 0 auto;
+        z-index: 109;
+        display: grid;
+        padding: 14px 18px 20px;
+        color: var(--ivory);
+        background: rgba(8, 16, 29, 0.98);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px);
+        transition-property: opacity, transform;
+        transition-duration: 180ms;
+        transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+      }
+
+      .mobile-menu.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .mobile-menu a {
+        min-height: 46px;
+        padding: 11px 10px;
+        border-bottom: 1px solid rgba(216, 170, 78, 0.16);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .section-head,
+      .vision-grid,
+      .variant-overview,
+      .systems-intro,
+      .architecture,
+      .commercial-grid,
+      .payment-layout {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .section-head {
+        margin-bottom: 40px;
+      }
+
+      .investment {
+        position: static;
+      }
+
+      .missions-grid,
+      .management-grid,
+      .workstreams {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .variant-heading {
+        grid-template-columns: 120px 1fr;
+        gap: 28px;
+      }
+
+      .variant-heading h2 {
+        font-size: 56px;
+      }
+
+      .variant-number {
+        font-size: 90px;
+      }
+
+      .recommendation,
+      .boundary {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .cta-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .cta-grid .button {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(var(--content), calc(100% - 32px));
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      h1 {
+        font-size: 50px;
+      }
+
+      h2 {
+        font-size: 40px;
+      }
+
+      h3 {
+        font-size: 27px;
+      }
+
+      .brand-project {
+        display: none;
+      }
+
+      .hero {
+        min-height: 92svh;
+        padding-bottom: 40px;
+        background:
+          linear-gradient(0deg, rgba(7, 13, 25, 0.96) 0%, rgba(7, 13, 25, 0.66) 68%, rgba(7, 13, 25, 0.46) 100%),
+          url("assets/rise-hero.png") 62% center / cover;
+      }
+
+      .hero-inner {
+        min-height: calc(92svh - var(--nav-height) - 80px);
+        justify-content: flex-end;
+      }
+
+      .hero-sub {
+        font-size: 16px;
+      }
+
+      .hero-actions,
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .hero-note {
+        display: none;
+      }
+
+      .snapshot-grid,
+      .player-journey,
+      .session-flow,
+      .execution-flow,
+      .missions-grid,
+      .management-grid,
+      .workstreams,
+      .systems-map,
+      .build-split,
+      .assumptions {
+        grid-template-columns: 1fr;
+      }
+
+      .snapshot-item,
+      .snapshot-item:last-child {
+        min-height: 98px;
+        padding: 20px 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line-dark);
+        border-left: 0;
+      }
+
+      .snapshot-item:nth-child(4),
+      .snapshot-item:nth-child(5) {
+        border-top: 0;
+      }
+
+      .snapshot-item:last-child {
+        border-bottom: 0;
+      }
+
+      .vision-copy blockquote {
+        font-size: 36px;
+      }
+
+      .principles {
+        grid-template-columns: 1fr;
+      }
+
+      .journey-step,
+      .journey-step:nth-child(n + 4),
+      .session-step,
+      .session-step:nth-child(n + 4),
+      .execution-step,
+      .execution-step:nth-child(n + 4) {
+        min-height: 190px;
+        border-top: 0;
+        border-right: 1px solid var(--line-dark);
+        border-bottom: 1px solid var(--line-dark);
+      }
+
+      .session-step,
+      .session-step:nth-child(n + 4),
+      .execution-step,
+      .execution-step:nth-child(n + 4) {
+        border-color: var(--line-light);
+      }
+
+      .execution-step::after,
+      .execution-step:nth-child(3)::after {
+        display: none;
+      }
+
+      .journey-number,
+      .session-step b,
+      .execution-number {
+        margin-bottom: 28px;
+      }
+
+      .execution-step h4 {
+        min-height: auto;
+      }
+
+      .mission {
+        min-height: 340px;
+      }
+
+      .variant-hero {
+        padding: 76px 0 62px;
+      }
+
+      .variant-heading {
+        grid-template-columns: 1fr;
+      }
+
+      .variant-heading > p {
+        grid-column: auto;
+      }
+
+      .variant-number {
+        font-size: 76px;
+      }
+
+      .variant-heading h2 {
+        font-size: 44px;
+      }
+
+      .progression-map {
+        grid-template-columns: 1fr;
+      }
+
+      .progression-arrow {
+        min-height: 36px;
+        transform: rotate(90deg);
+      }
+
+      .architecture-layer {
+        grid-template-columns: 38px 1fr;
+      }
+
+      .architecture-layer span {
+        grid-column: 2;
+      }
+
+      .workstreams {
+        border-top: 1px solid var(--line-light);
+      }
+
+      .workstream {
+        min-height: 220px;
+        border-left: 1px solid var(--line-light);
+      }
+
+      .price {
+        font-size: 60px;
+      }
+
+      .phase {
+        grid-template-columns: 78px 28px 1fr;
+        gap: 12px;
+        min-height: 190px;
+      }
+
+      .phase-dot {
+        width: 28px;
+        height: 28px;
+      }
+
+      .phase-track::after {
+        left: 14px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .modal {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+  <nav class="nav" id="nav" aria-label="Primary navigation">
+    <div class="shell nav-inner">
+      <a class="brand" href="#top" aria-label="NOXGAMES, back to top">
+        <img src="assets/noxgames-logo.png" alt="" />
+        <span>NOXGAMES</span>
+        <span class="brand-project">Rise of a Nation</span>
+      </a>
+      <div class="nav-links">
+        <a href="#vision">Vision</a>
+        <a href="#gameplay">Gameplay</a>
+        <a href="#variant-one">Variant 1</a>
+        <a href="#variant-two">Variant 2</a>
+        <a href="#scope">Scope</a>
+        <a href="#delivery">Delivery</a>
+        <a href="#execution">Execution</a>
+      </div>
+      <button class="icon-button menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#vision">Vision</a>
+    <a href="#gameplay">Gameplay</a>
+    <a href="#variant-one">Variant 1 · Hexapolis Evolution</a>
+    <a href="#variant-two">Variant 2 · Bespoke Nation Builder</a>
+    <a href="#scope">Scope</a>
+    <a href="#delivery">Delivery</a>
+    <a href="#execution">Execution & payment</a>
+  </div>
+
+  <main>
+    <header class="hero" id="top">
+      <div class="shell hero-inner">
+        <div class="hero-mark"><span></span>Detailed game development proposal</div>
+        <h1>Rise of a Nation</h1>
+        <p class="hero-sub">
+          A strategic nation builder for the next generation. Players begin with one district, balance the systems that make society work, and build a <strong>vision for Viksit Bharat 2047</strong>.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="#variant-one"><i data-lucide="layers-3"></i>Review both variants</a>
+          <a class="button button-ghost" href="#delivery"><i data-lucide="calendar-range"></i>Budget and delivery</a>
+        </div>
+      </div>
+      <div class="hero-note">Concept direction · NOXGAMES · July 2026</div>
+    </header>
+
+    <section class="snapshot section-compact" aria-label="Project parameters">
+      <div class="shell snapshot-grid">
+        <div class="snapshot-item">
+          <i data-lucide="users"></i>
+          <strong>Children and youth</strong>
+          <span>Accessible strategy, short sessions and positive civic agency</span>
+        </div>
+        <div class="snapshot-item">
+          <i data-lucide="landmark"></i>
+          <strong>Modern India</strong>
+          <span>Near-future progress rather than a historical setting</span>
+        </div>
+        <div class="snapshot-item">
+          <i data-lucide="git-branch"></i>
+          <strong>Two production variants</strong>
+          <span>Proven Unity foundation or bespoke web-first product</span>
+        </div>
+        <div class="snapshot-item">
+          <i data-lucide="badge-dollar-sign"></i>
+          <strong>USD 400K-600K</strong>
+          <span>Indicative envelope, finalized after discovery</span>
+        </div>
+        <div class="snapshot-item">
+          <i data-lucide="rocket"></i>
+          <strong>Early 2027 target</strong>
+          <span>MPP in 3-4 weeks; production capacity from Q4 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="vision">
+      <div class="shell vision-grid">
+        <div class="vision-copy">
+          <div class="eyebrow">The player promise</div>
+          <blockquote>You do not play a leader. <em>You become one.</em></blockquote>
+          <p>
+            The player creates an avatar and chooses how they want to contribute: architect, innovator, infrastructure strategist, entrepreneur or climate strategist. The role is an identity and progression lens, not a restriction. Every player must still understand that national progress depends on balanced choices.
+          </p>
+          <div class="principles">
+            <div class="principle">
+              <i data-lucide="brain"></i>
+              <div><strong>Strategic thinking</strong><span>Decisions have visible national consequences.</span></div>
+            </div>
+            <div class="principle">
+              <i data-lucide="lightbulb"></i>
+              <div><strong>Innovation mindset</strong><span>Emerging technology solves practical problems.</span></div>
+            </div>
+            <div class="principle">
+              <i data-lucide="gamepad-2"></i>
+              <div><strong>Productive play</strong><span>Purpose is delivered through systems, not lessons.</span></div>
+            </div>
+            <div class="principle">
+              <i data-lucide="flag"></i>
+              <div><strong>Leadership skills</strong><span>Ownership grows from district to nation.</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="framed-media" style="aspect-ratio: 3 / 2;">
+          <img src="assets/avatar-paths.jpg" alt="Client concept showing five leadership paths for the player avatar" />
+          <button class="icon-button expand-button" type="button" data-lightbox="assets/avatar-paths.jpg" data-caption="Client concept: one avatar, many paths, endless impact." aria-label="View avatar paths concept full screen">
+            <i data-lucide="expand"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section deep" id="gameplay">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Core product architecture</div>
+            <h2>One fantasy, expressed through repeatable play</h2>
+          </div>
+          <p>
+            Both production variants share the same emotional and strategic spine. They differ in session structure, persistence and technology, not in the promise made to the player.
+          </p>
+        </div>
+
+        <div class="player-journey">
+          <article class="journey-step">
+            <div class="journey-number"><i data-lucide="user-round-cog"></i><span>01</span></div>
+            <h4>Choose a role</h4>
+            <p>Create an avatar and select a leadership identity that shapes early missions and rewards.</p>
+          </article>
+          <article class="journey-step">
+            <div class="journey-number"><i data-lucide="map-pin"></i><span>02</span></div>
+            <h4>Inherit a district</h4>
+            <p>Receive a limited budget, constrained services and citizens with clear unmet needs.</p>
+          </article>
+          <article class="journey-step">
+            <div class="journey-number"><i data-lucide="scan-search"></i><span>03</span></div>
+            <h4>Read the system</h4>
+            <p>Identify bottlenecks across transport, skills, energy, health, food and employment.</p>
+          </article>
+          <article class="journey-step">
+            <div class="journey-number"><i data-lucide="hammer"></i><span>04</span></div>
+            <h4>Make a plan</h4>
+            <p>Build, upgrade, research and sequence investments within real resource limits.</p>
+          </article>
+          <article class="journey-step">
+            <div class="journey-number"><i data-lucide="activity"></i><span>05</span></div>
+            <h4>See consequences</h4>
+            <p>Jobs, trust, pollution, mobility and productivity respond to the player's choices.</p>
+          </article>
+          <article class="journey-step">
+            <div class="journey-number"><i data-lucide="map"></i><span>06</span></div>
+            <h4>Expand the mandate</h4>
+            <p>A thriving district unlocks a city, then a state path and ultimately the national layer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="systems">
+      <div class="shell systems-intro">
+        <div>
+          <div class="eyebrow">Strategic depth</div>
+          <h2>Every system must depend on another</h2>
+          <p class="lead">
+            The game becomes interesting when there is no single correct investment. Education creates skilled workers, but workers need jobs. Industry creates revenue, but requires energy and transport. Growth increases demand on health, housing and food.
+          </p>
+          <div class="balance-note">
+            <strong>Design rule:</strong> every major investment creates one clear benefit, one new dependency and one measurable effect on citizens.
+          </div>
+        </div>
+        <div class="systems-map">
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="train-front"></i></div>
+            <div><strong>Infrastructure</strong><span>Mobility, logistics, construction capacity and regional access</span></div>
+          </div>
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="sprout"></i></div>
+            <div><strong>Agriculture</strong><span>Food security, water, rural productivity and resilience</span></div>
+          </div>
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="graduation-cap"></i></div>
+            <div><strong>Education</strong><span>Skills, research capacity, employability and innovation</span></div>
+          </div>
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="cpu"></i></div>
+            <div><strong>Technology</strong><span>Automation, digital services and efficiency multipliers</span></div>
+          </div>
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="heart-pulse"></i></div>
+            <div><strong>Health</strong><span>Citizen wellbeing, productivity and crisis resistance</span></div>
+          </div>
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="zap"></i></div>
+            <div><strong>Energy</strong><span>Grid capacity, reliability, emissions and operating cost</span></div>
+          </div>
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="factory"></i></div>
+            <div><strong>Industry</strong><span>Jobs, tax income, exports and environmental pressure</span></div>
+          </div>
+          <div class="system-row">
+            <div class="system-icon"><i data-lucide="smile"></i></div>
+            <div><strong>Citizen trust</strong><span>Approval, social stability and the mandate to expand</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="missions">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Content framework</div>
+            <h2>National goals become playable missions</h2>
+          </div>
+          <p>
+            Missions translate broad ambitions into concrete objectives, dependencies and outcomes. Each can become a regional scenario in Variant 1 or a persistent multi-stage programme in Variant 2.
+          </p>
+        </div>
+        <div class="missions-grid">
+          <button class="mission" type="button" data-lightbox="assets/mission-bullet-train.jpg" data-caption="Bullet Train Corridors · transport capacity, urban growth and regional access.">
+            <img src="assets/mission-bullet-train.jpg" alt="Futuristic bullet train corridor concept" />
+            <span class="icon-button expand-button"><i data-lucide="expand"></i></span>
+            <span class="mission-copy"><strong>Bullet Train Corridors</strong><span>Connect cities without leaving districts behind.</span></span>
+          </button>
+          <button class="mission" type="button" data-lightbox="assets/mission-semiconductor.jpg" data-caption="Semiconductor Hubs · skills, energy, research and industrial policy.">
+            <img src="assets/mission-semiconductor.jpg" alt="Advanced semiconductor manufacturing hub concept" />
+            <span class="icon-button expand-button"><i data-lucide="expand"></i></span>
+            <span class="mission-copy"><strong>Semiconductor Hubs</strong><span>Build the talent and infrastructure behind a digital economy.</span></span>
+          </button>
+          <button class="mission" type="button" data-lightbox="assets/mission-drone-farming.jpg" data-caption="Drone Farming · water, skills, connectivity and rural productivity.">
+            <img src="assets/mission-drone-farming.jpg" alt="AI-enabled drone farming concept" />
+            <span class="icon-button expand-button"><i data-lucide="expand"></i></span>
+            <span class="mission-copy"><strong>Drone Farming</strong><span>Raise yields while protecting water and rural employment.</span></span>
+          </button>
+          <button class="mission" type="button" data-lightbox="assets/mission-renewable-energy.jpg" data-caption="Renewable Energy Grids · capacity, storage, reliability and clean growth.">
+            <img src="assets/mission-renewable-energy.jpg" alt="Renewable energy grid concept" />
+            <span class="icon-button expand-button"><i data-lucide="expand"></i></span>
+            <span class="mission-copy"><strong>Renewable Energy Grids</strong><span>Balance clean capacity, storage and reliable supply.</span></span>
+          </button>
+          <button class="mission" type="button" data-lightbox="assets/mission-space.jpg" data-caption="Space Programmes · research, industry, talent and national milestones.">
+            <img src="assets/mission-space.jpg" alt="Indian space technology concept" />
+            <span class="icon-button expand-button"><i data-lucide="expand"></i></span>
+            <span class="mission-copy"><strong>Space Programmes</strong><span>Coordinate research, industry and long-term ambition.</span></span>
+          </button>
+          <button class="mission" type="button" data-lightbox="assets/mission-ai-university.jpg" data-caption="AI Universities · access, talent, research output and job creation.">
+            <img src="assets/mission-ai-university.jpg" alt="Future AI university concept" />
+            <span class="icon-button expand-button"><i data-lucide="expand"></i></span>
+            <span class="mission-copy"><strong>AI Universities</strong><span>Connect education investment to research and employment.</span></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="variant-hero" id="variant-one">
+      <div class="shell variant-heading">
+        <div class="variant-number">01</div>
+        <div>
+          <div class="variant-tag"><i data-lucide="shield-check"></i>Highest delivery confidence</div>
+          <h2>Hexapolis Evolution</h2>
+        </div>
+        <p>
+          Reuse the proven Unity, hex-grid and turn-based foundation, then redirect it from conquest toward constructive regional development.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="variant-one-overview">
+      <div class="shell variant-overview">
+        <div class="variant-copy">
+          <div class="eyebrow">The product shape</div>
+          <h3>Short regional strategy sessions. One persistent national journey.</h3>
+          <p>
+            Each playable world becomes a district or regional challenge. The player explores a hex map, establishes services, develops resources, deploys specialist teams and completes a national mission. Results feed a persistent India progression layer between sessions.
+          </p>
+          <ul class="key-points">
+            <li><i data-lucide="check"></i><span><strong>Target session:</strong> approximately 8-12 minutes for a complete regional objective.</span></li>
+            <li><i data-lucide="check"></i><span><strong>Core mode:</strong> turn-based planning on a compact hex map, designed for one-handed mobile play.</span></li>
+            <li><i data-lucide="check"></i><span><strong>Conflict replacement:</strong> military pressure becomes crises, constraints, logistics and civic challenges.</span></li>
+            <li><i data-lucide="check"></i><span><strong>Persistence:</strong> technologies, leadership specialization and national milestones survive between worlds.</span></li>
+          </ul>
+        </div>
+        <div class="framed-media" style="aspect-ratio: 16 / 9;">
+          <img src="assets/hexapolis-build.png" alt="Current Hexapolis promotional gameplay showing a civilization built across a hex map" />
+          <div class="media-label"><strong>The reusable foundation</strong>Hex maps, exploration, settlement growth, turn resolution and native mobile delivery already exist.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="variant-one-session">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Representative session</div>
+            <h2>How one regional world plays</h2>
+          </div>
+          <p>
+            The sequence keeps the readability of Hexapolis while changing the fantasy, content and victory conditions around modern development.
+          </p>
+        </div>
+        <div class="session-flow">
+          <article class="session-step">
+            <b>01 · Brief</b>
+            <h4>Receive the mandate</h4>
+            <p>Example: connect two towns, raise employment and reach 60% clean energy within 24 turns.</p>
+          </article>
+          <article class="session-step">
+            <b>02 · Explore</b>
+            <h4>Reveal constraints</h4>
+            <p>Survey terrain, population, water, transport gaps, local resources and underserved settlements.</p>
+          </article>
+          <article class="session-step">
+            <b>03 · Establish</b>
+            <h4>Build the foundation</h4>
+            <p>Place a hub, roads, basic energy, agriculture and essential public services.</p>
+          </article>
+          <article class="session-step">
+            <b>04 · Specialize</b>
+            <h4>Choose a strategy</h4>
+            <p>Invest in research, skills, industry or sustainability according to the region and role.</p>
+          </article>
+          <article class="session-step">
+            <b>05 · Respond</b>
+            <h4>Handle events</h4>
+            <p>Adapt to drought, congestion, budget pressure, workforce shortages or citizen concerns.</p>
+          </article>
+          <article class="session-step">
+            <b>06 · Contribute</b>
+            <h4>Complete the mission</h4>
+            <p>Convert performance into Bharat Points, technology progress and state-level contribution.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section deep" id="variant-one-build">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Production breakdown</div>
+            <h2>Reuse the engine. Rebuild the meaning.</h2>
+          </div>
+          <p>
+            Route 1 is not a reskin. Its advantage comes from retaining low-level production infrastructure while replacing the player-facing economy, content and progression.
+          </p>
+        </div>
+        <div class="build-split">
+          <div class="build-column">
+            <h3>Foundation retained and adapted</h3>
+            <ul>
+              <li>Unity project, device support and native deployment pipeline</li>
+              <li>Hex-grid world representation and map-generation methods</li>
+              <li>Camera, touch input, selection and core map interaction</li>
+              <li>Turn sequencing, action resolution and deterministic game state</li>
+              <li>Building placement, territory expansion and map visibility</li>
+              <li>Save architecture, profile foundations and analytics hooks</li>
+              <li>AI and scenario framework where it supports civic challenges</li>
+            </ul>
+          </div>
+          <div class="build-column">
+            <h3>Product rebuilt for Rise of a Nation</h3>
+            <ul>
+              <li>All modern India environments, buildings, characters and UI</li>
+              <li>Resources: budget, workforce, energy, knowledge and trust</li>
+              <li>Sector dependencies, research tree and national missions</li>
+              <li>Specialist teams replacing conventional military units</li>
+              <li>Civic events, regional objectives and non-combat victory rules</li>
+              <li>Avatar roles, persistent national map and leadership progression</li>
+              <li>Age-appropriate onboarding, advisor, localization and content</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="variant-one-meta">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Long-term progression</div>
+            <h2>The match ends. The nation continues.</h2>
+          </div>
+          <p>
+            A persistent metagame gives short worlds meaning and creates the sense of India expanding through accumulated player achievement.
+          </p>
+        </div>
+        <div class="progression-map">
+          <article class="progression-stage">
+            <span>01</span>
+            <h4>Regional worlds</h4>
+            <p>Complete focused missions, earn ratings and discover regional modifiers.</p>
+          </article>
+          <div class="progression-arrow"><i data-lucide="arrow-right"></i></div>
+          <article class="progression-stage">
+            <span>02</span>
+            <h4>State journey</h4>
+            <p>Unlock a sequence of regions, develop a specialization and compare performance.</p>
+          </article>
+          <div class="progression-arrow"><i data-lucide="arrow-right"></i></div>
+          <article class="progression-stage">
+            <span>03</span>
+            <h4>National vision</h4>
+            <p>Advance flagship programmes, fill the 2047 roadmap and unlock new technology eras.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="variant-one-boundary">
+      <div class="shell boundary">
+        <div>
+          <div class="eyebrow">The reuse boundary</div>
+          <h3>When this route stops being the faster route</h3>
+          <p>
+            The Hexapolis advantage disappears if the core requirement becomes a continuously running multi-city economy. That changes the state model, interface, progression and content pipeline deeply enough that a bespoke foundation becomes more honest.
+          </p>
+        </div>
+        <div class="boundary-points">
+          <div class="boundary-point">
+            <i data-lucide="check-circle-2"></i>
+            <div><strong>Good fit</strong><span>Turn-based regional scenarios, compact mobile sessions and a persistent layer between matches.</span></div>
+          </div>
+          <div class="boundary-point">
+            <i data-lucide="triangle-alert"></i>
+            <div><strong>Poor fit</strong><span>Always-on construction timers, simultaneous management of many cities and dashboard-first play.</span></div>
+          </div>
+          <div class="boundary-point">
+            <i data-lucide="gauge"></i>
+            <div><strong>Delivery implication</strong><span>Highest confidence for early 2027 only if the product remains inside the regional-session model.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="variant-hero" id="variant-two">
+      <div class="shell variant-heading">
+        <div class="variant-number">02</div>
+        <div>
+          <div class="variant-tag"><i data-lucide="layout-dashboard"></i>Highest vision fidelity</div>
+          <h2>Bespoke Nation Builder</h2>
+        </div>
+        <p>
+          Build the client's persistent city, state and nation-management vision directly, without constraining it to a match-based hex game.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="variant-two-overview">
+      <div class="shell variant-overview">
+        <div class="variant-copy">
+          <div class="eyebrow">The product shape</div>
+          <h3>A living command center for India's future.</h3>
+          <p>
+            The player begins with one district, then manages a portfolio of towns and cities over time. Buildings complete persistently, policies alter system behavior, events demand trade-offs and national programmes require coordinated investment across regions.
+          </p>
+          <ul class="key-points">
+            <li><i data-lucide="check"></i><span><strong>Target session:</strong> 3-5 minute check-ins supported by longer planning sessions.</span></li>
+            <li><i data-lucide="check"></i><span><strong>Core mode:</strong> persistent management through a national map, city views and a strategic dashboard.</span></li>
+            <li><i data-lucide="check"></i><span><strong>Time model:</strong> upgrades and initiatives continue between sessions, with clear scheduled outcomes.</span></li>
+            <li><i data-lucide="check"></i><span><strong>Expansion:</strong> one district becomes several cities, then a state portfolio and national programmes.</span></li>
+          </ul>
+        </div>
+        <div class="framed-media dashboard">
+          <img src="assets/bharat-dashboard.jpg" alt="Client concept for a Viksit Bharat national strategy dashboard" />
+          <button class="icon-button expand-button" type="button" data-lightbox="assets/bharat-dashboard.jpg" data-caption="Client concept: a persistent Viksit Bharat command center." aria-label="View dashboard concept full screen">
+            <i data-lucide="expand"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="variant-two-session">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Representative check-in</div>
+            <h2>How persistent management feels</h2>
+          </div>
+          <p>
+            The player does not finish a world. They return to a living system, review what changed and make the next set of decisions.
+          </p>
+        </div>
+        <div class="session-flow">
+          <article class="session-step">
+            <b>01 · Review</b>
+            <h4>Read the overnight report</h4>
+            <p>See completed construction, resource changes, citizen feedback and emerging risks.</p>
+          </article>
+          <article class="session-step">
+            <b>02 · Diagnose</b>
+            <h4>Find the bottleneck</h4>
+            <p>Compare cities and identify where mobility, power, skills or health constrain progress.</p>
+          </article>
+          <article class="session-step">
+            <b>03 · Allocate</b>
+            <h4>Commit the budget</h4>
+            <p>Fund upgrades, move specialist capacity and reserve resources for national missions.</p>
+          </article>
+          <article class="session-step">
+            <b>04 · Decide</b>
+            <h4>Set policy priorities</h4>
+            <p>Choose incentives and programmes that alter costs, growth, trust and sustainability.</p>
+          </article>
+          <article class="session-step">
+            <b>05 · Respond</b>
+            <h4>Resolve an event</h4>
+            <p>Handle a water shortage, skills gap, migration spike or infrastructure failure.</p>
+          </article>
+          <article class="session-step">
+            <b>06 · Compare</b>
+            <h4>Measure contribution</h4>
+            <p>Track state standing, national goals, friends and the next milestone toward 2047.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section deep" id="variant-two-systems">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Bespoke feature model</div>
+            <h2>Systems designed for a persistent nation</h2>
+          </div>
+          <p>
+            This route gives the initial client vision room to breathe, but every system below must be scoped and balanced from the ground up.
+          </p>
+        </div>
+        <div class="management-grid">
+          <article class="management-item">
+            <div class="management-icon"><i data-lucide="building-2"></i></div>
+            <h4>City portfolio</h4>
+            <p>Specialize towns and cities, move resources between them and resolve local needs without losing the national view.</p>
+          </article>
+          <article class="management-item">
+            <div class="management-icon"><i data-lucide="scale"></i></div>
+            <h4>Policy and economy</h4>
+            <p>Use a limited number of legible policy levers that affect tax income, services, growth, trust and sustainability.</p>
+          </article>
+          <article class="management-item">
+            <div class="management-icon"><i data-lucide="timer"></i></div>
+            <h4>Persistent construction</h4>
+            <p>Schedule upgrades and programmes that complete over time, with acceleration earned through good planning rather than friction.</p>
+          </article>
+          <article class="management-item">
+            <div class="management-icon"><i data-lucide="bot"></i></div>
+            <h4>Cabinet assistant</h4>
+            <p>Explain dependencies, forecast consequences and translate policy language into age-appropriate choices and feedback.</p>
+          </article>
+          <article class="management-item">
+            <div class="management-icon"><i data-lucide="trophy"></i></div>
+            <h4>State competition</h4>
+            <p>Compare states on balanced public metrics, avoiding a single wealth score that rewards only aggressive growth.</p>
+          </article>
+          <article class="management-item">
+            <div class="management-icon"><i data-lucide="calendar-clock"></i></div>
+            <h4>National events</h4>
+            <p>Run shared missions, anniversary moments and time-limited goals that let individual progress contribute to collective outcomes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="variant-two-tech">
+      <div class="shell architecture">
+        <div>
+          <div class="eyebrow">Technical architecture</div>
+          <h2>Web-first, mobile-ready, service-backed</h2>
+          <p class="lead">
+            Three.js provides the rendered world, not the whole product. The game also requires a deterministic simulation layer, persistent services, content configuration and a native wrapper strategy.
+          </p>
+          <div class="balance-note">
+            <strong>Recommended validation:</strong> prototype one city view, one cross-sector dependency and one persistent return session before committing to the full architecture.
+          </div>
+        </div>
+        <div class="architecture-stack">
+          <div class="architecture-layer">
+            <i data-lucide="box"></i>
+            <strong>Presentation</strong>
+            <span>Three.js city/map scenes, responsive dashboard UI and accessible mobile controls</span>
+          </div>
+          <div class="architecture-layer">
+            <i data-lucide="workflow"></i>
+            <strong>Simulation</strong>
+            <span>Deterministic sector model, timers, events, policies and progression rules</span>
+          </div>
+          <div class="architecture-layer">
+            <i data-lucide="database"></i>
+            <strong>Services</strong>
+            <span>Accounts, cloud save, remote configuration, analytics, competition and live content</span>
+          </div>
+          <div class="architecture-layer">
+            <i data-lucide="smartphone"></i>
+            <strong>Distribution</strong>
+            <span>Responsive web release plus Capacitor packaging and native device validation</span>
+          </div>
+          <div class="architecture-layer">
+            <i data-lucide="shield-check"></i>
+            <strong>Safety</strong>
+            <span>Child-appropriate data handling, moderated social design and controlled advisor content</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comparison">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Decision framework</div>
+            <h2>Two credible products, not two skins</h2>
+          </div>
+          <p>
+            The routes use the same budget envelope differently. Variant 1 buys more content and deadline confidence. Variant 2 buys closer vision fidelity but requires a narrower first release.
+          </p>
+        </div>
+        <div class="comparison-wrap">
+          <table class="comparison">
+            <thead>
+              <tr><th>Decision area</th><th>Variant 1 · Hexapolis Evolution</th><th>Variant 2 · Bespoke Nation Builder</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Session rhythm</td><td>Complete 8-12 minute regional scenarios</td><td>3-5 minute check-ins plus longer planning sessions</td></tr>
+              <tr><td>Core interaction</td><td>Turn-based decisions on a compact hex map</td><td>Persistent city views, national map and dashboard</td></tr>
+              <tr><td>Progression</td><td>Match results feed state and national metagame</td><td>One continuous economy across cities and programmes</td></tr>
+              <tr><td>Technology</td><td>Unity and existing Hexapolis foundations</td><td>Three.js, web application, backend services and Capacitor</td></tr>
+              <tr><td>Reuse</td><td>High at engine and interaction level; low at content level</td><td>Genre knowledge and algorithms only; core product is new</td></tr>
+              <tr><td>Content capacity</td><td>More missions and regional scenarios inside the envelope</td><td>Fewer but deeper systems in the initial release</td></tr>
+              <tr><td>Primary risk</td><td>Over-customizing until reuse no longer saves time</td><td>Underestimating simulation, services and responsive UX</td></tr>
+              <tr><td>Deadline confidence</td><td>Higher for an early-2027 release</td><td>Viable only with strict MVP scope or staged launch</td></tr>
+              <tr><td>Best when</td><td>The anniversary date and polished mobile play are fixed</td><td>The persistent dashboard vision is the non-negotiable priority</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="recommendation">
+          <h3>Our recommendation: prototype Variant 1 first.</h3>
+          <p>
+            It is the most defensible route to a polished anniversary product. The 3-4 week MPP should also test one persistent dashboard screen. If that screen proves more compelling than the regional match, the project can deliberately move to Variant 2 before full production rather than discovering the mismatch later.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="scope">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Production scope</div>
+            <h2>What the development engagement includes</h2>
+          </div>
+          <p>
+            Final quantities depend on the selected variant, but each workstream needs a committed owner and acceptance criteria.
+          </p>
+        </div>
+        <div class="workstreams">
+          <article class="workstream">
+            <i data-lucide="notebook-tabs"></i>
+            <h4>Product and game design</h4>
+            <p>Core loop, economy, sector dependencies, progression, mission templates, balancing model and complete game design documentation.</p>
+            <small>OUTPUT · Approved design baseline and playable economy model</small>
+          </article>
+          <article class="workstream">
+            <i data-lucide="palette"></i>
+            <h4>Creative and content</h4>
+            <p>Modern India art direction, environments, buildings, avatar roles, UI, animation, audio, narrative framing and initial missions.</p>
+            <small>OUTPUT · Launch-ready visual system and first content set</small>
+          </article>
+          <article class="workstream">
+            <i data-lucide="code-2"></i>
+            <h4>Client engineering</h4>
+            <p>Core simulation, world interaction, UI, device support, save behavior, performance and platform-specific release builds.</p>
+            <small>OUTPUT · Production game clients for agreed platforms</small>
+          </article>
+          <article class="workstream">
+            <i data-lucide="server-cog"></i>
+            <h4>Services and operations</h4>
+            <p>Profiles, cloud save, analytics, remote configuration, live content hooks and competition services where included.</p>
+            <small>OUTPUT · Operable backend and environment configuration</small>
+          </article>
+          <article class="workstream">
+            <i data-lucide="languages"></i>
+            <h4>UX, accessibility and localization</h4>
+            <p>Age-appropriate onboarding, readable information hierarchy, localization framework and initial agreed languages.</p>
+            <small>OUTPUT · Validated mobile UX and localized content pipeline</small>
+          </article>
+          <article class="workstream">
+            <i data-lucide="bug"></i>
+            <h4>QA and release</h4>
+            <p>Test planning, device matrix, balancing telemetry, compliance support, store/web preparation and launch candidate validation.</p>
+            <small>OUTPUT · Approved release candidate and deployment package</small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section deep" id="delivery">
+      <div class="shell commercial-grid">
+        <div class="investment">
+          <div class="eyebrow">Commercial framework</div>
+          <h2>Indicative development envelope</h2>
+          <div class="price">$400K-600K</div>
+          <p>
+            Both variants can be shaped to this envelope, but they do not deliver the same amount of product. Variant 1 uses more of the budget on client-facing art, missions and progression. Variant 2 must reserve more for new core systems, responsive UI, services and technical validation.
+          </p>
+          <p>
+            A fixed price and milestone plan follow route selection, content inputs and acceptance of the first-release boundary.
+          </p>
+        </div>
+        <div class="timeline" aria-label="Indicative delivery plan">
+          <article class="phase">
+            <time>Week 0-1</time>
+            <div class="phase-track"><div class="phase-dot"><i data-lucide="compass"></i></div></div>
+            <div class="phase-copy">
+              <h4>Discovery and route lock</h4>
+              <p>Confirm audience, platform, content governance, first-release scope and the question the MPP must answer.</p>
+              <small>DECISION · Variant 1, Variant 2 or a specifically bounded hybrid</small>
+            </div>
+          </article>
+          <article class="phase">
+            <time>Weeks 2-4</time>
+            <div class="phase-track"><div class="phase-dot"><i data-lucide="flask-conical"></i></div></div>
+            <div class="phase-copy">
+              <h4>Focused MPP / prototype</h4>
+              <p>One representative build-and-balance loop, one national mission, target visual quality and a tested mobile interaction model.</p>
+              <small>GATE · Validate fun, clarity, technical route and production estimate</small>
+            </div>
+          </article>
+          <article class="phase">
+            <time>Q4 2026</time>
+            <div class="phase-track"><div class="phase-dot"><i data-lucide="hammer"></i></div></div>
+            <div class="phase-copy">
+              <h4>Foundation production</h4>
+              <p>Build or adapt core systems, establish the economy, complete art pipelines and deliver a representative vertical slice.</p>
+              <small>GATE · End-to-end playable product slice on target devices</small>
+            </div>
+          </article>
+          <article class="phase">
+            <time>Q1 2027</time>
+            <div class="phase-track"><div class="phase-dot"><i data-lucide="layers-3"></i></div></div>
+            <div class="phase-copy">
+              <h4>Content, progression and services</h4>
+              <p>Produce launch content, integrate persistence and analytics, balance progression, localize and test at scale.</p>
+              <small>GATE · Feature complete and content complete</small>
+            </div>
+          </article>
+          <article class="phase">
+            <time>Q1/Q2 2027</time>
+            <div class="phase-track"><div class="phase-dot"><i data-lucide="flag"></i></div></div>
+            <div class="phase-copy">
+              <h4>Release candidate and launch</h4>
+              <p>Optimize, resolve defects, complete compliance, prepare deployment and support the agreed launch window.</p>
+              <small>TARGET · Disciplined initial release, followed by planned expansion</small>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="shell assumptions">
+        <div class="assumption">
+          <i data-lucide="calendar-check"></i>
+          <div><strong>Schedule dependency</strong><span>Timely route selection, contracting, approvals and client content delivery.</span></div>
+        </div>
+        <div class="assumption">
+          <i data-lucide="languages"></i>
+          <div><strong>Localization boundary</strong><span>Launch languages and review process must be fixed during discovery.</span></div>
+        </div>
+        <div class="assumption">
+          <i data-lucide="shield-check"></i>
+          <div><strong>Child safety</strong><span>Social play, data collection and AI advisor behavior require explicit governance.</span></div>
+        </div>
+        <div class="assumption">
+          <i data-lucide="file-check-2"></i>
+          <div><strong>Content authority</strong><span>Client supplies approved initiatives, cultural guidance and factual reference material.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="execution">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Execution and payment plan</div>
+            <h2>Commit in stages. Expand after the prototype proves the route.</h2>
+          </div>
+          <p>
+            The commercial structure limits early risk for both parties. A preliminary agreement funds the prototype; the full production commitment follows prototype delivery, route confirmation and final scope approval.
+          </p>
+        </div>
+
+        <div class="execution-flow" aria-label="Contract and payment sequence">
+          <article class="execution-step">
+            <div class="execution-number"><i data-lucide="file-signature"></i><span>01</span></div>
+            <h4>Sign preliminary agreement</h4>
+            <p>Approve the prototype objective, delivery window, client inputs, review process and ownership of preliminary work.</p>
+            <span class="payment-trigger">$40K prepayment</span>
+          </article>
+          <article class="execution-step">
+            <div class="execution-number"><i data-lucide="flask-conical"></i><span>02</span></div>
+            <h4>Produce and deliver prototype</h4>
+            <p>NOXGAMES delivers the agreed 3-4 week MPP demonstrating the core loop, visual quality and technical route.</p>
+            <span class="payment-trigger">Prototype delivery</span>
+          </article>
+          <article class="execution-step">
+            <div class="execution-number"><i data-lucide="clipboard-check"></i><span>03</span></div>
+            <h4>Approve scope and final contract</h4>
+            <p>Use prototype findings to lock the selected variant, feature list, release date, acceptance criteria and final price.</p>
+            <span class="payment-trigger">Production sign-off</span>
+          </article>
+          <article class="execution-step">
+            <div class="execution-number"><i data-lucide="landmark"></i><span>04</span></div>
+            <h4>Start full production</h4>
+            <p>Execution of the final development contract triggers team reservation and the full production programme.</p>
+            <span class="payment-trigger">$100K prepayment</span>
+          </article>
+          <article class="execution-step">
+            <div class="execution-number"><i data-lucide="package-check"></i><span>05</span></div>
+            <h4>Deliver and settle balance</h4>
+            <p>Following delivery and acceptance of the contracted release, the remaining agreed project price becomes payable.</p>
+            <span class="payment-trigger">Remaining balance</span>
+          </article>
+        </div>
+
+        <div class="payment-layout">
+          <div class="payment-ledger" aria-label="Illustrative payment allocation">
+            <div class="ledger-row">
+              <div><strong>Preliminary agreement</strong><span>Prototype commitment and production-route validation</span></div>
+              <div class="ledger-amount">$40K</div>
+            </div>
+            <div class="ledger-row">
+              <div><strong>Final development contract</strong><span>Full production mobilization and team reservation</span></div>
+              <div class="ledger-amount">$100K</div>
+            </div>
+            <div class="ledger-row">
+              <div><strong>Final delivery and acceptance</strong><span>Agreed price less both previous prepayments</span></div>
+              <div class="ledger-amount">$260K-460K</div>
+            </div>
+          </div>
+
+          <div class="deadline-terms">
+            <div class="eyebrow">Release commitment</div>
+            <h3>A concrete deadline can carry a concrete remedy.</h3>
+            <p>
+              NOXGAMES is open to fixing the final release deadline in the development contract and agreeing a price reduction if NOXGAMES misses that deadline.
+            </p>
+            <div class="deadline-points">
+              <div class="deadline-point">
+                <i data-lucide="percent"></i>
+                <span><strong>Typical range:</strong> a negotiated 10-20% reduction for a missed final delivery deadline.</span>
+              </div>
+              <div class="deadline-point">
+                <i data-lucide="calendar-days"></i>
+                <span><strong>Defined in advance:</strong> exact deadline, grace period, measurement point and reduction percentage.</span>
+              </div>
+              <div class="deadline-point">
+                <i data-lucide="git-pull-request-arrow"></i>
+                <span><strong>Protected scope:</strong> approved change requests or expanded requirements move the schedule through written change control.</span>
+              </div>
+              <div class="deadline-point">
+                <i data-lucide="handshake"></i>
+                <span><strong>Shared dependencies:</strong> client approval delays, missing inputs and other agreed exclusions are handled explicitly in the final contract.</span>
+              </div>
+            </div>
+            <div class="legal-note">
+              Illustrative commercial structure only. Payment due dates, tax treatment, acceptance procedure, intellectual-property transfer, deadline remedies, exclusions and liability caps will be defined in the executed agreements.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="next">
+      <div class="shell cta-grid">
+        <div>
+          <div class="eyebrow">Recommended next step</div>
+          <h2>Lock the product question before building the product.</h2>
+          <p>
+            Use the 3-4 week MPP to compare one polished regional mission with one persistent return screen. That will produce evidence for the route decision, a credible production plan and a scope that can survive the anniversary deadline.
+          </p>
+        </div>
+        <a class="button" href="mailto:info@noxgames.com?subject=Rise%20of%20a%20Nation%20-%20Discovery">
+          <i data-lucide="arrow-up-right"></i>Start discovery
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div class="footer-brand"><img src="assets/noxgames-logo.png" alt="" /><span>NOXGAMES</span></div>
+      <div>Confidential proposal · Rise of a Nation · July 2026</div>
+      <div>Scope, budget and timing remain indicative until discovery and contract.</div>
+    </div>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
+    <figure class="modal-figure">
+      <button class="icon-button modal-close" id="modalClose" type="button" aria-label="Close image preview"><i data-lucide="x"></i></button>
+      <img class="modal-image" id="modalImage" alt="" />
+      <figcaption class="modal-caption" id="modalCaption"></figcaption>
+    </figure>
+  </div>
+
+  <script>
+    const nav = document.getElementById("nav");
+    const progressBar = document.getElementById("progressBar");
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const modal = document.getElementById("modal");
+    const modalImage = document.getElementById("modalImage");
+    const modalCaption = document.getElementById("modalCaption");
+    const modalClose = document.getElementById("modalClose");
+    const navLinks = [...document.querySelectorAll(".nav-links a")];
+    let lastModalTrigger = null;
+
+    const renderIcons = () => {
+      if (window.lucide) {
+        window.lucide.createIcons({ attrs: { "aria-hidden": "true" } });
+      }
+    };
+
+    const updateScroll = () => {
+      nav.classList.toggle("scrolled", window.scrollY > 24);
+      const distance = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = `${distance > 0 ? Math.min(window.scrollY / distance, 1) * 100 : 0}%`;
+    };
+
+    const closeMenu = () => {
+      mobileMenu.classList.remove("open");
+      mobileMenu.setAttribute("aria-hidden", "true");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Open menu");
+      menuButton.innerHTML = '<i data-lucide="menu"></i>';
+      document.body.classList.remove("locked");
+      renderIcons();
+    };
+
+    const openMenu = () => {
+      mobileMenu.classList.add("open");
+      mobileMenu.setAttribute("aria-hidden", "false");
+      menuButton.setAttribute("aria-expanded", "true");
+      menuButton.setAttribute("aria-label", "Close menu");
+      menuButton.innerHTML = '<i data-lucide="x"></i>';
+      document.body.classList.add("locked");
+      renderIcons();
+    };
+
+    menuButton.addEventListener("click", () => {
+      menuButton.getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu();
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+
+    const openModal = (trigger) => {
+      lastModalTrigger = trigger;
+      modalImage.src = trigger.dataset.lightbox;
+      const sourceImage = trigger.querySelector("img");
+      modalImage.alt = sourceImage ? sourceImage.alt : "";
+      modalCaption.textContent = trigger.dataset.caption || "";
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("locked");
+      window.setTimeout(() => modalClose.focus(), 30);
+    };
+
+    const closeModal = () => {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("locked");
+      modalImage.removeAttribute("src");
+      if (lastModalTrigger) lastModalTrigger.focus();
+    };
+
+    document.querySelectorAll("[data-lightbox]").forEach((trigger) => {
+      trigger.addEventListener("click", () => openModal(trigger));
+    });
+
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (modal.classList.contains("open")) closeModal();
+      else if (mobileMenu.classList.contains("open")) closeMenu();
+    });
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((link) => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+        });
+      });
+    }, { rootMargin: "-30% 0px -62%", threshold: 0 });
+
+    document.querySelectorAll("main [id]").forEach((section) => sectionObserver.observe(section));
+
+    window.addEventListener("scroll", updateScroll, { passive: true });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900 && mobileMenu.classList.contains("open")) closeMenu();
+    });
+
+    renderIcons();
+    updateScroll();
+  </script>
+</body>
+</html>
