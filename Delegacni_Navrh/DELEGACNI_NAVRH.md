@@ -1,150 +1,126 @@
-# Delegační návrh — NOXGAMES / indie tým 15 lidí
+# Delegační návrh — NOXGAMES
 
-> Pracovní dokument. Návrh struktury kompletně nezávislého (indie) týmu o 15 lidech,
-> včetně delegace rozhodování, fixních platů, měsíčních výkonnostních bonusů a provizí ze sales.
-> Stav: **první draft k diskuzi** - čísla jsou orientační a čekají na kalibraci.
-
----
-
-## 1. Principy návrhu
-
-1. **Malý tým = ploché vedení.** Maximálně 2 úrovně: studio lead a 3 leadi (tech, art, produkce). Žádný middle management navíc.
-2. **Každá oblast má jednoho vlastníka.** Kdo oblast vlastní, rozhoduje v ní bez eskalace až do definovaného limitu.
-3. **Plat je fixní a předvídatelný, bonus je za výkon.** Nikdo nehádá, kolik dostane - pravidla bonusů jsou veřejná uvnitř týmu.
-4. **Sales je motivovaný z výsledku, ne z aktivity.** Provize se počítá ze zisku dealu, ne z obratu, aby se nevyplácely ztrátové zakázky.
-5. **Leady může nosit kdokoliv.** 5% provize za sehnaný lead není vázaná na roli - programátor, který přivede klienta, ji dostane taky.
+> Pracovní dokument. Návrh delegační struktury a úpravy organizační struktury v NOXGAMES (16 lidí).
+> Stav: **iterace 02** - zapracované poznámky Davida z 29. 7. 2026.
 
 ---
 
-## 2. Struktura týmu (15 lidí)
+## 1. Principy
+
+1. **Ploché vedení, žádný izolující middle management.** Exec vrstva (CEO + operations, marketing a production chief) není klasický middle management - s leady a lidmi v týmech se pracuje napřímo, nikdo nestojí v cestě komunikaci.
+2. **Každá oblast má jednoho vlastníka.** Kdo oblast vlastní, rozhoduje v ní bez eskalace až do definovaného limitu. Eskalace je výjimka, ne default.
+3. **Fixní plat, ne tabulkový.** Fix vychází z měsíčního úhrnu času a rolí, které člověk reálně nese. Platy se normalizují (stejná pozice ≈ srovnatelný plat), ale nejde o tabulkový systém.
+4. **Bonus za výkon, podíl za iniciativu.** Měsíční bonus za týmové a osobní cíle. Podíl ze zisku za nápady, leady a dealy, které firmě vydělají nebo ušetří.
+5. **Více rolí = cíle ve všech rolích.** Kdo nese víc rolí (např. QA lead + office), má v každé z nich nastavené cíle a vstupuje mu to do platu i hodnocení.
+
+## 2. Struktura NOXGAMES (16 lidí)
 
 ```
-Studio lead (David)
-├── Producer ................ delivery, roadmapa, priority
-├── Tech lead ............... architektura, code review, odhady
-│   ├── Gameplay dev 1
-│   ├── Gameplay dev 2
-│   ├── Backend / liveops dev
-│   └── Playables / H5 dev
-├── Art lead ................ vizuální směr, pipeline, outsourcing
-│   ├── 2D / UI artist
-│   ├── 3D artist
-│   └── VFX / animátor
-├── Game designer ........... design, ekonomika hry, balance
-├── QA / analytik ........... testování, data, AB testy
-├── Marketing / UA .......... kampaně, kreativy, ASO
-└── Sales / BizDev .......... B2B dealy (playables, zakázky)
+CEO · Jirka (majitel) ←→ Poradní rada: Mirek (tech, nejseniornější programátor),
+│                                       Petr (art direction) — spolumajitelé
+├── DJ · Operations chief ....... finance, chod firmy
+│   ├── Office manager
+│   └── Externí spolupráce (účetní a další)
+├── Kuba · Marketing chief ...... marketing, UA
+│   ├── Marketing grafici
+│   └── UA manažeři
+└── David · Production chief .... produkce = vše ostatní
+    ├── Herní produkce (design · programování · art · testing)
+    ├── Publishing
+    ├── R&D
+    └── Externí zakázky (playables, vývoj externích her)
 ```
-
-Počet: 1 + 1 + 1 + 4 + 1 + 3 + 1 + 1 + 1 + 1 = **15**
 
 Poznámky:
 
-- Producer a studio lead nejsou totéž: studio lead drží vizi, finance a finální slovo, producer drží každodenní delivery. Tohle je hlavní delegační krok - bez něj visí denní provoz na majiteli.
-- Playables/H5 dev je zároveň hlavní kapacita pro B2B zakázky, které nosí sales.
-- QA a analytik v jedné osobě funguje do velikosti ~2 souběžných projektů, pak se role dělí.
-
----
+- **Poradní rada není řídicí vrstva.** Mirek a Petr jako spolumajitelé radí CEO a jsou zároveň nejseniornější tech a art autority ve firmě.
+- **Exec vrstva není middle management.** CEO i chiefs pracují napřímo s leady projektů a jednotlivými lidmi.
+- **Více rolí je norma.** Při hodnocení a nastavování cílů se počítá s tím, že člověk může zastávat víc rolí najednou.
 
 ## 3. Delegace rozhodování
 
 | Rozhodnutí | Vlastní | Bez eskalace do | Eskalace na |
 |---|---|---|---|
-| Denní priority a sprint | Producer | rámec schválené roadmapy | Studio lead |
-| Technické řešení, stack, refactor | Tech lead | 5 dní práce navíc | Producer + studio lead |
-| Vizuální směr, outsourcing artu | Art lead | 30 000 Kč / měsíc | Studio lead |
-| Game design změny | Game designer | změny bez dopadu na monetizaci | Studio lead |
-| UA rozpočet | Marketing | schválený měsíční budget | Studio lead |
-| Cenotvorba B2B nabídek | Sales | marže min. 40 % | Studio lead |
-| Nábor, platy, ukončení | Studio lead | - | - |
-| Roadmapa, nové projekty, finance | Studio lead | - | - |
+| Denní priority | Leadi týmů a projektů | rámec sprintu | Producer |
+| Sprint (náplň a plán) | Producer | schválená roadmapa | CEO |
+| Roadmapa, nové projekty | Producer | připravuje iniciální návrh | CEO (schvaluje) |
+| Technické řešení, stack | Tech lead projektu | bez dopadu na termíny | Project lead, dál producer |
+| Vizuální směr | Art lead projektu | rámec art directionu | Art director |
+| Outsourcing (art i další) | Producer | na žádost project managera | CEO |
+| Game design změny | Game designer projektu | bez dopadu na monetizaci | Project lead |
+| UA rozpočet | UA manager | schválený měsíční budget | Operations chief (DJ) |
+| Nábor, platy, ukončení | Producer (David) | - | CEO |
 
-Pravidlo: co není v tabulce, rozhoduje vlastník nejbližší oblasti. Eskalace je výjimka, ne default.
+Pravidlo: co není v tabulce, rozhoduje vlastník nejbližší oblasti. Názvosloví: producer = produkční lead = production chief.
 
----
+## 4. Fixní platy a normalizace
 
-## 4. Fixní platy (orientační, hrubá mzda / měsíc, CZK)
+**Žádné tabulkové platy.** Fixní plat je nastavený na měsíční úhrn času a role, které člověk nese. Cíl je normalizace: rozdíly v platech musí jít vysvětlit pojmenovanými faktory, ne historií vyjednávání.
 
-Čísla vycházejí z českého game-dev trhu, kalibrovat podle regionu a seniority konkrétních lidí.
+Faktory, ze kterých fix vychází:
 
-| Role | Junior | Medior | Senior / Lead |
-|---|---|---|---|
-| Producer | - | 65 000 | 85 000 - 110 000 |
-| Tech lead | - | - | 110 000 - 140 000 |
-| Programátor | 45 000 - 60 000 | 60 000 - 85 000 | 85 000 - 115 000 |
-| Art lead | - | - | 85 000 - 110 000 |
-| Artist (2D/3D/VFX) | 40 000 - 55 000 | 55 000 - 75 000 | 75 000 - 95 000 |
-| Game designer | 45 000 - 60 000 | 60 000 - 80 000 | 80 000 - 100 000 |
-| QA / analytik | 40 000 - 50 000 | 50 000 - 65 000 | 65 000 - 80 000 |
-| Marketing / UA | 45 000 - 60 000 | 60 000 - 80 000 | 80 000 - 100 000 |
-| Sales / BizDev | 40 000 - 50 000 (základ) | 50 000 - 65 000 (základ) | 65 000 - 80 000 (základ) |
+- **Počet rolí** - kdo nese víc rolí, má to ve fixu (ne v přesčasech); cíle má ve všech rolích.
+- **Důležitost rolí** - dopad role na firmu.
+- **Délka ve firmě** - loajalita a nasbíraný kontext.
+- **Skill v rolích** - úroveň, na jaké člověk roli drží (včetně extra skillů, které firma využívá).
 
-Zásady:
+Zásady přechodu:
 
-- Platová pásma jsou interní, ale **pravidla postupu mezi pásmy jsou veřejná** (co musí člověk umět/dodat pro posun).
-- Revize platů 1x ročně + mimořádně při změně role.
-- Sales má záměrně nižší fix - hlavní příjem má z provizí (viz kap. 6).
+1. Nikdo si nepohorší vůči svému průměrnému současnému výdělku.
+2. Kdo se normalizací ukáže jako výrazně přetížený (víc nutných rolí, nejde to jinak), má být odměněn víc.
+3. Bonusové složky jsou cesta, jak si vydělat navíc, když se daří.
+4. Základní pásma se nastaví ze současné reality (úkol, viz kap. 8).
 
----
+## 5. Výkonnostní bonusy
 
-## 5. Měsíční výkonnostní bonusy
+Bonus je **0 až 15 % fixního platu měsíčně**, složky **50 / 50**:
 
-Bonus je **0 - 15 % fixního platu měsíčně**, skládá se ze dvou složek:
-
-| Složka | Váha | Kdo hodnotí | Podle čeho |
-|---|---|---|---|
-| Týmová | 60 % bonusu | automaticky | splnění milestone/sprint cílů měsíce (dodáno vs. plán) |
-| Osobní | 40 % bonusu | přímý lead | kvalita, spolehlivost, iniciativa - krátké písemné zdůvodnění |
-
-Pravidla:
-
-1. Cíle měsíce se definují **předem** (první pracovní den měsíce), ne zpětně.
-2. Týmová složka je binární po cílech: každý splněný cíl = poměrná část. Žádné "skoro hotovo".
-3. Osobní složku lead zdůvodňuje jednou větou - transparentnost brání pocitu protekce.
-4. Bonus leadi dostávají podle výsledků svého úseku, producer podle delivery celého studia.
-5. Vyplácí se s výplatou za daný měsíc, žádné odkládání.
-
-Alternativa k diskuzi: místo měsíčního cyklu kvartální bonus s vyšším stropem (0 - 25 %). Měsíční cyklus víc motivuje, ale stojí víc administrativy.
-
----
-
-## 6. Provize ze sales dealů (B2B zakázky)
-
-| Role v dealu | Provize | Z čeho |
+| Složka | Váha | Podle čeho |
 |---|---|---|
-| Salesman, který deal uzavřel | **10 %** | ze zisku offeru |
-| Člověk, který sehnal lead | **5 %** | ze zisku offeru |
+| Týmová | 50 % | výsledek týmu / projektu za měsíc |
+| Osobní | 50 % | splnění osobních cílů |
 
 Pravidla:
 
-1. **Zisk offeru** = fakturovaná částka minus přímé náklady (odpracované hodiny × interní sazba, licence, outsourcing). Definici zisku zveřejnit předem, aby se o ní nediskutovalo po dealu.
-2. **Lead může přinést kdokoliv** z týmu, 5 % není vázáno na sales roli. Pokud salesman lead sám sehnal i uzavřel, bere 15 %.
-3. Provize se vyplácí **po zaplacení faktury klientem**, ne po podpisu.
-4. U opakovaných zakázek od stejného klienta: provize v plné výši z prvního dealu, z navazujících dealů 50 % sazby po dobu 12 měsíců, pak klient patří studiu. (K diskuzi - viz otevřené otázky.)
-5. Deal pod minimální marží (40 %, viz kap. 3) musí schválit studio lead a provize se počítá až ze skutečného zisku.
+1. Cíle se definují předem, první pracovní den měsíce. Nikdy zpětně.
+2. Kdo má víc rolí, má cíle nastavené ve všech svých rolích.
+3. Vyplácí se s výplatou za daný měsíc, žádné odkládání.
 
-Příklad: zakázka na playable za 200 000 Kč, přímé náklady 110 000 Kč, zisk 90 000 Kč.
-Salesman (uzavřel): 9 000 Kč. Kolega, co přivedl kontakt: 4 500 Kč. Studio: 76 500 Kč.
+**Podíl na zisku (profit share):** nad rámec měsíčních bonusů běží systém podílu na zisku firmy vyplácený **2× ročně**. Je to samostatný systém - přesná pravidla doplnit (kap. 8).
 
----
+## 6. Podíly z iniciativ a dealů
 
-## 7. Přechodový plán (pokud se restrukturalizuje stávající tým)
+NOXGAMES nemá sales tým. Nosit nápady, leady a dealy - jak vydělat nebo ušetřit - je práce všech.
 
-1. **Měsíc 1:** potvrdit obsazení leadů (producer, tech, art), zveřejnit delegační tabulku (kap. 3).
-2. **Měsíc 2:** spustit bonusový systém nanečisto - cíle se definují a vyhodnotí, ale první měsíc se vyplácí plný bonus všem (kalibrace pravidel bez rizika).
-3. **Měsíc 3:** ostrý provoz bonusů + provizní řád pro sales podepsaný jako dodatek smluv.
-4. **Průběžně:** kvartální retrospektiva struktury - co se eskaluje moc často, tam se posunou limity.
+| Role | Podíl | Z čeho |
+|---|---|---|
+| Kdo přinese iniciativu (nápad, lead, deal) | **5 %** | ze zisku / úspory |
+| Kdo deal nebo myšlenku dotáhne do konce | **10 %** | ze zisku / úspory |
+| Kdo udělá obojí | **15 %** | ze zisku / úspory |
 
----
+Pravidla:
 
-## 8. Otevřené otázky
+1. **Zisk dealu** = výnos minus náklady na delivery spočítané podle interních tarifů. Tarify se nastaví v rámci delegace (kap. 8).
+2. Podíl se vyplácí **po zaplacení klientem**; u úspor po jejich prokázání.
+3. Opakované zakázky od stejného klienta už podíl nenesou. U rekurentního výnosu se podíl počítá **jen z prvního roku**.
 
-- [ ] Kalibrace platových pásem na skutečné lidi a region (čísla v kap. 4 jsou tržní odhad).
-- [ ] Bonusy měsíčně (0-15 %) vs. kvartálně (0-25 %)?
-- [ ] Provize z opakovaných zakázek: návrh 50 % sazby po 12 měsíců - souhlas?
-- [ ] Interní hodinová sazba pro výpočet zisku offeru (nákladová vs. nákladová + režie?).
-- [ ] Má sales cílit jen playables/B2B, nebo i publishing a co-dev dealy? (Mění to velikost provizí.)
-- [ ] Vztah k současné struktuře NOXGAMES (33+ lidí) - je tohle návrh pro samostatnou buňku, nový projekt, nebo cílový stav po zeštíhlení?
+Příklad: zakázka za 200 000 Kč, náklady na delivery dle tarifů 110 000 Kč, zisk 90 000 Kč.
+Dotažení (10 %): 9 000 Kč. Iniciativa (5 %): 4 500 Kč. Firma: 76 500 Kč.
+
+## 7. Přechodový plán
+
+1. **Krok 1 - role shora dolů:** dodefinovat odpovědnosti od majitelů a CEO přes chiefy a leady až po základní pozice. Každá role: co dělá, za co ručí.
+2. **Krok 2 - normalizace platů:** nastavit fixy ze současné reality podle faktorů z kap. 4. Nikdo si nepohorší, přetížení se dorovnají.
+3. **Krok 3 - bonusy a podíly:** spustit měsíční bonusy (první měsíc nanečisto) a pravidla podílů z iniciativ a dealů.
+4. **Průběžně:** retrospektiva delegace - co se eskaluje moc často, tam se posunou limity. Doplnit tarify a pravidla profit share.
+
+## 8. Otevřené úkoly (TODO)
+
+- [ ] Nastavit základní platová pásma ze současné reality (přechod bez pohoršení).
+- [ ] Sepsat přesná pravidla pololetního podílu na zisku (profit share 2× ročně).
+- [ ] Nastavit interní tarify pro výpočet nákladů na delivery (vstup pro podíly z dealů).
+- [ ] Dopsat popisy rolí a odpovědností shora dolů: majitelé → CEO → chiefs → leadi → pozice.
+- [ ] Sjednotit názvosloví rolí (producer = produkční lead = production chief).
 
 ---
 
@@ -152,4 +128,5 @@ Salesman (uzavřel): 9 000 Kč. Kolega, co přivedl kontakt: 4 500 Kč. Studio: 
 
 | Iterace | Datum | HTML | Změny |
 |---|---|---|---|
-| v1 | 2026-07-28 | `delegacni-navrh-v1.html` | První draft: struktura 15 lidí, delegační tabulka, platy, bonusy 0-15 %, provize 10 % + 5 % ze zisku offeru |
+| v1 | 2026-07-28 | `delegacni-navrh-v1.html` | První draft: hypotetický 15členný indie tým, delegační tabulka, tabulkové platy, bonusy 60/40, provize 10 % + 5 % |
+| v2 | 2026-07-29 | `delegacni-navrh-v2.html` | Zapracované Davidovy poznámky: reálná struktura NOXGAMES (16 lidí, CEO Jirka, poradní rada Mirek + Petr, chiefs DJ/Kuba/David), delegační tabulka dle skutečných rolí, tabulkové platy nahrazeny normalizací (faktory: počet rolí, důležitost, délka, skill), bonusy 50/50 + zmínka profit share 2× ročně, provize přerámovány na podíly z iniciativ (5 % nápad, 10 % dotažení, i z úspor), rekurentní výnos jen první rok, přechodový plán shora dolů |
