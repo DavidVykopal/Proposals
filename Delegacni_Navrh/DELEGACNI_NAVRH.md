@@ -1,7 +1,7 @@
 # Delegační návrh — NOXGAMES
 
 > Pracovní dokument. Návrh delegační struktury a úpravy organizační struktury v NOXGAMES (16 lidí).
-> Stav: **iterace 02** - zapracované poznámky Davida z 29. 7. 2026.
+> Stav: **iterace 03** - doplněné popisy pozic, podíly z iniciativ upravené na 5 + 5 %.
 
 ---
 
@@ -37,7 +37,126 @@ Poznámky:
 - **Exec vrstva není middle management.** CEO i chiefs pracují napřímo s leady projektů a jednotlivými lidmi.
 - **Více rolí je norma.** Při hodnocení a nastavování cílů se počítá s tím, že člověk může zastávat víc rolí najednou.
 
-## 3. Delegace rozhodování
+## 3. Popisy pozic
+
+Každá pozice je popsaná ve čtyřech polích. Pořád platí, že jeden člověk může nést víc pozic najednou - pak se mu sčítají i pole.
+
+- **Povinnosti** - co pozice dělá pravidelně, co se od ní čeká každý týden.
+- **Odpovědnost** - za jaký výsledek se pozice hodnotí.
+- **Ručení** - co spadne na tuhle pozici, když to nevyjde. Tady končí hledání viníka.
+- **Práva** - co může pozice rozhodnout, schválit nebo zastavit, aniž by se ptala.
+
+### 3.1 Vedení firmy
+
+#### CEO · Jirka
+*Majitel, finální slovo ve firmě.*
+
+- **Povinnosti:** Držet směr firmy, schvalovat roadmapu a nové projekty, vést chiefy, rozhodovat tam, kde se nedohodnou.
+- **Odpovědnost:** Za výsledek firmy jako celku a za to, že strategie dává smysl.
+- **Ručení:** Za závazky firmy navenek a za finální rozhodnutí o projektech, náboru a ukončeních.
+- **Práva:** Veto na jakékoli rozhodnutí, přístup ke všem číslům, právo měnit strukturu i pravidla tohoto dokumentu.
+
+#### Poradní rada · Mirek, Petr
+*Spolumajitelé, nejseniornější tech a art autorita.*
+
+- **Povinnosti:** Radit CEO, oponovat návrhům, držet laťku kvality v technice a v art directionu.
+- **Odpovědnost:** Za kvalitu doporučení a za to, že rizika zazní včas, ne až po problému.
+- **Ručení:** Neručí za operativu, nejsou řídicí vrstva.
+- **Práva:** Přístup ke strategickým informacím, právo být u rozhodnutí, která mění směr firmy nebo standard kvality.
+
+#### Operations chief · DJ
+*Finance a chod firmy.*
+
+- **Povinnosti:** Finance a cash flow, smlouvy, chod kanceláře, externí spolupráce (účetní a další), schvalování rozpočtů.
+- **Odpovědnost:** Za to, že firma funguje po provozní a finanční stránce a čísla sedí.
+- **Ručení:** Za finanční plán, za správnost výplat, bonusů a podílů a za platby externím partnerům.
+- **Práva:** Zastavit výdaj mimo plán, schvalovat rozpočty, rozhodovat o provozních dodavatelích.
+
+#### Marketing chief · Kuba
+*Marketing a UA.*
+
+- **Povinnosti:** Marketingová strategie, vedení UA manažerů a marketing grafiků, plánování kampaní, měření výsledků.
+- **Odpovědnost:** Za akvizici, viditelnost titulů a efektivitu marketingového rozpočtu.
+- **Ručení:** Za výsledky kampaní vůči schválenému rozpočtu.
+- **Práva:** Rozhodovat o kanálech, kreativách a rozdělení marketingového rozpočtu.
+
+#### Production chief (producer) · David
+*Produkce, tedy vše ostatní.*
+
+- **Povinnosti:** Sprinty a plán produkce, vedení leadů, publishing, R&D, externí zakázky, nábor a platy.
+- **Odpovědnost:** Za dodání projektů v čase a kvalitě a za to, že týmy mají jasné zadání.
+- **Ručení:** Za termíny, za obsazení projektů lidmi a za outsourcing.
+- **Práva:** Rozhodovat o sprintu, o outsourcingu a o obsazení rolí, navrhovat platy a nábor.
+
+### 3.2 Leadi projektů
+
+#### Project lead
+*Vlastník jednoho projektu.*
+
+- **Povinnosti:** Vést projekt, nastavovat denní priority týmu, komunikovat stav směrem k produkci.
+- **Odpovědnost:** Za to, že projekt jde podle plánu a problémy se řeší, ne odkládají.
+- **Ručení:** Za rozsah a dodržení sprintu na svém projektu.
+- **Práva:** Rozhodovat o denních prioritách, řešit spory uvnitř projektu, žádat o outsourcing.
+
+#### Tech lead projektu
+*Technická autorita projektu.*
+
+- **Povinnosti:** Technické řešení a stack, code review, hlídání technického dluhu.
+- **Odpovědnost:** Za technickou kvalitu a udržitelnost projektu.
+- **Ručení:** Za to, že technická volba neohrozí termín.
+- **Práva:** Rozhodovat o technickém řešení bez eskalace, pokud to nemá dopad na termíny.
+
+#### Art lead projektu / art director
+*Vizuální autorita projektu, art direction napříč firmou drží Petr.*
+
+- **Povinnosti:** Vizuální směr projektu, zadání pro grafiky, kontrola výstupů.
+- **Odpovědnost:** Za vizuální kvalitu a konzistenci.
+- **Ručení:** Za to, že art odpovídá schválenému směru a je hotový v čase.
+- **Práva:** Rozhodovat o vizuálním směru v rámci art directionu, vracet práci k přepracování.
+
+#### Game designer projektu
+*Vlastník herního designu.*
+
+- **Povinnosti:** Herní design, ekonomika, balancování, zadání pro tým.
+- **Odpovědnost:** Za to, že hra dává smysl hráči a drží se cílů projektu.
+- **Ručení:** Za dopad designových změn na zážitek a monetizaci.
+- **Práva:** Měnit design bez eskalace, pokud to nemá dopad na monetizaci.
+
+#### UA manager
+*Nákup a optimalizace akvizice.*
+
+- **Povinnosti:** Vést kampaně, sledovat metriky, optimalizovat nákup.
+- **Odpovědnost:** Za výkon kampaní v rámci schváleného budgetu.
+- **Ručení:** Za dodržení měsíčního rozpočtu.
+- **Práva:** Rozdělovat budget mezi kampaně a kanály v rámci schváleného rámce.
+
+### 3.3 Pozice v týmech
+
+#### Člen týmu (programátor, grafik, designer)
+*Základní výkonná pozice.*
+
+- **Povinnosti:** Odvádět práci podle zadání, hlásit blokace včas, držet standard kvality.
+- **Odpovědnost:** Za svoje úkoly a za to, že jejich stav je vidět.
+- **Ručení:** Za to, že odhad, který dá, je reálný.
+- **Práva:** Rozhodovat o způsobu řešení svého úkolu, odmítnout zadání bez jasného zadavatele, přinášet iniciativy s podílem.
+
+#### QA
+*Kvalita a stav buildů.*
+
+- **Povinnosti:** Testovací plán, testování buildů, evidence chyb.
+- **Odpovědnost:** Za to, že se vždycky ví, v jakém stavu build je.
+- **Ručení:** Za to, že kritická chyba není přehlédnutá.
+- **Práva:** Zastavit release, dokud není kritická chyba vyřešená.
+
+#### Office manager
+*Zázemí a chod kanceláře.*
+
+- **Povinnosti:** Kancelář, administrativa, podpora týmu, objednávky.
+- **Odpovědnost:** Za to, že provoz kanceláře nikoho nebrzdí.
+- **Ručení:** Za objednávky a provozní výdaje v rámci limitu.
+- **Práva:** Rozhodovat o provozních nákupech do dohodnutého limitu.
+
+## 4. Delegace rozhodování
 
 | Rozhodnutí | Vlastní | Bez eskalace do | Eskalace na |
 |---|---|---|---|
@@ -53,7 +172,7 @@ Poznámky:
 
 Pravidlo: co není v tabulce, rozhoduje vlastník nejbližší oblasti. Názvosloví: producer = produkční lead = production chief.
 
-## 4. Fixní platy a normalizace
+## 5. Fixní platy a normalizace
 
 **Žádné tabulkové platy.** Fixní plat je nastavený na měsíční úhrn času a role, které člověk nese. Cíl je normalizace: rozdíly v platech musí jít vysvětlit pojmenovanými faktory, ne historií vyjednávání.
 
@@ -69,9 +188,9 @@ Zásady přechodu:
 1. Nikdo si nepohorší vůči svému průměrnému současnému výdělku.
 2. Kdo se normalizací ukáže jako výrazně přetížený (víc nutných rolí, nejde to jinak), má být odměněn víc.
 3. Bonusové složky jsou cesta, jak si vydělat navíc, když se daří.
-4. Základní pásma se nastaví ze současné reality (úkol, viz kap. 8).
+4. Základní pásma se nastaví ze současné reality (úkol, viz kap. 9).
 
-## 5. Výkonnostní bonusy
+## 6. Výkonnostní bonusy
 
 Bonus je **0 až 15 % fixního platu měsíčně**, složky **50 / 50**:
 
@@ -86,40 +205,40 @@ Pravidla:
 2. Kdo má víc rolí, má cíle nastavené ve všech svých rolích.
 3. Vyplácí se s výplatou za daný měsíc, žádné odkládání.
 
-**Podíl na zisku (profit share):** nad rámec měsíčních bonusů běží systém podílu na zisku firmy vyplácený **2× ročně**. Je to samostatný systém - přesná pravidla doplnit (kap. 8).
+**Podíl na zisku (profit share):** nad rámec měsíčních bonusů běží systém podílu na zisku firmy vyplácený **2× ročně**. Je to samostatný systém - přesná pravidla doplnit (kap. 9).
 
-## 6. Podíly z iniciativ a dealů
+## 7. Podíly z iniciativ a dealů
 
 NOXGAMES nemá sales tým. Nosit nápady, leady a dealy - jak vydělat nebo ušetřit - je práce všech.
 
 | Role | Podíl | Z čeho |
 |---|---|---|
 | Kdo přinese iniciativu (nápad, lead, deal) | **5 %** | ze zisku / úspory |
-| Kdo deal nebo myšlenku dotáhne do konce | **10 %** | ze zisku / úspory |
-| Kdo udělá obojí | **15 %** | ze zisku / úspory |
+| Kdo deal nebo myšlenku dotáhne do konce | **5 %** | ze zisku / úspory |
+| Kdo udělá obojí | **10 %** | ze zisku / úspory |
 
 Pravidla:
 
-1. **Zisk dealu** = výnos minus náklady na delivery spočítané podle interních tarifů. Tarify se nastaví v rámci delegace (kap. 8).
+1. **Zisk dealu** = výnos minus náklady na delivery spočítané podle interních tarifů. Tarify se nastaví v rámci delegace (kap. 9).
 2. Podíl se vyplácí **po zaplacení klientem**; u úspor po jejich prokázání.
 3. Opakované zakázky od stejného klienta už podíl nenesou. U rekurentního výnosu se podíl počítá **jen z prvního roku**.
 
 Příklad: zakázka za 200 000 Kč, náklady na delivery dle tarifů 110 000 Kč, zisk 90 000 Kč.
-Dotažení (10 %): 9 000 Kč. Iniciativa (5 %): 4 500 Kč. Firma: 76 500 Kč.
+Iniciativa (5 %): 4 500 Kč. Dotažení (5 %): 4 500 Kč. Firma: 81 000 Kč.
 
-## 7. Přechodový plán
+## 8. Přechodový plán
 
-1. **Krok 1 - role shora dolů:** dodefinovat odpovědnosti od majitelů a CEO přes chiefy a leady až po základní pozice. Každá role: co dělá, za co ručí.
-2. **Krok 2 - normalizace platů:** nastavit fixy ze současné reality podle faktorů z kap. 4. Nikdo si nepohorší, přetížení se dorovnají.
+1. **Krok 1 - role shora dolů:** projít popisy pozic z kap. 3 s lidmi a doladit je podle reality. Každá role: co dělá, za co ručí, co může rozhodnout.
+2. **Krok 2 - normalizace platů:** nastavit fixy ze současné reality podle faktorů z kap. 5. Nikdo si nepohorší, přetížení se dorovnají.
 3. **Krok 3 - bonusy a podíly:** spustit měsíční bonusy (první měsíc nanečisto) a pravidla podílů z iniciativ a dealů.
 4. **Průběžně:** retrospektiva delegace - co se eskaluje moc často, tam se posunou limity. Doplnit tarify a pravidla profit share.
 
-## 8. Otevřené úkoly (TODO)
+## 9. Otevřené úkoly (TODO)
 
 - [ ] Nastavit základní platová pásma ze současné reality (přechod bez pohoršení).
 - [ ] Sepsat přesná pravidla pololetního podílu na zisku (profit share 2× ročně).
 - [ ] Nastavit interní tarify pro výpočet nákladů na delivery (vstup pro podíly z dealů).
-- [ ] Dopsat popisy rolí a odpovědností shora dolů: majitelé → CEO → chiefs → leadi → pozice.
+- [ ] Projít popisy pozic (kap. 3) s každým člověkem a doladit podle reality; doplnit chybějící pozice.
 - [ ] Sjednotit názvosloví rolí (producer = produkční lead = production chief).
 
 ---
@@ -130,3 +249,4 @@ Dotažení (10 %): 9 000 Kč. Iniciativa (5 %): 4 500 Kč. Firma: 76 500 Kč.
 |---|---|---|---|
 | v1 | 2026-07-28 | `delegacni-navrh-v1.html` | První draft: hypotetický 15členný indie tým, delegační tabulka, tabulkové platy, bonusy 60/40, provize 10 % + 5 % |
 | v2 | 2026-07-29 | `delegacni-navrh-v2.html` | Zapracované Davidovy poznámky: reálná struktura NOXGAMES (16 lidí, CEO Jirka, poradní rada Mirek + Petr, chiefs DJ/Kuba/David), delegační tabulka dle skutečných rolí, tabulkové platy nahrazeny normalizací (faktory: počet rolí, důležitost, délka, skill), bonusy 50/50 + zmínka profit share 2× ročně, provize přerámovány na podíly z iniciativ (5 % nápad, 10 % dotažení, i z úspor), rekurentní výnos jen první rok, přechodový plán shora dolů |
+| v3 | 2026-07-29 | `delegacni-navrh-v3.html` | Nová kapitola 3 Popisy pozic: 13 pozic shora dolů (vedení, leadi, pozice v týmech), každá ve čtyřech polích (povinnosti, odpovědnost, ručení, práva). Podíly z iniciativ upraveny na **5 + 5 %** (obojí 10 %), přepočítaný příklad a graf. Přečíslované kapitoly, přechodový plán a TODO navázané na nové popisy pozic |
