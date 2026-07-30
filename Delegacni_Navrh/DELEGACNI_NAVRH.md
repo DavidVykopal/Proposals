@@ -1,7 +1,7 @@
 # Delegační návrh — NOXGAMES
 
 > Pracovní dokument. Návrh delegační struktury a úpravy organizační struktury v NOXGAMES (16 lidí).
-> Stav: **iterace 04** - doplněná kapitola rozpočtů exec vrstvy a vývojový budget producera.
+> Stav: **iterace 04** - doplněná kapitola rozpočtů exec vrstvy, vývojový budget producera a přístup exec k financím.
 
 ---
 
@@ -13,6 +13,7 @@
 4. **Bonus za výkon, podíl za iniciativu.** Měsíční bonus za týmové a osobní cíle. Podíl ze zisku za nápady, leady a dealy, které firmě vydělají nebo ušetří.
 5. **Více rolí = cíle ve všech rolích.** Kdo nese víc rolí (např. QA lead + office), má v každé z nich nastavené cíle a vstupuje mu to do platu i hodnocení.
 6. **Každý exec má svůj rozpočet.** Experimenty, vývoj a růst platů podřízených si každý exec řídí ve vlastním rozpočtu. Vyjednává se ročně, upravuje kvartálně.
+7. **Kdo nese rozpočet, vidí čísla.** Exec má plný přístup do financí firmy včetně toho, kam peníze tečou, a neomezený přístup k přehledům výplat jednotlivých zaměstnanců.
 
 ## 2. Struktura NOXGAMES (16 lidí)
 
@@ -71,7 +72,7 @@ Každá pozice je popsaná ve čtyřech polích. Pořád platí, že jeden člov
 - **Povinnosti:** Finance a cash flow, smlouvy, chod kanceláře, externí spolupráce (účetní a další), schvalování rozpočtů.
 - **Odpovědnost:** Za to, že firma funguje po provozní a finanční stránce a čísla sedí.
 - **Ručení:** Za finanční plán, za správnost výplat, bonusů a podílů a za platby externím partnerům.
-- **Práva:** Zastavit výdaj mimo plán, schvalovat rozpočty, rozhodovat o provozních dodavatelích, rozhodovat o experimentech a růstu platů podřízených v rámci svého rozpočtu.
+- **Práva:** Zastavit výdaj mimo plán, schvalovat rozpočty, rozhodovat o provozních dodavatelích, rozhodovat o experimentech a růstu platů podřízených v rámci svého rozpočtu. Plný přístup do financí a k přehledům výplat.
 
 #### Marketing chief · Kuba
 *Marketing a UA.*
@@ -79,7 +80,7 @@ Každá pozice je popsaná ve čtyřech polích. Pořád platí, že jeden člov
 - **Povinnosti:** Marketingová strategie, vedení UA manažerů a marketing grafiků, plánování kampaní, měření výsledků.
 - **Odpovědnost:** Za akvizici, viditelnost titulů a efektivitu marketingového rozpočtu.
 - **Ručení:** Za výsledky kampaní vůči schválenému rozpočtu.
-- **Práva:** Rozhodovat o kanálech, kreativách a rozdělení marketingového rozpočtu, rozhodovat o experimentech a růstu platů podřízených v rámci svého rozpočtu.
+- **Práva:** Rozhodovat o kanálech, kreativách a rozdělení marketingového rozpočtu, rozhodovat o experimentech a růstu platů podřízených v rámci svého rozpočtu. Plný přístup do financí a k přehledům výplat.
 
 #### Production chief (producer) · David
 *Produkce, tedy vše ostatní.*
@@ -87,7 +88,7 @@ Každá pozice je popsaná ve čtyřech polích. Pořád platí, že jeden člov
 - **Povinnosti:** Sprinty a plán produkce, vedení leadů, publishing, R&D, externí zakázky, nábor a platy, správa vývojového budgetu firmy.
 - **Odpovědnost:** Za dodání projektů v čase a kvalitě, za jasné zadání pro týmy a za **vývojový budget firmy**.
 - **Ručení:** Za termíny, za obsazení projektů lidmi, za outsourcing a za to, že vývojový budget drží schválený rámec.
-- **Práva:** Rozhodovat o sprintu, o outsourcingu a o obsazení rolí, **schvalovat si drobný vývoj a experimenty** v rámci vývojového budgetu, rozhodovat o růstu platů podřízených v rámci svého rozpočtu, navrhovat platy a nábor. Otevření produkce nového produktu schvaluje CEO a zbytek exec.
+- **Práva:** Rozhodovat o sprintu, o outsourcingu a o obsazení rolí, **schvalovat si drobný vývoj a experimenty** v rámci vývojového budgetu, rozhodovat o růstu platů podřízených v rámci svého rozpočtu, navrhovat platy a nábor. Plný přístup do financí a k přehledům výplat. Otevření produkce nového produktu schvaluje CEO a zbytek exec.
 
 ### 3.2 Leadi projektů
 
@@ -200,6 +201,13 @@ Každý exec (CEO, operations, marketing, production chief) pracuje s vlastním 
 | do 2 000 USD | vhodné zmínit, ale není povinnost |
 | od 2 000 USD | **povinné nahlásit** |
 
+**Přístup k financím.** Rozpočet nejde řídit bez dat. Každý exec proto má:
+
+- **Plný přístup do financí firmy** - kam peníze tečou, jaké jsou náklady a jaké výnosy.
+- **Neomezený přístup k přehledům výplat** - kolik se komu ze zaměstnanců vyplácí.
+
+Bez toho je odpovědnost za rozpočet a za růst platů podřízených jen formální.
+
 **Vývojový budget firmy** drží producer (David). Uvnitř něj si sám schvaluje **drobný vývoj a experimenty**. Hranice, kde končí experiment a začíná produkt, je zásadní a je potřeba ji doupřesnit (kap. 10).
 
 **Otevření produkce nového produktu** je jiná liga: producer připraví návrh, ale schválit ho musí **CEO a zbytek exec**. Rozpočet producera na to sám nestačí.
@@ -274,6 +282,7 @@ Iniciativa (5 %): 4 500 Kč. Dotažení (5 %): 4 500 Kč. Firma: 81 000 Kč.
 - [ ] Sjednotit názvosloví rolí (producer = produkční lead = production chief).
 - [ ] Nastavit konkrétní roční rozpočty jednotlivých exec (experimenty, vývoj, růst platů podřízených).
 - [ ] Definovat hranici mezi drobným vývojem nebo experimentem a otevřením produkce nového produktu.
+- [ ] Zpřístupnit celé exec vrstvě finanční přehledy (kam peníze tečou) a přehledy výplat zaměstnanců.
 
 ---
 
@@ -284,4 +293,4 @@ Iniciativa (5 %): 4 500 Kč. Dotažení (5 %): 4 500 Kč. Firma: 81 000 Kč.
 | v1 | 2026-07-28 | `delegacni-navrh-v1.html` | První draft: hypotetický 15členný indie tým, delegační tabulka, tabulkové platy, bonusy 60/40, provize 10 % + 5 % |
 | v2 | 2026-07-29 | `delegacni-navrh-v2.html` | Zapracované Davidovy poznámky: reálná struktura NOXGAMES (16 lidí, CEO Jirka, poradní rada Mirek + Petr, chiefs DJ/Kuba/David), delegační tabulka dle skutečných rolí, tabulkové platy nahrazeny normalizací (faktory: počet rolí, důležitost, délka, skill), bonusy 50/50 + zmínka profit share 2× ročně, provize přerámovány na podíly z iniciativ (5 % nápad, 10 % dotažení, i z úspor), rekurentní výnos jen první rok, přechodový plán shora dolů |
 | v3 | 2026-07-29 | `delegacni-navrh-v3.html` | Nová kapitola 3 Popisy pozic: 13 pozic shora dolů (vedení, leadi, pozice v týmech), každá ve čtyřech polích (povinnosti, odpovědnost, ručení, práva). Podíly z iniciativ upraveny na **5 + 5 %** (obojí 10 %), přepočítaný příklad a graf. Přečíslované kapitoly, přechodový plán a TODO navázané na nové popisy pozic |
-| v4 | 2026-07-30 | `delegacni-navrh-v4.html` | Nová kapitola 5 Rozpočty exec vrstvy: každý exec má vlastní rozpočet na experimenty, vývoj a růst platů podřízených, rámec se vyjednává ročně s kvartálními úpravami, hlášení nových nákladů povinné **od 2 000 USD**. Producer drží **vývojový budget firmy** a schvaluje si v něm drobný vývoj a experimenty, **otevření produkce nového produktu schvaluje CEO + zbytek exec**. Doplněn princip 6, čtyři nové řádky v delegační tabulce, upravené popisy CEO / DJ / Kuba / David, dva nové TODO. Přečíslované kapitoly 6-10 |
+| v4 | 2026-07-30 | `delegacni-navrh-v4.html` | Nová kapitola 5 Rozpočty exec vrstvy: každý exec má vlastní rozpočet na experimenty, vývoj a růst platů podřízených, rámec se vyjednává ročně s kvartálními úpravami, hlášení nových nákladů povinné **od 2 000 USD**. Producer drží **vývojový budget firmy** a schvaluje si v něm drobný vývoj a experimenty, **otevření produkce nového produktu schvaluje CEO + zbytek exec**. Doplněn princip 6, čtyři nové řádky v delegační tabulce, upravené popisy CEO / DJ / Kuba / David, dva nové TODO. Přečíslované kapitoly 6-10. Doplněn princip 7 a blok Přístup k financím: exec má plný přístup do financí a neomezený přístup k přehledům výplat |
