@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delegační návrh · NOXGAMES</title>
+<style>
+  @font-face {
+    font-family: 'Gambarino';
+    src: url('assets/fonts/Gambarino-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-hi: #1a1511;
+    --bg-lo: #14100c;
+    --surface: #211b15;
+    --surface-hi: #262019;
+    --edge: #322a20;
+    --ink: #ede4d4;
+    --muted: #a2947f;
+    --faint: #6e6353;
+    --gold: #c9a266;
+    --gold-dim: #8a7350;
+    --gold-deep: #57452a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: var(--bg-lo); }
+
+  body {
+    background: linear-gradient(175deg, var(--bg-hi) 0%, var(--bg-lo) 100%);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header.hero, footer { position: relative; z-index: 1; }
+
+  ::selection { background: var(--gold); color: var(--bg-lo); }
+
+  .shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: clamp(22px, 5vw, 52px);
+  }
+
+  h1, h2, .display { font-family: 'Gambarino', Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+  .num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.92em; }
+
+  a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s ease; }
+  a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 34px;
+  }
+
+  .wordmark {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+  }
+
+  .topbar .meta { font-size: 0.85rem; color: var(--faint); }
+
+  .hero-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .fan {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    width: min(62%, 700px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fan-inner { animation: fandrift 11s ease-in-out infinite alternate; }
+    @keyframes fandrift {
+      from { transform: translateY(-6px); }
+      to   { transform: translateY(6px); }
+    }
+  }
+
+  .hero-copy { position: relative; max-width: 640px; }
+
+  .hero-copy h1 {
+    font-size: clamp(3rem, 8.2vw, 6rem);
+    line-height: 1.04;
+    letter-spacing: 0.005em;
+  }
+
+  .hero-copy h1 em { font-style: normal; color: var(--gold-dim); }
+
+  .hero-copy .sub {
+    margin-top: 26px;
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    color: var(--muted);
+    max-width: 30em;
+  }
+
+  .hero-copy .origin { margin-top: 14px; font-size: 0.88rem; color: var(--faint); }
+
+  .toc {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(5, auto);
+    grid-template-columns: repeat(2, max-content);
+    gap: 8px 64px;
+    padding-bottom: 40px;
+  }
+
+  .toc a { font-size: 0.88rem; color: var(--muted); white-space: nowrap; }
+  .toc a:hover { color: var(--ink); }
+  .toc a span { color: var(--gold-deep); margin-right: 8px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: clamp(84px, 12vh, 130px); }
+  section:last-of-type { padding-bottom: 40px; }
+
+  h2 {
+    font-size: clamp(1.85rem, 3.8vw, 2.55rem);
+    line-height: 1.15;
+    margin-bottom: 34px;
+  }
+
+  h2 .no { color: var(--gold-deep); margin-right: 14px; }
+
+  p { color: var(--muted); max-width: 46em; }
+  p strong, li strong { color: var(--ink); font-weight: 600; }
+
+  .lead-p { font-size: 1.06rem; }
+
+  /* principles */
+
+  .principles { display: grid; gap: 34px; margin-top: 10px; }
+
+  .principle {
+    display: grid;
+    grid-template-columns: 74px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .principle .pn {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 3.1rem;
+    line-height: 1;
+    color: var(--gold-deep);
+    text-align: right;
+    padding-top: 2px;
+  }
+
+  .principle h3 { font-size: 1.08rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .principle p { font-size: 0.98rem; }
+
+  /* diagrams shared */
+
+  .dwrap { overflow-x: auto; margin-top: 8px; }
+  .dwrap svg { display: block; width: 100%; height: auto; }
+  .dwrap.org svg { min-width: 860px; }
+  .dwrap.money svg { min-width: 760px; }
+  .dwrap.cycle svg { min-width: 740px; }
+
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  svg .mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+
+  .orgnode rect { transition: fill 0.25s ease; }
+  .orgnode:hover rect { fill: var(--surface-hi); }
+  .orgnode.boss:hover rect { fill: #332a1c; }
+
+  .chart-notes { margin-top: 36px; display: grid; gap: 14px; }
+  .chart-notes p { font-size: 0.95rem; }
+
+  /* tables */
+
+  .tscroll { overflow-x: auto; margin-top: 6px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 640px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--faint);
+    padding: 10px 16px 12px;
+    border-bottom: 1px solid var(--edge);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #241e17;
+    color: var(--muted);
+    vertical-align: top;
+  }
+
+  td:first-child { color: var(--ink); }
+
+  tbody tr { transition: background-color 0.2s ease; }
+  tbody tr:hover { background-color: #1d1813; }
+
+  .tbl-note { margin-top: 18px; font-size: 0.9rem; color: var(--faint); max-width: 52em; }
+
+  /* lists */
+
+  ol.rules { margin: 26px 0 0 0; list-style: none; counter-reset: r; display: grid; gap: 14px; max-width: 50em; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 54px; color: var(--muted); font-size: 0.98rem; }
+  ol.rules li::before {
+    content: counter(r);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 36px;
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--gold-deep);
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  /* role descriptions */
+
+  .rolekey {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px 36px;
+    margin-top: 32px;
+    padding-bottom: 34px;
+    border-bottom: 1px solid var(--edge);
+  }
+
+  .rolekey div { font-size: 0.92rem; color: var(--muted); }
+  .rolekey b { display: block; font-size: 0.95rem; font-weight: 600; color: var(--gold); margin-bottom: 3px; }
+
+  .rolegroup { margin-top: 46px; }
+
+  .rolegroup > h3 {
+    font-family: 'Gambarino', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .rolegroup > .gnote { font-size: 0.92rem; color: var(--faint); }
+
+  .role {
+    display: grid;
+    grid-template-columns: 244px 1fr;
+    gap: 36px;
+    padding: 26px 0 28px;
+    border-top: 1px solid #241e17;
+    margin-top: 22px;
+  }
+
+  .role + .role { margin-top: 0; }
+
+  .role-id h4 { font-size: 1.06rem; font-weight: 600; color: var(--ink); line-height: 1.35; }
+  .role-id p { font-size: 0.88rem; color: var(--faint); margin-top: 5px; }
+
+  .role-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 42px; }
+  .role-fields div { font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
+  .role-fields b { display: block; font-size: 0.79rem; font-weight: 500; color: var(--gold-dim); margin-bottom: 2px; }
+
+  /* exec budgets */
+
+  .budgetkey {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 36px;
+    margin: 32px 0 6px;
+  }
+
+  .budgetkey div { font-size: 0.92rem; color: var(--muted); }
+  .budgetkey b { display: block; font-size: 0.95rem; font-weight: 600; color: var(--gold); margin-bottom: 3px; }
+
+  .split2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 48px;
+    margin-top: 46px;
+    max-width: 940px;
+  }
+
+  .split2 h3 {
+    font-family: 'Gambarino', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.32rem;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .split2 p { font-size: 0.95rem; }
+
+  /* salary factors */
+
+  .factors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 44px;
+    margin: 34px 0 8px;
+    max-width: 880px;
+  }
+
+  .factor h3 { font-size: 1.02rem; font-weight: 600; color: var(--ink); margin-bottom: 5px; }
+  .factor h3 span { color: var(--gold-dim); margin-right: 10px; font-family: 'Gambarino', Georgia, serif; font-weight: 400; font-size: 1.15rem; }
+  .factor p { font-size: 0.94rem; }
+
+  /* bonus bar */
+
+  .bonusbar {
+    display: flex;
+    height: 58px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 34px 0 12px;
+    max-width: 820px;
+  }
+
+  .bonusbar > div { display: flex; align-items: center; padding-inline: 20px; font-size: 0.92rem; white-space: nowrap; }
+  .bonusbar .team { flex: 0 0 50%; background: #33291a; color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold-deep); }
+  .bonusbar .pers { flex: 0 0 50%; background: var(--surface); color: var(--muted); box-shadow: inset 0 0 0 1px var(--edge); }
+  .bonusbar-cap { font-size: 0.88rem; color: var(--faint); max-width: 50em; }
+
+  /* podily figures */
+
+  .pct-row { display: flex; gap: clamp(40px, 8vw, 110px); margin: 8px 0 18px; flex-wrap: wrap; }
+  .pct { max-width: 300px; }
+  .pct .big {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: clamp(3.6rem, 7vw, 5.2rem);
+    line-height: 1;
+    color: var(--gold-dim);
+  }
+  .pct:nth-child(2) .big { color: var(--gold); }
+  .pct p { margin-top: 12px; font-size: 0.95rem; }
+
+  .example-cap { margin-top: 44px; margin-bottom: 6px; font-size: 0.9rem; color: var(--faint); }
+
+  /* transition plan */
+
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-top: 14px;
+  }
+
+  .phase { display: grid; grid-template-rows: auto 1fr; gap: 12px; align-content: start; }
+  .phase h3 { font-family: 'Gambarino', Georgia, serif; font-weight: 400; font-size: 1.35rem; color: var(--ink); }
+  .phase h3 span { color: var(--gold-deep); }
+  .phase p { font-size: 0.93rem; }
+
+  /* open tasks */
+
+  ul.open { list-style: none; margin-top: 10px; display: grid; gap: 15px; max-width: 50em; }
+  ul.open li { position: relative; padding-left: 30px; color: var(--muted); font-size: 0.98rem; }
+  ul.open li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.52em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold-dim);
+  }
+
+  /* footer */
+
+  footer { padding: 90px 0 44px; }
+  footer .colophon { font-size: 0.85rem; color: var(--faint); }
+
+  /* responsive */
+
+  @media (max-width: 920px) {
+    .phases { grid-template-columns: repeat(2, 1fr); gap: 34px; }
+    .fan { opacity: 0.55; width: 88%; right: -24%; }
+    .rolekey { grid-template-columns: repeat(2, 1fr); }
+    .role { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .phases { grid-template-columns: 1fr; }
+    .factors { grid-template-columns: 1fr; }
+    .toc { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 8px 0; }
+    .rolekey { grid-template-columns: 1fr; gap: 16px; }
+    .budgetkey, .split2 { grid-template-columns: 1fr; }
+    .role-fields { grid-template-columns: 1fr; gap: 16px; }
+    .principle { grid-template-columns: 52px 1fr; gap: 16px; }
+    .principle .pn { font-size: 2.4rem; }
+    .topbar { flex-direction: column; gap: 4px; }
+    .topbar .meta { font-size: 0.8rem; }
+    .fan { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="shell topbar">
+    <div class="wordmark">NOXGAMES</div>
+    <div class="meta">Interní návrh k diskuzi · 30.&nbsp;7.&nbsp;2026</div>
+  </div>
+
+  <div class="hero-body">
+    <svg class="fan" viewBox="0 0 800 600" aria-hidden="true">
+      <g class="fan-inner">
+        <g fill="none" stroke="#8a7350" stroke-opacity="0.3" stroke-width="1.3" stroke-linecap="round">
+          <path d="M70 300 Q 300 160 430 80"/>
+          <path d="M70 300 Q 310 200 520 180"/>
+          <path d="M70 300 Q 340 190 560 120"/>
+          <path d="M70 300 Q 360 250 600 210"/>
+          <path d="M70 300 Q 300 270 480 260"/>
+          <path d="M70 300 Q 380 240 700 160"/>
+          <path d="M70 300 Q 400 270 720 240"/>
+          <path d="M70 300 Q 380 300 640 300"/>
+          <path d="M70 300 Q 310 330 500 340"/>
+          <path d="M70 300 Q 370 360 620 380"/>
+          <path d="M70 300 Q 320 400 520 440"/>
+          <path d="M70 300 Q 340 420 560 480"/>
+          <path d="M70 300 Q 290 430 430 520"/>
+          <path d="M70 300 Q 380 460 610 540"/>
+          <path d="M70 300 Q 420 380 700 440"/>
+        </g>
+        <g fill="#8a7350">
+          <circle cx="430" cy="80" r="4.5"/>
+          <circle cx="520" cy="180" r="4.5"/>
+          <circle cx="600" cy="210" r="4.5"/>
+          <circle cx="480" cy="260" r="4.5"/>
+          <circle cx="700" cy="160" r="4.5"/>
+          <circle cx="720" cy="240" r="4.5"/>
+          <circle cx="500" cy="340" r="4.5"/>
+          <circle cx="620" cy="380" r="4.5"/>
+          <circle cx="520" cy="440" r="4.5"/>
+          <circle cx="430" cy="520" r="4.5"/>
+          <circle cx="610" cy="540" r="4.5"/>
+          <circle cx="700" cy="440" r="4.5"/>
+        </g>
+        <g fill="#c9a266">
+          <circle cx="560" cy="120" r="7"/>
+          <circle cx="640" cy="300" r="7"/>
+          <circle cx="560" cy="480" r="7"/>
+        </g>
+        <circle cx="70" cy="300" r="9" fill="#c9a266"/>
+      </g>
+    </svg>
+
+    <div class="shell">
+      <div class="hero-copy">
+        <h1>Delegační <em>návrh</em></h1>
+        <p class="sub">Struktura, pozice, pravomoci, rozpočty a odměňování.</p>
+        <p class="origin">Iterace 04 · rozpočty exec vrstvy</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="shell toc" aria-label="Obsah">
+    <a href="#s01"><span>01</span>Principy</a>
+    <a href="#s02"><span>02</span>Struktura NOXGAMES</a>
+    <a href="#s03"><span>03</span>Popisy pozic</a>
+    <a href="#s04"><span>04</span>Delegace rozhodování</a>
+    <a href="#s05"><span>05</span>Rozpočty exec vrstvy</a>
+    <a href="#s06"><span>06</span>Platy a normalizace</a>
+    <a href="#s07"><span>07</span>Výkonnostní bonusy</a>
+    <a href="#s08"><span>08</span>Podíly z dealů</a>
+    <a href="#s09"><span>09</span>Přechodový plán</a>
+    <a href="#s10"><span>10</span>Otevřené úkoly</a>
+  </nav>
+</header>
+
+<main class="shell">
+
+  <section id="s01">
+    <h2><span class="no">01</span>Principy</h2>
+    <div class="principles">
+      <div class="principle">
+        <div class="pn">1</div>
+        <div>
+          <h3>Ploché vedení, žádný izolující middle management</h3>
+          <p>Exec vrstva (CEO + operations, marketing a production chief) není klasický middle management. S leady a lidmi v týmech se pracuje napřímo, nikdo nestojí v cestě komunikaci.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">2</div>
+        <div>
+          <h3>Každá oblast má jednoho vlastníka</h3>
+          <p>Kdo oblast vlastní, rozhoduje v ní bez eskalace až do definovaného limitu. Eskalace je výjimka, ne default.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">3</div>
+        <div>
+          <h3>Fixní plat, ne tabulkový</h3>
+          <p>Fix vychází z měsíčního úhrnu času a rolí, které člověk reálně nese. Platy se normalizují, stejná pozice znamená srovnatelný plat, ale nejde o tabulkový systém.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">4</div>
+        <div>
+          <h3>Bonus za výkon, podíl za iniciativu</h3>
+          <p>Měsíční bonus za týmové a osobní cíle. Podíl ze zisku za nápady, leady a dealy, které firmě vydělají nebo ušetří.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">5</div>
+        <div>
+          <h3>Více rolí = cíle ve všech rolích</h3>
+          <p>Kdo nese víc rolí, třeba QA lead a k tomu office, má v každé z nich nastavené cíle a vstupuje mu to do platu i hodnocení.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <div class="pn">6</div>
+        <div>
+          <h3>Každý exec má svůj rozpočet</h3>
+          <p>Experimenty, vývoj a růst platů podřízených si každý exec řídí ve vlastním rozpočtu. Vyjednává se ročně, upravuje kvartálně.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s02">
+    <h2><span class="no">02</span>Struktura NOXGAMES</h2>
+    <p class="lead-p">Nahoře CEO s poradní radou spolumajitelů, pod ním tři oblasti: operations, marketing a produkce. Celkem 16 lidí.</p>
+
+    <div class="dwrap org">
+      <svg viewBox="0 0 1000 510" role="img" aria-label="Organizační struktura NOXGAMES">
+        <!-- connectors -->
+        <g fill="none" stroke="#4a4034" stroke-width="1.5" stroke-linecap="round">
+          <path d="M560 52 H640"/>
+          <path d="M450 80 V130 M170 130 H830 M170 130 V160 M500 130 V160 M830 130 V160"/>
+          <path d="M170 216 V232 H72 V344 M72 284 H90 M72 344 H90"/>
+          <path d="M500 216 V232 H402 V344 M402 284 H420 M402 344 H420"/>
+          <path d="M830 216 V232 H732 V464 M732 284 H750 M732 344 H750 M732 404 H750 M732 464 H750"/>
+        </g>
+
+        <!-- headcount -->
+        <text x="150" y="88" text-anchor="middle" font-family="Gambarino, Georgia, serif" font-size="72" fill="#8a7350" opacity="0.6">16</text>
+        <text x="150" y="112" text-anchor="middle" font-size="11" fill="#6e6353">lidí celkem</text>
+
+        <!-- CEO -->
+        <g class="orgnode boss">
+          <rect x="340" y="24" width="220" height="56" rx="10" fill="#2b2318" stroke="#4a3b26" stroke-width="1"/>
+          <text x="450" y="44" text-anchor="middle" dominant-baseline="central" font-size="15" font-weight="600" fill="#ede4d4">CEO · Jirka</text>
+          <text x="450" y="63" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#8a7350">majitel · finální slovo</text>
+        </g>
+
+        <!-- advisory -->
+        <rect x="640" y="12" width="345" height="86" rx="12" fill="#1a1511" stroke="#2a231b" stroke-width="1"/>
+        <text x="812" y="26" text-anchor="middle" dominant-baseline="central" font-size="11" fill="#6e6353">Poradní rada · spolumajitelé</text>
+        <g class="orgnode">
+          <rect x="652" y="38" width="158" height="48" rx="8" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="731" y="55" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Mirek · tech</text>
+          <text x="731" y="72" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">nejseniornější programátor</text>
+        </g>
+        <g class="orgnode">
+          <rect x="818" y="38" width="158" height="48" rx="8" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="897" y="55" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Petr · art</text>
+          <text x="897" y="72" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">art direction</text>
+        </g>
+
+        <!-- chiefs -->
+        <g class="orgnode">
+          <rect x="60" y="160" width="220" height="56" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="170" y="180" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">DJ · Operations chief</text>
+          <text x="170" y="198" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">finance · chod firmy</text>
+        </g>
+        <g class="orgnode">
+          <rect x="390" y="160" width="220" height="56" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="500" y="180" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Kuba · Marketing chief</text>
+          <text x="500" y="198" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">marketing · UA</text>
+        </g>
+        <g class="orgnode">
+          <rect x="720" y="160" width="220" height="56" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="830" y="180" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">David · Production chief</text>
+          <text x="830" y="198" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">produkce · vše ostatní</text>
+        </g>
+
+        <!-- operations -->
+        <g class="orgnode">
+          <rect x="90" y="260" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="185" y="277" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Office manager</text>
+          <text x="185" y="294" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">zázemí a chod kanceláře</text>
+        </g>
+        <g class="orgnode">
+          <rect x="90" y="320" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="185" y="337" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Externí spolupráce</text>
+          <text x="185" y="354" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">účetní a další</text>
+        </g>
+
+        <!-- marketing -->
+        <g class="orgnode">
+          <rect x="420" y="260" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="515" y="277" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Marketing grafici</text>
+          <text x="515" y="294" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">kreativy · obsah</text>
+        </g>
+        <g class="orgnode">
+          <rect x="420" y="320" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="515" y="337" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">UA manažeři</text>
+          <text x="515" y="354" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">kampaně · akvizice</text>
+        </g>
+
+        <!-- production -->
+        <g class="orgnode">
+          <rect x="750" y="260" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="845" y="277" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Herní produkce</text>
+          <text x="845" y="294" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">design · kód · art · testing</text>
+        </g>
+        <g class="orgnode">
+          <rect x="750" y="320" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="845" y="337" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Publishing</text>
+          <text x="845" y="354" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">vydávání a provoz titulů</text>
+        </g>
+        <g class="orgnode">
+          <rect x="750" y="380" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="845" y="397" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">R&amp;D</text>
+          <text x="845" y="414" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">výzkum · prototypy</text>
+        </g>
+        <g class="orgnode">
+          <rect x="750" y="440" width="190" height="48" rx="8" fill="#1d1813" stroke="#2d261e" stroke-width="1"/>
+          <text x="845" y="457" text-anchor="middle" dominant-baseline="central" font-size="13" fill="#c8bca9">Externí zakázky</text>
+          <text x="845" y="474" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#6e6353">playables · externí hry</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="chart-notes">
+      <p><strong>Poradní rada není řídicí vrstva.</strong> Mirek a Petr jako spolumajitelé radí CEO a jsou zároveň nejseniornější tech a art autority ve firmě.</p>
+      <p><strong>Exec vrstva není middle management.</strong> CEO i chiefs pracují napřímo s leady projektů a jednotlivými lidmi v týmech.</p>
+      <p><strong>Více rolí je norma.</strong> Při hodnocení a nastavování cílů se počítá s tím, že člověk může zastávat víc rolí najednou.</p>
+    </div>
+  </section>
+
+  <section id="s03">
+    <h2><span class="no">03</span>Popisy pozic</h2>
+    <p class="lead-p">Každá pozice je popsaná ve čtyřech polích. Jeden člověk může nést víc pozic najednou, pak se mu sčítají i pole.</p>
+
+    <div class="rolekey">
+      <div><b>Povinnosti</b>Co pozice dělá pravidelně, co se od ní čeká každý týden.</div>
+      <div><b>Odpovědnost</b>Za jaký výsledek se pozice hodnotí.</div>
+      <div><b>Ručení</b>Co spadne na tuhle pozici, když to nevyjde. Tady končí hledání viníka.</div>
+      <div><b>Práva</b>Co může pozice rozhodnout, schválit nebo zastavit, aniž by se ptala.</div>
+    </div>
+
+    <div class="rolegroup">
+      <h3>Vedení firmy</h3>
+      <p class="gnote">Pět pozic, které drží směr, peníze a dodání.</p>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>CEO · Jirka</h4>
+          <p>Majitel, finální slovo ve firmě</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Držet směr firmy, schvalovat roadmapu a nové projekty, vést chiefy, vyjednávat s nimi roční rozpočty a schvalovat kvartální úpravy, rozhodovat tam, kde se nedohodnou.</div>
+          <div><b>Odpovědnost</b>Za výsledek firmy jako celku a za to, že strategie dává smysl.</div>
+          <div><b>Ručení</b>Za závazky firmy navenek a za finální rozhodnutí o projektech, náboru a ukončeních.</div>
+          <div><b>Práva</b>Veto na jakékoli rozhodnutí, přístup ke všem číslům, právo měnit strukturu i pravidla tohoto dokumentu.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Poradní rada · Mirek, Petr</h4>
+          <p>Spolumajitelé, nejseniornější tech a art autorita</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Radit CEO, oponovat návrhům, držet laťku kvality v technice a v art directionu.</div>
+          <div><b>Odpovědnost</b>Za kvalitu doporučení a za to, že rizika zazní včas, ne až po problému.</div>
+          <div><b>Ručení</b>Neručí za operativu, nejsou řídicí vrstva.</div>
+          <div><b>Práva</b>Přístup ke strategickým informacím, právo být u rozhodnutí, která mění směr firmy nebo standard kvality.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Operations chief · DJ</h4>
+          <p>Finance a chod firmy</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Finance a cash flow, smlouvy, chod kanceláře, externí spolupráce, schvalování rozpočtů.</div>
+          <div><b>Odpovědnost</b>Za to, že firma funguje po provozní a finanční stránce a čísla sedí.</div>
+          <div><b>Ručení</b>Za finanční plán, za správnost výplat, bonusů a podílů a za platby externím partnerům.</div>
+          <div><b>Práva</b>Zastavit výdaj mimo plán, schvalovat rozpočty, rozhodovat o provozních dodavatelích, rozhodovat o experimentech a růstu platů podřízených v rámci svého rozpočtu.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Marketing chief · Kuba</h4>
+          <p>Marketing a UA</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Marketingová strategie, vedení UA manažerů a marketing grafiků, plánování kampaní, měření výsledků.</div>
+          <div><b>Odpovědnost</b>Za akvizici, viditelnost titulů a efektivitu marketingového rozpočtu.</div>
+          <div><b>Ručení</b>Za výsledky kampaní vůči schválenému rozpočtu.</div>
+          <div><b>Práva</b>Rozhodovat o kanálech, kreativách a rozdělení marketingového rozpočtu, rozhodovat o experimentech a růstu platů podřízených v rámci svého rozpočtu.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Production chief · David</h4>
+          <p>Producer, produkce a vše ostatní</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Sprinty a plán produkce, vedení leadů, publishing, R&amp;D, externí zakázky, nábor a platy, správa vývojového budgetu firmy.</div>
+          <div><b>Odpovědnost</b>Za dodání projektů v čase a kvalitě, za jasné zadání pro týmy a za <strong>vývojový budget firmy</strong>.</div>
+          <div><b>Ručení</b>Za termíny, za obsazení projektů lidmi, za outsourcing a za to, že vývojový budget drží schválený rámec.</div>
+          <div><b>Práva</b>Rozhodovat o sprintu, o outsourcingu a o obsazení rolí, <strong>schvalovat si drobný vývoj a experimenty</strong> v rámci vývojového budgetu, rozhodovat o růstu platů podřízených. Otevření produkce nového produktu schvaluje CEO a zbytek exec.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rolegroup">
+      <h3>Leadi projektů</h3>
+      <p class="gnote">Vlastníci jednotlivých oblastí uvnitř projektu.</p>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Project lead</h4>
+          <p>Vlastník jednoho projektu</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Vést projekt, nastavovat denní priority týmu, komunikovat stav směrem k produkci.</div>
+          <div><b>Odpovědnost</b>Za to, že projekt jde podle plánu a problémy se řeší, ne odkládají.</div>
+          <div><b>Ručení</b>Za rozsah a dodržení sprintu na svém projektu.</div>
+          <div><b>Práva</b>Rozhodovat o denních prioritách, řešit spory uvnitř projektu, žádat o outsourcing.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Tech lead projektu</h4>
+          <p>Technická autorita projektu</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Technické řešení a stack, code review, hlídání technického dluhu.</div>
+          <div><b>Odpovědnost</b>Za technickou kvalitu a udržitelnost projektu.</div>
+          <div><b>Ručení</b>Za to, že technická volba neohrozí termín.</div>
+          <div><b>Práva</b>Rozhodovat o technickém řešení bez eskalace, pokud to nemá dopad na termíny.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Art lead projektu</h4>
+          <p>Vizuální autorita projektu, art direction napříč firmou drží Petr</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Vizuální směr projektu, zadání pro grafiky, kontrola výstupů.</div>
+          <div><b>Odpovědnost</b>Za vizuální kvalitu a konzistenci.</div>
+          <div><b>Ručení</b>Za to, že art odpovídá schválenému směru a je hotový v čase.</div>
+          <div><b>Práva</b>Rozhodovat o vizuálním směru v rámci art directionu, vracet práci k přepracování.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Game designer projektu</h4>
+          <p>Vlastník herního designu</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Herní design, ekonomika, balancování, zadání pro tým.</div>
+          <div><b>Odpovědnost</b>Za to, že hra dává smysl hráči a drží se cílů projektu.</div>
+          <div><b>Ručení</b>Za dopad designových změn na zážitek a monetizaci.</div>
+          <div><b>Práva</b>Měnit design bez eskalace, pokud to nemá dopad na monetizaci.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>UA manager</h4>
+          <p>Nákup a optimalizace akvizice</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Vést kampaně, sledovat metriky, optimalizovat nákup.</div>
+          <div><b>Odpovědnost</b>Za výkon kampaní v rámci schváleného budgetu.</div>
+          <div><b>Ručení</b>Za dodržení měsíčního rozpočtu.</div>
+          <div><b>Práva</b>Rozdělovat budget mezi kampaně a kanály v rámci schváleného rámce.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rolegroup">
+      <h3>Pozice v týmech</h3>
+      <p class="gnote">Výkonné pozice, na kterých stojí dodání.</p>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Člen týmu</h4>
+          <p>Programátor, grafik, designer</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Odvádět práci podle zadání, hlásit blokace včas, držet standard kvality.</div>
+          <div><b>Odpovědnost</b>Za svoje úkoly a za to, že jejich stav je vidět.</div>
+          <div><b>Ručení</b>Za to, že odhad, který dá, je reálný.</div>
+          <div><b>Práva</b>Rozhodovat o způsobu řešení svého úkolu, odmítnout zadání bez jasného zadavatele, přinášet iniciativy s podílem.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>QA</h4>
+          <p>Kvalita a stav buildů</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Testovací plán, testování buildů, evidence chyb.</div>
+          <div><b>Odpovědnost</b>Za to, že se vždycky ví, v jakém stavu build je.</div>
+          <div><b>Ručení</b>Za to, že kritická chyba není přehlédnutá.</div>
+          <div><b>Práva</b>Zastavit release, dokud není kritická chyba vyřešená.</div>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-id">
+          <h4>Office manager</h4>
+          <p>Zázemí a chod kanceláře</p>
+        </div>
+        <div class="role-fields">
+          <div><b>Povinnosti</b>Kancelář, administrativa, podpora týmu, objednávky.</div>
+          <div><b>Odpovědnost</b>Za to, že provoz kanceláře nikoho nebrzdí.</div>
+          <div><b>Ručení</b>Za objednávky a provozní výdaje v rámci limitu.</div>
+          <div><b>Práva</b>Rozhodovat o provozních nákupech do dohodnutého limitu.</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="tbl-note">Popisy jsou první verze. Projít je s každým člověkem a doladit podle reality, včetně pozic, které tu zatím chybí - úkol v kapitole 10.</p>
+  </section>
+
+  <section id="s04">
+    <h2><span class="no">04</span>Delegace rozhodování</h2>
+    <p class="lead-p">Co není v tabulce, rozhoduje vlastník nejbližší oblasti. Eskalace je výjimka, ne default. Názvosloví: producer = produkční lead = production chief.</p>
+
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr><th>Rozhodnutí</th><th>Vlastní</th><th>Bez eskalace do</th><th>Eskalace na</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Denní priority</td><td>Leadi týmů a projektů</td><td>rámec sprintu</td><td>Producer</td></tr>
+          <tr><td>Sprint (náplň a plán)</td><td>Producer</td><td>schválená roadmapa</td><td>CEO</td></tr>
+          <tr><td>Roadmapa, nové projekty</td><td>Producer</td><td>připravuje iniciální návrh</td><td>CEO (schvaluje)</td></tr>
+          <tr><td>Technické řešení, stack</td><td>Tech lead projektu</td><td>bez dopadu na termíny</td><td>Project lead, dál producer</td></tr>
+          <tr><td>Vizuální směr</td><td>Art lead projektu</td><td>rámec art directionu</td><td>Art director</td></tr>
+          <tr><td>Outsourcing (art i další)</td><td>Producer</td><td>na žádost project managera</td><td>CEO</td></tr>
+          <tr><td>Game design změny</td><td>Game designer projektu</td><td>bez dopadu na monetizaci</td><td>Project lead</td></tr>
+          <tr><td>UA rozpočet</td><td>UA manager</td><td>schválený měsíční budget</td><td>Operations chief (DJ)</td></tr>
+          <tr><td>Nábor, platy, ukončení</td><td>Producer (David)</td><td>–</td><td>CEO</td></tr>
+          <tr><td>Experimenty a drobný vývoj</td><td>Exec ve své oblasti</td><td>schválený rozpočet</td><td>CEO</td></tr>
+          <tr><td>Vývojový budget firmy</td><td>Producer (David)</td><td>schválený roční rámec</td><td>CEO</td></tr>
+          <tr><td>Otevření produkce nového produktu</td><td>Producer připravuje návrh</td><td>–</td><td><strong>CEO + zbytek exec</strong></td></tr>
+          <tr><td>Růst platů podřízených</td><td>Exec ve své oblasti</td><td>schválený rozpočet</td><td>CEO</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s05">
+    <h2><span class="no">05</span>Rozpočty exec vrstvy</h2>
+    <p class="lead-p">Každý exec pracuje s vlastním rozpočtem. Uvnitř rozpočtu rozhoduje sám, o rámci se vyjednává.</p>
+
+    <div class="budgetkey">
+      <div><b>Nové experimenty</b>Zkoušet věci bez schvalovacího kolečka.</div>
+      <div><b>Vývoj</b>Práce, která posouvá produkt i firmu dál.</div>
+      <div><b>Růst platů podřízených</b>Odměnit svoje lidi, když si to zaslouží.</div>
+    </div>
+
+    <div class="dwrap cycle">
+      <svg viewBox="0 0 960 250" role="img" aria-label="Rozpočtový cyklus a limit pro hlášení nových nákladů">
+        <!-- cyklus -->
+        <text x="225" y="78" text-anchor="end" dominant-baseline="central" font-size="13.5" fill="#a2947f">Rozpočtový cyklus</text>
+        <text x="245" y="42" dominant-baseline="central" font-size="12" fill="#c9a266">Roční vyjednávání s CEO</text>
+        <text x="905" y="42" text-anchor="end" dominant-baseline="central" font-size="12" fill="#6e6353">Nový rok</text>
+        <path d="M245 78 H905" fill="none" stroke="#322a20" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="410" cy="78" r="4.5" fill="#8a7350"/>
+        <circle cx="575" cy="78" r="4.5" fill="#8a7350"/>
+        <circle cx="740" cy="78" r="4.5" fill="#8a7350"/>
+        <circle cx="245" cy="78" r="7" fill="#c9a266"/>
+        <circle cx="905" cy="78" r="7" fill="#c9a266"/>
+        <g font-size="11" fill="#6e6353" text-anchor="middle">
+          <text x="327.5" y="104" dominant-baseline="central">Q1</text>
+          <text x="492.5" y="104" dominant-baseline="central">Q2</text>
+          <text x="657.5" y="104" dominant-baseline="central">Q3</text>
+          <text x="822.5" y="104" dominant-baseline="central">Q4</text>
+        </g>
+        <text x="575" y="132" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#8a7350">kvartální úpravy rámce</text>
+
+        <!-- limit -->
+        <text x="225" y="205" text-anchor="end" dominant-baseline="central" font-size="13.5" fill="#a2947f">Hlášení nových nákladů</text>
+        <clipPath id="limitclip"><rect x="245" y="186" width="660" height="38" rx="7"/></clipPath>
+        <g clip-path="url(#limitclip)">
+          <rect x="245" y="186" width="264" height="38" fill="#1d1813"/>
+          <rect x="509" y="186" width="396" height="38" fill="#33291a"/>
+        </g>
+        <rect x="245" y="186" width="660" height="38" rx="7" fill="none" stroke="#322a20" stroke-width="1"/>
+        <text x="259" y="205" dominant-baseline="central" class="mono" font-size="12.5" fill="#a2947f">do 2 000 USD · vhodné zmínit</text>
+        <text x="523" y="205" dominant-baseline="central" class="mono" font-size="12.5" fill="#c9a266">od 2 000 USD výš · povinné nahlásit</text>
+      </svg>
+    </div>
+
+    <ol class="rules">
+      <li>Rámec se vyjednává <strong>ročně</strong> s CEO.</li>
+      <li>Upravuje se <strong>kvartálně</strong>, když se změní realita.</li>
+      <li>Uvnitř schváleného rámce rozhoduje exec bez eskalace.</li>
+      <li>Nové náklady je vhodné zmínit vždy, <strong>od 2&nbsp;000&nbsp;USD je nahlásit povinnost</strong>.</li>
+    </ol>
+
+    <div class="split2">
+      <div>
+        <h3>Vývojový budget firmy</h3>
+        <p>Drží ho producer. Uvnitř si sám schvaluje <strong>drobný vývoj a experimenty</strong>, bez eskalace a bez čekání.</p>
+      </div>
+      <div>
+        <h3>Otevření produkce nového produktu</h3>
+        <p>Jiná liga. Producer připraví návrh, ale schválit ho musí <strong>CEO a zbytek exec</strong>. Vlastní rozpočet na to producerovi nestačí.</p>
+      </div>
+    </div>
+
+    <p class="tbl-note">Hranice, kde končí experiment a začíná produkt, je zásadní. Doupřesnit ji je úkol v kapitole 10.</p>
+  </section>
+
+  <section id="s06">
+    <h2><span class="no">06</span>Platy a normalizace</h2>
+    <p class="lead-p"><strong>Žádné tabulkové platy.</strong> Fixní plat je nastavený na měsíční úhrn času a role, které člověk nese. Cíl je normalizace: rozdíly v platech musí jít vysvětlit pojmenovanými faktory, ne historií vyjednávání.</p>
+
+    <div class="factors">
+      <div class="factor">
+        <h3><span>a</span>Počet rolí</h3>
+        <p>Kdo nese víc rolí, má to ve fixu, ne v přesčasech. Cíle má nastavené ve všech svých rolích.</p>
+      </div>
+      <div class="factor">
+        <h3><span>b</span>Důležitost rolí</h3>
+        <p>Jaký dopad má role na firmu a její výsledky.</p>
+      </div>
+      <div class="factor">
+        <h3><span>c</span>Délka ve firmě</h3>
+        <p>Loajalita a nasbíraný kontext se počítají.</p>
+      </div>
+      <div class="factor">
+        <h3><span>d</span>Skill v rolích</h3>
+        <p>Úroveň, na jaké člověk roli drží, včetně extra skillů, které firma reálně využívá.</p>
+      </div>
+    </div>
+
+    <ol class="rules">
+      <li>Stejná pozice znamená srovnatelný plat. Rozdíly jdou vysvětlit faktory výše, ničím jiným.</li>
+      <li>Při přechodu si <strong>nikdo nepohorší</strong> vůči svému průměrnému současnému výdělku.</li>
+      <li>Kdo se normalizací ukáže jako výrazně přetížený (víc nutných rolí, nejde to jinak), má být odměněn víc.</li>
+      <li>Bonusové složky jsou cesta, jak si vydělat navíc, když se daří.</li>
+    </ol>
+
+    <p class="tbl-note">Základní pásma se nastaví ze současné reality - úkol v kapitole 10.</p>
+  </section>
+
+  <section id="s07">
+    <h2><span class="no">07</span>Výkonnostní bonusy</h2>
+    <p class="lead-p">Bonus je <strong>0 až 15&nbsp;% fixního platu měsíčně</strong> a skládá se ze dvou rovnocenných složek.</p>
+
+    <div class="bonusbar">
+      <div class="team">Týmová složka · 50&nbsp;%</div>
+      <div class="pers">Osobní složka · 50&nbsp;%</div>
+    </div>
+    <p class="bonusbar-cap">Týmová složka podle výsledku týmu a projektu za měsíc. Osobní složka podle splnění osobních cílů.</p>
+
+    <ol class="rules">
+      <li>Cíle se definují předem, první pracovní den měsíce. Nikdy zpětně.</li>
+      <li>Kdo má víc rolí, má cíle nastavené ve všech svých rolích.</li>
+      <li>Vyplácí se s výplatou za daný měsíc, žádné odkládání.</li>
+    </ol>
+
+    <p class="tbl-note"><strong>Podíl na zisku (profit share):</strong> nad rámec měsíčních bonusů běží systém podílu na zisku firmy vyplácený dvakrát ročně. Je to samostatný systém, přesná pravidla doplníme (kapitola 10).</p>
+  </section>
+
+  <section id="s08">
+    <h2><span class="no">08</span>Podíly z iniciativ a dealů</h2>
+    <p class="lead-p">NOXGAMES nemá sales tým. Nosit nápady, leady a dealy - jak vydělat nebo ušetřit - je práce všech.</p>
+
+    <div class="pct-row">
+      <div class="pct">
+        <div class="big">5&nbsp;%</div>
+        <p>ze zisku pro toho, kdo <strong>přinese iniciativu</strong> - nápad, lead nebo deal</p>
+      </div>
+      <div class="pct">
+        <div class="big">5&nbsp;%</div>
+        <p>ze zisku pro toho, kdo deal nebo myšlenku <strong>dotáhne do konce</strong></p>
+      </div>
+    </div>
+
+    <p>Kdo přinese i dotáhne, bere <strong>10&nbsp;%</strong>. Platí i pro úspory, ne jen výdělky.</p>
+
+    <ol class="rules">
+      <li><strong>Zisk dealu</strong> = výnos minus náklady na delivery spočítané podle interních tarifů. Tarify se nastaví v rámci delegace (kapitola 10).</li>
+      <li>Podíl se vyplácí <strong>po zaplacení klientem</strong>; u úspor po jejich prokázání.</li>
+      <li>Opakované zakázky od stejného klienta už podíl nenesou. U rekurentního výnosu se podíl počítá <strong>jen z prvního roku</strong>.</li>
+    </ol>
+
+    <p class="example-cap">Příklad: externí zakázka za 200&nbsp;000&nbsp;Kč</p>
+    <div class="dwrap money">
+      <svg viewBox="0 0 960 340" role="img" aria-label="Rozdělení zisku ze zakázky za 200 tisíc korun">
+        <!-- fakturace -->
+        <text x="225" y="49" text-anchor="end" dominant-baseline="central" font-size="13.5" fill="#a2947f">Fakturace</text>
+        <rect x="245" y="30" width="660" height="38" rx="7" fill="#221c15" stroke="#322a20" stroke-width="1"/>
+        <text x="893" y="49" text-anchor="end" dominant-baseline="central" class="mono" font-size="13" fill="#ede4d4">200 000 Kč</text>
+
+        <!-- naklady -->
+        <text x="225" y="111" text-anchor="end" dominant-baseline="central" font-size="13.5" fill="#a2947f">Náklady dle tarifů</text>
+        <rect x="245" y="92" width="363" height="38" rx="7" fill="#1d1813" stroke="#2a231b" stroke-width="1"/>
+        <text x="596" y="111" text-anchor="end" dominant-baseline="central" class="mono" font-size="13" fill="#a2947f">110 000 Kč</text>
+
+        <!-- zisk -->
+        <text x="225" y="173" text-anchor="end" dominant-baseline="central" font-size="13.5" fill="#a2947f">Zisk dealu</text>
+        <rect x="608" y="154" width="297" height="38" rx="7" fill="#33291a" stroke="#57452a" stroke-width="1"/>
+        <text x="893" y="173" text-anchor="end" dominant-baseline="central" class="mono" font-size="13" fill="#c9a266">90 000 Kč</text>
+
+        <!-- guides -->
+        <g stroke="#6e6353" stroke-opacity="0.35" stroke-width="1" stroke-linecap="round">
+          <path d="M905 68 V154"/>
+          <path d="M608 130 V154"/>
+        </g>
+
+        <!-- split -->
+        <text x="225" y="259" text-anchor="end" dominant-baseline="central" font-size="13.5" fill="#a2947f">Rozdělení zisku</text>
+        <clipPath id="splitclip"><rect x="245" y="240" width="660" height="38" rx="7"/></clipPath>
+        <g clip-path="url(#splitclip)">
+          <rect x="245" y="240" width="33" height="38" fill="#8a7350"/>
+          <rect x="278" y="240" width="33" height="38" fill="#c9a266"/>
+          <rect x="311" y="240" width="594" height="38" fill="#221c15"/>
+        </g>
+        <rect x="245" y="240" width="660" height="38" rx="7" fill="none" stroke="#322a20" stroke-width="1"/>
+        <text x="893" y="259" text-anchor="end" dominant-baseline="central" class="mono" font-size="13" fill="#a2947f">Firma 90 % · 81 000 Kč</text>
+
+        <!-- legend -->
+        <rect x="245" y="303" width="10" height="10" rx="2" fill="#8a7350"/>
+        <text x="263" y="308" dominant-baseline="central" class="mono" font-size="12.5" fill="#a2947f">Iniciativa 5 % · 4 500 Kč</text>
+        <rect x="470" y="303" width="10" height="10" rx="2" fill="#c9a266"/>
+        <text x="488" y="308" dominant-baseline="central" class="mono" font-size="12.5" fill="#a2947f">Dotažení 5 % · 4 500 Kč</text>
+      </svg>
+    </div>
+  </section>
+
+  <section id="s09">
+    <h2><span class="no">09</span>Přechodový plán</h2>
+    <p class="lead-p">Role se doladí shora dolů, pak se normalizují platy a nakonec se spustí bonusy a podíly.</p>
+
+    <div class="phases">
+      <div class="phase">
+        <h3><span>Krok</span> 1</h3>
+        <p>Role shora dolů: projít popisy pozic z kapitoly 03 s lidmi a doladit je podle reality. Každá role: co dělá, za co ručí, co může rozhodnout.</p>
+      </div>
+      <div class="phase">
+        <h3><span>Krok</span> 2</h3>
+        <p>Normalizace platů a rozpočty: nastavit fixy podle faktorů z kapitoly 06 a spolu s nimi roční rozpočty exec. Nikdo si nepohorší, přetížení se dorovnají.</p>
+      </div>
+      <div class="phase">
+        <h3><span>Krok</span> 3</h3>
+        <p>Bonusy a podíly: spustit měsíční bonusy (první měsíc nanečisto) a pravidla podílů z iniciativ a dealů.</p>
+      </div>
+      <div class="phase">
+        <h3>Průběžně</h3>
+        <p>Retrospektiva delegace: co se eskaluje moc často, tam se posunou limity. Doplnit tarify a pravidla profit share.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="s10">
+    <h2><span class="no">10</span>Otevřené úkoly</h2>
+    <ul class="open">
+      <li>Nastavit základní platová pásma ze současné reality (přechod bez pohoršení).</li>
+      <li>Sepsat přesná pravidla pololetního podílu na zisku (profit share 2× ročně).</li>
+      <li>Nastavit interní tarify pro výpočet nákladů na delivery (vstup pro podíly z dealů).</li>
+      <li>Projít popisy pozic z kapitoly 03 s každým člověkem a doladit podle reality; doplnit chybějící pozice.</li>
+      <li>Sjednotit názvosloví rolí (producer = produkční lead = production chief).</li>
+      <li>Nastavit konkrétní roční rozpočty jednotlivých exec (experimenty, vývoj, růst platů podřízených).</li>
+      <li>Definovat hranici mezi drobným vývojem nebo experimentem a otevřením produkce nového produktu.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell colophon">NOXGAMES · Delegační návrh · Iterace 04 · 30. července 2026 · Interní dokument</div>
+</footer>
+
+</body>
+</html>
