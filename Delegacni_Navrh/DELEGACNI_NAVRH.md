@@ -1,7 +1,7 @@
 # Delegační návrh — NOXGAMES
 
 > Pracovní dokument. Návrh delegační struktury a úpravy organizační struktury v NOXGAMES (16 lidí).
-> Stav: **iterace 04** - doplněná kapitola rozpočtů exec vrstvy, vývojový budget producera a přístup exec k financím.
+> Stav: **iterace 05** - podíly z iniciativ a dealů se počítají ze zisku za prvních 12 měsíců a vyplácejí se měsíčně.
 
 ---
 
@@ -253,18 +253,19 @@ NOXGAMES nemá sales tým. Nosit nápady, leady a dealy - jak vydělat nebo uše
 
 | Role | Podíl | Z čeho |
 |---|---|---|
-| Kdo přinese iniciativu (nápad, lead, deal) | **5 %** | ze zisku / úspory |
-| Kdo deal nebo myšlenku dotáhne do konce | **5 %** | ze zisku / úspory |
-| Kdo udělá obojí | **10 %** | ze zisku / úspory |
+| Kdo přinese iniciativu (nápad, lead, deal) | **5 %** | ze zisku / úspory za prvních 12 měsíců |
+| Kdo deal nebo myšlenku dotáhne do konce | **5 %** | ze zisku / úspory za prvních 12 měsíců |
+| Kdo udělá obojí | **10 %** | ze zisku / úspory za prvních 12 měsíců |
 
 Pravidla:
 
 1. **Zisk dealu** = výnos minus náklady na delivery spočítané podle interních tarifů. Tarify se nastaví v rámci delegace (kap. 10).
-2. Podíl se vyplácí **po zaplacení klientem**; u úspor po jejich prokázání.
-3. Opakované zakázky od stejného klienta už podíl nenesou. U rekurentního výnosu se podíl počítá **jen z prvního roku**.
+2. Podíl se počítá **ze zisku za prvních 12 měsíců** běhu dealu; u úspor za prvních 12 měsíců od jejich prokázání.
+3. Vyplácí se **měsíčně** s výplatou, vždy ze zisku, který klient v daném měsíci skutečně zaplatil. Po 12 měsících podíl končí.
+4. Opakované zakázky od stejného klienta už nový podíl nenesou.
 
-Příklad: zakázka za 200 000 Kč, náklady na delivery dle tarifů 110 000 Kč, zisk 90 000 Kč.
-Iniciativa (5 %): 4 500 Kč. Dotažení (5 %): 4 500 Kč. Firma: 81 000 Kč.
+Příklad: deal vydělává 7 500 Kč zisku měsíčně (výnos minus náklady dle tarifů), za prvních 12 měsíců tedy 90 000 Kč.
+Iniciativa (5 %): 375 Kč měsíčně, celkem 4 500 Kč. Dotažení (5 %): 375 Kč měsíčně, celkem 4 500 Kč. Firma: 81 000 Kč.
 
 ## 9. Přechodový plán
 
@@ -294,3 +295,4 @@ Iniciativa (5 %): 4 500 Kč. Dotažení (5 %): 4 500 Kč. Firma: 81 000 Kč.
 | v2 | 2026-07-29 | `delegacni-navrh-v2.html` | Zapracované Davidovy poznámky: reálná struktura NOXGAMES (16 lidí, CEO Jirka, poradní rada Mirek + Petr, chiefs DJ/Kuba/David), delegační tabulka dle skutečných rolí, tabulkové platy nahrazeny normalizací (faktory: počet rolí, důležitost, délka, skill), bonusy 50/50 + zmínka profit share 2× ročně, provize přerámovány na podíly z iniciativ (5 % nápad, 10 % dotažení, i z úspor), rekurentní výnos jen první rok, přechodový plán shora dolů |
 | v3 | 2026-07-29 | `delegacni-navrh-v3.html` | Nová kapitola 3 Popisy pozic: 13 pozic shora dolů (vedení, leadi, pozice v týmech), každá ve čtyřech polích (povinnosti, odpovědnost, ručení, práva). Podíly z iniciativ upraveny na **5 + 5 %** (obojí 10 %), přepočítaný příklad a graf. Přečíslované kapitoly, přechodový plán a TODO navázané na nové popisy pozic |
 | v4 | 2026-07-30 | `delegacni-navrh-v4.html` | Nová kapitola 5 Rozpočty exec vrstvy: každý exec má vlastní rozpočet na experimenty, vývoj a růst platů podřízených, rámec se vyjednává ročně s kvartálními úpravami, hlášení nových nákladů povinné **od 2 000 USD**. Producer drží **vývojový budget firmy** a schvaluje si v něm drobný vývoj a experimenty, **otevření produkce nového produktu schvaluje CEO + zbytek exec**. Doplněn princip 6, čtyři nové řádky v delegační tabulce, upravené popisy CEO / DJ / Kuba / David, dva nové TODO. Přečíslované kapitoly 6-10. Doplněn princip 7 a blok Přístup k financím: exec má plný přístup do financí a neomezený přístup k přehledům výplat |
+| v5 | 2026-08-06 | `delegacni-navrh-v5.html` | Podíly z iniciativ a dealů (kap. 8): podíl 5 + 5 % se nově počítá **ze zisku za prvních 12 měsíců** běhu dealu a vyplácí se **měsíčně** podle skutečně zaplaceného zisku; po 12 měsících podíl končí. Pravidlo o rekurentním výnosu jen z prvního roku tím bylo nahrazeno. Přepracovaný příklad (7 500 Kč zisku měsíčně, za 12 měsíců 90 000 Kč) a graf s oknem 12 měsíčních výplat |
