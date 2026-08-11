@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sféry vlivu a oddělení · příprava na 20. 8. · NOXGAMES</title>
+<style>
+  @font-face {
+    font-family: 'Gambarino';
+    src: url('assets/fonts/Gambarino-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-hi: #1a1511;
+    --bg-lo: #14100c;
+    --surface: #211b15;
+    --surface-hi: #262019;
+    --edge: #322a20;
+    --ink: #ede4d4;
+    --muted: #a2947f;
+    --faint: #6e6353;
+    --gold: #c9a266;
+    --gold-dim: #8a7350;
+    --gold-deep: #57452a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: var(--bg-lo); }
+
+  body {
+    background: linear-gradient(175deg, var(--bg-hi) 0%, var(--bg-lo) 100%);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header.hero, footer { position: relative; z-index: 1; }
+
+  ::selection { background: var(--gold); color: var(--bg-lo); }
+
+  .shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: clamp(22px, 5vw, 52px);
+  }
+
+  h1, h2, .display { font-family: 'Gambarino', Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+  .num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.92em; }
+
+  a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s ease; }
+  a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 34px;
+  }
+
+  .wordmark {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+  }
+
+  .topbar .meta { font-size: 0.85rem; color: var(--faint); }
+
+  .hero-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .art {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    width: min(62%, 700px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .art-inner { animation: artdrift 11s ease-in-out infinite alternate; }
+    @keyframes artdrift {
+      from { transform: translateY(-6px); }
+      to   { transform: translateY(6px); }
+    }
+  }
+
+  .hero-copy { position: relative; max-width: 640px; }
+
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 6.8vw, 4.9rem);
+    line-height: 1.06;
+    letter-spacing: 0.005em;
+  }
+
+  .hero-copy h1 em { font-style: normal; color: var(--gold-dim); }
+
+  .hero-copy .sub {
+    margin-top: 26px;
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    color: var(--muted);
+    max-width: 30em;
+  }
+
+  .hero-copy .origin { margin-top: 14px; font-size: 0.88rem; color: var(--faint); }
+
+  .toc {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(4, auto);
+    grid-template-columns: repeat(2, max-content);
+    gap: 8px 64px;
+    padding-bottom: 40px;
+  }
+
+  .toc a { font-size: 0.88rem; color: var(--muted); white-space: nowrap; }
+  .toc a:hover { color: var(--ink); }
+  .toc a span { color: var(--gold-deep); margin-right: 8px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: clamp(84px, 12vh, 130px); }
+  section:last-of-type { padding-bottom: 40px; }
+
+  h2 {
+    font-size: clamp(1.85rem, 3.8vw, 2.55rem);
+    line-height: 1.15;
+    margin-bottom: 34px;
+  }
+
+  h2 .no { color: var(--gold-deep); margin-right: 14px; }
+
+  p { color: var(--muted); max-width: 46em; }
+  p strong, li strong { color: var(--ink); font-weight: 600; }
+
+  .lead-p { font-size: 1.06rem; }
+
+  /* numbered rules */
+
+  ol.rules { margin: 26px 0 0 0; list-style: none; counter-reset: r; display: grid; gap: 14px; max-width: 52em; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 54px; color: var(--muted); font-size: 0.98rem; }
+  ol.rules li::before {
+    content: counter(r);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 36px;
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--gold-deep);
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  /* point lists */
+
+  ul.points { list-style: none; margin-top: 10px; display: grid; gap: 15px; max-width: 52em; }
+  ul.points li { position: relative; padding-left: 30px; color: var(--muted); font-size: 0.97rem; }
+  ul.points li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.58em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-deep);
+  }
+
+  /* tables */
+
+  .tscroll { overflow-x: auto; margin-top: 6px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 560px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--faint);
+    padding: 10px 16px 12px;
+    border-bottom: 1px solid var(--edge);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #241e17;
+    color: var(--muted);
+    vertical-align: top;
+  }
+
+  td:first-child { color: var(--gold-dim); white-space: nowrap; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.88rem; }
+
+  tbody tr { transition: background-color 0.2s ease; }
+  tbody tr:hover { background-color: #1d1813; }
+
+  .tbl-note { margin-top: 18px; font-size: 0.9rem; color: var(--faint); max-width: 52em; }
+
+  /* department cards */
+
+  .dept {
+    display: grid;
+    grid-template-columns: 244px 1fr;
+    gap: 36px;
+    padding: 26px 0 28px;
+    border-top: 1px solid #241e17;
+    margin-top: 22px;
+  }
+
+  .dept + .dept { margin-top: 0; }
+
+  .dept-id h4 { font-size: 1.06rem; font-weight: 600; color: var(--ink); line-height: 1.35; }
+  .dept-id h4 span { color: var(--gold-deep); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.82rem; margin-right: 8px; }
+  .dept-id p { font-size: 0.88rem; color: var(--faint); margin-top: 5px; }
+
+  .dept-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 42px; }
+  .dept-fields div { font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
+  .dept-fields b { display: block; font-size: 0.79rem; font-weight: 500; color: var(--gold-dim); margin-bottom: 2px; }
+  .dept-fields .wide { grid-column: 1 / -1; }
+
+  /* template card */
+
+  .cardtpl {
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: 14px;
+    padding: 10px 28px 14px;
+    margin-top: 36px;
+    max-width: 760px;
+  }
+
+  .cardtpl .row {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid #2a2219;
+    font-size: 0.93rem;
+  }
+
+  .cardtpl .row:last-child { border-bottom: none; }
+  .cardtpl .row b { font-weight: 600; color: var(--ink); }
+  .cardtpl .row span { color: var(--faint); }
+
+  /* diagrams */
+
+  .dwrap { overflow-x: auto; margin-top: 8px; }
+  .dwrap svg { display: block; width: 100%; height: auto; }
+  .dwrap.map svg { min-width: 860px; }
+
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  svg .mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+
+  .orgnode rect { transition: fill 0.25s ease; }
+  .orgnode:hover rect { fill: var(--surface-hi); }
+
+  /* footer */
+
+  footer { padding: 90px 0 44px; }
+  footer .related { font-size: 0.9rem; color: var(--faint); margin-bottom: 14px; }
+  footer .related a { margin-right: 22px; }
+  footer .colophon { font-size: 0.85rem; color: var(--faint); }
+
+  /* responsive */
+
+  @media (max-width: 920px) {
+    .art { opacity: 0.55; width: 88%; right: -24%; }
+    .dept { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .toc { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 8px 0; }
+    .dept-fields { grid-template-columns: 1fr; gap: 16px; }
+    .cardtpl .row { grid-template-columns: 1fr; gap: 4px; }
+    .topbar { flex-direction: column; gap: 4px; }
+    .topbar .meta { font-size: 0.8rem; }
+    .art { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="shell topbar">
+    <div class="wordmark">NOXGAMES</div>
+    <div class="meta">Příprava na poradu vedení · 20.&nbsp;8.&nbsp;2026</div>
+  </div>
+
+  <div class="hero-body">
+    <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+      <g class="art-inner">
+        <g fill="none" stroke="#8a7350" stroke-opacity="0.28" stroke-width="1.3">
+          <circle cx="330" cy="230" r="125"/>
+          <circle cx="490" cy="310" r="150"/>
+          <circle cx="350" cy="410" r="105"/>
+          <circle cx="580" cy="160" r="85"/>
+          <circle cx="640" cy="430" r="95"/>
+          <circle cx="230" cy="330" r="75"/>
+        </g>
+        <g fill="#8a7350">
+          <circle cx="580" cy="160" r="4.5"/>
+          <circle cx="230" cy="330" r="4.5"/>
+          <circle cx="640" cy="430" r="4.5"/>
+        </g>
+        <g fill="#c9a266">
+          <circle cx="408" cy="278" r="7"/>
+          <circle cx="418" cy="382" r="7"/>
+          <circle cx="553" cy="234" r="7"/>
+        </g>
+      </g>
+    </svg>
+
+    <div class="shell">
+      <div class="hero-copy">
+        <h1>Sféry vlivu a <em>oddělení</em></h1>
+        <p class="sub">Rozdělení firmy na oddělení nezávisle na lidech. Startovní návrh k rozstřílení, ne hotové řešení.</p>
+        <p class="origin">Nejdřív krabičky, jména až v druhém kroku · zlaté body = sporné zóny</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="shell toc" aria-label="Obsah">
+    <a href="#s01"><span>01</span>Cíl porady</a>
+    <a href="#s02"><span>02</span>Agenda</a>
+    <a href="#s03"><span>03</span>Mapa oddělení</a>
+    <a href="#s04"><span>04</span>Karta oddělení</a>
+    <a href="#s05"><span>05</span>Sporné zóny</a>
+    <a href="#s06"><span>06</span>Pravidla diskuse</a>
+    <a href="#s07"><span>07</span>Co si každý přinese</a>
+  </nav>
+</header>
+
+<main class="shell">
+
+  <section id="s01">
+    <h2><span class="no">01</span>Cíl porady</h2>
+    <p class="lead-p">Do konce porady mít:</p>
+    <ol class="rules" style="margin-top: 30px;">
+      <li><strong>Odsouhlasenou mapu oddělení:</strong> seznam oblastí, ze kterých se firma skládá, nezávisle na jménech.</li>
+      <li><strong>Kartu každého oddělení:</strong> účel, co řeší, co rozhoduje samo, co eskaluje, rozhraní na ostatní.</li>
+      <li><strong>Rozhodnuté sporné zóny:</strong> u každého průniku určeného právě jednoho vlastníka.</li>
+      <li><strong>Potvrzený plán dalších schůzek:</strong> recap témat z <a href="temata-dalsich-porad.html">plánu dalších porad</a>, případné doplnění.</li>
+      <li><strong>Zápis jako dekret do Wiki:</strong> první reálný dekret nového systému.</li>
+    </ol>
+    <p style="margin-top: 36px;">Jména se přiřazují až v druhém kroku (jeden člověk může držet víc oddělení). Nejdřív se shodnout, JAKÉ krabičky existují a kde mají hranice.</p>
+  </section>
+
+  <section id="s02">
+    <h2><span class="no">02</span>Agenda</h2>
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr><th>Čas</th><th>Blok</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>10 min</td><td>Připomenutí vize firmy + kontrola úkolů z minula</td></tr>
+          <tr><td>15 min</td><td>Každý představí svůj návrh mapy oddělení (bez diskuse, jen prezentace)</td></tr>
+          <tr><td>20 min</td><td>Sladění mapy: shodnout se na seznamu oddělení (rozdíly v návrzích = body k diskusi)</td></tr>
+          <tr><td>40 min</td><td>Sporné zóny: projít průniky (kapitola 05), u každého určit vlastníka</td></tr>
+          <tr><td>15 min</td><td>Karty oddělení: doplnit „rozhoduje samo / eskaluje" u shodnutých oddělení</td></tr>
+          <tr><td>10 min</td><td>Recap plánu dalších schůzek: potvrdit témata, doplnit chybějící</td></tr>
+          <tr><td>10 min</td><td>Rekapitulace, zápis dekretu, úkoly na příště</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-note">Celkem 120 minut.</p>
+  </section>
+
+  <section id="s03">
+    <h2><span class="no">03</span>Mapa oddělení</h2>
+    <p class="lead-p">Startovní návrh: devět oblastí a jedna průřezová. Vychází ze struktury v delegačním návrhu (iterace 05) a z oblastí zmíněných na poradě: marketing, produkce, hiring, finance, interní operace.</p>
+
+    <div class="dwrap map" style="margin-top: 36px;">
+      <svg viewBox="0 0 1000 400" role="img" aria-label="Mapa devíti oddělení NOXGAMES plus průřezová oblast Lidé">
+        <g class="orgnode">
+          <rect x="10" y="18" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="160" y="46" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Strategie a vedení</text>
+          <text x="160" y="67" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">směr · kapitál · portfolio</text>
+        </g>
+        <g class="orgnode">
+          <rect x="350" y="18" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="500" y="46" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Finance</text>
+          <text x="500" y="67" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">cashflow · budgety · payroll</text>
+        </g>
+        <g class="orgnode">
+          <rect x="690" y="18" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="840" y="46" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Interní operations</text>
+          <text x="840" y="67" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">kancelář · služby · smlouvy</text>
+        </g>
+
+        <g class="orgnode">
+          <rect x="10" y="112" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="160" y="140" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Efektivizace a automatizace</text>
+          <text x="160" y="161" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">AI · nástroje · data</text>
+        </g>
+        <g class="orgnode">
+          <rect x="350" y="112" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="500" y="140" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Marketing a UA</text>
+          <text x="500" y="161" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">kampaně · kreativy · brand</text>
+        </g>
+        <g class="orgnode">
+          <rect x="690" y="112" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="840" y="140" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Herní produkce</text>
+          <text x="840" y="161" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">design · kód · art · QA</text>
+        </g>
+
+        <g class="orgnode">
+          <rect x="10" y="206" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="160" y="234" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Publishing a provoz titulů</text>
+          <text x="160" y="255" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">releasy · liveops · store</text>
+        </g>
+        <g class="orgnode">
+          <rect x="350" y="206" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="500" y="234" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">R&amp;D a nové produkty</text>
+          <text x="500" y="255" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">prototypy · greenlight</text>
+        </g>
+        <g class="orgnode">
+          <rect x="690" y="206" width="300" height="76" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="840" y="234" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#ede4d4">Externí zakázky</text>
+          <text x="840" y="255" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">playables · B2B delivery</text>
+        </g>
+
+        <rect x="10" y="312" width="980" height="66" rx="9" fill="#1a1511" stroke="#383025" stroke-width="1" stroke-dasharray="5 6"/>
+        <text x="500" y="335" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#c8bca9">Lidé · průřezová oblast</text>
+        <text x="500" y="357" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">nábor · normalizace · bonusy · rozvoj · kultura (k diskusi, zda je to samostatné oddělení)</text>
+      </svg>
+    </div>
+
+    <div class="dept" style="margin-top: 54px;">
+      <div class="dept-id">
+        <h4><span>3.1</span>Strategie a vedení</h4>
+        <p>Účel: směr firmy, kapitál, portfolio.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Vizi a strategii, roadmapu firmy, greenlight a ukončení projektů, zásadní rizika, krize, vztahy s platformami na úrovni závazků, právní a statutární věci.</div>
+        <div class="wide"><b>Typicky rozhoduje</b>Všechna jednosměrná rozhodnutí firmy.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.2</span>Finance</h4>
+        <p>Účel: firma ví, kolik má, kolik pálí a na co.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Cashflow forecast, burn a runway, platby, fakturaci, konsolidaci budgetů, payroll administrativu, smlouvy po finanční stránce, reporting (měsíční snapshot).</div>
+        <div><b>Rozhoduje samo</b>Standardní platby v budgetu, finanční procesy.</div>
+        <div><b>Eskaluje</b>Dopad na runway, výdaje mimo budget, změny celkového rozpočtu.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.3</span>Interní operations</h4>
+        <p>Účel: provoz nikoho nebrzdí.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Kancelář, hardware a vybavení, provozní služby a dodavatele, provozní smlouvy, eventy, onboarding zázemí, provozní HR agendu (docházka, benefity).</div>
+        <div><b>Rozhoduje samo</b>Dodavatele a nákupy v operations budgetu.</div>
+        <div><b>Eskaluje</b>Stěhování, dlouhé závazky, významný recurring.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.4</span>Efektivizace a automatizace</h4>
+        <p>Účel: firma se zrychluje. AI, nástroje, data.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Interní nástroje a systémy (hub, wiki), AI nástroje a automatizace procesů, interní data a přehledy, vyhodnocování experimentů efektivity.</div>
+        <div><b>Rozhoduje samo</b>Experimenty v experimentálním budgetu v rámci bezpečnostních pravidel.</div>
+        <div><b>Eskaluje</b>Citlivá data, zásah do produktu, větší projekt.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.5</span>Marketing a UA</h4>
+        <p>Účel: hráči se o titulech dozví a přijdou.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Marketingovou strategii, UA kampaně a nákup, marketingové kreativy, měření výkonu kampaní, ASO a store prezentaci, sociální sítě a komunitu, brand navenek.</div>
+        <div><b>Rozhoduje samo</b>Kanály, kreativy, realokaci uvnitř schválené alokace.</div>
+        <div><b>Eskaluje</b>Změnu celkové alokace, zásah do značky.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.6</span>Herní produkce</h4>
+        <p>Účel: hry se dodávají v čase a kvalitě.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Sprinty a plán produkce, vedení projektů (leadi), game design, vývoj, art, QA, obsazení projektů lidmi, outsourcing.</div>
+        <div><b>Rozhoduje samo</b>Sprint v rámci roadmapy, outsourcing, obsazení rolí.</div>
+        <div><b>Eskaluje</b>Roadmapu a nové projekty, skluz s dopadem na firmu.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.7</span>Publishing a provoz titulů</h4>
+        <p>Účel: vydané hry žijí a vydělávají.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Release management, store operations, liveops a eventy ve hrách, monetizační provoz, komunikaci s platformami na provozní úrovni, produktovou analytiku vydaných titulů.</div>
+        <div><b>Rozhoduje samo</b>Provozní releasy, liveops kalendář.</div>
+        <div><b>Eskaluje</b>Platformní závazky, zásadní monetizační změny.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.8</span>R&amp;D a nové produkty</h4>
+        <p>Účel: odkud přijde další hra.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Prototypy, ověřování konceptů, market research, přípravu greenlight podkladů.</div>
+        <div><b>Rozhoduje samo</b>Experimenty v experimentálním a vývojovém budgetu.</div>
+        <div><b>Eskaluje</b>Otevření produkce nového produktu (CEO + zbytek exec).</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.9</span>Externí zakázky (B2B)</h4>
+        <p>Účel: příjmy mimo vlastní tituly.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Playables a externí vývoj, pipeline dealů, pricing (interní tarify), delivery a vztah s klientem.</div>
+        <div><b>Rozhoduje samo</b>Realizaci zakázek v kapacitním rámci.</div>
+        <div><b>Eskaluje</b>Závazky nad rámec kapacit, strategické partnery.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>3.10</span>Lidé</h4>
+        <p>Průřezová oblast, k diskusi, zda je to oddělení.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Řeší</b>Nábor, ukončení, platovou normalizaci, bonusový systém, rozvoj lidí, kulturu.</div>
+        <div class="wide"><b>Poznámka</b>Na poradě zmíněno jako „hiring", tedy samostatná oblast. Dnes to v návrhu drží produkce (nábor a platy), každý exec (růst platů podřízených) a finance (payroll administrativa). Rozhodnout, zda je to samostatné oddělení, nebo rozprostřená odpovědnost s jasnými pravidly.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s04">
+    <h2><span class="no">04</span>Karta oddělení</h2>
+    <p class="lead-p">Šablona na vyplnění. Každý si před poradou zkusí vyplnit kartu minimálně pro oblasti, které dnes fakticky drží, a přinese vlastní verzi celkové mapy (klidně jinou než kapitola 03).</p>
+
+    <div class="cardtpl">
+      <div class="row"><b>Oddělení</b><span>název</span></div>
+      <div class="row"><b>Účel</b><span>jedna věta, proč existuje</span></div>
+      <div class="row"><b>Co řeší</b><span>5 až 10 položek</span></div>
+      <div class="row"><b>Rozhoduje samo</b><span>bez eskalace</span></div>
+      <div class="row"><b>Vždy eskaluje</b><span>jednosměrné dveře oblasti</span></div>
+      <div class="row"><b>Rozhraní na ostatní oddělení</b><span>od koho co potřebuje, komu co dodává</span></div>
+      <div class="row"><b>Kde to dnes skřípe</b><span>konflikty, nejasné vlastnictví</span></div>
+    </div>
+  </section>
+
+  <section id="s05">
+    <h2><span class="no">05</span>Sporné zóny</h2>
+    <p class="lead-p">Místa, kde si dnes vlastnictví může nárokovat víc oblastí. Cíl: u každé určit právě jednoho vlastníka. Ostatní jsou konzultovaní, bez veta.</p>
+    <ol class="rules" style="margin-top: 36px;">
+      <li><strong>Nábor a platy:</strong> produkce (obsazení projektů, návrhy platů) × finance (payroll, budget) × každý exec (růst platů podřízených) × CEO (finální slovo). Kdo vlastní proces náboru od potřeby po nástup?</li>
+      <li><strong>Marketingové kreativy vs. herní art:</strong> marketing (výkon kreativ) × produkce a art (kapacita grafiků, kvalita, art direction napříč firmou). Kdo prioritizuje čas grafiků, když se tlačí kampaň i hra?</li>
+      <li><strong>Publishing:</strong> produkce (dodání buildů, feature development) × marketing (store prezentace, ASO, launch komunikace). Kde přesně vede hranice u releasu?</li>
+      <li><strong>Produktová analytika a data:</strong> marketing (kampaně, atribuce) × publishing a produkce (metriky her) × efektivizace (interní data a nástroje). Kdo vlastní datový stack a definice metrik?</li>
+      <li><strong>AI a automatizace vs. vývojové nástroje:</strong> efektivizace (interní systémy, AI) × produkce (nástroje ve vývoji her, vývojový budget). Kde končí interní efektivita a začíná vývoj?</li>
+      <li><strong>Externí zakázky:</strong> kdo vlastní pipeline a pricing, když sales tým neexistuje a iniciativy nosí všichni (podíly z dealů)? Kdo rozhoduje o alokaci lidí z produkce na zakázku vs. vlastní titul?</li>
+      <li><strong>Monetizace:</strong> game design (ekonomika hry) × publishing (provozní monetizace) × marketing (LTV a ROAS pohled). Kdo má finální slovo u monetizační změny?</li>
+      <li><strong>Provozní HR vs. Lidé:</strong> interní operations (administrativa, benefity) × oblast Lidé (nábor, rozvoj, odměňování). Kde je hranice?</li>
+      <li><strong>Smlouvy:</strong> finance (finanční stránka) × interní operations (provozní dodavatelé) × strategie (platformy, IP). Kdo drží registr smluv a hlídá závazky?</li>
+      <li><strong>Komunita a sociální sítě:</strong> marketing (brand, akvizice) × publishing (podpora hráčů, liveops komunikace). Jeden hlas navenek?</li>
+    </ol>
+  </section>
+
+  <section id="s06">
+    <h2><span class="no">06</span>Pravidla diskuse</h2>
+    <ul class="points">
+      <li>Bavíme se o krabičkách, ne o lidech. Jména až v druhém kroku.</li>
+      <li>Každý průnik končí právě jedním vlastníkem; ostatní jsou konzultovaní bez veta.</li>
+      <li>Neshoda = disagree &amp; commit po rozhodnutí; nesouhlas zazní teď, ne po poradě.</li>
+      <li>Kritérium pro eskalace: vratnost rozhodnutí, ne jeho velikost.</li>
+      <li>Výstup se zapíše jako dekret do Wiki.</li>
+    </ul>
+  </section>
+
+  <section id="s07">
+    <h2><span class="no">07</span>Co si každý přinese</h2>
+    <ol class="rules">
+      <li>Vlastní verzi mapy oddělení (klidně odlišnou od kapitoly 03). Stačí seznam s jednou větou u každého.</li>
+      <li>Vyplněné karty (kapitola 04) pro oblasti, které dnes fakticky drží.</li>
+      <li>Svoje tři nejpalčivější sporné zóny: kde ho dnes nejvíc brzdí nejasné vlastnictví.</li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="related">Související: <a href="delegacni-navrh-v5.html">Delegační návrh · iterace 05</a> <a href="porada-2026-08-06-kompilat.html">Kompilát porady 6. 8.</a> <a href="temata-dalsich-porad.html">Plán dalších porad</a></div>
+    <div class="colophon">NOXGAMES · Sféry vlivu a oddělení · Příprava na poradu 20. srpna 2026 · Interní dokument</div>
+  </div>
+</footer>
+
+</body>
+</html>

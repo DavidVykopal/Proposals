@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plán dalších porad · NOXGAMES</title>
+<style>
+  @font-face {
+    font-family: 'Gambarino';
+    src: url('assets/fonts/Gambarino-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-hi: #1a1511;
+    --bg-lo: #14100c;
+    --surface: #211b15;
+    --surface-hi: #262019;
+    --edge: #322a20;
+    --ink: #ede4d4;
+    --muted: #a2947f;
+    --faint: #6e6353;
+    --gold: #c9a266;
+    --gold-dim: #8a7350;
+    --gold-deep: #57452a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: var(--bg-lo); }
+
+  body {
+    background: linear-gradient(175deg, var(--bg-hi) 0%, var(--bg-lo) 100%);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header.hero, footer { position: relative; z-index: 1; }
+
+  ::selection { background: var(--gold); color: var(--bg-lo); }
+
+  .shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: clamp(22px, 5vw, 52px);
+  }
+
+  h1, h2, .display { font-family: 'Gambarino', Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+  .num { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.92em; }
+
+  a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s ease; }
+  a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 34px;
+  }
+
+  .wordmark {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+  }
+
+  .topbar .meta { font-size: 0.85rem; color: var(--faint); }
+
+  .hero-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .art {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    width: min(62%, 700px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .art-inner { animation: artdrift 11s ease-in-out infinite alternate; }
+    @keyframes artdrift {
+      from { transform: translateY(-6px); }
+      to   { transform: translateY(6px); }
+    }
+  }
+
+  .hero-copy { position: relative; max-width: 640px; }
+
+  .hero-copy h1 {
+    font-size: clamp(2.7rem, 7.4vw, 5.4rem);
+    line-height: 1.04;
+    letter-spacing: 0.005em;
+  }
+
+  .hero-copy h1 em { font-style: normal; color: var(--gold-dim); }
+
+  .hero-copy .sub {
+    margin-top: 26px;
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    color: var(--muted);
+    max-width: 30em;
+  }
+
+  .hero-copy .origin { margin-top: 14px; font-size: 0.88rem; color: var(--faint); }
+
+  .toc {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(4, auto);
+    grid-template-columns: repeat(2, max-content);
+    gap: 8px 64px;
+    padding-bottom: 40px;
+  }
+
+  .toc a { font-size: 0.88rem; color: var(--muted); white-space: nowrap; }
+  .toc a:hover { color: var(--ink); }
+  .toc a span { color: var(--gold-deep); margin-right: 8px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: clamp(84px, 12vh, 130px); }
+  section:last-of-type { padding-bottom: 40px; }
+
+  h2 {
+    font-size: clamp(1.85rem, 3.8vw, 2.55rem);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  h2 .no { color: var(--gold-deep); margin-right: 14px; }
+
+  .meetmeta { font-size: 0.9rem; color: var(--faint); margin-bottom: 34px; }
+  .meetmeta b { font-weight: 500; color: var(--gold-dim); }
+
+  p { color: var(--muted); max-width: 46em; }
+  p strong, li strong { color: var(--ink); font-weight: 600; }
+
+  .lead-p { font-size: 1.06rem; }
+
+  /* checklists */
+
+  ul.open { list-style: none; margin-top: 10px; display: grid; gap: 15px; max-width: 52em; }
+  ul.open li { position: relative; padding-left: 30px; color: var(--muted); font-size: 0.98rem; }
+  ul.open li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.52em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold-dim);
+  }
+
+  ul.open li.hilite::before { background: var(--gold-dim); }
+
+  .podklad { margin-top: 30px; font-size: 0.9rem; color: var(--faint); }
+
+  /* diagrams */
+
+  .dwrap { overflow-x: auto; margin-top: 8px; }
+  .dwrap svg { display: block; width: 100%; height: auto; }
+  .dwrap.path svg { min-width: 860px; }
+
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+  svg .mono { font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+
+  .tbl-note { margin-top: 18px; font-size: 0.9rem; color: var(--faint); max-width: 52em; }
+
+  /* footer */
+
+  footer { padding: 90px 0 44px; }
+  footer .related { font-size: 0.9rem; color: var(--faint); margin-bottom: 14px; }
+  footer .related a { margin-right: 22px; }
+  footer .colophon { font-size: 0.85rem; color: var(--faint); }
+
+  /* responsive */
+
+  @media (max-width: 920px) {
+    .art { opacity: 0.55; width: 88%; right: -24%; }
+  }
+
+  @media (max-width: 600px) {
+    .toc { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 8px 0; }
+    .topbar { flex-direction: column; gap: 4px; }
+    .topbar .meta { font-size: 0.8rem; }
+    .art { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="shell topbar">
+    <div class="wordmark">NOXGAMES</div>
+    <div class="meta">Transformační porady · srpen až říjen 2026</div>
+  </div>
+
+  <div class="hero-body">
+    <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+      <g class="art-inner">
+        <path d="M60 480 C 220 470 320 380 400 320 C 490 252 600 190 740 140" fill="none" stroke="#8a7350" stroke-opacity="0.3" stroke-width="1.3" stroke-linecap="round"/>
+        <g fill="#8a7350">
+          <circle cx="215" cy="450" r="5.5"/>
+          <circle cx="345" cy="360" r="5.5"/>
+          <circle cx="470" cy="272" r="5.5"/>
+          <circle cx="590" cy="200" r="5.5"/>
+          <circle cx="705" cy="150" r="5.5"/>
+        </g>
+        <circle cx="88" cy="478" r="9" fill="#c9a266"/>
+      </g>
+    </svg>
+
+    <div class="shell">
+      <div class="hero-copy">
+        <h1>Šest dalších <em>porad</em></h1>
+        <p class="sub">Plán a témata transformačních porad vedení. Jednou za 14 dní ve čtvrtek, dvě hodiny.</p>
+        <p class="origin">Recap a potvrzení plánu proběhne na poradě 20. 8. · data jsou orientační</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="shell toc" aria-label="Obsah">
+    <a href="#s01"><span>01</span>Plán schůzek</a>
+    <a href="#s02"><span>02</span>Oddělení a sféry</a>
+    <a href="#s03"><span>03</span>EXEC a CEO/Majitel</a>
+    <a href="#s04"><span>04</span>Role a procesy</a>
+    <a href="#s05"><span>05</span>Odměňování</a>
+    <a href="#s06"><span>06</span>Cíle a osobní růst</a>
+    <a href="#s07"><span>07</span>Vedení lidí a 1:1</a>
+    <a href="#s08"><span>08</span>Průběžné</a>
+  </nav>
+</header>
+
+<main class="shell">
+
+  <section id="s01">
+    <h2><span class="no">01</span>Plán schůzek</h2>
+    <p class="lead-p" style="margin-top: 22px;">Šest tematických porad od srpna do konce října. Témata se dají přeskládat nebo rozdělit, když se jedno nestihne.</p>
+
+    <div class="dwrap path" style="margin-top: 30px;">
+      <svg viewBox="0 0 1000 250" role="img" aria-label="Časová osa šesti porad: 20. 8. oddělení a sféry, 3. 9. EXEC a CEO/Majitel, 17. 9. role a procesy, 1. 10. odměňování, 15. 10. cíle a růst, 29. 10. vedení lidí a 1:1">
+        <line x1="40" y1="153" x2="915" y2="107" stroke="#4a4034" stroke-width="1.5" stroke-linecap="round"/>
+
+        <circle cx="90" cy="150" r="8" fill="#c9a266"/>
+        <circle cx="245" cy="142" r="6" fill="#8a7350"/>
+        <circle cx="400" cy="134" r="6" fill="#8a7350"/>
+        <circle cx="555" cy="126" r="6" fill="#8a7350"/>
+        <circle cx="710" cy="118" r="6" fill="#8a7350"/>
+        <circle cx="865" cy="110" r="6" fill="#8a7350"/>
+
+        <g class="mono" font-size="11" fill="#57452a" text-anchor="middle">
+          <text x="90" y="96">01</text>
+          <text x="245" y="88">02</text>
+          <text x="400" y="80">03</text>
+          <text x="555" y="72">04</text>
+          <text x="710" y="64">05</text>
+          <text x="865" y="56">06</text>
+        </g>
+
+        <g font-size="13" text-anchor="middle">
+          <text x="90" y="118" fill="#ede4d4">Oddělení a sféry</text>
+          <text x="245" y="110" fill="#c8bca9">EXEC a CEO/Majitel</text>
+          <text x="400" y="102" fill="#c8bca9">Role a procesy</text>
+          <text x="555" y="94" fill="#c8bca9">Odměňování</text>
+          <text x="710" y="86" fill="#c8bca9">Cíle a osobní růst</text>
+          <text x="865" y="78" fill="#c8bca9">Vedení lidí a 1:1</text>
+        </g>
+
+        <g class="mono" font-size="11" fill="#6e6353" text-anchor="middle">
+          <text x="90" y="184">čt 20. 8.</text>
+          <text x="245" y="176">čt 3. 9.</text>
+          <text x="400" y="168">čt 17. 9.</text>
+          <text x="555" y="160">čt 1. 10.</text>
+          <text x="710" y="152">čt 15. 10.</text>
+          <text x="865" y="144">čt 29. 10.</text>
+        </g>
+      </svg>
+    </div>
+
+    <p class="tbl-note">Čtvrtky à 14 dní, v týdnu ceremonií. Plán se recapne a případně doplní na začátku porady 20. 8.</p>
+  </section>
+
+  <section id="s02">
+    <h2><span class="no">02</span>Oddělení a sféry</h2>
+    <div class="meetmeta"><b>Meet 1</b> · čtvrtek 20. 8. 2026 · high-level rozdělení oddělení a jejich sfér</div>
+    <ul class="open">
+      <li>Kontrola úkolů z minula (kompilát, logování aktivit, Máďa).</li>
+      <li>Odsouhlasit mapu oddělení, nezávisle na konkrétních lidech.</li>
+      <li>Sféry působnosti: co které oddělení řeší, co rozhoduje samo, co eskaluje.</li>
+      <li>Sporné zóny: průniky a konflikty, u každého určit právě jednoho vlastníka.</li>
+      <li class="hilite"><strong>Recap plánu dalších schůzek (tento dokument):</strong> potvrdit témata, případně doplnit.</li>
+      <li>Zápis výstupu jako dekret do Wiki.</li>
+    </ul>
+    <p class="podklad">Podklad: <a href="priprava-2026-08-20-oddeleni.html">Příprava na 20. 8. · Sféry vlivu a oddělení</a></p>
+  </section>
+
+  <section id="s03">
+    <h2><span class="no">03</span>EXEC a CEO/Majitel</h2>
+    <div class="meetmeta"><b>Meet 2</b> · čtvrtek 3. 9. 2026 · rozdělení povinností EXEC týmu a CEO/Majitele</div>
+    <ul class="open">
+      <li>Oddělit roli Jirky majitele a Jirky CEO: kdy mluví kdo, co je vlastnická otázka a co exekutivní.</li>
+      <li>Připomenout a potvrdit vizi firmy jako referenční bod pro delegovaná rozhodnutí.</li>
+      <li>Sjednotit stupnici delegace (7 úrovní vs. 4 stupně vs. 4 úrovně dohodového listu) do jedné firemní škály.</li>
+      <li>Delegation-poker workshop (30 až 60 min): kalibrace cílových úrovní na typy rozhodnutí.</li>
+      <li>Potvrdit delegační tabulku: kdo vlastní, do čeho bez eskalace, kam eskaluje.</li>
+      <li>Jednosměrné dveře: potvrdit firemní seznam; každý chief si definuje svých 3 až 5.</li>
+      <li>Mandáty exec: přiřazení oddělení z meetu 1 konkrétním exec; sjednotit názvosloví rolí (Operations Lead/chief, producer = production chief).</li>
+      <li>Schvalovací matice s reálnými částkami: limity lead / chief / CEO, recurring o úroveň výš, pravidlo nedostupného schvalovatele (48 h).</li>
+      <li>Roční rozpočty jednotlivých exec: experimenty, vývoj, růst platů podřízených; kvartální úpravy.</li>
+      <li>Rozsah finanční transparentnosti: měsíční snapshot; rozhodnout payroll (souhrn + need-to-know vs. neomezený přístup pro exec); technické zpřístupnění přehledů.</li>
+      <li>Hranice experiment vs. otevření produkce nového produktu.</li>
+      <li>Start pilotu: zvolit první pilotní oblast, sladit 90denní pilot s třífázovým přechodovým plánem, kritéria vyhodnocení dohodnout předem.</li>
+    </ul>
+  </section>
+
+  <section id="s04">
+    <h2><span class="no">04</span>Role a procesy</h2>
+    <div class="meetmeta"><b>Meet 3</b> · čtvrtek 17. 9. 2026 · nastavení rolí napříč vedoucími týmů a procesů, nastavení procesů obecně</div>
+    <ul class="open">
+      <li>Role leadů (project, tech, art, game design, UA): potvrdit popisy pozic, pravomoci a eskalace; plán, jak je projít s každým člověkem.</li>
+      <li>Formát „rozhraní" delegace: dohodový list vs. mandátové karty vs. popisy pozic; vybrat jeden dokumentový formát.</li>
+      <li>Pravidlo předpokládaného souhlasu (silence = consent): zavést ano/ne, s jakou lhůtou.</li>
+      <li>Princip 2 návrhů (problém vždy s návrhy řešení): potvrdit jako standard.</li>
+      <li>Same-page meeting CEO a chief + decision log: zavést, formát, frekvence.</li>
+      <li>Redesign schůzek: oddělit synchro od 1:1, asynchronní denní priority (Discord), méně vyrušování, mikro-rituály.</li>
+      <li>Interní Wiki s dekrety: kdo zakládá, formát dekretu, proces zápisu rozhodnutí.</li>
+      <li>Vyhodnocení auditu kalendářů a logů aktivit. Triáž: zrušit / automatizovat / předat / nechat; komu padá admin klastr.</li>
+    </ul>
+  </section>
+
+  <section id="s05">
+    <h2><span class="no">05</span>Odměňování</h2>
+    <div class="meetmeta"><b>Meet 4</b> · čtvrtek 1. 10. 2026 · odměňování lidí: fixní platy, flexibilní složky, odměny z dealů</div>
+    <ul class="open">
+      <li>Přechod na fixní platy: normalizace, základní pásma ze současné reality (nikdo si nepohorší, přetížení se dorovnají).</li>
+      <li>Flexibilní složka: potvrzení 0 až 15 % / 50-50 (tým/osobní), měsíční cyklus, první měsíc nanečisto.</li>
+      <li>Profit share dvakrát ročně: sepsat přesná pravidla.</li>
+      <li>Odměny z dealů a iniciativ: potvrdit model 5 + 5 %; interní tarify pro delivery náklady.</li>
+      <li>Pravidla úspor: vrací se firmě vs. část do bonus poolu; pojistky proti kontraproduktivnímu šetření.</li>
+      <li>Diferencované odměňování v týmech: pravomoc lídrů rozlišovat odměny podle výkonu.</li>
+      <li>Man-days místo man-hours: změna sledování práce, mindset 4 až 6 hodin kvalitního výkonu denně.</li>
+      <li>Komunikační plán pro zbytek firmy, proti echo komoře: co, kdy, jak; zavádění od nového kvartálu či roku se zpětnou vazbou zaměstnanců.</li>
+    </ul>
+  </section>
+
+  <section id="s06">
+    <h2><span class="no">06</span>Cíle a osobní růst</h2>
+    <div class="meetmeta"><b>Meet 5</b> · čtvrtek 15. 10. 2026 · nastavování a ohodnocování cílů a goalů, osobní růsty lidí</div>
+    <ul class="open">
+      <li>Proces nastavování cílů: KPI/OKR na oblasti a role, cíle předem (první pracovní den měsíce), víc rolí = cíle ve všech rolích.</li>
+      <li>Firemní scorecard: max 10 čísel, jeden vlastník na číslo, on/off-track bez vyprávění.</li>
+      <li>Jak se cíle vyhodnocují: podle dat, ne pocitu; co se děje při „mimo plán" (problém k vyřešení, ne výmluva).</li>
+      <li>Gradient důsledků: pozitivní (autonomie, bonusy, rozvoj) i negativní (korekce pravomocí, PIP 30 až 60 dní, personální změna).</li>
+      <li>Osobní růst lidí: rozvojové plány, investice do vzdělávání a osobního brandu, kariérní směřování.</li>
+      <li>Kritéria připravenosti na odpovědnost: kontextové myšlení, proaktivita, integrita; jak poznat, komu delegovat víc.</li>
+    </ul>
+  </section>
+
+  <section id="s07">
+    <h2><span class="no">07</span>Vedení lidí a 1:1</h2>
+    <div class="meetmeta"><b>Meet 6</b> · čtvrtek 29. 10. 2026 · vedení lidí, 1:1, práce s lidmi</div>
+    <ul class="open">
+      <li>Formát 1:1: oddělené od synchro meetingů; obsah je osobní rozvoj, zpětná vazba, kariérní směřování, ne operativa.</li>
+      <li>Frekvence a struktura 1:1 napříč vedením a leady.</li>
+      <li>Kultura zpětné vazby: okamžitý feedback, oprava chyb bez hledání viníka, otevřené „nevím".</li>
+      <li>Důvěra jako pracovní dohoda: plnění slibů, disagree &amp; commit, žádné end runs.</li>
+      <li>Práce s přetíženými lidmi: víc rolí, kognitivní limit 4 až 6 hodin, prevence vyhoření.</li>
+      <li>Vyhodnocení pilotu (den 90): naplánovat termín a projít kritéria.</li>
+    </ul>
+  </section>
+
+  <section id="s08">
+    <h2><span class="no">08</span>Průběžné</h2>
+    <p class="lead-p" style="margin-top: 22px;">Věci, které nejsou jednorázový bod porady a běží mezi nimi.</p>
+    <ul class="open" style="margin-top: 30px;">
+      <li>Logování denních aktivit a rozhodnutí (dobrovolné, Kuba testuje).</li>
+      <li>Projít popisy pozic s každým člověkem a doladit podle reality (exekuce mezi poradami).</li>
+      <li>Retrospektiva delegace: co se eskaluje moc často, tam posunout limity.</li>
+      <li>Decision log a počet overridů jako metrika zdraví delegace (cíl max 1 za měsíc).</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="related">Související: <a href="delegacni-navrh-v5.html">Delegační návrh · iterace 05</a> <a href="porada-2026-08-06-kompilat.html">Kompilát porady 6. 8.</a> <a href="priprava-2026-08-20-oddeleni.html">Příprava na 20. 8.</a></div>
+    <div class="colophon">NOXGAMES · Plán dalších porad · Interní dokument</div>
+  </div>
+</footer>
+
+</body>
+</html>
