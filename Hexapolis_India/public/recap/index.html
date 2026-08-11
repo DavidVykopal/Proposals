@@ -541,7 +541,7 @@
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 12px 36px;
       align-items: baseline;
-      padding: 12px 0;
+      padding: 10px 0;
     }
 
     .ledger-row .what {
@@ -588,14 +588,16 @@
     .ledger-total .amount { color: var(--gold-soft); font-size: clamp(42px, 5.2vw, 58px); }
 
     .fin-notes {
-      display: flex;
-      gap: clamp(24px, 4vw, 64px);
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 2.5vw, 36px);
       margin-top: 20px;
       max-width: 980px;
     }
 
-    .fin-notes p { flex: 1 1 300px; color: var(--muted); font-size: 14.5px; }
+    .fin-notes p { color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 760px) { .fin-notes { grid-template-columns: 1fr; } }
     .fin-notes b { color: var(--gold-soft); font-weight: 600; }
 
     @media (max-width: 640px) {
@@ -930,7 +932,8 @@
         </div>
         <div class="fin-notes rise d3">
           <p><b>Nothing is paid twice.</b> Both prepayments credit in full against the total project price.</p>
-          <p><b>Your decision stays yours.</b> After MVP delivery you have 14 days to confirm full production, exactly as the preliminary agreement sets out.</p>
+          <p><b>Your decision stays yours.</b> After MVP delivery you have 14 days to confirm full production, as the preliminary agreement sets out.</p>
+          <p><b>Running costs after launch.</b> A monthly server and maintenance fee, fixed in the development contract: expected USD 500 to 1,000 at launch scale.</p>
         </div>
       </div>
     </section>

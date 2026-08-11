@@ -139,6 +139,8 @@ Represented by: `[●]`, `[●]`
 
 9.6 **Form of delivery and distribution.** Under the Development Contract the final product will likewise be delivered in the form of playable builds and/or web builds, including store-ready release binaries. Source code, project files and source (working) assets will not form part of the delivered work unless the Development Contract expressly agrees otherwise; marketing materials will be treated in line with Clause 10.6. The Development Contract will also specify the store accounts and distribution channels under which the final game will be published and operated; this Agreement deliberately leaves that unspecified.
 
+9.7 **Post-launch server and maintenance fee.** From full launch of the game, the Client will pay the Developer a recurring monthly fee covering server infrastructure and routine maintenance of the live service. The exact monthly amount will be fixed in the Development Contract and is currently expected in the range of USD 500 to USD 1,000 per month at launch scale. The Development Contract will define what routine maintenance includes, and will provide for a review of the fee if actual player numbers or infrastructure usage materially exceed the launch-scale assumptions. Extended live operations (new content, events, economy tuning and similar) are not covered by this fee and may be agreed separately.
+
 ## 10. Intellectual property
 
 10.1 Each Party retains all rights it held before the Effective Date, including the Developer's engines, tools, libraries, know-how and generic game mechanics ("**Background IP**").
