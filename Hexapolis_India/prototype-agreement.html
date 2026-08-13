@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Prototype Development Agreement — Rise of a Nation (DRAFT)</title>
+<style>
+  :root {
+    --ink: #1a1c22;
+    --muted: #5a5e68;
+    --line: #d8d5cd;
+    --accent: #8a6d2f;
+    --paper: #fdfcf9;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    background: #e8e6e0;
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11.5pt;
+    line-height: 1.55;
+  }
+  .page {
+    max-width: 210mm;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 22mm 20mm 24mm;
+  }
+  @media screen { .page { margin: 24px auto; box-shadow: 0 2px 8px rgba(20,20,20,0.14); } }
+  @page { size: A4; margin: 18mm 16mm; }
+  @media print {
+    body { background: #fff; }
+    .page { max-width: none; margin: 0; padding: 0; box-shadow: none; }
+    .no-print { display: none; }
+    h2 { break-after: avoid; }
+    table, .sig { break-inside: avoid; }
+  }
+  .draft-banner {
+    border: 1.5pt solid var(--accent);
+    color: var(--accent);
+    padding: 8pt 12pt;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 22pt;
+  }
+  h1 {
+    font-size: 17pt;
+    line-height: 1.3;
+    margin: 0 0 4pt;
+    text-align: center;
+  }
+  .subtitle { text-align: center; font-style: italic; color: var(--muted); margin: 0 0 4pt; }
+  .legalbase { text-align: center; font-size: 10pt; color: var(--muted); margin: 0 0 24pt; }
+  h2 {
+    font-size: 12.5pt;
+    margin: 22pt 0 8pt;
+    border-bottom: 0.75pt solid var(--line);
+    padding-bottom: 4pt;
+  }
+  p, li { margin: 0 0 7pt; text-align: justify; }
+  ol.sub { padding-left: 0; list-style: none; }
+  ol.sub > li { padding-left: 34pt; text-indent: -34pt; }
+  ol.sub > li > b:first-child { font-weight: normal; }
+  .num { display: inline-block; width: 34pt; text-indent: 0; }
+  ul.alpha { list-style: lower-alpha; padding-left: 52pt; }
+  .party { margin-bottom: 12pt; }
+  .party p { margin-bottom: 2pt; text-align: left; }
+  .ph { background: #f3ead6; padding: 0 3pt; }
+  table { width: 100%; border-collapse: collapse; margin: 10pt 0 14pt; font-size: 10.5pt; }
+  th, td { border: 0.75pt solid var(--line); padding: 6pt 8pt; text-align: left; vertical-align: top; }
+  th { font-family: Helvetica, Arial, sans-serif; font-size: 9pt; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  .sig { margin-top: 28pt; }
+  .sig table td { height: 26pt; }
+  .foot { margin-top: 26pt; font-size: 9pt; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="draft-banner">Draft v1 · 12 August 2026 · For review by Czech legal counsel · Not for signature in this form · Placeholders marked [●]</div>
+
+  <h1>Prototype Development Agreement</h1>
+  <p class="subtitle">Project: “Rise of a Nation” (working title) · (including mutual non-disclosure undertakings)</p>
+  <p class="legalbase">concluded pursuant to Section 1746(2) of Act No. 89/2012 Coll., the Civil Code of the Czech Republic (the “Civil Code”)</p>
+
+  <h2>Parties</h2>
+  <div class="party">
+    <p><b>NOXGAMES s.r.o.</b></p>
+    <p>Registered office: Příčná 1892/4, Nové Město, 110 00 Praha 1, Czech Republic · ID No. (IČO): 06673066 · VAT No. (DIČ): <span class="ph">[●]</span></p>
+    <p>Registered in the Commercial Register kept by the Municipal Court in Prague, file No. <span class="ph">[●]</span></p>
+    <p>Represented by: <span class="ph">[●]</span>, <span class="ph">[●]</span> (the “<b>Developer</b>”)</p>
+  </div>
+  <div class="party">
+    <p><b><span class="ph">[CLIENT LEGAL NAME]</span></b></p>
+    <p>Registered office: <span class="ph">[●]</span> · Company / registration No.: <span class="ph">[●]</span> · Incorporated under the laws of <span class="ph">[●]</span></p>
+    <p>Represented by: <span class="ph">[●]</span>, <span class="ph">[●]</span> (the “<b>Client</b>”)</p>
+  </div>
+  <p>(each a “<b>Party</b>”, together the “<b>Parties</b>”)</p>
+
+  <h2>Recitals</h2>
+  <p>(A) The Developer is a Czech game development studio. The Client intends to publish <i>Rise of a Nation</i>, a youth-focused civic strategy game about building the future of India (the “<b>Project</b>”).</p>
+  <p>(B) The Developer presented a detailed development proposal in July 2026. On subsequent calls the Client selected the bespoke nation-builder production route described in that proposal as “Variant 2” (the “<b>Selected Route</b>”), including a central narrator character, region content built on the real identity of Indian states, a single overall progression system, and state-versus-state competitive and social features.</p>
+  <p>(C) The Client wishes to commission, as a first and self-contained phase, a playable prototype culminating in an MVP vertical slice, so that the Client can review the resulting work and confirm the direction and requirements of the Project. Any further development of the Project, if the Client decides to proceed, will be the subject of a separate future agreement between the parties concerned; this Agreement covers the Prototype Phase only.</p>
+  <p>(D) The Parties also wish to protect each other's confidential information.</p>
+
+  <h2>1. Definitions</h2>
+  <ol class="sub">
+    <li><span class="num">1.1</span>“<b>Agreement</b>” means this prototype development agreement including its Schedules.</li>
+    <li><span class="num">1.2</span>“<b>Effective Date</b>” means the date of signature by the last Party.</li>
+    <li><span class="num">1.3</span>“<b>Prototype Phase</b>” means the work described in Clause 3 and Schedule A, from the Effective Date until delivery of the MVP Vertical Slice.</li>
+    <li><span class="num">1.4</span>“<b>MVP Vertical Slice</b>” means the final deliverable of the Prototype Phase: a playable build containing a representative sample of every core system intended for the launch version of the game, as described in Schedule A.</li>
+    <li><span class="num">1.5</span>“<b>Prototype Fee</b>” means USD 40,000 (forty thousand US dollars).</li>
+    <li><span class="num">1.6</span>“<b>Review Period</b>” means the period of 14 (fourteen) calendar days starting on the day following delivery of the MVP Vertical Slice.</li>
+    <li><span class="num">1.7</span>“<b>Confidential Information</b>” has the meaning given in Clause 10.</li>
+  </ol>
+
+  <h2>2. Subject of the Agreement</h2>
+  <ol class="sub">
+    <li><span class="num">2.1</span>The Developer undertakes to perform the Prototype Phase and deliver the deliverables listed in Schedule A.</li>
+    <li><span class="num">2.2</span>The Client undertakes to pay the Prototype Fee and to provide the cooperation described in Clause 5 and Schedule B.</li>
+    <li><span class="num">2.3</span>The Parties undertake mutual confidentiality obligations (Clause 10).</li>
+  </ol>
+
+  <h2>3. Prototype Phase — scope</h2>
+  <ol class="sub">
+    <li><span class="num">3.1</span>During the Prototype Phase the Developer will design and build, on the Selected Route:</li>
+  </ol>
+  <ul class="alpha">
+    <li>first visual concepts of the game world and of the narrator character;</li>
+    <li>complete game documentation for the prototype scope and a visual style direction decided with the Client, visually distinct from the Developer's existing title <i>Hexapolis</i>;</li>
+    <li>a playable demo of approximately the first 2 to 3 minutes of the game;</li>
+    <li>the MVP Vertical Slice, containing a representative sample of all core launch systems, including without limitation: the district-to-nation build-and-balance loop, the narrator as guide of the player journey, region content grounded in the real identity of Indian states, the single overall progression system, the persistent multi-city dashboard in a first working version, and the intended approach to state-versus-state competitive and social features.</li>
+  </ul>
+  <ol class="sub">
+    <li><span class="num">3.2</span>The MVP Vertical Slice will be delivered as a build installable on a mobile phone. One purpose of the Prototype Phase is to validate performance of the persistent multi-city dashboard on mid-range Android hardware.</li>
+    <li><span class="num">3.3</span><b>Form of deliverables.</b> All deliverables under this Agreement are provided exclusively in the form of playable builds (installable mobile builds and/or web builds) and, where applicable, documentation and visual presentation materials. Source code, project files, development tools, build pipelines and source (working) assets are not deliverables, are not part of the engagement and are neither transferred nor licensed to the Client, with the sole exception of marketing materials under Clause 9.6.</li>
+    <li><span class="num">3.4</span>Matters of final game scope not listed in Schedule A (including final content volume, localization, live operations and launch services) are outside the scope of this Agreement.</li>
+  </ol>
+
+  <h2>4. Timeline</h2>
+  <ol class="sub">
+    <li><span class="num">4.1</span>The delivery plan of the Prototype Phase is set out in Schedule A. The plan assumes the Client's inputs under Schedule B are provided at or before the Effective Date.</li>
+    <li><span class="num">4.2</span>Each deliverable is followed by a feedback window pursuant to Clause 6. Delays caused by late Client inputs, late feedback or requests exceeding the agreed scope extend the affected deadlines by the corresponding time.</li>
+  </ol>
+
+  <h2>5. Client cooperation</h2>
+  <ol class="sub">
+    <li><span class="num">5.1</span>The Client shall provide the inputs listed in Schedule B at or before the Effective Date, and shall nominate one person authorised to give consolidated, binding feedback on deliverables.</li>
+    <li><span class="num">5.2</span>The Parties will maintain a shared Slack channel for day-to-day communication. Formal notices under this Agreement require the form set out in Clause 14.6.</li>
+  </ol>
+
+  <h2>6. Delivery, feedback and acceptance of deliverables</h2>
+  <ol class="sub">
+    <li><span class="num">6.1</span>The Developer notifies delivery of each deliverable in writing (email is sufficient) with access to the deliverable.</li>
+    <li><span class="num">6.2</span>The Client has 5 (five) business days from notification to give one consolidated round of written feedback per deliverable. Feedback within the agreed scope will be incorporated into subsequent work; the playable demo and the MVP Vertical Slice each include one revision round within the agreed scope.</li>
+    <li><span class="num">6.3</span>If the Client gives no feedback within the window, the deliverable is deemed approved for the purpose of continuing the plan. Deemed approval does not shorten the Review Period.</li>
+  </ol>
+
+  <h2>7. Prototype Fee and payment terms</h2>
+  <ol class="sub">
+    <li><span class="num">7.1</span>The Prototype Fee is USD 40,000, fixed. The Developer will issue an invoice on the Effective Date; the invoice is payable within 5 (five) business days by wire transfer to the account stated on the invoice.</li>
+    <li><span class="num">7.2</span>The Prototype Phase and the timeline in Schedule A start on the day the Prototype Fee is credited to the Developer's account.</li>
+    <li><span class="num">7.3</span>The Prototype Fee is non-refundable. If the Parties subsequently conclude a written agreement for further development of the Project, the Prototype Fee will be credited in full against the price under that agreement.</li>
+    <li><span class="num">7.4</span>All amounts are net of VAT and of any bank charges, withholding or similar taxes. If the Client is required by law to withhold any amount, the payment shall be grossed up so that the Developer receives the full invoiced amount. The Parties will cooperate on double-taxation treaty relief where available.</li>
+  </ol>
+
+  <h2>8. Review Period</h2>
+  <ol class="sub">
+    <li><span class="num">8.1</span>The Review Period serves for the Client to review the MVP Vertical Slice and the other deliverables and to confirm, at its sole discretion, the further direction and requirements of the Project. During the Review Period the licence under Clause 9.3 continues in force.</li>
+    <li><span class="num">8.2</span>Nothing in this Agreement obliges either Party to enter into any further agreement or to continue the Project beyond the Prototype Phase.</li>
+    <li><span class="num">8.3</span>This Agreement terminates upon expiry of the Review Period, unless the Parties agree otherwise in writing. The Prototype Fee remains earned by the Developer and Clause 9.4 applies.</li>
+  </ol>
+
+  <h2>9. Intellectual property</h2>
+  <ol class="sub">
+    <li><span class="num">9.1</span>Each Party retains all rights it held before the Effective Date, including the Developer's engines, tools, libraries, know-how and generic game mechanics (“<b>Background IP</b>”).</li>
+    <li><span class="num">9.2</span>Materials, briefs, brand assets and content provided by the Client remain the Client's property. The Client grants the Developer a non-exclusive, royalty-free licence to use them solely for the Project.</li>
+    <li><span class="num">9.3</span>All intellectual property in the deliverables of the Prototype Phase (“<b>Prototype IP</b>”) vests in and remains with the Developer. The Client receives a non-exclusive, non-transferable licence to use delivered builds and materials solely for internal evaluation of the deliverables and decision-making regarding the further direction of the Project.</li>
+    <li><span class="num">9.4</span>Upon termination of this Agreement: the Developer retains the Prototype IP and may reuse it except for elements derived from the Client's Confidential Information or Client materials, which the Developer shall not use; the Client shall not use, develop or commission development based on the Prototype IP or the Developer's Confidential Information. A subsequent written agreement between the Parties may provide otherwise.</li>
+    <li><span class="num">9.5</span><b>No assignment.</b> Nothing in this Agreement transfers to the Client any ownership of, or grants any licence to, the Prototype IP or the Developer's Background IP beyond the limited licences in Clauses 9.3 and 9.6. Any transfer or broader licensing of intellectual property in the game would require a separate written agreement.</li>
+    <li><span class="num">9.6</span><b>Marketing materials.</b> Where the Developer provides materials expressly designated as marketing materials (for example key art, screenshots, video captures or promotional texts), the Client may use them for internal presentation and, subject to Clause 10.4, for promotion of the Project. This licence covers the marketing materials as delivered and does not extend to their source files.</li>
+  </ol>
+
+  <h2>10. Confidentiality</h2>
+  <ol class="sub">
+    <li><span class="num">10.1</span>“<b>Confidential Information</b>” means all non-public information disclosed by one Party to the other in connection with the Project before or after the Effective Date, including the existence and terms of this Agreement, the Prototype Fee and payment terms, the Parties' commercial discussions concerning the Project, game concepts and design documents, the prototype and all builds, business plans, and the content of the Parties' calls and correspondence.</li>
+    <li><span class="num">10.2</span>Each Party shall keep Confidential Information secret, use it solely for the Project, and disclose it only to its employees, contractors and professional advisers who need it for the Project and are bound by confidentiality obligations at least as protective as this Clause.</li>
+    <li><span class="num">10.3</span>Confidential Information does not include information that is or becomes public other than through breach, was lawfully known to the receiving Party before disclosure, is received from a third party without confidentiality obligation, or is independently developed without use of the disclosing Party's Confidential Information. Disclosure required by law, court or regulator is permitted to the minimum necessary extent, with prior notice to the other Party where lawful.</li>
+    <li><span class="num">10.4</span>Neither Party shall make public announcements about the Project without the other Party's prior written consent.</li>
+    <li><span class="num">10.5</span>On written request the receiving Party shall return or destroy Confidential Information, except for copies required by law or routine backups.</li>
+    <li><span class="num">10.6</span>The obligations of this Clause 10 apply during the term of this Agreement and for 5 (five) years after its termination.</li>
+  </ol>
+
+  <h2>11. Warranties and liability</h2>
+  <ol class="sub">
+    <li><span class="num">11.1</span>The Developer shall perform with professional care and adequate expert capacity. The prototype deliverables are pre-production artifacts intended for evaluation; they are provided as they stand at delivery and no warranty of fitness for commercial release attaches to them.</li>
+    <li><span class="num">11.2</span>The total aggregate liability of either Party under this Agreement is limited to the amount of the Prototype Fee actually paid. Neither Party is liable for loss of profit or indirect or consequential loss. These limitations do not apply where liability cannot be limited under mandatory Czech law (including harm caused intentionally or by gross negligence within the meaning of Section 2898 of the Civil Code).</li>
+  </ol>
+
+  <h2>12. Term and termination</h2>
+  <ol class="sub">
+    <li><span class="num">12.1</span>This Agreement takes effect on the Effective Date and terminates on the earlier of (i) expiry of the Review Period, or (ii) termination under this Clause.</li>
+    <li><span class="num">12.2</span>Either Party may terminate for a material breach not remedied within 10 (ten) business days of written notice. If the Client terminates without the Developer's material breach, or the Developer terminates for the Client's material breach, the Prototype Fee remains earned.</li>
+    <li><span class="num">12.3</span>Clauses 9, 10, 11, 13 and 14 survive termination.</li>
+  </ol>
+
+  <h2>13. Governing law and jurisdiction</h2>
+  <ol class="sub">
+    <li><span class="num">13.1</span>This Agreement and any non-contractual obligations arising out of or in connection with it are governed by the laws of the Czech Republic, in particular the Civil Code. The United Nations Convention on Contracts for the International Sale of Goods shall not apply.</li>
+    <li><span class="num">13.2</span>All disputes arising out of or in connection with this Agreement shall be resolved by the courts of the Czech Republic. Pursuant to Section 89a of Act No. 99/1963 Coll., the Czech Civil Procedure Code, the court with local jurisdiction is the court competent for the registered office of the Developer.</li>
+    <li><span class="num">13.3</span>The Parties will attempt to resolve any dispute amicably by negotiation between senior representatives before commencing proceedings.</li>
+  </ol>
+
+  <h2>14. Final provisions</h2>
+  <ol class="sub">
+    <li><span class="num">14.1</span>This Agreement may be amended only in writing signed by both Parties; this requirement itself may be waived only in writing.</li>
+    <li><span class="num">14.2</span>This Agreement constitutes the entire agreement of the Parties on its subject and supersedes prior discussions of the same subject. The July 2026 proposal and the Parties' calls have informative value for interpreting the agreed scope of the Prototype Phase.</li>
+    <li><span class="num">14.3</span>If any provision is invalid or unenforceable, the remainder stays in force and the Parties shall replace the provision with a valid one closest in economic effect.</li>
+    <li><span class="num">14.4</span>Neither Party may assign this Agreement or any rights under it without the other Party's prior written consent.</li>
+    <li><span class="num">14.5</span>This Agreement is executed in English; the English text governs. It may be signed in counterparts and by qualified electronic signature (e.g. DocuSign), which the Parties accept as written form.</li>
+    <li><span class="num">14.6</span>Formal notices shall be sent by email with delivery confirmation to the addresses stated below the signatures, and are deemed delivered on the first business day after dispatch unless a delivery failure is received.</li>
+  </ol>
+
+  <h2>Schedule A — Prototype Phase: scope of work, deliverables and timeline</h2>
+  <p>Timeline runs in weeks from the start of the Prototype Phase (Clause 7.2).</p>
+  <table>
+    <tr><th>#</th><th>Deliverable</th><th>Content</th><th>Delivery target</th></tr>
+    <tr><td>D1</td><td>First visual concepts</td><td>Concept art of the game world and the narrator character; initial visual directions, distinct from Hexapolis</td><td>Week 1</td></tr>
+    <tr><td>D2</td><td>Documentation and visual style</td><td>Complete prototype-scope game documentation; visual style decided with the Client</td><td>Week 2</td></tr>
+    <tr><td>D3</td><td>Playable demo</td><td>The first 2 to 3 minutes of the game, playable on a phone</td><td>Week 3</td></tr>
+    <tr><td>D4</td><td>MVP Vertical Slice</td><td>Representative sample of all core launch systems in one installable build (Clause 3.1 d); performance validation on mid-range Android</td><td>Weeks 4–5</td></tr>
+  </table>
+  <p>Each deliverable is followed by the Client feedback window under Clause 6. The Review Period (Clause 8) starts on the day following delivery of D4. All deliverables are provided as playable builds or presentation materials per Clause 3.3; source code and source assets are not included.</p>
+  <p><b>Cost of the Prototype Phase: USD 40,000 fixed (Clause 7), invoiced on the Effective Date, payable within 5 business days.</b></p>
+
+  <h2>Schedule B — Client inputs due at or before the Effective Date</h2>
+  <ol>
+    <li>Target age range and audience definition.</li>
+    <li>Launch territories and languages for the first release.</li>
+    <li>Mandatory national initiatives, technologies or messages that must appear in version one.</li>
+    <li>Approved references for the narrator character (tone, personality, any constraints).</li>
+    <li>Cultural and regional representation guidelines and any review or approval process on the Client's side.</li>
+    <li>Brand assets and visual standards, if any are binding.</li>
+    <li>Name and contact of the single feedback-authorised person (Clause 5.1).</li>
+  </ol>
+
+  <div class="sig">
+    <h2>Signatures</h2>
+    <table>
+      <tr><th></th><th>Developer</th><th>Client</th></tr>
+      <tr><td>Name</td><td><span class="ph">[●]</span></td><td><span class="ph">[●]</span></td></tr>
+      <tr><td>Title</td><td><span class="ph">[●]</span></td><td><span class="ph">[●]</span></td></tr>
+      <tr><td>Place, date</td><td></td><td></td></tr>
+      <tr><td>Signature</td><td></td><td></td></tr>
+      <tr><td>Notice email</td><td><span class="ph">[●]</span></td><td><span class="ph">[●]</span></td></tr>
+    </table>
+  </div>
+
+  <p class="foot">Draft prepared 12 August 2026 · Source of truth: PROTOTYPE_AGREEMENT.md · Confidential</p>
+</div>
+</body>
+</html>
