@@ -1,10 +1,14 @@
 # Prototype Development Agreement — Rise of a Nation
 
-> **DRAFT v1 — 12 August 2026.** Prepared for review by Czech legal counsel before signature. This is a working draft, not legal advice. Placeholders are marked `[●]`.
+> **v2 — 14 August 2026. Execution version, prepared for DocuSign.** Party details, signatories and notice emails are complete on both sides; no placeholders remain. This is a working document, not legal advice.
 >
 > Source of truth for the rendered version `prototype-agreement.html`.
 >
+> **Counterparty due diligence (14 Aug 2026, Companies House):** MERIDIAN FIELD SCIENCES LTD, No. 17364173, was **incorporated 27 July 2026** (18 days before signature), registered at 71-75 Shelton Street (a mass registered-office service address), sole officer Witold Andrzej Matulewicz (both director and secretary, Polish national, UK resident, DOB 08/1971), SIC codes 71200 / 72190 / 74901 — technical testing, natural-sciences R&D, environmental consulting, i.e. no games or publishing activity registered. No filed accounts, so no demonstrable financial substance. This is a **different entity from MONSOLO AGENCY LIMITED (No. 13355949)**, with which the NDA was concluded; the NDA therefore does not cover MERIDIAN, and Clause 10 of this Agreement is what protects NOXGAMES against this counterparty. Practical protection: Clause 7.2 (no work starts before the fee is credited) and Clause 7.5 (walk-away if unpaid within 30 days).
+>
 > **Relation to `PRELIMINARY_AGREEMENT.md`:** per client request (MONSOLO email 11/12 Aug 2026), this version covers ONLY the prototype/demo phase. Removed against the preliminary agreement: definitions of Development Contract and Total Project Price (old 1.5, 1.6), the Election mechanism (old Clause 8), the whole framework of the Development Contract (old Clause 9 including 600K price, 40/120/440 schedule, delivery commitment, post-launch fee), and old 10.5 (IP transfer under the future contract, replaced by a "no assignment" clarification). Decision Window renamed to Review Period with evaluation-only purpose. Fee crediting kept as one neutral sentence in 7.3 (client-favourable; strike if a fully clean split is preferred). The 600K/Variant 2 framework remains NOXGAMES's standing commercial basis for the future development agreement, but lives only in correspondence now.
+>
+> **Changelog v1 → v2:** parties completed (NOXGAMES: DIČ CZ06673066, file C 383981 Municipal Court in Prague, represented by Jiří Bukovjan; Client: MERIDIAN FIELD SCIENCES LTD, represented by Witold Andrzej Matulewicz, director); signature block and notice emails completed; **new Clause 7.5** added (Developer may withdraw if the fee is not credited within 30 days of the Effective Date); draft banner replaced with an execution-version line.
 
 ---
 
@@ -18,18 +22,18 @@ concluded pursuant to Section 1746(2) of Act No. 89/2012 Coll., the Civil Code o
 
 **NOXGAMES s.r.o.**
 Registered office: Příčná 1892/4, Nové Město, 110 00 Praha 1, Czech Republic
-ID No. (IČO): 06673066 | VAT No. (DIČ): `[●]`
-Registered in the Commercial Register kept by the Municipal Court in Prague, file No. `[●]`
-Represented by: `[●]`, `[●]`
+ID No. (IČO): 06673066 | VAT No. (DIČ): CZ06673066
+Registered in the Commercial Register kept by the Municipal Court in Prague, file No. C 383981
+Represented by: Jiří Bukovjan
 (the "**Developer**")
 
 and
 
-**`[CLIENT LEGAL NAME]`**
-Registered office: `[●]`
-Company / registration No.: `[●]`
-Incorporated under the laws of `[●]`
-Represented by: `[●]`, `[●]`
+**MERIDIAN FIELD SCIENCES LTD**
+Registered office: 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom
+Company registration No.: 17364173
+Incorporated under the laws of England and Wales
+Represented by: Mr. Witold Andrzej Matulewicz, Director
 (the "**Client**")
 
 (each a "**Party**", together the "**Parties**")
@@ -112,6 +116,8 @@ Represented by: `[●]`, `[●]`
 7.3 The Prototype Fee is non-refundable. If the Parties subsequently conclude a written agreement for further development of the Project, the Prototype Fee will be credited in full against the price under that agreement.
 
 7.4 All amounts are net of VAT and of any bank charges, withholding or similar taxes. If the Client is required by law to withhold any amount, the payment shall be grossed up so that the Developer receives the full invoiced amount. The Parties will cooperate on double-taxation treaty relief where available.
+
+7.5 If the Prototype Fee is not credited to the Developer's account within 30 (thirty) calendar days of the Effective Date, the Developer may withdraw from this Agreement by written notice with immediate effect and without any liability towards the Client.
 
 ## 8. Review Period
 
@@ -218,8 +224,9 @@ Each deliverable is followed by the Client feedback window under Clause 6. The R
 
 | | Developer | Client |
 |---|---|---|
-| Name | `[●]` | `[●]` |
-| Title | `[●]` | `[●]` |
+| For | NOXGAMES s.r.o. | MERIDIAN FIELD SCIENCES LTD |
+| Name | Jiří Bukovjan | Witold Andrzej Matulewicz |
+| Title | Executive Director (jednatel) | Director |
 | Place, date | | |
 | Signature | | |
-| Notice email | `[●]` | `[●]` |
+| Notice email | j.bukovjan@gmail.com | ronprojectops@gmail.com |
