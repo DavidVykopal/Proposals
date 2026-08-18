@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moje mapa a čtyři podmínky · příprava na 20. 8. · David · NOXGAMES</title>
+<style>
+  @font-face {
+    font-family: 'Gambarino';
+    src: url('assets/fonts/Gambarino-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-hi: #1a1511;
+    --bg-lo: #14100c;
+    --surface: #211b15;
+    --surface-hi: #262019;
+    --edge: #322a20;
+    --ink: #ede4d4;
+    --muted: #a2947f;
+    --faint: #6e6353;
+    --gold: #c9a266;
+    --gold-dim: #8a7350;
+    --gold-deep: #57452a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: var(--bg-lo); }
+
+  body {
+    background: linear-gradient(175deg, var(--bg-hi) 0%, var(--bg-lo) 100%);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header.hero, footer { position: relative; z-index: 1; }
+
+  ::selection { background: var(--gold); color: var(--bg-lo); }
+
+  .shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: clamp(22px, 5vw, 52px);
+  }
+
+  h1, h2, .display { font-family: 'Gambarino', Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+  a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s ease; }
+  a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 34px;
+  }
+
+  .wordmark {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+  }
+
+  .topbar .meta { font-size: 0.85rem; color: var(--faint); }
+
+  .hero-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .art {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    width: min(54%, 620px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .art-inner { animation: artdrift 11s ease-in-out infinite alternate; }
+    @keyframes artdrift {
+      from { transform: translateY(-6px); }
+      to   { transform: translateY(6px); }
+    }
+  }
+
+  .hero-copy { position: relative; max-width: 620px; }
+
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 6.8vw, 4.9rem);
+    line-height: 1.06;
+    letter-spacing: 0.005em;
+  }
+
+  .hero-copy h1 em { font-style: normal; color: var(--gold-dim); }
+
+  .hero-copy .sub {
+    margin-top: 26px;
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    color: var(--muted);
+    max-width: 30em;
+  }
+
+  .hero-copy .origin { margin-top: 14px; font-size: 0.88rem; color: var(--faint); }
+
+  .toc {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(6, auto);
+    grid-template-columns: repeat(2, max-content);
+    gap: 8px 64px;
+    padding-bottom: 40px;
+  }
+
+  .toc a { font-size: 0.88rem; color: var(--muted); white-space: nowrap; }
+  .toc a:hover { color: var(--ink); }
+  .toc a span { color: var(--gold-deep); margin-right: 8px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: clamp(84px, 12vh, 130px); }
+  section:last-of-type { padding-bottom: 40px; }
+
+  h2 {
+    font-size: clamp(1.85rem, 3.8vw, 2.55rem);
+    line-height: 1.15;
+    margin-bottom: 34px;
+  }
+
+  h2 .no { color: var(--gold-deep); margin-right: 14px; }
+
+  h3 {
+    font-family: 'Gambarino', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-top: 48px;
+    margin-bottom: 14px;
+  }
+
+  p { color: var(--muted); max-width: 46em; }
+  p strong, li strong, td strong { color: var(--ink); font-weight: 600; }
+  p + p { margin-top: 16px; }
+
+  .lead-p { font-size: 1.06rem; }
+
+  /* numbered rules */
+
+  ol.rules { margin: 26px 0 0 0; list-style: none; counter-reset: r; display: grid; gap: 14px; max-width: 52em; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 54px; color: var(--muted); font-size: 0.98rem; }
+  ol.rules li::before {
+    content: counter(r);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 36px;
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--gold-deep);
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  /* point lists */
+
+  ul.points { list-style: none; margin-top: 10px; display: grid; gap: 15px; max-width: 52em; }
+  ul.points li { position: relative; padding-left: 30px; color: var(--muted); font-size: 0.97rem; }
+  ul.points li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.58em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-deep);
+  }
+
+  /* tables */
+
+  .tscroll { overflow-x: auto; margin-top: 6px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 560px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--faint);
+    padding: 10px 16px 12px;
+    border-bottom: 1px solid var(--edge);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #241e17;
+    color: var(--muted);
+    vertical-align: top;
+  }
+
+  td:first-child { color: var(--gold-dim); white-space: nowrap; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.88rem; }
+
+  table.wordy td:first-child { white-space: normal; font-family: inherit; font-size: 0.95rem; color: var(--ink); }
+
+  tbody tr { transition: background-color 0.2s ease; }
+  tbody tr:hover { background-color: #1d1813; }
+
+  .tbl-note { margin-top: 18px; font-size: 0.9rem; color: var(--faint); max-width: 52em; }
+
+  /* department cards */
+
+  .dept {
+    display: grid;
+    grid-template-columns: 244px 1fr;
+    gap: 36px;
+    padding: 26px 0 28px;
+    border-top: 1px solid #241e17;
+    margin-top: 22px;
+  }
+
+  .dept + .dept { margin-top: 0; }
+
+  .dept-id h4 { font-size: 1.06rem; font-weight: 600; color: var(--ink); line-height: 1.35; }
+  .dept-id h4 span { color: var(--gold-deep); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.82rem; margin-right: 8px; }
+  .dept-id p { font-size: 0.88rem; color: var(--faint); margin-top: 5px; }
+  .dept-id .claim { color: var(--gold-dim); }
+
+  .dept-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 42px; }
+  .dept-fields div { font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
+  .dept-fields b { display: block; font-size: 0.79rem; font-weight: 500; color: var(--gold-dim); margin-bottom: 2px; }
+  .dept-fields .wide { grid-column: 1 / -1; }
+
+  /* pull statement */
+
+  .pull {
+    margin-top: 26px;
+    padding: 22px 30px;
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: 14px;
+    max-width: 46em;
+    color: var(--ink);
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  /* diagrams */
+
+  .dwrap { overflow-x: auto; margin-top: 8px; }
+  .dwrap svg { display: block; width: 100%; height: auto; }
+  .dwrap.map svg { min-width: 880px; }
+
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+
+  .orgnode rect { transition: fill 0.25s ease; }
+  .orgnode:hover rect { fill: var(--surface-hi); }
+
+  .legend { margin-top: 20px; font-size: 0.88rem; color: var(--faint); display: flex; flex-wrap: wrap; gap: 10px 30px; }
+  .legend span { display: inline-flex; align-items: center; gap: 9px; }
+  .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  /* footer */
+
+  footer { padding: 90px 0 44px; }
+  footer .related { font-size: 0.9rem; color: var(--faint); margin-bottom: 14px; }
+  footer .related a { margin-right: 22px; }
+  footer .colophon { font-size: 0.85rem; color: var(--faint); }
+
+  /* responsive */
+
+  @media (max-width: 920px) {
+    .art { opacity: 0.5; width: 88%; right: -22%; }
+    .dept { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  @media (max-width: 600px) {
+    .toc { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 8px 0; }
+    .dept-fields { grid-template-columns: 1fr; gap: 16px; }
+    .topbar { flex-direction: column; gap: 4px; }
+    .topbar .meta { font-size: 0.8rem; }
+    .art { display: none; }
+    .pull { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="shell topbar">
+    <div class="wordmark">NOXGAMES</div>
+    <div class="meta">Osobní příprava · David · porada vedení 20.&nbsp;8.&nbsp;2026</div>
+  </div>
+
+  <div class="hero-body">
+    <svg class="art" viewBox="0 0 700 560" aria-hidden="true">
+      <g class="art-inner">
+        <rect x="40" y="96" width="196" height="368" rx="12" fill="none" stroke="#57452a" stroke-opacity="0.65" stroke-width="1.4" stroke-dasharray="6 7"/>
+        <g fill="none" stroke="#57452a" stroke-opacity="0.5" stroke-width="1.2">
+          <path d="M236 128 H 368"/>
+          <path d="M236 184 H 368"/>
+          <path d="M236 240 H 368"/>
+          <path d="M236 296 H 368"/>
+          <path d="M236 352 H 368"/>
+          <path d="M236 408 H 368"/>
+          <path d="M236 464 H 368"/>
+        </g>
+        <g fill="#241d16" stroke="#383025" stroke-width="1.2">
+          <rect x="368" y="106" width="252" height="44" rx="8"/>
+          <rect x="368" y="162" width="252" height="44" rx="8"/>
+          <rect x="368" y="218" width="252" height="44" rx="8"/>
+          <rect x="368" y="274" width="252" height="44" rx="8"/>
+          <rect x="368" y="330" width="252" height="44" rx="8"/>
+          <rect x="368" y="386" width="252" height="44" rx="8"/>
+          <rect x="368" y="442" width="252" height="44" rx="8"/>
+        </g>
+        <g fill="#c9a266">
+          <circle cx="392" cy="352" r="4.5"/>
+          <circle cx="392" cy="408" r="4.5"/>
+          <circle cx="392" cy="464" r="4.5"/>
+        </g>
+      </g>
+    </svg>
+
+    <div class="shell">
+      <div class="hero-copy">
+        <h1>Zbytek <em>není oddělení</em></h1>
+        <p class="sub">Moje verze mapy, moje odpovědi na sporné zóny a čtyři podmínky, bez kterých nemá smysl jít na meet 2.</p>
+        <p class="origin">Osobní podklad k poradě · zlaté body = krabičky, o které se hlásím</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="shell toc" aria-label="Obsah">
+    <a href="#s01"><span>01</span>Co si odnést</a>
+    <a href="#s02"><span>02</span>Přiznaná zaujatost</a>
+    <a href="#s03"><span>03</span>Test oddělení</a>
+    <a href="#s04"><span>04</span>Mapa</a>
+    <a href="#s05"><span>05</span>Karty oblastí</a>
+    <a href="#s06"><span>06</span>Sporné zóny</a>
+    <a href="#s07"><span>07</span>Čtyři podmínky</a>
+    <a href="#s08"><span>08</span>Co za to shazuju</a>
+    <a href="#s09"><span>09</span>Rizika</a>
+    <a href="#s10"><span>10</span>Rozpočty a tarify</a>
+    <a href="#s11"><span>11</span>Otázky a doplnění</a>
+  </nav>
+</header>
+
+<main class="shell">
+
+  <section id="s01">
+    <h2><span class="no">01</span>Co si chci odnést</h2>
+    <p class="lead-p">Čtyři body. Žádný z nich není přání, všechny čtyři jsou podmínky, bez kterých nemá smysl pokračovat na meet 2.</p>
+
+    <div class="tscroll" style="margin-top: 30px;">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Co</th><th>Proč to nejde odložit</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td><strong>Rozhodnutí, že produkce se rozřezává</strong></td>
+            <td>Dokud je produkce definovaná jako „vše ostatní", není co delegovat. Zbytková kategorie nemá hranici, a co nemá hranici, to se nedá předat.</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td><strong>Rozhodovací pásmo černé na bílém</strong></td>
+            <td>U každé krabičky co rozhoduje vlastník sám a kde začínají jednosměrné dveře. Bez toho je mapa jen obrázek.</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td><strong>Kapacitní pravidla</strong></td>
+            <td>Rozdělení grafiků na DEV a MKT a kritérium marže na B2B. Nejmenší možný test celého modelu, vyhodnotitelný za 14 dní.</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td><strong>Přístup k číslům včetně výplat</strong></td>
+            <td>Rozhoduje se až na meetu 2, ale 20. 8. má zaznít jako podmínka. Krabička s rozpočtem, jejíž vlastník nevidí čísla, neprojde ani vlastním testem.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top: 34px;">Plus jeden bod, který porada dostane ode mě: <strong>pravidlo, podle kterého poznáme, co je oddělení a co je jen agenda</strong> (kapitola 03). Navrhuju ho odsouhlasit jako první věc, jinak se o mapě budeme bavit každý s jinou definicí slova oddělení.</p>
+  </section>
+
+  <section id="s02">
+    <h2><span class="no">02</span>Přiznaná zaujatost</h2>
+    <p class="lead-p">Do porady jdu jako člověk, který navrhuje pravidla pro celou firmu, a zároveň jako člověk, kterého se ta pravidla nejvíc týkají. Aby to nemusel nikdo hádat, dávám svůj zájem na stůl hned.</p>
+
+    <ul class="points" style="margin-top: 26px;">
+      <li><strong>Nechci zmenšit svoji sféru.</strong> Rozsah, který dnes nesu, je podle mě správně poskládaný. Problém není jeho velikost, ale to, že k němu nemám data, rozpočtové pásmo a napsané hranice.</li>
+      <li><strong>Chci k sobě přibrat dvě věci, které dnes nikdo nedrží celé:</strong> data a analytiku a komunitu a store. Argument je věcný (kapitola 04.4) a když ho někdo vyvrátí lepším, ustoupím.</li>
+      <li><strong>Chci celý proces náboru napříč firmou.</strong> Nábor je kapacitní rozhodnutí a kapacitu plánuje produkce.</li>
+      <li><strong>Za to shazuju čtyři věci</strong> (kapitola 08). Bez toho by to byl jen růst revíru a model by se mi rozpadl pod rukama.</li>
+    </ul>
+
+    <div class="pull">
+      Pravidla, která navrhuju, mají platit na mě stejně jako na ostatní. Když test oddělení něco z mojí sféry vyhodí, vyhodím to taky.
+    </div>
+  </section>
+
+  <section id="s03">
+    <h2><span class="no">03</span>Test oddělení</h2>
+    <p class="lead-p">Návrh pravidla, které chci odsouhlasit na začátku bloku o mapě. Oblast je oddělení, když splní všechny čtyři body. Když splní míň, je to agenda uvnitř jiného oddělení a nekreslíme jí vlastní krabičku.</p>
+
+    <div class="tscroll" style="margin-top: 30px;">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Kritérium</th><th>Kontrolní otázka</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td><strong>Jeden vlastník</strong></td><td>Umíme napsat jednu roli, ne dvě?</td></tr>
+          <tr><td>02</td><td><strong>Vlastní rozpočet nebo nákladová linka</strong></td><td>Z čeho se platí to, co se v oblasti dělá?</td></tr>
+          <tr><td>03</td><td><strong>Vlastní výsledek</strong></td><td>Jedno číslo nebo jeden stav, podle kterého se pozná, že oblast funguje?</td></tr>
+          <tr><td>04</td><td><strong>Vlastní rozhodovací pásmo</strong></td><td>Co může rozhodnout bez eskalace? Když nic, není to oddělení.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="tbl-note">Vedlejší efekt: rovnou vypadne, které krabičky jsou dnes prázdné (nikdo, žádný rozpočet, žádné číslo) a které jsou přeplněné. To je věcný podklad pro druhý krok, kdy se přiřazují jména.</p>
+
+    <h3>03.1 Co znamená vlastní rozpočet</h3>
+    <p>Bod 2 testu není nová věc, je to model z <a href="delegacni-navrh-v5.html">delegačního návrhu</a> (iterace 05, kapitola 5). Chci ho jen mít napsaný <strong>u každého oddělení</strong>, ne jenom u exec vrstvy.</p>
+    <ul class="points" style="margin-top: 20px;">
+      <li>Každé oddělení má <strong>vlastní roční rozpočet</strong>: experimenty, vývoj a růst platů svých lidí.</li>
+      <li>Rámec se <strong>vyjednává ročně</strong> s CEO a <strong>upravuje kvartálně</strong>, když se změní realita.</li>
+      <li>Uvnitř rámce rozhoduje vlastník <strong>bez eskalace</strong>. Nad rámec, mimo plán nebo nový významný opakovaný náklad jde na CEO. Opakovaný náklad se počítá roční hodnotou závazku.</li>
+      <li>Rozpočet je <strong>rámec, ne povinnost ho utratit</strong>. Nevyčerpané peníze se při reforecastu vracejí, ne propálí, ať o ně nepřijdu.</li>
+      <li>Nový náklad <strong>od 2 000 USD</strong> se hlásí povinně, pod tím je vhodné ho zmínit.</li>
+      <li><strong>Kdo nese rozpočet, vidí čísla pod ním</strong> (kapitola 07.4). Bez toho je rozpočtová odpovědnost formální.</li>
+    </ul>
+    <p style="margin-top: 22px;">U oddělení, které dnes nemá vlastní tým ani nákup (typicky Komunita a store), to může být zatím jen pojmenovaná nákladová linka místo plného rozpočtu. Ale i ta musí mít vlastníka a číslo, jinak krabička testem neprojde.</p>
+  </section>
+
+  <section id="s04">
+    <h2><span class="no">04</span>Mapa</h2>
+    <p class="lead-p">Dvanáct krabiček ve čtyřech sférách a jedna průřezová osa. Sféra je vrstva vlastnictví a eskalace, oddělení je vrstva hranic, rozpočtu a čísla. Bez těch dvou vrstev si mapu hned rozbijeme o to, že jsme čtyři.</p>
+
+    <div class="dwrap map" style="margin-top: 36px;">
+      <svg viewBox="0 0 1000 588" role="img" aria-label="Mapa dvanácti oddělení ve čtyřech sférách plus průřezová osa odměňování a růst lidí">
+        <text x="150" y="50" text-anchor="end" dominant-baseline="central" font-size="12.5" fill="#8a7350">Firma</text>
+        <g class="orgnode">
+          <rect x="170" y="20" width="252" height="60" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="296" y="41" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Strategie a portfolio</text>
+          <text x="296" y="60" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">směr · kapitál · jednosměrné dveře</text>
+        </g>
+
+        <text x="150" y="134" text-anchor="end" dominant-baseline="central" font-size="12.5" fill="#8a7350">Provoz a peníze</text>
+        <g class="orgnode">
+          <rect x="170" y="104" width="252" height="60" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="296" y="125" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Finance</text>
+          <text x="296" y="144" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">burn proti plánu</text>
+        </g>
+        <g class="orgnode">
+          <rect x="442" y="104" width="252" height="60" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="568" y="125" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Interní provoz</text>
+          <text x="568" y="144" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">otevřené blokace</text>
+        </g>
+        <g class="orgnode">
+          <rect x="714" y="104" width="252" height="60" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="840" y="125" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Efektivizace a AI</text>
+          <text x="840" y="144" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">ušetřené člověkodny</text>
+        </g>
+
+        <text x="150" y="218" text-anchor="end" dominant-baseline="central" font-size="12.5" fill="#8a7350">Poptávka</text>
+        <g class="orgnode">
+          <rect x="170" y="188" width="252" height="60" rx="9" fill="#241d16" stroke="#383025" stroke-width="1"/>
+          <text x="296" y="209" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Marketing a UA</text>
+          <text x="296" y="228" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">CPI a ROAS proti plánu</text>
+        </g>
+
+        <text x="150" y="362" text-anchor="end" dominant-baseline="central" font-size="12.5" fill="#8a7350">Produkt</text>
+        <text x="150" y="382" text-anchor="end" dominant-baseline="central" font-size="10.5" fill="#57452a">7 z 12 krabiček</text>
+        <g class="orgnode">
+          <rect x="170" y="272" width="252" height="60" rx="9" fill="#241d16" stroke="#57452a" stroke-width="1.2"/>
+          <text x="296" y="293" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Herní produkce</text>
+          <text x="296" y="312" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">milníky · kapacita proti plánu</text>
+        </g>
+        <g class="orgnode">
+          <rect x="442" y="272" width="252" height="60" rx="9" fill="#241d16" stroke="#57452a" stroke-width="1.2"/>
+          <text x="568" y="293" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Publishing a liveops</text>
+          <text x="568" y="312" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">revenue · retence</text>
+        </g>
+        <g class="orgnode">
+          <rect x="714" y="272" width="252" height="60" rx="9" fill="#241d16" stroke="#57452a" stroke-width="1.2"/>
+          <text x="840" y="293" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">R&amp;D a greenlight</text>
+          <text x="840" y="312" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">prototypy dovedené k ano/ne</text>
+        </g>
+        <g class="orgnode">
+          <rect x="170" y="342" width="252" height="60" rx="9" fill="#241d16" stroke="#57452a" stroke-width="1.2"/>
+          <text x="296" y="363" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Externí zakázky</text>
+          <text x="296" y="382" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">marže · spotřebovaná kapacita</text>
+        </g>
+        <g class="orgnode">
+          <rect x="442" y="342" width="252" height="60" rx="9" fill="#241d16" stroke="#57452a" stroke-width="1.2"/>
+          <circle cx="462" cy="372" r="4.5" fill="#c9a266"/>
+          <text x="568" y="363" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Komunita a store</text>
+          <text x="568" y="382" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">konverze store · sentiment</text>
+        </g>
+        <g class="orgnode">
+          <rect x="714" y="342" width="252" height="60" rx="9" fill="#241d16" stroke="#57452a" stroke-width="1.2"/>
+          <circle cx="734" cy="372" r="4.5" fill="#c9a266"/>
+          <text x="840" y="363" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Data a analytika</text>
+          <text x="840" y="382" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">jedna definice na metriku</text>
+        </g>
+        <g class="orgnode">
+          <rect x="170" y="412" width="252" height="60" rx="9" fill="#241d16" stroke="#57452a" stroke-width="1.2"/>
+          <circle cx="190" cy="442" r="4.5" fill="#c9a266"/>
+          <text x="296" y="433" text-anchor="middle" dominant-baseline="central" font-size="13.5" font-weight="600" fill="#ede4d4">Nábor</text>
+          <text x="296" y="452" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">doba od potřeby po nástup</text>
+        </g>
+
+        <text x="150" y="536" text-anchor="end" dominant-baseline="central" font-size="12.5" fill="#8a7350">Průřezová osa</text>
+        <rect x="170" y="506" width="796" height="60" rx="9" fill="#1a1511" stroke="#383025" stroke-width="1" stroke-dasharray="5 6"/>
+        <text x="568" y="527" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="600" fill="#c8bca9">Odměňování a růst lidí</text>
+        <text x="568" y="546" text-anchor="middle" dominant-baseline="central" font-size="10.5" fill="#6e6353">pravidla centrálně · rozhodnutí u sféry, kde člověk sedí</text>
+      </svg>
+    </div>
+
+    <div class="legend">
+      <span><i style="background:#c9a266"></i>krabička, o kterou se hlásím</span>
+      <span><i style="background:#57452a"></i>sféra Produkt</span>
+      <span><i style="background:#383025"></i>ostatní sféry</span>
+    </div>
+
+    <p style="margin-top: 30px;">Sféra Produkt drží sedm z dvanácti krabiček. Píšu to naplno, protože to je hlavní námitka, kterou proti téhle mapě dostanu, a je oprávněná. Odpověď na ni je v kapitolách 08 a 09: uvnitř sféry vznikají leady s vlastním rozhodovacím pásmem a já ze sebe současně shazuju denní koordinaci. Pokud tohle nedokážeme, mapa neplatí a sféru je potřeba rozdělit.</p>
+
+    <h3>04.1 Proč nábor ano a odměňování ne</h3>
+    <p>Společný podklad je slučuje do jedné oblasti Lidé. Ta má ale dvě různé povahy. <strong>Nábor</strong> je proces s vlastníkem, průběžným nákladem, vlastním číslem a rozhodovacím pásmem, projde testem celý. <strong>Odměňování a růst</strong> má jen pravidla: rozhodnutí o platu konkrétního člověka nutně patří tomu, kdo s ním pracuje, takže na bodu 4 testu padá. Slepené dohromady nikdy nedostanou jasného vlastníka.</p>
+
+    <h3>04.2 Co jsem oproti společnému podkladu změnil</h3>
+    <div class="tscroll">
+      <table class="wordy">
+        <thead>
+          <tr><th>Změna</th><th>Proč</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Komunita a store jako samostatné oddělení</td><td>V podkladu je to rozprostřené mezi marketing a publishing a je to sporná zóna číslo 10. Jeden hlas navenek si zaslouží viditelnou krabičku, ne poznámku pod čarou.</td></tr>
+          <tr><td>Data a analytika jako oddělení, ne jako spor</td><td>V podkladu je to sporná zóna číslo 4. Dokud nemá vlastníka, má každý svoji definici retence a nikdo nemá pravdu.</td></tr>
+          <tr><td>Nábor jako oddělení, odměňování jako osa</td><td>Viz 04.1. Jedno je proces, druhé je pravidlo.</td></tr>
+          <tr><td>R&amp;D a greenlight místo R&amp;D a nové produkty</td><td>Výstupem R&amp;D není produkt, ale rozhodnutí. Mění to, za co se oblast hodnotí: ne kolik prototypů vzniklo, ale kolik jich došlo k jasnému ano nebo ne.</td></tr>
+          <tr><td>U každé krabičky jedno číslo</td><td>Bez čísla nepoznáme, že delegace funguje, a na meetu 5 budeme vymýšlet KPI od nuly.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>04.3 Podle čeho jsem přiřazoval sporné krabičky</h3>
+    <p>Nepoužívám argument „dělám to dnes". Používám dvě pravidla a jsem ochoten je nechat obrátit proti sobě.</p>
+
+    <ol class="rules" style="margin-top: 26px;">
+      <li><strong>Vlastník definice není největší konzument.</strong> Marketing je největší konzument dat. Kdyby definice metrik vlastnil konzument, ohnou se podle toho, co zrovna potřebuje vykázat. Data se navíc technicky rodí v buildu (eventy, SDK, pipeline), takže vlastnictví u produktu znamená o jedno rozhraní míň. Proto Data a analytika do sféry Produkt, marketing i finance jako konzumenti s právem měřit si cokoli, ale ne předefinovat význam metriky.</li>
+      <li><strong>Kampaň vlastní ten, kdo kupuje. Hlas hry vlastní ten, kdo hru dělá.</strong> Reklama a nákup je marketing. Ale co říká hra svým hráčům, jaká je store page a jak se odpovídá komunitě, to je součást produktu. Exekuce store stránek (texty, screenshoty, ASO) zůstává na marketingu jako dodavateli, protože tam sedí kreativní kapacita. Vlastním hlas a rozhodnutí, ne výrobu.</li>
+      <li><strong>A jedno pravidlo, které jde proti mně:</strong> kdo přibere krabičku, musí ve stejné poradě říct, co shazuje. Můj seznam je v kapitole 08.</li>
+    </ol>
+  </section>
+
+  <section id="s05">
+    <h2><span class="no">05</span>Karty oblastí</h2>
+    <p class="lead-p">Vyplněné podle šablony ze společného podkladu. Čtyři, které dnes fakticky držím, a tři, o které se hlásím.</p>
+
+    <div class="dept" style="margin-top: 44px;">
+      <div class="dept-id">
+        <h4><span>05.1</span>Herní produkce</h4>
+        <p>Hry se dodávají v čase a kvalitě, tým ví, co dělá a proč.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Co řeší</b>Plán produkce a sprinty, vedení leadů, obsazení projektů lidmi, kapacitu a její alokaci, outsourcing, zadání pro týmy, kvalitu dodávky.</div>
+        <div><b>Rozhoduje samo</b>Náplň sprintu v rámci schválené roadmapy, obsazení rolí, outsourcing v rámci vývojového budgetu, drobný vývoj a experimenty.</div>
+        <div><b>Vždy eskaluje</b>Změnu roadmapy, otevření produkce nového produktu, skluz s dopadem na firmu, nový headcount, ukončení spolupráce.</div>
+        <div class="wide"><b>Rozhraní</b>Od financí reálná čísla nákladů a platů, od marketingu termíny kampaní a požadavky na kreativy, od publishingu release okno. Dodává buildy, termíny, kapacitní plán.</div>
+        <div class="wide"><b>Kde to skřípe</b>Kapacita grafiků se prioritizuje podle toho, kdo zrovna přijde. Vývojový budget mám řídit bez přístupu k platům. Zakázky a marketingové požadavky vstupují do plánu mimo plán.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>05.2</span>Publishing a liveops</h4>
+        <p>Vydané hry žijí a vydělávají.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Co řeší</b>Release management, liveops kalendář a eventy, provozní monetizaci, komunikaci s platformami na provozní úrovni, provozní čísla vydaných titulů.</div>
+        <div><b>Rozhoduje samo</b>Provozní releasy a hotfixy, liveops kalendář, monetizační kroky uvnitř schváleného modelu.</div>
+        <div><b>Vždy eskaluje</b>Platformní závazky, změnu monetizačního modelu (ne parametru), stažení titulu.</div>
+        <div class="wide"><b>Rozhraní</b>Od produkce buildy a fixy, od marketingu kampaňový kalendář, od dat metriky. Dodává release termíny a provozní výsledky.</div>
+        <div class="wide"><b>Kde to skřípe</b>Hranice s marketingem u releasu není nikde napsaná. Dnes to funguje, protože se domluvíme, ne protože je to rozhodnuté. Takové vlastnictví spadne při první neshodě.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>05.3</span>R&amp;D a greenlight</h4>
+        <p>Ví se, odkud přijde další hra, a rozhodnutí padne včas.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Co řeší</b>Prototypy, ověřování konceptů, market research, podklad pro greenlight.</div>
+        <div><b>Rozhoduje samo</b>Experimenty v rámci vývojového budgetu, zastavení prototypu.</div>
+        <div><b>Vždy eskaluje</b>Otevření produkce nového produktu (CEO plus zbytek exec).</div>
+        <div class="wide"><b>Rozhraní</b>Od strategie mantinely portfolia, od marketingu pohled na trh a odhad akvizice, od financí náklad na prototyp. Dodává podklad k rozhodnutí.</div>
+        <div class="wide"><b>Kde to skřípe</b>Není definovaná hranice mezi experimentem a otevřením produkce. Dokud není, každý povedený prototyp je potenciální spor o to, jestli jsme už něco odsouhlasili. Je to i otevřený úkol v delegačním návrhu.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>05.4</span>Externí zakázky (B2B)</h4>
+        <p>Příjem mimo vlastní tituly, aniž by to rozbilo produkci.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Co řeší</b>Playables a externí vývoj, pipeline dealů, pricing podle interních tarifů, delivery a vztah s klientem.</div>
+        <div><b>Rozhoduje samo</b>Realizaci zakázky s marží alespoň 100 %, obsazení lidí uvnitř plánu, cenu nad tímto prahem.</div>
+        <div><b>Vždy eskaluje</b>Zakázku s marží pod 100 %, závazek sahající na kapacitu greenlightnutého titulu, strategického partnera.</div>
+        <div class="wide"><b>Rozhraní</b>Od financí interní tarify a fakturace, od strategie mantinely (koho bereme a koho ne). Dodává marži, obsazenost, referenční práce.</div>
+        <div class="wide"><b>Kde to skřípe</b>Iniciativu nosí všichni, což je správně a je na to podílový systém, ale rozhodnutí o alokaci lidí nese produkce sama a bez pravidla.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>05.5</span>Komunita a store</h4>
+        <p class="claim">Hlásím se o ni. Dnes ji nikdo nedrží celou.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Co řeší</b>Store prezentaci a její výsledek, komunikaci s komunitou, sociální sítě směrem ke hráčům, podporu hráčů, tón hlasu hry.</div>
+        <div><b>Rozhoduje samo</b>Obsah a tón komunikace ke hráčům, priority na store page, reakce na komunitu.</div>
+        <div><b>Vždy eskaluje</b>Krizovou komunikaci, zásah do značky firmy.</div>
+        <div class="wide"><b>Rozhraní</b>Od marketingu kreativní výroba a ASO exekuce jako dodávka, od publishingu liveops kalendář a vstupy ze supportu, od dat čísla o konverzi. Dodává jednotný hlas a store výsledek.</div>
+        <div class="wide"><b>Kde to dnes skřípe</b>Neexistuje. Rozprostřené mezi marketing a publishing, tedy dvě verze toho, co firma hráčům říká.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>05.6</span>Data a analytika</h4>
+        <p class="claim">Hlásím se o ni. Dnes je to spor, ne vlastnictví.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Co řeší</b>Datový stack, eventy v buildech, definice metrik, dostupnost přehledů, kvalitu dat.</div>
+        <div><b>Rozhoduje samo</b>Technické řešení stacku, definice metrik po konzultaci s konzumenty.</div>
+        <div><b>Vždy eskaluje</b>Citlivá data, zásah do produktu kvůli měření, větší investici do stacku.</div>
+        <div class="wide"><b>Rozhraní</b>Dodává marketingu, financím, publishingu a produkci jedna čísla. Od nich bere požadavky na to, co se má měřit.</div>
+        <div class="wide"><b>Kde to dnes skřípe</b>Neexistuje jako vlastnictví, existuje jako spor. Každý má svůj pohled a svoji definici.</div>
+      </div>
+    </div>
+
+    <div class="dept">
+      <div class="dept-id">
+        <h4><span>05.7</span>Nábor</h4>
+        <p class="claim">Hlásím se o něj. Pohovory vedou leadi.</p>
+      </div>
+      <div class="dept-fields">
+        <div class="wide"><b>Co řeší</b>Proces od potřeby po nástup napříč firmou: definici role, standard pohovorů, inzerci a kanály, laťku, nabídku, koordinaci nástupu.</div>
+        <div><b>Rozhoduje samo</b>Podobu procesu a standardu, kanály a nástroje, finální ano k nabídce.</div>
+        <div><b>Vždy eskaluje</b>Nový headcount (CEO), plat mimo rámec rozpočtu sféry, ukončení spolupráce.</div>
+        <div class="wide"><b>Kdo to odpracuje</b>Pohovory a výběr do svých týmů dělají leadi, každý podle stejného procesu a stejné laťky. Vlastním proces, standard a finální ano, ne kalendář pohovorů. Provozní HR administrativu (smlouvy, nástupní papíry, benefity) dělá interní provoz.</div>
+        <div class="wide"><b>Proč to patří k produkci</b>Nábor je kapacitní rozhodnutí a kapacitní plán firmy vzniká v produkci. Když nábor vlastní někdo, kdo nedrží kapacitní plán, začne se nabírat podle toho, kdo si nejvíc stěžuje.</div>
+        <div class="wide"><b>Riziko, které přiznávám</b>Nábor přes leady je rychlý, ale bez společné laťky si každý tým nabere podle sebe. Proto je vlastnictví procesu a standardu podmínka, ne formalita.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="s06">
+    <h2><span class="no">06</span>Sporné zóny</h2>
+    <p class="lead-p">Ke každé zóně jdu s odpovědí, ne s otázkou. Je to k rozstřílení, ale ať se střílí do konkrétního návrhu.</p>
+
+    <div class="tscroll" style="margin-top: 30px;">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Sporná zóna</th><th>Návrh vlastníka</th><th>Mechanismus, který to drží</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td><td>Nábor a platy</td>
+            <td><strong>Proces a laťka: Nábor. Výběr do týmu: lead. Plat člověka: sféra, kde sedí. Headcount: CEO.</strong></td>
+            <td>Jeden proces pro celou firmu, pohovory vedou leadi, pravidla a rámec drží Finance.</td>
+          </tr>
+          <tr>
+            <td>02</td><td>Marketingové kreativy vs. herní art</td>
+            <td><strong>Zdroj: produkce. Výsledek: marketing.</strong></td>
+            <td>Grafici se jmenovitě rozdělí na DEV a MKT, uvnitř své skupiny si každý prioritizuje sám, cross práce je přípustná po dohodě leadů obou oddělení.</td>
+          </tr>
+          <tr>
+            <td>03</td><td>Publishing vs. marketing u releasu</td>
+            <td><strong>Co je v buildu a kdy jde ven: publishing. Kolik se nalije a jaká je kampaň: marketing. Jak se o hře mluví: Komunita a store.</strong></td>
+            <td>Každý má veto jen na svoji půlku, žádné společné schvalování.</td>
+          </tr>
+          <tr>
+            <td>04</td><td>Produktová analytika a data</td>
+            <td><strong>Oddělení Data a analytika.</strong></td>
+            <td>Definice metrik jsou dekret ve Wiki, konzumenti si měří cokoli, ale nepředefinovávají významy.</td>
+          </tr>
+          <tr>
+            <td>05</td><td>AI a automatizace vs. vývojové nástroje</td>
+            <td><strong>Kritérium komu to slouží: celá firma je Efektivizace a AI, vývoj her je produkce.</strong></td>
+            <td>Hub, wiki a procesní automatizace u provozu, pipeline, buildy a herní nástroje u produkce.</td>
+          </tr>
+          <tr>
+            <td>06</td><td>Externí zakázky</td>
+            <td><strong>Pipeline: kdokoli. Delivery a alokace lidí: produkce. Cena: produkce nad prahem marže, pod prahem CEO.</strong></td>
+            <td>Práh je marže alespoň 100 %, zásah do kapacity greenlightnutého titulu je eskalace bez ohledu na marži.</td>
+          </tr>
+          <tr>
+            <td>07</td><td>Monetizace</td>
+            <td><strong>Hra v produkci: game design. Hra v provozu: publishing.</strong></td>
+            <td>Marketing konzultovaný (LTV, ROAS) bez veta, změna modelu je eskalace, změna parametru ne.</td>
+          </tr>
+          <tr>
+            <td>08</td><td>Provozní HR vs. Lidé</td>
+            <td><strong>Papír: interní provoz. Člověk: Nábor a sféry.</strong></td>
+            <td>Docházka, benefity a smlouvy do provozu, výběr, rozvoj a odměna k lidem, kteří s člověkem pracují.</td>
+          </tr>
+          <tr>
+            <td>09</td><td>Smlouvy</td>
+            <td><strong>Registr a lhůty: Finance. Obsah závazku: sféra, která ho nese.</strong></td>
+            <td>Jeden registr, jeden termínovník, žádná smlouva mimo registr.</td>
+          </tr>
+          <tr>
+            <td>10</td><td>Komunita a sociální sítě</td>
+            <td><strong>Oddělení Komunita a store.</strong></td>
+            <td>Podpora hráčů a in-game komunikace je vstup, ne druhý kanál, krizová komunikace na CEO.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s07">
+    <h2><span class="no">07</span>Čtyři podmínky</h2>
+
+    <h3 style="margin-top: 8px;">07.1 Rozřezání produkce</h3>
+    <p>„Produkce = vše ostatní" není oddělení, je to zbytková kategorie. Za dva roky se do ní nasypal publishing, R&amp;D, externí zakázky, nábor, platy a vývojový budget. Nikdo to nerozhodl, jen to nikam jinam nespadlo.</p>
+    <p>Když z porady vyjde mapa, ve které je Herní produkce jedna krabička, nevyřešili jsme nic, jen jsme ten zbytek přejmenovali. Chci odejít s tím, že jsou to pojmenované krabičky s hranicemi, i kdyby je zítra pořád držel jeden člověk.</p>
+
+    <h3>07.2 Rozhodovací pásmo černé na bílém</h3>
+    <p>U každé krabičky dvě věty: co rozhoduje vlastník bez eskalace a kde začínají jednosměrné dveře. Kritérium je vratnost, ne velikost, to už jsme si odsouhlasili minule. Bez tohohle je mapa jen obrázek a na meetu 2 začneme od nuly.</p>
+    <p>Konkrétně u sebe potřebuju odsouhlasit hranici mezi experimentem a otevřením produkce nového produktu, protože dnes neexistuje. Navrhuju měřit ji časem.</p>
+    <div class="pull">
+      Práce na konceptu je <strong>experiment</strong>, dokud nepřekročí <strong>2 sprinty, tedy 4 týdny</strong> práce týmu. Za tou čarou je to <strong>otevření produkce nového produktu</strong> a schvaluje ho CEO plus zbytek exec.
+    </div>
+    <p style="margin-top: 22px;">Čas je proti penězům lepší měřítko, protože ho vidí každý a nedá se schovat do jiné nákladové linky. Sprint je navíc jednotka, ve které stejně plánujeme, takže se nemusí nikam přepočítávat. Má to jednu díru a rovnou k ní přidávám pojistku: <strong>prodloužení experimentu o další dva sprinty není pokračování, ale nové rozhodnutí.</strong> Jinak se produkt otevře na salám, čtyři týdny pětkrát za sebou.</p>
+
+    <h3>07.3 Kapacitní pravidla</h3>
+    <p>Dvě pravidla, obě dohodnutá dopředu. Dnes jsou grafici fakticky jeden pool a prioritu dostane ten, kdo přijde dřív nebo tlačí víc. Nejde přidat pravidlo nad společný pool, pool se musí rozdělit.</p>
+    <ul class="points" style="margin-top: 20px;">
+      <li>Grafici se rozdělí <strong>jmenovitě na DEV a MKT</strong>. Ne procenta, ne půl na půl, konkrétní lidé pod konkrétní oddělení.</li>
+      <li>Uvnitř své skupiny si vlastník prioritizuje sám a nikoho se neptá. To je celý smysl: marketing přestane žádat o čas a začne s ním hospodařit.</li>
+      <li><strong>Cross práce je přípustná, když se na ní domluví leadi obou oddělení.</strong> Není to eskalace a nepotřebuje to mě ani CEO, dohoda leadů stačí. Je to záměrně měkčí než tvrdý zámek: kapacita se má dát půjčit, jen ne potichu a ne přes hlavu leada.</li>
+      <li>Co nejde: brát si lidi druhé skupiny bez té dohody, nebo si ji domluvit přímo s grafikem mimo leada.</li>
+    </ul>
+    <p style="margin-top: 26px;"><strong>Kritérium na B2B zakázky.</strong> Strop v člověkodnech nedává smysl, protože trestá i zakázky, které vydělávají. Kritérium je marže.</p>
+    <ul class="points" style="margin-top: 20px;">
+      <li>Zakázka s <strong>marží alespoň 100 %</strong>, tedy výnos je aspoň dvojnásobek delivery nákladů podle interních tarifů, je v pořádku a rozhoduje o ní produkce sama.</li>
+      <li>Pod 100 % marže je to eskalace na CEO. Tam už nejde o zakázku, ale o rozhodnutí prodávat kapacitu firmy levně.</li>
+      <li>Bez ohledu na marži: <strong>zásah do kapacity greenlightnutého titulu je vždycky eskalace.</strong> Ani skvěle placená zakázka nesmí potichu posunout vlastní hru.</li>
+      <li>Předpoklad, který musí zaznít: <strong>interní tarify musí existovat.</strong> Dnes nejsou a je to otevřený úkol z delegačního návrhu. Bez nich se marže nedá spočítat a celé kritérium je jen věta.</li>
+    </ul>
+    <p style="margin-top: 22px;">Je to zároveň nejlevnější možný test celého modelu: malý rozsah, jasná hranice, vyhodnotitelné za 14 dní. Když tohle nezvládneme, nemá smysl zavádět 90denní pilot.</p>
+
+    <h3>07.4 Přístup k číslům včetně výplat</h3>
+    <p>Mám odpovídat za vývojový budget firmy a za návrhy platů, ale nevidím, kolik kdo bere. Bez toho neumím říct, jestli je projekt drahý, ani co znamená přidat člověka. Každé rozhodnutí o kapacitě je odhad, každý návrh platu vyjednávání naslepo.</p>
+    <p>Vím, že je to sporný bod (podklad P1 navrhuje souhrn a need-to-know) a že se o něm rozhoduje až na meetu 2. Na 20. 8. chci, aby zaznělo jako podmínka a zapsalo se to. <strong>Kompromis, který přijmu:</strong> vidím platy lidí, kteří spadají pod mou sféru, plus souhrny za firmu. Neprosazuju přístup ke všemu za každou cenu, prosazuju přístup k tomu, za co ručím. A platí to jako obecné pravidlo pro každého, kdo nese rozpočet, ne jako výjimka pro mě.</p>
+  </section>
+
+  <section id="s08">
+    <h2><span class="no">08</span>Co za to shazuju</h2>
+    <p class="lead-p">Kdo přibere krabičku, musí ve stejné poradě říct, co shazuje. Podmínka je u všech čtyř stejná: shazuju to i s rozhodováním. Poloviční předání znamená, že se věc vrátí zpátky ve chvíli, kdy je potřeba rozhodnout, a to je horší než ji držet.</p>
+
+    <div class="tscroll" style="margin-top: 30px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Co shazuju</th><th>Komu</th><th>Podmínka</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Denní koordinace projektů</strong></td>
+            <td>project leadům</td>
+            <td>Kompletně, včetně rozhodování o denních prioritách a řešení blokací uvnitř projektu. Mně zůstává sprint, roadmapa a kapacita. Tohle je největší položka a zároveň nutná podmínka toho, aby moje sféra unesla sedm krabiček.</td>
+          </tr>
+          <tr>
+            <td><strong>Provozní HR administrativa</strong></td>
+            <td>internímu provozu</td>
+            <td>Docházka, benefity, smlouvy, nástupní papíry. Beru rozhodnutí o lidech, ne agendu kolem nich.</td>
+          </tr>
+          <tr>
+            <td><strong>Store operations a ASO exekuce</strong></td>
+            <td>marketingu</td>
+            <td>Texty, screenshoty, lokalizace store stránek, ASO práce. Vlastním hlas, prioritu a výsledek store page, ne její výrobu.</td>
+          </tr>
+          <tr>
+            <td><strong>Vedení pohovorů a výběr do týmů</strong></td>
+            <td>leadům</td>
+            <td>Leadi si vybírají lidi do svých týmů podle jednoho procesu a jedné laťky. Mně zůstává proces, standard a finální ano. Krabičku Nábor beru i s tím, že ji z velké části odpracuje někdo jiný.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull">
+      Co neshazuju a říkám to nahlas: <strong>kapacitní plán a obsazení projektů</strong>. To je jádro produkce. Když tohle rozhoduje někdo jiný, produkce už neručí za termíny a celý model padá.
+    </div>
+  </section>
+
+  <section id="s09">
+    <h2><span class="no">09</span>Rizika</h2>
+    <ol class="rules" style="margin-top: 8px;">
+      <li><strong>Moje sféra touhle mapou roste, ne zmenšuje se.</strong> Sedm z dvanácti krabiček. Je to legitimní námitka a čekám ji. Moje odpověď: krabičky nejsou lidi, uvnitř sféry mají vzniknout leady s vlastním rozhodovacím pásmem a já současně shazuju denní koordinaci. Pokud tomu vedení nevěří, správné řešení není mi krabičky nedat, ale rozdělit sféru Produkt na dvě a přiřadit druhou někomu jinému. To ale znamená pátého člověka ve vedení a to není rozhodnutí, které mám já.</li>
+      <li><strong>Dvanáct krabiček na čtyři lidi.</strong> Když mapu nakreslíme hezky a přiřazení odložíme, na meetu 2 zjistíme, že dva z nás drží po čtyřech odděleních a někdo žádné. Proto chci u každé krabičky rovnou i větu „dnes to fakticky dělá X" jako reality check, ne jako přiřazení.</li>
+      <li><strong>Prázdné krabičky.</strong> Efektivizace a AI, Komunita a store, Data, Nábor: dnes je nikdo nedrží celé. Krabička bez vlastníka je horší než žádná, protože se do ní začne odkazovat.</li>
+      <li><strong>Vlastnictví bez rozpočtu a bez dat.</strong> Netýká se to jen mě, týká se to každého, kdo dostane oddělení s nákladovou linkou.</li>
+      <li><strong>Ochrana delegace v prvním týdnu.</strong> Až první rozhodnutí padne jinak, než by ho udělal CEO, ukáže se, jestli model platí. Chci dopředu dohodnuté, že se řeší přes vlastníka a nikdy kolem něj, oběma směry.</li>
+      <li><strong>Echo komora.</strong> Čtyři lidi kreslí mapu celé firmě. Než se z toho stane dekret, měl by ho vidět aspoň někdo z leadů. Navrhuju jako úkol, ne jako diskusi na poradě.</li>
+    </ol>
+  </section>
+
+  <section id="s10">
+    <h2><span class="no">10</span>Rozpočty a tarify</h2>
+    <p class="lead-p">Dvě věci, které dnes nemáme a bez kterých zbytek modelu nefunguje. Nenesu na poradu čísla, nesu způsob, jak se k nim dostaneme. Cíl je, aby se o tom dalo rozhodnout za dvacet minut a ne za kvartál.</p>
+
+    <h3>10.1 Rozpočet oddělení</h3>
+    <p><strong>Nepočítat od nuly.</strong> Zero-based rozpočtování je u šestnácti lidí zbytečná práce. Baseline z reality plus zdůvodněné delty.</p>
+
+    <p style="margin-top: 26px;"><strong>Krok 1: baseline, co oddělení stojí dnes</strong> (roční run rate).</p>
+    <div class="tscroll" style="margin-top: 16px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Složka</th><th>Co do ní patří</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Lidé</td><td>Fixní platy lidí, kteří na oddělení dělají, plus odhad bonusové složky. U sdílených lidí odhad podle podílu času, stačí přesnost na desítky procent.</td></tr>
+          <tr><td>Nástroje a subscriptions</td><td>Licence, SaaS, cloud, storage, AI nástroje. Roční hodnota, ne měsíční.</td></tr>
+          <tr><td>Externí dodávky</td><td>Outsourcing a externí spolupráce, které si oddělení objednává.</td></tr>
+          <tr><td>Přímé provozní náklady</td><td>Co jde jednoznačně přiřadit: UA spend, hardware, devices.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tbl-note">Baseline není rozpočet, je to podlaha. Ukáže, co firma na tu oblast utratí, i kdyby se celý rok nic nezměnilo.</p>
+
+    <p style="margin-top: 34px;"><strong>Krok 2: obálky navrch.</strong> Tady teprve začíná pravomoc.</p>
+    <div class="tscroll" style="margin-top: 16px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Obálka</th><th>Doporučení</th><th>K čemu je</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Experimenty a investice</td><td>5 až 15 % run rate podle toho, kolik změny od oblasti čekáme (Efektivizace a AI nahoře, Finance dole)</td><td>Aby vlastník mohl něco zkusit bez prosby.</td></tr>
+          <tr><td>Růst platů podřízených</td><td>3 až 8 % payrollu oddělení na rok</td><td>Přesně ta pravomoc, kterou dává delegační návrh.</td></tr>
+          <tr><td>Rezerva</td><td>drží firma centrálně, ne oddělení</td><td>Buffer v každé krabičce znamená dvanáct neviditelných rezerv.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top: 34px;"><strong>Pravidla, která k tomu patří.</strong></p>
+    <ol class="rules" style="margin-top: 18px;">
+      <li><strong>Dvě čísla, ne jedno.</strong> Payroll (vlastník ho vidí, ale mění se přes headcount a přes obálku na růst platů) a <strong>diskreční část</strong>, to, co vlastník opravdu řídí. Bez toho rozdělení to vypadá, že chief rozhoduje o milionech, a přitom nerozhoduje skoro o ničem.</li>
+      <li><strong>Kdo co dělá:</strong> Finance sestaví baseline, mají data. Vlastník navrhne delty a zdůvodní je. CEO schvaluje rámec.</li>
+      <li><strong>Kvartální reforecast</strong>, ne roční slib.</li>
+      <li><strong>Nevyčerpané peníze se vracejí</strong> do centrální rezervy. Žádné utrácení v prosinci, ať o ně nepřijdu.</li>
+      <li><strong>První kvartál nanečisto.</strong> Čísla se sledují, ale rozhoduje se pořád postaru. Ověří se, jestli přiřazení nákladů vůbec dává smysl, dřív než se z toho stane pravomoc. Sedí to k rozhodnutí zavádět postupně i k tomu, že bonusy mají první měsíc běžet nanečisto.</li>
+    </ol>
+    <p style="margin-top: 26px;"><strong>Kolik to reálně stojí práce:</strong> baseline za všechna oddělení je jedno odpoledne nad exportem z účetnictví a seznamem subscriptions. Delty jsou hodina na oddělení. Není to kvartální projekt a nechci, aby se z toho udělal.</p>
+
+    <h3>10.2 Interní tarify</h3>
+    <p>Tarif potřebujeme na dvě věci: spočítat <strong>marži zakázky</strong> (kritérium v kapitole 07.3) a spočítat <strong>zisk dealu pro podíly 5 + 5 %</strong> (delegační návrh, kapitola 8). Dokud tarify nejsou, obě pravidla jsou jen věty.</p>
+    <ol class="rules" style="margin-top: 26px;">
+      <li><strong>Tarif na roli, ne na člověka.</strong> Programátor, grafik, game designer, QA, produkce. Maximálně tři stupně seniority. Tarif podle jednotlivce je citlivý, nedá se sdílet a stejně se nikdy neaktualizuje.</li>
+      <li><strong>Náklad na člověkoden</strong> = (roční náklad role včetně odvodů + přiřaditelné nástroje a hardware + přirážka na režii) / reálně odpracovatelné dny.</li>
+      <li><strong>Reálné dny, ne 250.</strong> Po dovolené, svátcích, nemoci, interních schůzkách a školení vychází zhruba 180 až 200 dní. Počítat s utilizací 75 až 80 %. Kdo počítá se stovkou procent, zabuduje si ztrátu rovnou do tarifu.</li>
+      <li><strong>Režie se rozpouští přirážkou</strong> na produkční role, řádově 20 až 40 %. Druhá možnost je režii nepočítat a chtít vyšší marži, ale pak číslo 100 % neznamená to, co si pod ním představujeme.</li>
+      <li><strong>Dvě sazby na roli:</strong> cost rate (interní náklad, slouží pro marži a pro podíly) a list rate (cena pro klienta). <strong>List = cost × 2.</strong> Tím je kritérium marže 100 % zabudované rovnou do ceníku a nemusí se dopočítávat u každé nabídky.</li>
+      <li><strong>Revize jednou ročně</strong> spolu s rozpočty. Tarif se nemění uprostřed běžící zakázky.</li>
+      <li><strong>Zpětná kontrola po dodání:</strong> skutečně odpracované dny × cost rate proti odhadu. Vypadne z toho skutečná marže (podíly se počítají ze skutečně zaplaceného zisku) a lepší odhady na příště.</li>
+      <li><strong>Kdo to vlastní:</strong> Finance počítá, produkce dodává vstupy (složení týmu, utilizace, odpracované dny), CEO schvaluje.</li>
+    </ol>
+
+    <div class="pull">
+      Marže 100 % nad tarifem, který obsahuje režii, je něco úplně jiného než 100 % nad holými mzdami. Musíme se dohodnout, co tarif obsahuje, jinak si každý pod stejným číslem představí něco jiného.
+    </div>
+    <p style="margin-top: 22px;">Je to zároveň další důvod, proč je přístup k mzdovým datům podmínka a ne preference: bez nich produkce cenu neobhájí a marži jen odhaduje.</p>
+  </section>
+
+  <section id="s11">
+    <h2><span class="no">11</span>Otázky a doplnění</h2>
+
+    <h3 style="margin-top: 8px;">Otázky, které položím ostatním</h3>
+    <ol class="rules">
+      <li>Souhlasíme, že krabička bez rozpočtu a bez čísla není oddělení? Pokud ano, je to první pravidlo mapy a použijeme ho na všechno včetně mě.</li>
+      <li>DJ: bereš Efektivizaci a AI jako svoji krabičku s vlastním rozpočtem, nebo je to dnes díra, kterou jen pojmenováváme?</li>
+      <li>Kuba: sedí ti rozdělení grafiků na DEV a MKT s cross prací po dohodě leadů, nebo v tom vidíš past? A co ti vadí na tom, aby definice metrik držel někdo jiný než jejich největší konzument?</li>
+      <li>Jirko: kde je pro tebe hranice mezi rozhodnutím majitele a rozhodnutím CEO u greenlightu nové hry? Předjímá to meet 2, ale ovlivní to, kam nakreslíme R&amp;D a greenlight.</li>
+      <li>Všichni: pokud vám sedm krabiček u jedné sféry vadí, je odpověď rozdělit sféru Produkt, nebo mi krabičky nedat? Chci to slyšet teď, ne po poradě.</li>
+      <li>DJ: sestavíš baseline rozpočtů podle kapitoly 10.1, když ti dám rozpad lidí na oddělení? A co potřebuješ k tomu, abychom měli interní tarify do konce září?</li>
+    </ol>
+
+    <h3>Co si doplním před poradou</h3>
+    <ul class="points">
+      <li>Reality check ke každé krabičce: kdo to dnes fakticky dělá. Dělám sám před poradou.</li>
+      <li>Z metodik v kapitole 10 udělat na poradě dva úkoly s vlastníkem a termínem: baseline rozpočtů (Finance a vlastníci oblastí) a interní tarify (Finance a produkce).</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="shell">
+  <div class="related">
+    <a href="priprava-2026-08-20-oddeleni.html">Společný podklad</a>
+    <a href="porada-2026-08-06-kompilat.html">Kompilát 6. 8.</a>
+    <a href="temata-dalsich-porad.html">Plán dalších porad</a>
+    <a href="delegacni-navrh-v5.html">Delegační návrh v5</a>
+  </div>
+  <div class="colophon">Osobní příprava Davida na poradu vedení 20. 8. 2026 · NOXGAMES</div>
+</footer>
+
+</body>
+</html>
