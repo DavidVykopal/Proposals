@@ -1,0 +1,8 @@
+{
+  "name": "puppet-sports-revival",
+  "private": true,
+  "scripts": {
+    "cf:deploy": "wrangler deploy",
+    "cf:preview": "wrangler dev"
+  }
+}

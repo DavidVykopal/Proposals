@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 62 480 298" width="480" height="298" role="img" aria-label="FLOORBALL on the Puppet Sports core">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16314f"/>
+      <stop offset="1" stop-color="#081a2d"/>
+    </linearGradient>
+    <linearGradient id="grd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9793a"/>
+      <stop offset="1" stop-color="#b9793a" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" fill="url(#sky)"/>
+  <circle cx="80" cy="60" r="130" fill="#7fe3ff" opacity="0.10"/>
+  <circle cx="410" cy="180" r="120" fill="#7fe3ff" opacity="0.07"/>
+
+  <g stroke="#e9eef4" stroke-width="4" fill="none" opacity="0.85">
+    <path d="M 20 232 h 46 v 58 h -46"/>
+    <path d="M 460 232 h -46 v 58 h 46"/>
+  </g>
+  <g>
+    <rect x="0" y="200" width="480" height="26" fill="#0a1f33"/>
+    <rect x="0" y="200" width="480" height="2" fill="#ffffff" opacity="0.16"/>
+    <rect x="24" y="206" width="112" height="15" rx="3" fill="#ffffff" opacity="0.14"/>
+    <rect x="148" y="206" width="184" height="15" rx="3" fill="#ffb938"/>
+    <text x="240" y="217" text-anchor="middle" font-family="Verdana, Geneva, sans-serif"
+          font-size="9" font-weight="bold" letter-spacing="1.8" fill="#241500">YOUR BRAND</text>
+    <rect x="344" y="206" width="112" height="15" rx="3" fill="#ffffff" opacity="0.14"/>
+  </g>
+  <rect x="0" y="226" width="480" height="134" fill="url(#grd)"/>
+
+  <g>
+    <line x1="146" y1="0" x2="146" y2="240" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    <ellipse cx="146" cy="336" rx="32" ry="5" fill="#000000" opacity="0.3"/>
+    <rect x="131" y="294" width="30" height="36" rx="12" fill="#7fe3ff"/>
+    <rect x="133" y="320" width="10" height="13" rx="4" fill="#20303f"/>
+    <rect x="149" y="320" width="10" height="13" rx="4" fill="#20303f"/>
+    <circle cx="146" cy="263" r="27" fill="#f6cfa8"/>
+    <path d="M 119 260 a 27 27 0 0 1 54 0 z" fill="#3b2a1c"/>
+    <circle cx="137" cy="267" r="3.3" fill="#26303a"/>
+    <circle cx="153" cy="267" r="3.3" fill="#26303a"/>
+    <path d="M 138 278 q 8 7 16 0" stroke="#26303a" stroke-width="2.6"
+          fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <line x1="334" y1="0" x2="334" y2="240" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    <ellipse cx="334" cy="336" rx="32" ry="5" fill="#000000" opacity="0.3"/>
+    <rect x="319" y="294" width="30" height="36" rx="12" fill="#ff6b6b"/>
+    <rect x="321" y="320" width="10" height="13" rx="4" fill="#20303f"/>
+    <rect x="337" y="320" width="10" height="13" rx="4" fill="#20303f"/>
+    <circle cx="334" cy="263" r="27" fill="#f6cfa8"/>
+    <path d="M 307 260 a 27 27 0 0 1 54 0 z" fill="#3b2a1c"/>
+    <circle cx="343" cy="267" r="3.3" fill="#26303a"/>
+    <circle cx="327" cy="267" r="3.3" fill="#26303a"/>
+    <path d="M 342 278 q -8 7 -16 0" stroke="#26303a" stroke-width="2.6"
+          fill="none" stroke-linecap="round"/>
+  </g>
+  <path d="M 174 290 l 40 32 l -15 8 l -36 -30 z" fill="#e9eef4"/>
+  <path d="M 306 290 l -40 32 l 15 8 l 36 -30 z" fill="#e9eef4"/>
+  <circle cx="240" cy="322" r="11" fill="#f7f9fb"/>
+  <circle cx="236" cy="318" r="1.9" fill="#a2652f"/>
+  <circle cx="244" cy="325" r="1.9" fill="#a2652f"/>
+  <circle cx="242" cy="316" r="1.7" fill="#a2652f"/>
+  <rect x="18" y="76" width="107" height="28" rx="14" fill="#000000" opacity="0.5"/>
+  <text x="71.5" y="95" text-anchor="middle" font-family="Verdana, Geneva, sans-serif"
+        font-size="12" font-weight="bold" letter-spacing="2" fill="#7fe3ff">FLOORBALL</text>
+</svg>
