@@ -1,0 +1,8 @@
+{
+  "name": "block-defense-proposal",
+  "private": true,
+  "scripts": {
+    "cf:deploy": "wrangler deploy",
+    "cf:preview": "wrangler dev"
+  }
+}
