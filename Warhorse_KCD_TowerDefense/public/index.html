@@ -1,0 +1,1806 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Kingdom Come: Ramparts | Tower Defense Proposal | NOXGAMES</title>
+  <link rel="icon" href="assets/noxgames-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Cinzel:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --nox-dark: #15110c;
+      --nox-darker: #0d0a07;
+      --nox: #2a2117;
+      --nox-light: #41341f;
+      --accent: #4b7793;
+      --cyan: #8fb4cf;
+      --magenta: #b0424f;
+      --gold: #d9a441;
+      --sand: #e6c98f;
+      --green: #86b053;
+      --red: #c05a4a;
+      --ink: #f3ead9;
+      --muted: #a9977a;
+      --line: rgba(217, 164, 65, 0.2);
+      --glass: rgba(255, 255, 255, 0.045);
+      --radius: 14px;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--nox-dark);
+      overflow-x: hidden;
+    }
+
+    ::selection { background: rgba(143, 180, 207, 0.35); }
+
+    h1, h2, h3, h4 {
+      font-family: Cinzel, "Times New Roman", serif;
+      margin-top: 0;
+      letter-spacing: 0.01em;
+    }
+
+    h1 {
+      font-weight: 900;
+      font-size: clamp(2.9rem, 8.4vw, 6.6rem);
+      line-height: 0.94;
+      text-transform: uppercase;
+      margin: 26px 0 24px;
+    }
+
+    h2 {
+      font-weight: 900;
+      font-size: clamp(2rem, 4.6vw, 3.6rem);
+      line-height: 1.02;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-weight: 800;
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+    }
+
+    p { margin-top: 0; }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .accent-cyan { color: var(--cyan); }
+    .accent-gold { color: var(--gold); }
+
+    .grad-text {
+      background: linear-gradient(100deg, #c2dcee 6%, var(--cyan) 42%, #6d92ad 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .grad-gold {
+      background: linear-gradient(100deg, var(--gold) 0%, #ffdf8e 60%, var(--sand) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .grad-green {
+      background: linear-gradient(100deg, var(--green) 0%, #8ff5c6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ---------- Nav ---------- */
+    #navbar {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 60;
+      transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+      padding: 18px 0;
+    }
+
+    #navbar.scrolled {
+      background: rgba(13, 10, 7, 0.86);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      min-height: 44px;
+    }
+
+    .brand img {
+      height: 40px;
+      width: 40px;
+      object-fit: contain;
+      transition: transform 0.35s ease;
+    }
+
+    .brand:hover img { transform: rotate(12deg); }
+
+    .brand span {
+      font-family: Cinzel, "Times New Roman", serif;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      font-size: 1.05rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--ink);
+      padding: 12px 2px;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover { color: var(--cyan); }
+
+    .nav-cta {
+      border: 2px solid var(--accent);
+      border-radius: 999px;
+      padding: 10px 22px !important;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .nav-cta:hover { background: var(--accent); color: #fff8ec !important; }
+
+    .nav-burger {
+      display: none;
+      background: none;
+      border: 0;
+      color: var(--ink);
+      padding: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      cursor: pointer;
+    }
+
+    .nav-burger svg { display: block; }
+
+    #mobileMenu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 22px 22px;
+      background: rgba(13, 10, 7, 0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    #mobileMenu a {
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.85rem;
+      padding: 13px 6px;
+      border-radius: 8px;
+    }
+
+    #mobileMenu a:hover { background: rgba(143, 180, 207, 0.1); color: var(--cyan); }
+
+    #mobileMenu.open { display: flex; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: 130px 0 70px;
+      background:
+        radial-gradient(ellipse at 18% 8%, rgba(140, 84, 32, 0.55), transparent 55%),
+        radial-gradient(ellipse at 85% 90%, rgba(88, 52, 22, 0.6), transparent 55%),
+        var(--nox-dark);
+      isolation: isolate;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      mix-blend-mode: screen;
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: -1;
+      animation: orbPulse 6s ease-in-out infinite;
+    }
+
+    .orb.o1 { top: 12%; left: 6%; width: 220px; height: 220px; background: var(--accent); }
+    .orb.o2 { bottom: 10%; right: 8%; width: 340px; height: 340px; background: var(--magenta); animation-delay: 1.4s; }
+    .orb.o3 { top: 46%; left: 44%; width: 260px; height: 260px; background: var(--gold); opacity: 0.14; animation-delay: 2.6s; }
+
+    @keyframes orbPulse {
+      0%, 100% { transform: scale(1); opacity: 0.22; }
+      50% { transform: scale(1.18); opacity: 0.3; }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      border: 1px solid rgba(143, 180, 207, 0.35);
+      border-radius: 999px;
+      background: rgba(143, 180, 207, 0.07);
+      color: var(--cyan);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .eyebrow .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 0 5px rgba(143, 180, 207, 0.16);
+      animation: dotBlink 2.2s ease-in-out infinite;
+    }
+
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .hero-sub {
+      max-width: 560px;
+      color: #dccbae;
+      font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+      font-weight: 300;
+    }
+
+    .hero-sub strong { color: var(--cyan); font-weight: 700; }
+    .hero-sub b { color: var(--gold); font-weight: 700; }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .btn-neon {
+      background: var(--accent);
+      color: #fff8ec;
+      box-shadow: 0 0 24px rgba(75, 119, 147, 0.45);
+      border: 1px solid transparent;
+    }
+
+    .btn-neon:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 42px rgba(143, 180, 207, 0.6);
+      background: #5d90ad;
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--ink);
+      background: transparent;
+    }
+
+    .btn-ghost:hover {
+      border-color: #fff8ec;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .btn-gold {
+      background: linear-gradient(120deg, var(--gold), #f2d492);
+      color: #1e1304;
+      border: 1px solid transparent;
+      box-shadow: 0 0 26px rgba(217, 164, 65, 0.35);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 44px rgba(217, 164, 65, 0.55);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      opacity: 0.5;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 10px); }
+    }
+
+    /* ---------- Phone mock ---------- */
+    .mock-wrap {
+      position: relative;
+      display: grid;
+      justify-items: center;
+    }
+
+    .mock-chip {
+      position: absolute;
+      z-index: 3;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: rgba(13, 10, 7, 0.88);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      box-shadow: var(--shadow);
+      animation: floatY 5s ease-in-out infinite;
+    }
+
+    .mock-chip small {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .mock-chip.c1 { top: 7%; left: -4%; color: var(--cyan); }
+    .mock-chip.c2 { top: 38%; right: -6%; color: var(--gold); animation-delay: 1.2s; }
+    .mock-chip.c3 { bottom: 9%; left: -2%; color: var(--green); animation-delay: 2.3s; }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .phone {
+      position: relative;
+      width: min(340px, 82vw);
+      aspect-ratio: 9 / 18.6;
+      border-radius: 42px;
+      border: 10px solid #090705;
+      background: #17120c;
+      overflow: hidden;
+      box-shadow: 0 40px 110px rgba(0, 0, 0, 0.6), 0 0 60px rgba(75, 119, 147, 0.18);
+    }
+
+    .screen {
+      position: absolute;
+      inset: 0;
+      background: #17120c;
+    }
+
+    .screen img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 7, 5, 0.35), transparent 18%, transparent 82%, rgba(9, 7, 5, 0.4));
+      pointer-events: none;
+    }
+
+    /* ---------- Sections ---------- */
+    section { position: relative; padding: 104px 0; }
+
+    .sec-label {
+      display: inline-block;
+      color: var(--cyan);
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      margin-bottom: 14px;
+    }
+
+    .sec-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+      gap: 30px;
+      align-items: end;
+      margin-bottom: 52px;
+    }
+
+    .sec-head p { color: var(--muted); margin-bottom: 0; }
+
+    .darker { background: var(--nox-darker); }
+
+    .glass-card {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius);
+      padding: 30px 28px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(143, 180, 207, 0.4);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: rgba(143, 180, 207, 0.1);
+      border: 1px solid rgba(143, 180, 207, 0.3);
+    }
+
+    .icon-badge svg { width: 26px; height: 26px; }
+
+    .icon-badge.gold { background: rgba(217, 164, 65, 0.1); border-color: rgba(217, 164, 65, 0.35); }
+    .icon-badge.green { background: rgba(134, 176, 83, 0.1); border-color: rgba(134, 176, 83, 0.35); }
+    .icon-badge.magenta { background: rgba(176, 66, 79, 0.08); border-color: rgba(176, 66, 79, 0.3); }
+
+    .card-text { color: var(--muted); font-size: 0.95rem; margin-bottom: 0; }
+    .card-text strong { color: var(--ink); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+
+    /* ---------- Worlds ---------- */
+    .world-card { position: relative; overflow: hidden; }
+
+    .world-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--wc, var(--cyan)), transparent 80%);
+      opacity: 0.9;
+    }
+
+    .world-card h3 { font-size: 1.02rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .world-card .enemy-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.66rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--wc, var(--cyan));
+      border: 1px solid color-mix(in srgb, var(--wc, var(--cyan)) 45%, transparent);
+      background: color-mix(in srgb, var(--wc, var(--cyan)) 9%, transparent);
+    }
+
+    .world-card p { font-size: 0.88rem; }
+
+    .note {
+      margin-top: 26px;
+      padding: 16px 20px;
+      border-left: 3px solid var(--gold);
+      background: rgba(217, 164, 65, 0.06);
+      border-radius: 0 10px 10px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .note strong { color: var(--gold); }
+
+    /* ---------- Options ---------- */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .option {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 38px 34px;
+      overflow: hidden;
+    }
+
+    .option .tier {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      margin-bottom: 12px;
+    }
+
+    .option-shot {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      margin: 4px 0 20px;
+      display: block;
+    }
+
+    .opt-3d .option-shot { object-position: center 26%; }
+
+    .option h3 {
+      font-family: Cinzel, "Times New Roman", serif;
+      font-weight: 900;
+      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      text-transform: uppercase;
+    }
+
+    .option .price {
+      font-family: Cinzel, "Times New Roman", serif;
+      font-weight: 900;
+      font-size: clamp(2.4rem, 4.4vw, 3.4rem);
+      line-height: 1;
+      margin: 18px 0 4px;
+    }
+
+    .option .per {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 22px;
+    }
+
+    .option ul {
+      list-style: none;
+      margin: 0 0 26px;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+      color: #dccbae;
+      font-size: 0.94rem;
+    }
+
+    .option ul li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .option ul svg { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 3px; }
+
+    .option .thirds {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .option .thirds div {
+      padding: 12px 6px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .option .thirds strong {
+      display: block;
+      font-family: Cinzel, "Times New Roman", serif;
+      font-size: 1rem;
+      color: #fff8ec;
+      margin-bottom: 3px;
+    }
+
+    .option.opt-2d { border-color: rgba(143, 180, 207, 0.35); }
+    .option.opt-2d .tier { color: var(--cyan); }
+    .option.opt-2d .price { color: var(--cyan); }
+
+    .option.opt-3d { border-color: rgba(217, 164, 65, 0.4); }
+    .option.opt-3d .tier { color: var(--gold); }
+    .option.opt-3d .price { color: var(--gold); }
+
+    .option .flare {
+      position: absolute;
+      top: -70px;
+      right: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.16;
+      pointer-events: none;
+    }
+
+    .opt-2d .flare { background: var(--cyan); }
+    .opt-3d .flare { background: var(--gold); }
+
+    /* ---------- Add-ons ---------- */
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .addon {
+      display: flex;
+      flex-direction: column;
+      padding: 26px 24px;
+    }
+
+    .addon .icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+      margin-bottom: 16px;
+    }
+
+    .addon .icon-badge svg { width: 22px; height: 22px; }
+
+    .addon h3 { font-size: 1rem; margin-bottom: 8px; }
+
+    .addon p { color: var(--muted); font-size: 0.84rem; margin-bottom: 20px; }
+
+    .addon .price-tag {
+      margin-top: auto;
+      font-family: Cinzel, "Times New Roman", serif;
+      font-weight: 900;
+      font-size: 1.45rem;
+      line-height: 1;
+      color: var(--gold);
+    }
+
+    .addon .price-tag small {
+      display: block;
+      margin-top: 5px;
+      font-family: Inter, sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ---------- Deal flow ---------- */
+    .flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      counter-reset: step;
+    }
+
+    .flow::before {
+      content: "";
+      position: absolute;
+      top: 26px;
+      left: 6%;
+      right: 6%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--accent), var(--gold), var(--gold), var(--green));
+      opacity: 0.4;
+    }
+
+    .step { position: relative; padding-top: 0; }
+
+    .step .n {
+      position: relative;
+      z-index: 1;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      font-family: Cinzel, "Times New Roman", serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      background: var(--nox-darker);
+      border: 2px solid var(--sc, var(--cyan));
+      color: var(--sc, var(--cyan));
+      box-shadow: 0 0 22px color-mix(in srgb, var(--sc, var(--cyan)) 35%, transparent);
+    }
+
+    .step h3 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .step .who {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--sc, var(--cyan));
+      border: 1px solid color-mix(in srgb, var(--sc, var(--cyan)) 45%, transparent);
+    }
+
+    .step p { color: var(--muted); font-size: 0.85rem; margin-bottom: 0; }
+    .step p strong { color: var(--ink); }
+
+    /* ---------- Split bars ---------- */
+    .splits { display: grid; gap: 22px; margin-top: 56px; }
+
+    .split-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .split-row .phase { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; }
+    .split-row .phase small { display: block; color: var(--muted); font-weight: 600; letter-spacing: 0.04em; text-transform: none; margin-top: 3px; }
+
+    .bar {
+      display: flex;
+      height: 46px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .bar div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      overflow: hidden;
+    }
+
+    .bar .px { background: linear-gradient(120deg, #8f6415, var(--gold)); color: #1e1304; }
+    .bar .nx { background: linear-gradient(120deg, var(--accent), var(--cyan)); color: #0f1a20; }
+
+    .visible .bar div { width: var(--w); }
+
+    .legend {
+      display: flex;
+      gap: 26px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 8px;
+    }
+
+    .legend .l-px i { background: var(--gold); }
+    .legend .l-nx i { background: var(--cyan); }
+
+    .callout {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+
+    .callout .commitment { border-color: rgba(217, 164, 65, 0.35); }
+
+    .callout .glass-card { padding: 30px; }
+
+    .callout .guarantee { border-color: rgba(134, 176, 83, 0.35); }
+
+    .callout h3 { display: flex; align-items: center; gap: 12px; }
+
+    .callout h3 svg { width: 22px; height: 22px; flex: 0 0 auto; }
+
+    /* ---------- Pipeline / IP ---------- */
+    .pipe { counter-reset: pipe; }
+
+    .pipe .glass-card { position: relative; padding-top: 58px; }
+
+    .pipe .glass-card::before {
+      counter-increment: pipe;
+      content: "0" counter(pipe);
+      position: absolute;
+      top: 18px;
+      left: 26px;
+      font-family: Cinzel, "Times New Roman", serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: rgba(143, 180, 207, 0.4);
+    }
+
+    /* ---------- Timeline ---------- */
+    .tl { position: relative; margin: 0; padding: 0 0 0 34px; list-style: none; }
+
+    .tl::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--cyan), var(--gold));
+      opacity: 0.5;
+    }
+
+    .tl li { position: relative; padding: 0 0 38px; }
+    .tl li:last-child { padding-bottom: 0; }
+
+    .tl li::before {
+      content: "";
+      position: absolute;
+      left: -32px;
+      top: 7px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--nox-dark);
+      border: 3px solid var(--cyan);
+      box-shadow: 0 0 16px rgba(143, 180, 207, 0.5);
+    }
+
+    .tl li.gold::before { border-color: var(--gold); box-shadow: 0 0 16px rgba(217, 164, 65, 0.5); }
+
+    .tl .when {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--cyan);
+    }
+
+    .tl li.gold .when { color: var(--gold); }
+
+    .tl h3 { margin: 6px 0 6px; font-size: 1.25rem; }
+    .tl p { color: var(--muted); max-width: 640px; margin-bottom: 0; }
+
+    /* ---------- Terms table ---------- */
+    .terms {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.94rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .terms th, .terms td {
+      text-align: left;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+
+    .terms th {
+      width: 240px;
+      background: rgba(143, 180, 207, 0.05);
+      color: var(--cyan);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .terms td { color: #dccbae; }
+    .terms td strong { color: #fff8ec; }
+    .terms tr:last-child th, .terms tr:last-child td { border-bottom: 0; }
+
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); }
+
+    /* ---------- CTA ---------- */
+    .cta {
+      text-align: center;
+      padding: 130px 0;
+      background:
+        radial-gradient(ellipse at 50% 120%, rgba(75, 119, 147, 0.35), transparent 60%),
+        radial-gradient(ellipse at 15% 0%, rgba(217, 164, 65, 0.14), transparent 50%),
+        var(--nox-darker);
+    }
+
+    .cta h2 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+
+    .cta p { color: var(--muted); max-width: 560px; margin: 0 auto 38px; }
+
+    .cta .hero-actions { justify-content: center; margin-top: 0; }
+
+    .cta .mail {
+      display: inline-block;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .cta .mail a { color: var(--cyan); text-decoration: none; font-weight: 700; }
+    .cta .mail a:hover { text-decoration: underline; }
+
+    footer {
+      padding: 34px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--nox-darker);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .foot-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .foot-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.12em; color: var(--ink); }
+    .foot-brand img { height: 26px; width: 26px; }
+
+    /* ---------- Reveal ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.d4 { transition-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      .visible .bar div { width: var(--w); }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1020px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+      .mock-wrap { order: 2; }
+      .sec-head { grid-template-columns: 1fr; align-items: start; }
+      .grid-4, .addons-grid { grid-template-columns: repeat(2, 1fr); }
+      .callout { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; gap: 30px; }
+      .flow::before {
+        top: 8px;
+        bottom: 8px;
+        left: 25px;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: linear-gradient(180deg, var(--cyan), var(--accent), var(--gold), var(--gold), var(--green));
+      }
+      .step { padding-left: 76px; }
+      .step .n { position: absolute; left: 0; top: 0; margin-bottom: 0; }
+      .split-row { grid-template-columns: 1fr; gap: 10px; }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links { display: none; }
+      .nav-burger { display: block; }
+      section { padding: 76px 0; }
+      .grid-3, .options-grid, .callout, .addons-grid { grid-template-columns: 1fr; }
+      .mock-chip.c1 { left: 0; }
+      .mock-chip.c2 { right: 0; }
+      .mock-chip.c3 { left: 4%; }
+      .bar div { font-size: 0.6rem; }
+      .terms th { width: 130px; padding: 13px 14px; }
+      .terms td { padding: 13px 14px; }
+    }
+
+    /* ---------- Kingdom Come theming ---------- */
+    h1 { font-size: clamp(2.6rem, 7.4vw, 5.6rem); line-height: 1.02; letter-spacing: 0.02em; }
+    h2 { font-size: clamp(1.8rem, 4.1vw, 3.1rem); line-height: 1.12; letter-spacing: 0.02em; }
+    .cta h2 { font-size: clamp(2.1rem, 5.2vw, 3.9rem); }
+    .option h3 { font-size: clamp(1.4rem, 2.4vw, 1.95rem); letter-spacing: 0.03em; }
+
+    /* Sub-brand kicker over the product name. */
+    .kicker {
+      display: block;
+      font-size: 0.34em;
+      letter-spacing: 0.24em;
+      line-height: 1.2;
+      margin-bottom: 0.28em;
+    }
+
+    /* Polished brass, sweeping slowly like light off a helm. */
+    .sheen {
+      display: inline-block;
+      background: linear-gradient(100deg, #a8791f 0%, var(--gold) 22%, #f7e6b6 44%, var(--sand) 60%, var(--gold) 78%, #a8791f 100%);
+      background-size: 260% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: sheenSweep 8s ease-in-out infinite;
+    }
+
+    @keyframes sheenSweep {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .cta {
+      background:
+        radial-gradient(ellipse at 50% 120%, rgba(217, 164, 65, 0.3), transparent 60%),
+        radial-gradient(ellipse at 15% 0%, rgba(176, 66, 79, 0.12), transparent 50%),
+        var(--nox-darker);
+    }
+
+    .pipe .glass-card::before { color: rgba(217, 164, 65, 0.45); }
+
+    .credit {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      opacity: 0.8;
+    }
+
+    /* Parchment grain over the whole page. */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.05;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.6'/></svg>");
+    }
+
+</style>
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <nav id="navbar">
+    <div class="shell nav-inner">
+      <a href="#top" class="brand">
+        <img src="assets/noxgames-logo.png" alt="NOXGAMES logo" />
+        <span>NOXGAMES</span>
+      </a>
+      <div class="nav-links">
+        <a href="#opportunity">Opportunity</a>
+        <a href="#concept">Concept</a>
+        <a href="#scope">Scope &amp; Budget</a>
+        <a href="#addons">Add-ons</a>
+        <a href="#deal">The Deal</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#terms" class="nav-cta">Term Sheet</a>
+      </div>
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <div id="mobileMenu">
+      <a href="#opportunity" onclick="toggleMenu()">Opportunity</a>
+      <a href="#concept" onclick="toggleMenu()">Concept</a>
+      <a href="#scope" onclick="toggleMenu()">Scope &amp; Budget</a>
+      <a href="#addons" onclick="toggleMenu()">Add-ons</a>
+      <a href="#deal" onclick="toggleMenu()">The Deal</a>
+      <a href="#timeline" onclick="toggleMenu()">Timeline</a>
+      <a href="#terms" onclick="toggleMenu()">Term Sheet</a>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <header class="hero" id="top">
+    <span class="orb o1"></span>
+    <span class="orb o2"></span>
+    <span class="orb o3"></span>
+
+    <div class="shell hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> NOXGAMES &times; Warhorse Studios &middot; Publishing Proposal</span>
+        <h1>
+          <span class="kicker grad-gold">Kingdom Come</span>
+          <span class="sheen">Ramparts</span>
+        </h1>
+        <p class="hero-sub">
+          A tower defense spin-off of our <strong>Mecha Fortress</strong>, rebuilt inside the Bohemia of
+          <b>Kingdom Come: Deliverance</b>. You fund it and own it. We build, ship and operate every part of it,
+          with <b>no call on your team</b>, and you take the larger share until you have recouped.
+        </p>
+        <div class="hero-actions">
+          <a href="#deal" class="btn btn-neon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            See the deal structure
+          </a>
+          <a href="#concept" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7z"/></svg>
+            Explore the concept
+          </a>
+        </div>
+      </div>
+
+      <div class="mock-wrap reveal">
+        <div class="mock-chip c1">8 regions<small>One per KCD landmark</small></div>
+        <div class="mock-chip c2">Q1 2027<small>Production opens</small></div>
+        <div class="mock-chip c3">Zero headcount<small>You commit no people</small></div>
+        <div class="phone">
+          <div class="screen">
+            <img src="assets/kcd-hero.jpg" alt="Art direction reference: a Bohemian river valley with a hilltop castle and a campaign trail across the map" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span class="scroll-hint">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+  </header>
+
+  <!-- ===== Opportunity ===== -->
+  <section id="opportunity">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">The Opportunity</span>
+          <h2>The model is <span class="grad-text">already proven.</span></h2>
+        </div>
+        <p class="reveal d1">
+          This is not co-development. You are buying firm knowhow and a market-proven product: the same
+          tower defense core has <strong>already shipped twice</strong>, under two different IPs and themes, both times
+          with positive and growing ROI. Warhorse funds it and approves it. NOXGAMES builds, ships and
+          operates it, <strong>without a single person coming off your mainline production</strong>.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="glass-card reveal">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#86b053" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4L12 14l-3-3"/></svg>
+          </div>
+          <h3>A validated playbook</h3>
+          <p class="card-text">
+            Our tower defense core has shipped twice: as our own Mecha Fortress and as a spin-off
+            co-published with TinySoft, re-themed for their audience. <strong>Two releases, two different
+            IPs and topics, positive and growing ROI both times.</strong> This is a repeat of a working
+            formula, not an experiment.
+          </p>
+        </div>
+        <div class="glass-card reveal d1">
+          <div class="icon-badge gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l4-3 4 3 4-3 4 3v12z"/><path d="M4 13h16M10 21v-5h4v5"/></svg>
+          </div>
+          <h3>Bohemia is already a defense game</h3>
+          <p class="card-text">
+            Kingdom Come is a world of <strong>raids, palisades, warbands and sieges</strong>. Tower defense
+            lives on exactly that: one place to hold, waves that escalate, an enemy roster that changes
+            with the region. Skalitz, Talmberg and Pribyslavitz are defense scenarios already.
+          </p>
+        </div>
+        <div class="glass-card reveal d2">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>
+          </div>
+          <h3>Ready to release</h3>
+          <p class="card-text">
+            The engine, combat systems, meta and live-ops backbone from Mecha Fortress <strong>exist today</strong>.
+            We re-theme, re-balance and polish. That is why the timeline reads in months, not years, and why
+            this reaches mobile players without a developer, artist, producer or live-ops person coming off
+            your mainline production.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Concept ===== -->
+  <section id="concept" class="darker">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">The Concept</span>
+          <h2>Raid. Fortify. <span class="grad-gold">Hold the line.</span></h2>
+        </div>
+        <p class="reveal d1">
+          Bohemia in 1403 is a land under raid. Every settlement on the road has to hold against an enemy
+          that fits the place: Cuman riders at Skalitz, mercenary companies at Trosky, a siege train at
+          Kuttenberg. Clear the waves, take the spoils, rebuild, ride on.
+        </p>
+      </div>
+
+      <div class="grid-4">
+        <div class="glass-card world-card reveal" style="--wc: #c05a4a;">
+          <span class="enemy-tag">Raiding waves</span>
+          <h3>Skalitz</h3>
+          <p class="card-text">Cuman riders arrive fast and in numbers, burning through an unwalled mining town.</p>
+        </div>
+        <div class="glass-card world-card reveal d1" style="--wc: #8fb4cf;">
+          <span class="enemy-tag">Siege assault</span>
+          <h3>Talmberg</h3>
+          <p class="card-text">Ladders, rams and heavy infantry thrown at stone. Slow, armoured, relentless.</p>
+        </div>
+        <div class="glass-card world-card reveal d2" style="--wc: #d9a441;">
+          <span class="enemy-tag">Mixed companies</span>
+          <h3>Rattay</h3>
+          <p class="card-text">Bandit bands of uneven quality that punish a defense built for one kind of threat.</p>
+        </div>
+        <div class="glass-card world-card reveal d3" style="--wc: #b8a6d8;">
+          <span class="enemy-tag">Armoured ranks</span>
+          <h3>Sasau</h3>
+          <p class="card-text">Disciplined, well-equipped columns that demand armour-piercing answers.</p>
+        </div>
+        <div class="glass-card world-card reveal" style="--wc: #d97a3c;">
+          <span class="enemy-tag">Sappers and fire</span>
+          <h3>Pribyslavitz</h3>
+          <p class="card-text">Enemies that go for your structures instead of your gate. Rebuild between waves or lose the line.</p>
+        </div>
+        <div class="glass-card world-card reveal d1" style="--wc: #b0424f;">
+          <span class="enemy-tag">Warband boss</span>
+          <h3>Vranik</h3>
+          <p class="card-text">The hidden camp. A set-piece encounter with mechanics to read, learn and beat.</p>
+        </div>
+        <div class="glass-card world-card reveal d2" style="--wc: #86b053;">
+          <span class="enemy-tag">Mercenary bands</span>
+          <h3>Trosky</h3>
+          <p class="card-text">Paid professionals who bring a counter to whatever you leaned on last run.</p>
+        </div>
+        <div class="glass-card world-card reveal d3" style="--wc: #e6c98f;">
+          <span class="enemy-tag">Endgame siege</span>
+          <h3>Kuttenberg</h3>
+          <p class="card-text">The mastery tier. Siege engines, endless mode, leaderboards and live-ops events.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top: 26px;">
+        <div class="glass-card reveal">
+          <div class="icon-badge gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V9l6-6 6 6v12M9 21v-6h6v6"/></svg>
+          </div>
+          <h3>Rebuild between battles</h3>
+          <p class="card-text">A settlement meta in the spirit of the Pribyslavitz reconstruction: forge, armoury, alchemy bench and stables upgrade what you can field in the next defense.</p>
+        </div>
+        <div class="glass-card reveal d1">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+          </div>
+          <h3>Henry and the cast</h3>
+          <p class="card-text">Henry, Sir Radzig, Hans Capon, Captain Bernard and Theresa as commanders with active abilities that headline each campaign, all subject to your casting and canon approval.</p>
+        </div>
+        <div class="glass-card reveal d2">
+          <div class="icon-badge magenta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b0424f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>Live-ops from day one</h3>
+          <p class="card-text">Events, seasonal waves keyed to the medieval calendar and remote-configured difficulty tuning ship with the release, powered by our existing platform.</p>
+        </div>
+      </div>
+
+      <p class="note reveal">
+        <strong>Design note:</strong> region order, enemy rosters and named characters above are directional
+        examples drawn from the published Kingdom Come: Deliverance games. Final region selection, canon and
+        character use are agreed with your team during pre-production.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Scope &amp; Budget ===== -->
+  <section id="scope">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">Scope &amp; Budget</span>
+          <h2>Two ways to <span class="grad-text">build it.</span></h2>
+        </div>
+        <p class="reveal d1">
+          Development cost and length are defined by the art direction you choose. Both options are
+          2D games and ship the full experience; they differ in how the art is produced. Warhorse funds the
+          budget in <strong>three equal milestones</strong>, and the delivery milestone is <strong>waived in full</strong> if we miss
+          the agreed date or scope. Final scope and timeline are confirmed at signing.
+        </p>
+      </div>
+
+      <div class="options-grid">
+        <div class="glass-card option opt-2d reveal">
+          <span class="flare"></span>
+          <span class="tier">Option A</span>
+          <h3>Painted 2D</h3>
+          <img class="option-shot" src="assets/kcd-2d.jpg" alt="Art direction reference: a hand-painted isometric medieval village defense board" />
+          <p class="card-text">Hand-painted 2D in a warm period illustration style. Instantly readable on a phone, cheap to extend across eight regions, and the fastest path to market.</p>
+          <div class="price">&euro;250K</div>
+          <p class="per">3 months of development</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Hand-painted period art, built for small screens</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Fastest route to a Q2 2027 delivery</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Lightest asset load on your team</li>
+          </ul>
+          <div class="thirds">
+            <div><strong>&euro;83.3K</strong>at signing</div>
+            <div><strong>&euro;83.3K</strong>at delivery</div>
+            <div><strong>&euro;83.3K</strong>at launch</div>
+          </div>
+        </div>
+
+        <div class="glass-card option opt-3d reveal d1">
+          <span class="flare"></span>
+          <span class="tier">Option B</span>
+          <h3>Rendered Realism</h3>
+          <img class="option-shot" src="assets/kcd-3d.jpg" alt="Art direction reference: a photorealistic isometric castle bailey rendered as a 3D diorama" />
+          <p class="card-text">The grounded, muddy realism of Kingdom Come itself. Still a 2D game: we build 3D models and pre-render them into 2D spritesheets, so the game carries the cinematic look with all the performance of 2D.</p>
+          <div class="price">&euro;350K</div>
+          <p class="per">5 to 6 months of development</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 3D models pre-rendered into 2D spritesheets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> The visual bar your own key art already sets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Reads as Kingdom Come at first glance</li>
+          </ul>
+          <div class="thirds">
+            <div><strong>&euro;116.7K</strong>at signing</div>
+            <div><strong>&euro;116.7K</strong>at delivery</div>
+            <div><strong>&euro;116.6K</strong>at launch</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note reveal">
+        <strong>On the images:</strong> both shots above are art direction references produced by NOXGAMES for
+        this proposal. They are not Kingdom Come: Deliverance assets and not final screens. The real look is
+        built from your source materials after signing.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Add-ons ===== -->
+  <section id="addons" class="darker">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">Add-ons</span>
+          <h2>Extras on top. <span class="grad-gold">Only if you want them.</span></h2>
+        </div>
+        <p class="reveal d1">
+          The development budget covers the complete game, including three A/B tests run in the
+          direction you set. Everything below is optional, priced as a one-time fee in EUR, and can be
+          ordered at signing or any time later.
+        </p>
+      </div>
+
+      <div class="addons-grid">
+        <div class="glass-card addon reveal">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></svg>
+          </div>
+          <h3>Playable ad: real gameplay</h3>
+          <p>A simplified playable version of the actual game, built for ad networks and tuned for completion rate.</p>
+          <div class="price-tag">&euro;5K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal d1">
+          <div class="icon-badge magenta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b0424f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7h20v10H2z"/><path d="M6 7V5h12v2M9 12h6"/></svg>
+          </div>
+          <h3>Playable ad: concept</h3>
+          <p>An ad-first "fake gameplay" playable, engineered purely for click-through and CPI performance.</p>
+          <div class="price-tag">&euro;5K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal d2">
+          <div class="icon-badge gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-2.5-8.5z"/></svg>
+          </div>
+          <h3>Marketing license for game assets</h3>
+          <p>Use the in-game assets we create freely in your own marketing, across campaigns and channels.</p>
+          <div class="price-tag">&euro;2K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal d3">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#86b053" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-11M12 6V3M20 21v-5M20 12V3"/><path d="M1 14h6M9 6h6M17 16h6"/></svg>
+          </div>
+          <h3>Cheat build for content capture</h3>
+          <p>An on-device editor build to stage and record artificial game content for creatives, stores and social.</p>
+          <div class="price-tag">&euro;10K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal">
+          <div class="icon-badge gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2 0-2.8-.8-.7-2.2-.8-3 .8z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.7 12.7 0 0 1 21.7 2c0 2.7-.9 7.4-6.1 10.7A22.4 22.4 0 0 1 12 15z"/><path d="M9 12H4s.5-3 2-4c1.6-1 5 0 5 0M12 15v5s3-.5 4-2c1-1.6 0-5 0-5"/></svg>
+          </div>
+          <h3>Initial UA + ASO package</h3>
+          <p>Full-service provisioning of launch UA and ASO materials: store copy, icons, screenshots and the first creative set.</p>
+          <div class="price-tag">&euro;10K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal d1">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 6-6"/></svg>
+          </div>
+          <h3>Pre-launch CPI validation</h3>
+          <p>Store-style test pages plus a live ad test measuring real CPI before launch, closed with a go/no-go report.</p>
+          <div class="price-tag">&euro;8K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal d2">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#86b053" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Localization pack</h3>
+          <p>Five additional languages beyond English, translated, integrated and verified in-game.</p>
+          <div class="price-tag">&euro;3K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal d3">
+          <div class="icon-badge magenta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#b0424f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2l-2 5v13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7l-2-5z"/><path d="M4 7h16M16 11a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3>Store release management</h3>
+          <p>Listings, builds, review compliance and submission on both stores, handled end to end under your accounts.</p>
+          <div class="price-tag">&euro;4K<small>One-time</small></div>
+        </div>
+
+        <div class="glass-card addon reveal">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M12 9l-5 5M12 9l5 5"/><circle cx="7" cy="18" r="3"/><circle cx="17" cy="18" r="3"/></svg>
+          </div>
+          <h3>Additional A/B tests</h3>
+          <p>A further bundle of A/B tests beyond the three included in development, run and evaluated with your team.</p>
+          <div class="price-tag">&euro;2K<small>Per test</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Deal ===== -->
+  <section id="deal">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">The Deal</span>
+          <h2>You fund it,<br />
+          <span class="grad-gold">we run all of it,</span><br />
+          <span class="grad-green">we both collect.</span></h2>
+        </div>
+        <p class="reveal d1">
+          Warhorse provides the cashflow and the world. NOXGAMES provides everything else: the build, the
+          live-ops, the store work and the creative. You commit money and canon approval, and not one person
+          from your production. Your UA comes back off the top, and you take the larger share until you have recouped.
+        </p>
+      </div>
+
+      <div class="flow reveal">
+        <div class="step" style="--sc: #8fb4cf;">
+          <div class="n">1</div>
+          <span class="who">Warhorse funds</span>
+          <h3>Signing</h3>
+          <p><strong>1/3 of the budget</strong> upfront. Production starts, scope and delivery date are locked in the contract.</p>
+        </div>
+        <div class="step" style="--sc: #4b7793;">
+          <div class="n">2</div>
+          <span class="who">Warhorse funds</span>
+          <h3>Delivery</h3>
+          <p><strong>1/3 on delivery</strong> of the agreed scope. <strong>Waived entirely</strong> if we miss the agreed date or scope.</p>
+        </div>
+        <div class="step" style="--sc: #d9a441;">
+          <div class="n">3</div>
+          <span class="who">Warhorse funds</span>
+          <h3>Launch and UA</h3>
+          <p>Final <strong>1/3 at launch</strong>, plus UA cashflow. We ship on both stores and run live-ops. <strong>You assign nobody.</strong></p>
+        </div>
+        <div class="step" style="--sc: #d9a441;">
+          <div class="n">4</div>
+          <span class="who">From revenue</span>
+          <h3>Favorable share</h3>
+          <p>UA returns off the top, then gross profit is split <strong>70/30 in your favor</strong> until you have recouped the full budget.</p>
+        </div>
+        <div class="step" style="--sc: #86b053;">
+          <div class="n">5</div>
+          <span class="who">Both, monthly</span>
+          <h3>Perpetuity</h3>
+          <p>From then on, gross profit is shared <strong>50/50, settled monthly, in perpetuity</strong>.</p>
+        </div>
+      </div>
+
+      <div class="splits reveal" id="splitBars">
+        <div class="split-row">
+          <div class="phase">UA recovery <small>Of revenue, before gross profit is calculated</small></div>
+          <div class="bar">
+            <div class="px" style="--w: 100%;">Warhorse UA repaid in full</div>
+            <div class="nx" style="--w: 0%;"></div>
+          </div>
+        </div>
+        <div class="split-row">
+          <div class="phase">Phase 1 <small>Of gross profit, until Warhorse recoups the full budget</small></div>
+          <div class="bar">
+            <div class="px" style="--w: 70%;">Warhorse 70%</div>
+            <div class="nx" style="--w: 30%;">NOX 30%</div>
+          </div>
+        </div>
+        <div class="split-row">
+          <div class="phase">Phase 2 <small>Of gross profit, forever after, settled monthly</small></div>
+          <div class="bar">
+            <div class="px" style="--w: 50%;">Warhorse 50%</div>
+            <div class="nx" style="--w: 50%;">NOX 50%</div>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="l-px"><i></i>Warhorse Studios</span>
+          <span class="l-nx"><i></i>NOXGAMES</span>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="glass-card reveal">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#8fb4cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 6-6"/></svg>
+            What counts as gross profit
+          </h3>
+          <p class="card-text">
+            Gross profit is <strong>revenue minus UA spend, and nothing else</strong>. Your UA cashflow is therefore
+            <strong>repaid in full before a single euro is split</strong>. It is measured on cohorts that are already
+            ROI positive at an agreed retention checkpoint between <strong>D30 and D60</strong>, fixed at signing.
+            Clean, auditable, and shared monthly.
+          </p>
+        </div>
+        <div class="glass-card guarantee reveal d1">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#86b053" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+            Our delivery guarantee
+          </h3>
+          <p class="card-text">
+            If NOXGAMES does not deliver the agreed scope at the agreed date, the delivery milestone is
+            <strong>dropped in full</strong>. You keep that third and the game still ships. We carry the schedule risk,
+            in writing.
+          </p>
+        </div>
+        <div class="glass-card commitment reveal d2">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8z"/></svg>
+            What you never provide
+          </h3>
+          <p class="card-text">
+            <strong>People.</strong> No developers, artists, producers or live-ops staff. NOXGAMES runs development,
+            store submission, creative production, live-ops and player support end to end. Alongside the budget,
+            Warhorse commits a minimum of <strong>&euro;500K to UA in the first 3 months</strong> after release, repaid off the
+            top of revenue. If that commitment is not met, NOXGAMES receives <strong>one third of the development
+            cost</strong> as reparation, mirroring our delivery guarantee.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== IP &amp; Assets ===== -->
+  <section id="assets" class="darker">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">IP &amp; Assets</span>
+          <h2>Your world, <span class="grad-text">handled with care.</span></h2>
+        </div>
+        <p class="reveal d1">
+          Nothing ships without your approval, and everything we produce from your source material stays
+          yours to use. The collaboration is designed to feed value back into Warhorse, not just borrow from it.
+        </p>
+      </div>
+
+      <div class="grid-3 pipe">
+        <div class="glass-card reveal">
+          <h3>You share sources and canon</h3>
+          <p class="card-text">Warhorse provides the source materials used in the game and in marketing: characters, environments, style guides, references and the canon rules that come with them.</p>
+        </div>
+        <div class="glass-card reveal d1">
+          <h3>We build the game</h3>
+          <p class="card-text">NOXGAMES turns them into in-game assets in the chosen art direction: regions, enemies, towers, commanders, UI and effects. Every asset and every line of narrative content passes your brand and canon review before it ships.</p>
+        </div>
+        <div class="glass-card reveal d2">
+          <h3>Assets flow back</h3>
+          <p class="card-text">Upon request, everything we create is delivered back to Warhorse for further use in your own games and campaigns. A marketing license for these assets is available as an add-on.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Timeline ===== -->
+  <section id="timeline">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">Timeline</span>
+          <h2>Production in Q1, live the <span class="grad-gold">same year.</span></h2>
+        </div>
+        <p class="reveal d1">
+          Production opens in Q1 2027. Delivery lands in Q2 or Q3 2027 depending on the art direction and
+          final scope, fixed at signing and backed by our delivery guarantee.
+        </p>
+      </div>
+
+      <ol class="tl">
+        <li class="reveal">
+          <span class="when">Now</span>
+          <h3>Proposal review</h3>
+          <p>You are here. We walk through the concept and terms together, answer questions and align on the art direction in a working session.</p>
+        </li>
+        <li class="reveal">
+          <span class="when">Q4 2026</span>
+          <h3>Contract and kickoff</h3>
+          <p>Art direction chosen, exact scope and development length confirmed, delivery date locked. First third is paid and pre-production starts on your source materials.</p>
+        </li>
+        <li class="reveal">
+          <span class="when">Q1 2027</span>
+          <h3>Production opens</h3>
+          <p>Three months for painted 2D, five to six for rendered realism. Built on the live Mecha Fortress foundation, with canon review running alongside production rather than at the end.</p>
+        </li>
+        <li class="reveal">
+          <span class="when">Q2 or Q3 2027</span>
+          <h3>Full scope handover</h3>
+          <p>Painted 2D delivers in Q2 2027, rendered realism in Q3 2027. The agreed scope is delivered and verified. Second third is due here, and only if we hit the agreed date and scope.</p>
+        </li>
+        <li class="gold reveal">
+          <span class="when">Q2 / Q3 2027 target</span>
+          <h3>Release and revenue share</h3>
+          <p>Launch under the Kingdom Come: Deliverance banner. Final third is paid, your UA cashflow starts and returns off the top, and the 70/30 share begins paying out monthly.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Term sheet ===== -->
+  <section id="terms" class="darker">
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="sec-label">Term Sheet</span>
+          <h2>The whole deal, <span class="grad-text">one table.</span></h2>
+        </div>
+        <p class="reveal d1">Everything above, condensed for your legal and finance teams.</p>
+      </div>
+
+      <div class="table-wrap reveal">
+        <table class="terms">
+          <tr><th>Product</th><td>Tower defense spin-off of <strong>Mecha Fortress</strong>, set in the Bohemia of <strong>Kingdom Come: Deliverance</strong>, with per-region enemy rosters and a campaign that follows the map. Working title <strong>Kingdom Come: Ramparts</strong>. Built on a core <strong>already released twice with different IPs and themes, both times with positive and growing ROI</strong>; firm knowhow, not speculative co-development.</td></tr>
+          <tr><th>Platforms</th><td><strong>Mobile, iOS and Android.</strong> A platform the mainline titles do not occupy, with no overlap with and no exposure for the premium PC and console business.</td></tr>
+          <tr><th>Development</th><td><strong>3 to 6 months</strong> depending on scope. Exact content scope is <strong>negotiated and confirmed at signing</strong>.</td></tr>
+          <tr><th>A/B testing</th><td><strong>Three A/B tests are included</strong> in development, run based on Warhorse's direction. Additional tests are available as an add-on at <strong>&euro;2K per test</strong>.</td></tr>
+          <tr><th>Budget</th><td><strong>&euro;250K</strong> for hand-painted 2D in a period illustration style (3 months), or <strong>&euro;350K</strong> for the grounded realistic look of Kingdom Come, built as 3D models and pre-rendered into 2D spritesheets (5 to 6 months). Both ship as 2D games and both are <strong>funded by Warhorse in three equal milestones</strong>.</td></tr>
+          <tr><th>Add-ons</th><td>Optional fixed-price services on top of the budget (in EUR): playable ads, marketing license for game assets, cheat build for content capture, initial UA and ASO package, CPI validation, localization, store release management.</td></tr>
+          <tr><th>Development funding</th><td>Warhorse funds <strong>100% of the budget in three equal milestones</strong>: at signing, on delivery of the agreed scope, and at launch.</td></tr>
+          <tr><th>Warhorse contribution</th><td>The <strong>IP licence</strong>, brand and canon approval, <strong>development funding</strong> and <strong>UA cashflow</strong>. <strong>No production resource:</strong> Warhorse assigns no developers, artists, producers or live-ops staff at any stage.</td></tr>
+          <tr><th>Operations</th><td>NOXGAMES handles <strong>development, live-ops, store management, creative production and player support</strong>, end to end.</td></tr>
+          <tr><th>UA recovery</th><td>Revenue <strong>repays Warhorse's UA spend in full</strong> before gross profit is calculated. The UA commitment is working capital, not sunk cost.</td></tr>
+          <tr><th>Revenue share, phase 1</th><td>Gross profit is split <strong>70/30 in Warhorse's favor</strong> until Warhorse has recouped its full development investment.</td></tr>
+          <tr><th>Steady state</th><td>Once Warhorse's development investment is recouped, <strong>perpetual 50/50 gross profit share</strong>, settled monthly.</td></tr>
+          <tr><th>Gross profit definition</th><td>Revenue from cohorts that are <strong>ROI positive at the agreed retention day (D30 to D60</strong>, set at signing<strong>)</strong>, with <strong>UA spend as the only cost</strong> deducted.</td></tr>
+          <tr><th>Post-launch updates</th><td>Bug fixes are included. Expanding content ships as future updates: <strong>once the full development cost is recouped and monthly gross profit exceeds $45K USD per side, up to 2 updates per quarter are guaranteed</strong>. Work beyond that pace is billed at an agreed hourly rate; before those thresholds, updates can be commissioned at an extra negotiated development cost per release.</td></tr>
+          <tr><th>IP &amp; assets</th><td>Warhorse <strong>provides source materials</strong> for asset creation. NOXGAMES creates the in-game assets and <strong>delivers them back upon request</strong> for further use in Warhorse games and campaigns; a marketing license is available as an add-on.</td></tr>
+          <tr><th>Brand &amp; canon approval</th><td>Warhorse holds <strong>approval over all assets, characters, narrative content and live-ops events</strong>. Review runs alongside production, with agreed turnaround windows so approvals do not move the delivery date.</td></tr>
+          <tr><th>Live-ops</th><td><strong>NOXGAMES operates live-ops</strong> on its existing platform and carries the mobile operations knowhow. Warhorse retains brand and canon approval over events and content.</td></tr>
+          <tr><th>Production &amp; release</th><td>Production <strong>opens Q1 2027</strong>. Delivery <strong>Q2 2027</strong> for painted 2D or <strong>Q3 2027</strong> for rendered realism, depending on final requirements. Date fixed at signing.</td></tr>
+          <tr><th>Delivery guarantee</th><td>If NOXGAMES does not deliver the agreed scope at the agreed date, <strong>the delivery milestone is dropped in full</strong> and the game still ships.</td></tr>
+          <tr><th>UA commitment</th><td>Warhorse, with its publisher, commits to a <strong>minimum of &euro;500K UA spend within the first 3 months after release</strong>, repaid off the top of revenue. If the commitment is not met, NOXGAMES receives <strong>one third of the development cost as reparation</strong>, mirroring the delivery guarantee. Owned-channel activation is additive and does not substitute for the spend.</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta">
+    <div class="shell">
+      <span class="eyebrow reveal"><span class="dot"></span> Next step</span>
+      <h2 class="reveal d1">Let's <span class="grad-gold">hold the line.</span></h2>
+      <p class="reveal d2">
+        One working session is enough to pick the art direction, confirm the scope and put a date on the contract.
+        We bring the build, the crew and the live-ops. You bring the world and the funding, and nobody from
+        your team. Two Czech studios, one timezone, nothing lost in translation.
+      </p>
+      <div class="hero-actions reveal d3">
+        <a class="btn btn-gold" href="mailto:studio@noxgames.com?subject=Kingdom%20Come%20Ramparts%20Proposal">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
+          Book the working session
+        </a>
+        <a class="btn btn-ghost" href="https://noxgames.com" target="_blank" rel="noopener">Visit noxgames.com</a>
+      </div>
+      <span class="mail reveal d4">Or write us directly at <a href="mailto:studio@noxgames.com">studio@noxgames.com</a></span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="shell foot-inner">
+      <span class="foot-brand"><img src="assets/noxgames-logo.png" alt="" />NOXGAMES</span>
+      <span>Prepared for Warhorse Studios &middot; August 2026 &middot; Confidential &middot; Kingdom Come: Deliverance is a trademark of Warhorse Studios; all imagery shown is NOXGAMES art direction reference.</span>
+      <span>Games with no limits.</span>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const burger = document.querySelector('.nav-burger');
+
+    function toggleMenu() {
+      const open = mobileMenu.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+  </script>
+</body>
+</html>
