@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jan Vaněček: Design Tryout (Puppet hry)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f7fb;
+    --surface:#ffffff;
+    --surface-2:#eef0f7;
+    --text:#171a26;
+    --text-soft:#565d73;
+    --line:#dde1ec;
+    --accent:#4f46e5;
+    --accent-soft:#eceafd;
+    --good:#0f766e;
+    --good-soft:#e2f4f1;
+    --warn:#b45309;
+    --warn-soft:#fdf1e0;
+    --todo:#b91c1c;
+    --todo-soft:#fdeaea;
+    --todo-line:#e8b4b4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1117;
+      --surface:#171a23;
+      --surface-2:#1f2330;
+      --text:#e8eaf2;
+      --text-soft:#9aa1b5;
+      --line:#2a2f3f;
+      --accent:#8b84f5;
+      --accent-soft:#26243d;
+      --good:#4fd1c0;
+      --good-soft:#132b28;
+      --warn:#f0b35e;
+      --warn-soft:#2e2415;
+      --todo:#f08c8c;
+      --todo-soft:#2e1717;
+      --todo-line:#5a2e2e;
+    }
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; scroll-padding-top:70px; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', system-ui, -apple-system, sans-serif;
+    line-height:1.65;
+    font-size:16px;
+  }
+  a{ color:var(--accent); }
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:960px; margin:0 auto; padding:10px 20px;
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .brand{ font-weight:800; letter-spacing:1px; font-size:15px; }
+  .brand span{ color:var(--accent); }
+  .nav-links{ display:flex; gap:4px; flex-wrap:wrap; margin-left:auto; }
+  .nav-links a{
+    text-decoration:none; color:var(--text-soft);
+    font-size:13px; font-weight:600;
+    padding:5px 10px; border-radius:8px;
+  }
+  .nav-links a:hover{ background:var(--surface-2); color:var(--text); }
+  header.hero{
+    max-width:960px; margin:0 auto; padding:56px 20px 8px;
+  }
+  .tag{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:.6px;
+    text-transform:uppercase; color:var(--accent);
+    background:var(--accent-soft); border-radius:999px; padding:4px 12px;
+  }
+  h1{
+    font-size:clamp(28px, 5vw, 40px); font-weight:800;
+    line-height:1.15; margin:14px 0 8px;
+  }
+  .hero-sub{ color:var(--text-soft); font-size:16px; max-width:640px; }
+  .meta-row{
+    display:flex; gap:22px; flex-wrap:wrap;
+    margin-top:22px; padding-top:18px; border-top:1px solid var(--line);
+    font-size:14px;
+  }
+  .meta-row div b{ display:block; font-size:12px; text-transform:uppercase; letter-spacing:.5px; color:var(--text-soft); font-weight:600; margin-bottom:2px; }
+  main{ max-width:960px; margin:0 auto; padding:12px 20px 90px; }
+  section{ margin-top:56px; }
+  h2{
+    font-size:24px; font-weight:800; margin:0 0 6px;
+    display:flex; align-items:baseline; gap:12px;
+  }
+  h2 .num{
+    color:var(--accent); font-size:15px; font-weight:800;
+  }
+  .section-sub{ color:var(--text-soft); margin:0 0 20px; font-size:15px; }
+  h3{ font-size:17px; font-weight:700; margin:26px 0 8px; }
+  .card{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:22px 24px; margin-top:16px;
+  }
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  @media (max-width:720px){ .grid-2{ grid-template-columns:1fr; } }
+  ul{ padding-left:20px; margin:10px 0; }
+  li{ margin:6px 0; }
+  li::marker{ color:var(--accent); }
+  .pill{
+    display:inline-block; font-size:12px; font-weight:700; border-radius:999px;
+    padding:3px 10px; margin-bottom:8px;
+  }
+  .pill.good{ color:var(--good); background:var(--good-soft); }
+  .pill.warn{ color:var(--warn); background:var(--warn-soft); }
+  .pill.accent{ color:var(--accent); background:var(--accent-soft); }
+  .todo{
+    border:2px dashed var(--todo-line);
+    background:var(--todo-soft);
+    border-radius:14px; padding:18px 22px; margin-top:16px;
+    color:var(--text);
+  }
+  .todo .todo-label{
+    font-size:12px; font-weight:800; letter-spacing:.8px; text-transform:uppercase;
+    color:var(--todo); margin-bottom:6px;
+  }
+  .quote{
+    border-left:3px solid var(--accent);
+    padding:2px 0 2px 16px; margin:14px 0;
+    color:var(--text-soft); font-style:italic;
+  }
+  .embed-frame{
+    margin-top:18px; border:1px solid var(--line); border-radius:14px;
+    overflow:hidden; background:var(--surface);
+  }
+  .embed-bar{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    padding:10px 16px; border-bottom:1px solid var(--line);
+    background:var(--surface-2); font-size:13px; font-weight:600;
+  }
+  .embed-bar .spacer{ margin-left:auto; }
+  .btn{
+    display:inline-block; text-decoration:none; font-size:13px; font-weight:700;
+    color:#fff; background:var(--accent);
+    padding:7px 16px; border-radius:9px;
+  }
+  .btn.ghost{
+    color:var(--accent); background:transparent; border:1px solid var(--accent);
+  }
+  iframe.pdf{ width:100%; height:720px; border:0; display:block; background:#fff; }
+  .phone-wrap{
+    display:flex; flex-direction:column; align-items:center;
+    padding:28px 12px; background:var(--surface-2);
+  }
+  .phone{
+    width:min(380px, 92vw); aspect-ratio:9/17.5;
+    border-radius:34px; border:10px solid #14121c;
+    overflow:hidden; background:#000;
+    box-shadow:0 24px 60px rgba(0,0,0,.35);
+  }
+  .phone iframe{ width:100%; height:100%; border:0; display:block; }
+  .phone-hint{ font-size:13px; color:var(--text-soft); margin-top:14px; text-align:center; max-width:420px; }
+  table{ width:100%; border-collapse:collapse; margin-top:12px; font-size:14.5px; }
+  th, td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ font-size:12px; text-transform:uppercase; letter-spacing:.5px; color:var(--text-soft); }
+  .table-scroll{ overflow-x:auto; }
+  footer{
+    border-top:1px solid var(--line);
+    padding:26px 20px 50px; text-align:center;
+    color:var(--text-soft); font-size:13px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">NOX<span>GAMES</span></div>
+    <div class="nav-links">
+      <a href="#schuzka">Schůzka</a>
+      <a href="#vystup">Výstup</a>
+      <a href="#twist">Twist</a>
+      <a href="#poznamky">Moje poznámky</a>
+      <a href="#puppets">Nápady na puppets</a>
+      <a href="#dal">Co teď</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="tag">Interní podklad, nešířit dál</span>
+  <h1>Jan Vaněček: testovací úkol<br>Puppet hry</h1>
+  <p class="hero-sub">Shrnutí tryoutu kandidáta na game designera, jeho výstupy k našim puppet hrám a moje doporučení, jak s tím naložit.</p>
+  <div class="meta-row">
+    <div><b>Kandidát</b>Jan Vaněček</div>
+    <div><b>Zadání</b>Analýza puppet her (retence a monetizace)</div>
+    <div><b>Připravil</b>David Vykopal</div>
+    <div><b>Schůzka</b>25. 8. 2026</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. SOUHRN SCHUZKY -->
+  <section id="schuzka">
+    <h2><span class="num">01</span>Souhrn schůzky</h2>
+    <p class="section-sub">Kandidát prezentoval svůj postup a výstupy z testovacího úkolu, cca 40 minut.</p>
+
+    <div class="card">
+      <p><b>Zadání:</b> podívat se na naše puppet hry (Puppet Hockey a příbuzné tituly) a navrhnout zlepšení pro dvě hlavní byznys metriky: retenci (D1, D7, D30) a monetizaci.</p>
+      <p><b>Jak k tomu přistoupil:</b> nezačal u nápadů, ale u procesu. Vede ho vždy od byznys cílů přes identifikaci příležitostí a problémů, ideaci a prioritizaci (matice impact vs. riziko) až po přípravu na development: story mapy, akceptační kritéria a hlavně validační metriky, podle kterých se po releasu vyhodnotí, jestli feature splnila cíl. Zdůrazňoval, že týmy často skáčou rovnou k solutions a chybí jim linka na původní problém.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="pill good">Co na schůzce zaznělo ke hře</span>
+        <ul>
+          <li>Skill hráče má dnes na výsledek zápasu výrazně větší vliv než atributy. Power progrese není v core hře čitelná, což brzdí monetizaci.</li>
+          <li>Zápasy se snowballují. Při vedení 10:0 je optimální strategie nedělat nic a čekat na konec, protože gól zastavuje a prodlužuje čas.</li>
+          <li>Ovládání a prezentace působí zastarale, hry vznikly před delší dobou.</li>
+          <li>Arkádovost vidí jako výhodu. Doporučuje soupeřit v segmentu arcade sport, ne s fotorealistickými tituly typu NHL.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill warn">Kde narazil</span>
+        <ul>
+          <li>Nedostal se pořádně k monetizačním datům (IAP), SQL dotazy mu běžely pomalu a dělal to o víkendu.</li>
+          <li>Stihl ad konverze a pár retenčních dotazů. U rewarded videí mu vyšla překvapivě nízká konverze, ale datům nevěřil natolik, aby je prezentoval. Sám to přiznal a chce si to ověřit.</li>
+          <li>V dokumentu chybí konkrétní číselné odhady u validačních cílů, jen definice metrik.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <p><b>Klíčový moment schůzky:</b> na přímou otázku, jestli má větší smysl hru vylepšovat tásky, nebo ji zkusit otočit, odpověděl, že by strategii rozdělil na dvě paralelní cesty:</p>
+      <ul>
+        <li><b>Cesta 1: rozšíření a modernizace mety.</b> Nezávislá na tom, jaká bude core hra. Looping eventy a rozvoj meta vrstvy se neztratí, ať s core hrou uděláme cokoliv.</li>
+        <li><b>Cesta 2: rychlé prototypování modernizace core hry.</b> Portrét, jednodušší ovládání, případně hypercasual start s postupným otevíráním hloubky. Levné prototypy jen na validaci směru, ne na release.</li>
+      </ul>
+      <p>Naopak feature typu Block and Penetration by teď neprozkoumával, protože závisí na tom, jak bude vypadat core hra.</p>
+      <p><b>Domluvený další krok:</b> projdu výstupy, pošlu je s poznámkami Jirkovi a pak se kandidátovi ozveme. Je otevřený hlubší debatě nad čímkoliv z toho.</p>
+    </div>
+  </section>
+
+  <!-- 2. VYSTUP DESIGNERA -->
+  <section id="vystup">
+    <h2><span class="num">02</span>Výstup designéra</h2>
+    <p class="section-sub">Jedenáctistránkový dokument Puppet Hockey Analysis. Níže shrnutí, celý dokument je vložený pod ním.</p>
+
+    <div class="card">
+      <p>Definoval dvě hlavní příležitosti, každou navázanou na jeden byznys cíl:</p>
+      <ul>
+        <li><b>Retence (D7, D30):</b> hráč má každý den na co se těšit. Jasné krátkodobé i dlouhodobé cíle s viditelnými kroky v každé session.</li>
+        <li><b>Monetizace (IAP):</b> hráč rozumí power progresi a v každé session cítí posun. Rozdíl v síle musí být znát přímo v zápase.</li>
+      </ul>
+      <p>Ke každé příležitosti vygeneroval sadu nápadů (celkem 17), každý s popisem, důvodem proč by mohl fungovat a klíčovým rizikem. Nápady naplotil na matici impact vs. riziko a z každé příležitosti vybral jeden k rozpracování:</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="pill accent">Vybráno pro retenci</span>
+        <h3 style="margin-top:4px;">Looping Events Schedule</h3>
+        <ul>
+          <li>Rotující eventy na hlavní obrazovce, každý běží pár dní, celý cyklus se opakuje po jednom až dvou týdnech.</li>
+          <li>Každý event je zaměřený na konkrétní resource nebo feature (gear, hráči apod.), drop tabulky v mid a late game se upraví tak, aby účast v eventech dávala smysl.</li>
+          <li>Ideálně každý event lehce obmění core hru: jiné módy (1v1, 2v2), jednoduché modifikátory.</li>
+          <li>Vstup přes tickety: za čas, za reklamu, za nákup. Do budoucna event shopy a speciální nabídky, takže feature podporuje retenci i monetizaci zároveň.</li>
+          <li>Součástí je story mapa s MVP řezem a validační cíle na D7 a D30 retenci.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill accent">Vybráno pro monetizaci</span>
+        <h3 style="margin-top:4px;">Block and Penetration</h3>
+        <ul>
+          <li>Nový atribut, který jde vylepšovat neomezeně a jehož dopad je jasně vidět přímo v zápase.</li>
+          <li>Když puk narazí do hráče, formule spočítá šanci na průstřel podle rozdílu mezi penetrací střelce a blokem obránce.</li>
+          <li>Průstřel i blok doprovodí výrazné VFX, takže hráč mechaniku opakovaně vidí a chápe, proč se vyplatí upgradovat.</li>
+          <li>Cílí na IAP konverzi a opakované nákupy. Rozmyšlené segmenty: nováčci (odložit viditelnost), core a mid spendeři (hlavní cíl), F2P (atribut musí jít vygrindit).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">Co dokument dál obsahuje</h3>
+      <ul>
+        <li>Competitor research: Head Ball 2 (sezónní ligy), Stumble Guys (rotující módy), Score! Hero (čitelná progrese), Match Masters (power-upy a betting loop).</li>
+        <li>Story mapy obou features v Miru s rozdělením na MVP a další iterace.</li>
+        <li>Sekce Other: portrétní prototyp (viz další sekce) a seznam menších nápadů na zlepšení (responzivnější UI, jednodušší onboarding, kratší intenzivnější zápasy, víc ad placementů, náhodné modifikátory zápasů).</li>
+        <li>Sebekritické shrnutí: přeskočil některé mezikroky, data využil méně, než chtěl, a řešení nezohledňují kontext týmu a termínů, který nezná.</li>
+      </ul>
+    </div>
+
+    <div class="embed-frame">
+      <div class="embed-bar">
+        Puppet Hockey Analysis (PDF, 11 stran)
+        <span class="spacer"></span>
+        <a class="btn" href="vanecek-analysis.pdf" target="_blank" rel="noopener">Otevřít v novém okně</a>
+      </div>
+      <iframe class="pdf" src="vanecek-analysis.pdf" title="Puppet Hockey Analysis PDF"></iframe>
+    </div>
+  </section>
+
+  <!-- 3. TWIST -->
+  <section id="twist">
+    <h2><span class="num">03</span>Nápad na twist: portrétní prototyp</h2>
+    <p class="section-sub">Nad rámec zadání postavil hratelný proof-of-concept nazvaný Meow Cup. Je vložený níže, dá se rovnou hrát.</p>
+
+    <div class="card">
+      <p><b>Myšlenka:</b> otočit hru z landscape do portrétu a ovládat ji jedním prstem (virtuální joystick a swipe místo tlačítek). K tomu kočičí reskin jako ukázka, že arkádovost se dá posunout ještě dál.</p>
+      <p><b>Dvě hypotézy, které by to testovalo:</b></p>
+      <ul>
+        <li><b>Nižší CPI:</b> portrétní kreativy a gameplay v UA funnel u casual a arcade titulů typicky konvertují lépe, odpovídají tomu, jak lidé konzumují krátká videa i store listing.</li>
+        <li><b>Lehčí UI:</b> ovládání swipem uvolní obrazovku, umožní jednodušší onboarding a méně vizuálního balastu.</li>
+      </ul>
+      <p><b>Největší twist z celé schůzky:</b> vzít meta vrstvu, kterou v našich hrách už máme, a napojit ji na novou, modernizovanou core hru. Podle něj by šlo výrazně pohnout s CPI a D1 a D7 retencí bez velkého investmentu, protože meta i obsah už existují a měnila by se jen core hra.</p>
+      <p>Prototyp vznikl v Claude zhruba za dva dny, první hratelná iterace za hodinu čistého času. Sám ho rámuje jako výzkumný podklad pro budoucí prioritizaci, ne jako hotovou feature. Detail je také v PDF výše, sekce Other, strana 11.</p>
+    </div>
+
+    <div class="embed-frame">
+      <div class="embed-bar">
+        Meow Cup, hratelný prototyp
+        <span class="spacer"></span>
+        <a class="btn" href="prototype.html" target="_blank" rel="noopener">Otevřít na celou obrazovku</a>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <iframe src="prototype.html" title="Meow Cup prototyp" loading="lazy"></iframe>
+        </div>
+        <p class="phone-hint">Ovládá se jedním prstem (tahem). Nejlépe funguje na mobilu, na desktopu použijte myš. Tlačítkem výše se dá otevřít na celou obrazovku.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. MOJE POZNAMKY -->
+  <section id="poznamky">
+    <h2><span class="num">04</span>Moje shrnutí poznámek</h2>
+    <p class="section-sub">Moje hodnocení kandidáta a toho, co předvedl.</p>
+
+    <div class="card">
+      <span class="pill accent">Co mi z toho zůstalo v hlavě</span>
+      <ul>
+        <li>Škoda, že práce s daty pokulhávala. Právě tam mohl přinést nejvíc nového.</li>
+        <li>Mluvil hodně obecně. Většinou jde o produktové věci, které víme, i když je možná ne vždy vynucujeme. Nic zásadního.</li>
+        <li>Je znát, že přichází ze Smashing Four. Jeho největší myšlenka je vlastně otočit core do konceptu Smashing Four a ten nápad se mi líbí.</li>
+        <li>Dokument je zcela jasně generovaný AI. Otázka je, kolik z výstupu je opravdu jeho. Minimálně Miro si dělal sám a drží se best practices.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="pill warn">Můj verdikt</span>
+      <ul>
+        <li>Osobně nejsem přesvědčený o jeho kvalitě a skillu.</li>
+        <li>Čistě remote spolupráce v kombinaci s pražským platem je za mě no-go.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. NAPADY NA PUPPETS -->
+  <section id="puppets">
+    <h2><span class="num">05</span>Moje nápady na puppets</h2>
+    <p class="section-sub">Věci, které mě napadly, když jsem procházel podklady.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="pill accent">Core a zápasy</span>
+        <ul>
+          <li>První zápas zkrátit jen na 20 až 30 sekund a délku postupně přidávat s tím, jak hráč hraje.</li>
+          <li>Kdyby i tak zápas trval moc dlouho a skill gap byl velký, přidat pravidlo: vedení o 5 gólů znamená okamžité vítězství.</li>
+          <li>A rovnou z toho udělat dramatický prvek: když se sudden death blíží, hra hráče varuje a zvyšuje stakes.</li>
+          <li>Osobně mi (a nejen mně) ve hře chybí PvP.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill accent">K jeho návrhům</span>
+        <ul>
+          <li>S myšlenkou točících se eventů souhlasím.</li>
+          <li>Koncept miss/block se mi osobně nelíbí. Vyzkoušet se může a v praxi fungovat může, ale konceptuálně mi nesedí.</li>
+          <li>Prošel bych i jeho další nápady a zvážil, co díky našemu přístupu k vývoji můžeme levně a rychle zkusit.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="pill good">Co se mi líbí nejvíc</span>
+      <p style="margin:4px 0 0;">Otočit ten core: vzít top-down Smashing Four, náš vizuál a udělat z toho rychlou single-hand arkádu. U tohoto stylu by navíc šlo mnohem víc tlačit na atributy hráče: váhu, sílu, upgrady. Přímo by ovlivňovaly, jak se panák na hřišti chová, kdo koho přetlačí a jak souboje dopadnou. První prototyp na tuhle myšlenku už máme, je vložený níže.</p>
+    </div>
+
+    <div class="embed-frame">
+      <div class="embed-bar">
+        Top Puppets, prototyp top-down core
+        <span class="spacer"></span>
+        <a class="btn" href="https://top-puppets.studio-0b0.workers.dev/" target="_blank" rel="noopener">Otevřít na celou obrazovku</a>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone">
+          <iframe src="https://top-puppets.studio-0b0.workers.dev/" title="Top Puppets prototyp" loading="lazy"></iframe>
+        </div>
+        <p class="phone-hint">Rychlý prototyp top-down core ve stylu Smashing Four. Nejlépe funguje na mobilu, na desktopu použijte myš.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CO TED -->
+  <section id="dal">
+    <h2><span class="num">06</span>Co bychom teď měli udělat</h2>
+    <p class="section-sub">Moje doporučení dalších kroků.</p>
+
+    <div class="card">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Krok</th><th>Co to znamená</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>1. Zaimplementovat a otestovat jeho dvě vybrané features</b></td>
+              <td>Looping Events Schedule a Block and Penetration. I přes moje výhrady ke konceptu miss/block je férové obě otestovat v praxi a nechat rozhodnout data.</td>
+            </tr>
+            <tr>
+              <td><b>2. Projít jeho další poznámky a zvážit je</b></td>
+              <td>V dokumentu má řadu menších nápadů (onboarding, UI, ad placementy, modifikátory zápasů). Vybrat, co díky našemu přístupu k vývoji můžeme levně zkusit.</td>
+            </tr>
+            <tr>
+              <td><b>3. Vyzkoušet překopat core do stylu Smashing Four</b></td>
+              <td>Top-down, single-hand, náš vizuál. Využít, že atributy tím získají mnohem větší hodnotu, a udělat z toho opravdu stat-based arkádu. Metu nechat, jak je. První prototyp: <a href="https://top-puppets.studio-0b0.workers.dev/" target="_blank" rel="noopener">Top Puppets</a> (hratelný i v sekci 05).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  NOXGAMES, interní podklad. Připravil David Vykopal, 26. 8. 2026.
+</footer>
+
+</body>
+</html>

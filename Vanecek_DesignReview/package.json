@@ -1,0 +1,8 @@
+{
+  "name": "vanecek-design-review",
+  "private": true,
+  "scripts": {
+    "cf:deploy": "wrangler deploy",
+    "cf:preview": "wrangler dev"
+  }
+}

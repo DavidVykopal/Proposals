@@ -1,0 +1,9 @@
+{
+  "name": "vanecek-design-review",
+  "compatibility_date": "2026-08-25",
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "account_id": "0b01374e269cd80008534b2efebe3c58",
+  "assets": {
+    "directory": "./public"
+  }
+}
