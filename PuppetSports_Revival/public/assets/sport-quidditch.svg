@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 62 480 298" width="480" height="298" role="img" aria-label="QUIDDITCH on the Puppet Sports core">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d2265"/>
+      <stop offset="1" stop-color="#150b26"/>
+    </linearGradient>
+    <linearGradient id="grd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#35704a"/>
+      <stop offset="1" stop-color="#35704a" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" fill="url(#sky)"/>
+  <circle cx="80" cy="60" r="130" fill="#c9a3ff" opacity="0.10"/>
+  <circle cx="410" cy="180" r="120" fill="#c9a3ff" opacity="0.07"/>
+
+  <g stroke="#ffb938" stroke-width="6" fill="none" opacity="0.7">
+    <circle cx="58" cy="96" r="28"/><path d="M 58 124 v 110"/>
+    <circle cx="424" cy="72" r="23"/><path d="M 424 95 v 139"/>
+  </g>
+  <g>
+    <rect x="0" y="200" width="480" height="26" fill="#0a1f33"/>
+    <rect x="0" y="200" width="480" height="2" fill="#ffffff" opacity="0.16"/>
+    <rect x="24" y="206" width="112" height="15" rx="3" fill="#ffffff" opacity="0.14"/>
+    <rect x="148" y="206" width="184" height="15" rx="3" fill="#ffb938"/>
+    <text x="240" y="217" text-anchor="middle" font-family="Verdana, Geneva, sans-serif"
+          font-size="9" font-weight="bold" letter-spacing="1.8" fill="#241500">YOUR BRAND</text>
+    <rect x="344" y="206" width="112" height="15" rx="3" fill="#ffffff" opacity="0.14"/>
+  </g>
+  <rect x="0" y="226" width="480" height="134" fill="url(#grd)"/>
+
+  <ellipse cx="150" cy="328" rx="34" ry="6" fill="#000000" opacity="0.22"/>
+  <ellipse cx="330" cy="328" rx="30" ry="5" fill="#000000" opacity="0.18"/>
+  <path d="M 104 200 l 96 -18" stroke="#8a5a2b" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 100 201 l -20 10 l 24 0 l -16 10 l 22 -4" stroke="#d8a24a" stroke-width="4"
+        fill="none" stroke-linecap="round"/>
+  <path d="M 284 166 l 96 -18" stroke="#8a5a2b" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 384 145 l 20 10 l -24 0 l 16 10 l -22 -4" stroke="#d8a24a" stroke-width="4"
+        fill="none" stroke-linecap="round"/>
+
+  <g>
+    <line x1="150" y1="0" x2="150" y2="102" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    
+    <rect x="135" y="156" width="30" height="36" rx="12" fill="#ffb938"/>
+    <rect x="137" y="182" width="10" height="13" rx="4" fill="#20303f"/>
+    <rect x="153" y="182" width="10" height="13" rx="4" fill="#20303f"/>
+    <circle cx="150" cy="125" r="27" fill="#f6cfa8"/>
+    <path d="M 123 122 a 27 27 0 0 1 54 0 z" fill="#3b2a1c"/>
+    <circle cx="141" cy="129" r="3.3" fill="#26303a"/>
+    <circle cx="157" cy="129" r="3.3" fill="#26303a"/>
+    <path d="M 142 140 q 8 7 16 0" stroke="#26303a" stroke-width="2.6"
+          fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <line x1="330" y1="0" x2="330" y2="68" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    
+    <rect x="315" y="122" width="30" height="36" rx="12" fill="#c9a3ff"/>
+    <rect x="317" y="148" width="10" height="13" rx="4" fill="#20303f"/>
+    <rect x="333" y="148" width="10" height="13" rx="4" fill="#20303f"/>
+    <circle cx="330" cy="91" r="27" fill="#f6cfa8"/>
+    <path d="M 303 88 a 27 27 0 0 1 54 0 z" fill="#3b2a1c"/>
+    <circle cx="339" cy="95" r="3.3" fill="#26303a"/>
+    <circle cx="323" cy="95" r="3.3" fill="#26303a"/>
+    <path d="M 338 106 q -8 7 -16 0" stroke="#26303a" stroke-width="2.6"
+          fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="243" cy="118" r="11" fill="#ffd066"/>
+    <path d="M 232 118 q -24 -18 -33 -2 q 15 11 33 2 z" fill="#ffe9b0" opacity="0.95"/>
+    <path d="M 254 118 q 24 -18 33 -2 q -15 11 -33 2 z" fill="#ffe9b0" opacity="0.95"/>
+  </g>
+  <rect x="18" y="76" width="107" height="28" rx="14" fill="#000000" opacity="0.5"/>
+  <text x="71.5" y="95" text-anchor="middle" font-family="Verdana, Geneva, sans-serif"
+        font-size="12" font-weight="bold" letter-spacing="2" fill="#c9a3ff">QUIDDITCH</text>
+</svg>

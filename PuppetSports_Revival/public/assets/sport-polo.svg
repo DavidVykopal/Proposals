@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 62 480 298" width="480" height="298" role="img" aria-label="HORSE POLO on the Puppet Sports core">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#154064"/>
+      <stop offset="1" stop-color="#07203a"/>
+    </linearGradient>
+    <linearGradient id="grd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f8f4f"/>
+      <stop offset="1" stop-color="#3f8f4f" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" fill="url(#sky)"/>
+  <circle cx="80" cy="60" r="130" fill="#ffb938" opacity="0.10"/>
+  <circle cx="410" cy="180" r="120" fill="#ffb938" opacity="0.07"/>
+
+  <g>
+    <rect x="0" y="200" width="480" height="26" fill="#0a1f33"/>
+    <rect x="0" y="200" width="480" height="2" fill="#ffffff" opacity="0.16"/>
+    <rect x="24" y="206" width="112" height="15" rx="3" fill="#ffffff" opacity="0.14"/>
+    <rect x="148" y="206" width="184" height="15" rx="3" fill="#ffb938"/>
+    <text x="240" y="217" text-anchor="middle" font-family="Verdana, Geneva, sans-serif"
+          font-size="9" font-weight="bold" letter-spacing="1.8" fill="#241500">YOUR BRAND</text>
+    <rect x="344" y="206" width="112" height="15" rx="3" fill="#ffffff" opacity="0.14"/>
+  </g>
+  <rect x="0" y="226" width="480" height="134" fill="url(#grd)"/>
+
+  <g fill="#7a4a24">
+    <ellipse cx="152" cy="338" rx="62" ry="7" fill="#000000" opacity="0.28"/>
+    <rect x="106" y="280" width="92" height="34" rx="16"/>
+    <rect x="184" y="256" width="22" height="32" rx="10"/>
+    <rect x="116" y="310" width="10" height="24" rx="5"/>
+    <rect x="178" y="310" width="10" height="24" rx="5"/>
+    <path d="M 106 282 q -20 8 -22 28 q 14 -10 22 -14 z"/>
+  </g>
+  <g fill="#5e3418">
+    <ellipse cx="328" cy="338" rx="62" ry="7" fill="#000000" opacity="0.28"/>
+    <rect x="282" y="280" width="92" height="34" rx="16"/>
+    <rect x="274" y="256" width="22" height="32" rx="10"/>
+    <rect x="292" y="310" width="10" height="24" rx="5"/>
+    <rect x="354" y="310" width="10" height="24" rx="5"/>
+    <path d="M 374 282 q 20 8 22 28 q -14 -10 -22 -14 z"/>
+  </g>
+  <g>
+    <line x1="148" y1="0" x2="148" y2="184" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    
+    <rect x="133" y="238" width="30" height="36" rx="12" fill="#ffb938"/>
+    <rect x="135" y="264" width="10" height="13" rx="4" fill="#20303f"/>
+    <rect x="151" y="264" width="10" height="13" rx="4" fill="#20303f"/>
+    <circle cx="148" cy="207" r="27" fill="#f6cfa8"/>
+    <path d="M 121 204 a 27 27 0 0 1 54 0 z" fill="#3b2a1c"/>
+    <circle cx="139" cy="211" r="3.3" fill="#26303a"/>
+    <circle cx="155" cy="211" r="3.3" fill="#26303a"/>
+    <path d="M 140 222 q 8 7 16 0" stroke="#26303a" stroke-width="2.6"
+          fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <line x1="332" y1="0" x2="332" y2="184" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    
+    <rect x="317" y="238" width="30" height="36" rx="12" fill="#ff6b6b"/>
+    <rect x="319" y="264" width="10" height="13" rx="4" fill="#20303f"/>
+    <rect x="335" y="264" width="10" height="13" rx="4" fill="#20303f"/>
+    <circle cx="332" cy="207" r="27" fill="#f6cfa8"/>
+    <path d="M 305 204 a 27 27 0 0 1 54 0 z" fill="#3b2a1c"/>
+    <circle cx="341" cy="211" r="3.3" fill="#26303a"/>
+    <circle cx="325" cy="211" r="3.3" fill="#26303a"/>
+    <path d="M 340 222 q -8 7 -16 0" stroke="#26303a" stroke-width="2.6"
+          fill="none" stroke-linecap="round"/>
+  </g>
+  <path d="M 174 238 l 46 76" stroke="#d9b489" stroke-width="5" stroke-linecap="round"/>
+  <rect x="215" y="308" width="17" height="8" rx="3" fill="#8a5a2b"/>
+  <path d="M 306 238 l -46 76" stroke="#d9b489" stroke-width="5" stroke-linecap="round"/>
+  <rect x="248" y="308" width="17" height="8" rx="3" fill="#8a5a2b"/>
+  <circle cx="240" cy="330" r="9" fill="#f7f9fb"/>
+  <rect x="18" y="76" width="116" height="28" rx="14" fill="#000000" opacity="0.5"/>
+  <text x="76.0" y="95" text-anchor="middle" font-family="Verdana, Geneva, sans-serif"
+        font-size="12" font-weight="bold" letter-spacing="2" fill="#ffb938">HORSE POLO</text>
+</svg>
