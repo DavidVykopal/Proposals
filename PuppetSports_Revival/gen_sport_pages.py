@@ -8,7 +8,7 @@ sport-specific strings are substituted in that tail.
 """
 import pathlib
 
-PUB = pathlib.Path('/Users/davidvykopal/.superset/worktrees/78e07d52-6fb3-4c2e-a8e7-bd8bf30ca9dc/puppets/PuppetSports_Revival/public')
+PUB = pathlib.Path(__file__).resolve().parent / 'public'
 core = (PUB / 'index.html').read_text()
 
 TAIL_MARK = '  <!-- ===== Board divider ===== -->'

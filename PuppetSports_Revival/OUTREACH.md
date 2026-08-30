@@ -235,7 +235,9 @@ Ordered by how fast we could realistically get a first call, not by size.
 
 - [ ] Drop the four MeowCup creatives into `public/assets/` so the Proof section is complete
 - [ ] Get the source behind the 42M downloads figure
-- [ ] Get Jiri's floorball / football / quidditch / horse polo GIFs into `public/assets/`
+- [x] Get Jiri's floorball / football / quadball / horse polo GIFs into `public/assets/` (done 28 Aug 2026,
+      cut to 10 s / 640x360 / 10 fps from his SnapCast captures; strip labels now say Quadball and
+      American football to match the build's watermarks)
 - [ ] Deploy the three pages (`npm run cf:deploy`) and get the URLs
 - [ ] Build the mockup pipeline: one reusable PSD or template per sport, so a branded screenshot
       takes 30 minutes not half a day
