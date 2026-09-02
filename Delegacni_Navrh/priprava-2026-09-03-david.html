@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zúžit na hlavní činnosti · příprava na 3. 9. · David · NOXGAMES</title>
+<style>
+  @font-face {
+    font-family: 'Gambarino';
+    src: url('assets/fonts/Gambarino-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-hi: #1a1511;
+    --bg-lo: #14100c;
+    --surface: #211b15;
+    --surface-hi: #262019;
+    --edge: #322a20;
+    --ink: #ede4d4;
+    --muted: #a2947f;
+    --faint: #6e6353;
+    --gold: #c9a266;
+    --gold-dim: #8a7350;
+    --gold-deep: #57452a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: var(--bg-lo); }
+
+  body {
+    background: linear-gradient(175deg, var(--bg-hi) 0%, var(--bg-lo) 100%);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header.hero, footer { position: relative; z-index: 1; }
+
+  ::selection { background: var(--gold); color: var(--bg-lo); }
+
+  .shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: clamp(22px, 5vw, 52px);
+  }
+
+  h1, h2, .display { font-family: 'Gambarino', Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+  a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s ease; }
+  a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 34px;
+  }
+
+  .wordmark {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+  }
+
+  .topbar .meta { font-size: 0.85rem; color: var(--faint); }
+
+  .hero-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .art {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    width: min(54%, 620px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .art-inner { animation: artdrift 11s ease-in-out infinite alternate; }
+    @keyframes artdrift {
+      from { transform: translateY(-6px); }
+      to   { transform: translateY(6px); }
+    }
+  }
+
+  .hero-copy { position: relative; max-width: 620px; }
+
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 6.8vw, 4.9rem);
+    line-height: 1.06;
+    letter-spacing: 0.005em;
+  }
+
+  .hero-copy h1 em { font-style: normal; color: var(--gold-dim); }
+
+  .hero-copy .sub {
+    margin-top: 26px;
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    color: var(--muted);
+    max-width: 30em;
+  }
+
+  .hero-copy .origin { margin-top: 14px; font-size: 0.88rem; color: var(--faint); }
+
+  .toc {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(8, auto);
+    grid-template-columns: repeat(2, max-content);
+    gap: 8px 64px;
+    padding-bottom: 40px;
+  }
+
+  .toc a { font-size: 0.88rem; color: var(--muted); white-space: nowrap; }
+  .toc a:hover { color: var(--ink); }
+  .toc a span { color: var(--gold-deep); margin-right: 8px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: clamp(84px, 12vh, 130px); }
+  section:last-of-type { padding-bottom: 40px; }
+
+  h2 {
+    font-size: clamp(1.85rem, 3.8vw, 2.55rem);
+    line-height: 1.15;
+    margin-bottom: 34px;
+  }
+
+  h2 .no { color: var(--gold-deep); margin-right: 14px; }
+
+  h3 {
+    font-family: 'Gambarino', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-top: 48px;
+    margin-bottom: 14px;
+  }
+
+  p { color: var(--muted); max-width: 46em; }
+  p strong, li strong, td strong { color: var(--ink); font-weight: 600; }
+  p + p { margin-top: 16px; }
+
+  .lead-p { font-size: 1.06rem; }
+
+  ol.rules { margin: 26px 0 0 0; list-style: none; counter-reset: r; display: grid; gap: 14px; max-width: 52em; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 54px; color: var(--muted); font-size: 0.98rem; }
+  ol.rules li::before {
+    content: counter(r);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 36px;
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--gold-deep);
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  ul.points { list-style: none; margin-top: 10px; display: grid; gap: 15px; max-width: 52em; }
+  ul.points li { position: relative; padding-left: 30px; color: var(--muted); font-size: 0.97rem; }
+  ul.points li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.58em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-deep);
+  }
+
+  .tscroll { overflow-x: auto; margin-top: 6px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 560px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--faint);
+    padding: 10px 16px 12px;
+    border-bottom: 1px solid var(--edge);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #241e17;
+    color: var(--muted);
+    vertical-align: top;
+  }
+
+  td:first-child { color: var(--gold-dim); white-space: nowrap; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.88rem; }
+
+  table.wordy td:first-child { white-space: normal; font-family: inherit; font-size: 0.95rem; color: var(--ink); }
+
+  table.dense { font-size: 0.9rem; min-width: 980px; }
+  table.dense td { padding: 11px 12px; }
+  table.dense th { padding: 9px 12px 11px; }
+
+  tbody tr { transition: background-color 0.2s ease; }
+  tbody tr:hover { background-color: #1d1813; }
+
+  .tbl-note { margin-top: 18px; font-size: 0.9rem; color: var(--faint); max-width: 52em; }
+
+  .pull {
+    margin-top: 26px;
+    padding: 22px 30px;
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: 14px;
+    max-width: 46em;
+    color: var(--ink);
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  .pull .fine { display: block; margin-top: 10px; font-size: 0.9rem; color: var(--muted); }
+
+  .dwrap { overflow-x: auto; margin-top: 8px; }
+  .dwrap svg { display: block; width: 100%; height: auto; }
+  .dwrap.map svg { min-width: 880px; }
+
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+
+  .orgnode rect { transition: fill 0.25s ease; }
+  .orgnode:hover rect { fill: var(--surface-hi); }
+
+  .legend { margin-top: 20px; font-size: 0.88rem; color: var(--faint); display: flex; flex-wrap: wrap; gap: 10px 30px; }
+  .legend span { display: inline-flex; align-items: center; gap: 9px; }
+  .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  footer { padding: 90px 0 44px; }
+  footer .related { font-size: 0.9rem; color: var(--faint); margin-bottom: 14px; }
+  footer .related a { margin-right: 22px; }
+  footer .colophon { font-size: 0.85rem; color: var(--faint); }
+
+  @media (max-width: 920px) {
+    .art { opacity: 0.5; width: 88%; right: -22%; }
+  }
+
+  @media (max-width: 600px) {
+    .toc { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 8px 0; }
+    .topbar { flex-direction: column; gap: 4px; }
+    .topbar .meta { font-size: 0.8rem; }
+    .art { display: none; }
+    .pull { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="shell topbar">
+    <div class="wordmark">NOXGAMES</div>
+    <div class="meta">Osobní příprava · David · porada vedení 3.&nbsp;9.&nbsp;2026</div>
+  </div>
+
+  <div class="hero-body">
+    <svg class="art" viewBox="0 0 700 560" aria-hidden="true">
+      <g class="art-inner">
+        <g fill="#241d16" stroke="#383025" stroke-width="1.1">
+          <rect x="48" y="88" width="150" height="26" rx="6"/>
+          <rect x="48" y="124" width="150" height="26" rx="6"/>
+          <rect x="48" y="160" width="150" height="26" rx="6"/>
+          <rect x="48" y="196" width="150" height="26" rx="6"/>
+          <rect x="48" y="232" width="150" height="26" rx="6"/>
+          <rect x="48" y="268" width="150" height="26" rx="6"/>
+          <rect x="48" y="304" width="150" height="26" rx="6"/>
+          <rect x="48" y="340" width="150" height="26" rx="6"/>
+          <rect x="48" y="376" width="150" height="26" rx="6"/>
+          <rect x="48" y="412" width="150" height="26" rx="6"/>
+        </g>
+        <g fill="none" stroke="#57452a" stroke-opacity="0.55" stroke-width="1.2">
+          <path d="M198 101 C 290 101, 300 190, 380 190"/>
+          <path d="M198 173 C 290 173, 300 210, 380 210"/>
+          <path d="M198 245 C 290 245, 300 262, 380 262"/>
+          <path d="M198 317 C 290 317, 300 282, 380 282"/>
+          <path d="M198 389 C 290 389, 300 334, 380 334"/>
+          <path d="M198 425 C 290 425, 300 354, 380 354"/>
+        </g>
+        <g fill="#241d16" stroke="#383025" stroke-width="1.3">
+          <rect x="380" y="168" width="240" height="60" rx="9"/>
+          <rect x="380" y="244" width="240" height="60" rx="9"/>
+          <rect x="380" y="320" width="240" height="60" rx="9"/>
+        </g>
+        <rect x="380" y="404" width="240" height="60" rx="9" fill="none" stroke="#c9a266" stroke-opacity="0.8" stroke-width="1.3" stroke-dasharray="6 7"/>
+        <g fill="#c9a266">
+          <circle cx="404" cy="434" r="4.5"/>
+          <circle cx="422" cy="434" r="4.5"/>
+          <circle cx="440" cy="434" r="4.5"/>
+        </g>
+      </g>
+    </svg>
+
+    <div class="shell">
+      <div class="hero-copy">
+        <h1>Zúžit na <em>hlavní činnosti</em></h1>
+        <p class="sub">Soupis dvaceti činností Produkce se jmény a kapacitami, role, které se formalizují, dvě, které se vědomě nezřizují, a tři personální tahy, které zaplatí schodek firmy.</p>
+        <p class="origin">Osobní podklad k poradě · zlatě čárkovaně = co se teprve osazuje</p>
+      </div>
+    </div>
+  </div>
+
+  <nav class="shell toc" aria-label="Obsah">
+    <a href="#s01"><span>01</span>Moje teze</a>
+    <a href="#s02"><span>02</span>Co si odnést</a>
+    <a href="#s03"><span>03</span>Přiznaná zaujatost</a>
+    <a href="#s04"><span>04</span>Role z činností</a>
+    <a href="#s05"><span>05</span>Soupis činností</a>
+    <a href="#s06"><span>06</span>Role v Produkci</a>
+    <a href="#s07"><span>07</span>Mezery a přetížení</a>
+    <a href="#s08"><span>08</span>Co ruším</a>
+    <a href="#s09"><span>09</span>Hraniční případy</a>
+    <a href="#s10"><span>10</span>Známé mezery</a>
+    <a href="#s11"><span>11</span>Grafici DEV a MKT</a>
+    <a href="#s12"><span>12</span>Firma: typy rolí</a>
+    <a href="#s13"><span>13</span>Výstup Operations</a>
+    <a href="#s14"><span>14</span>Body od Davida</a>
+    <a href="#s15"><span>15</span>Otázky na ostatní</a>
+  </nav>
+</header>
+
+<main class="shell">
+
+  <section id="s01">
+    <h2><span class="no">01</span>Moje teze do porady</h2>
+    <p class="lead-p"><strong>Musíme zúžit firmu na hlavní činnosti.</strong> Všechno ostatní se od toho odvíjí, v tomhle pořadí.</p>
+
+    <ol class="rules">
+      <li><strong>Zúžit.</strong> Vyjmenovat hlavní činnosti a mít odvahu říct, co mezi ně nepatří.</li>
+      <li><strong>Pokrýt.</strong> Každá hlavní činnost má jméno, kapacitu a u core zástup. Ne „řeší se".</li>
+      <li><strong>Nepředimenzovat.</strong> Žádná činnost nedostane víc kapacity ani víc rolí, než potřebuje. Role, pro kterou nemáme člověka ani obsah, se nezřizuje.</li>
+      <li><strong>Nevyhovující kapacitu řešit třemi tahy: přeřadit, zautomatizovat, najmout.</strong></li>
+      <li><strong>Když nejde ani jedno z toho, není to důležitá činnost.</strong> Škrtnout a zapsat, kdo ji vrátí, kdyby chyběla.</li>
+    </ol>
+
+    <p style="margin-top: 30px;">Je to totéž, co žebřík pěti odpovědí ze společného podkladu, jen řečené jako filtr: zrušení není pátá možnost na konci, je to závěr, ke kterému se dojde vždycky, když činnost neobstojí v bodech 2 až 4.</p>
+
+    <p><strong>A cíl, ke kterému to celé míří: přesunout pozornost z množství práce a odsezených hodin na kvalitu odvedené práce a přidanou hodnotu.</strong> Soupis činností není nástroj na měření vytížení, je to nástroj na to, aby každý mohl dělat míň věcí pořádně. Navazuje na man-days místo man-hours a kognitivní limit 4 až 6 hodin z porady 6. 8.</p>
+
+    <div class="pull">
+      Pravidlo výšky letu: porada řeší <strong>core a management role</strong>, ne grassroot odpovědnosti. Že grafik a developer společně drží čistý git tree, je věc popisu rolí a doladí se mezi poradami. Porada rozhoduje o patro výš: kdo odpovídá za to, že git a pipeline vůbec jedou, kdo za to, že build jde ven, kdo za kvalitu.
+    </div>
+  </section>
+
+  <section id="s02">
+    <h2><span class="no">02</span>Co si chci z porady odnést</h2>
+
+    <div class="tscroll" style="margin-top: 10px;">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Co</th><th>Proč to nejde odložit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td><strong>Soupis činností Produkce jako schválený základ, ze kterého se odvozují role</strong></td><td>Když se role nakreslí dřív než činnosti, vzniknou podle titulů a zbytek zůstane u mě. Přesně z toho se dostáváme.</td></tr>
+          <tr><td>02</td><td><strong>Rozhodnutí o rolích uvnitř Produkce</strong> (kapitola 06)</td><td>Nesu sedm oblastí a jsem na cca 150 %. Návrh nepřidává management, zužuje ho: dvě role se vědomě nezřizují.</td></tr>
+          <tr><td>03</td><td><strong>Součet kapacity za firmu a u každé mezery právě jedna odpověď</strong></td><td>Číslo vychází: schodek zhruba 1 až 2 úvazky, dnes schovaný v přetížení dvou lidí (já a Akimo) a v neosazených činnostech.</td></tr>
+          <tr><td>04</td><td><strong>Tři personální tahy jako balík</strong>: datový analytik/tester, OPS &amp; AI programátor, part-time externista na kanceláře</td><td>Všechny tři vzešly nezávisle z mojí přípravy i z přípravy Operations. Jednotlivě jsou to prosby, dohromady plán, jak schodek zaplatit.</td></tr>
+          <tr><td>05</td><td><strong>Jmenovité rozdělení grafiků DEV a MKT</strong> (T11) a <strong>termín konce přechodného stavu u analytiky</strong> (T16)</td><td>Obě věci se z 20. 8. přenesly bez rozhodnutí. Potřetí je nechci přenášet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s03">
+    <h2><span class="no">03</span>Přiznaná zaujatost</h2>
+
+    <ul class="points" style="margin-top: 16px;">
+      <li><strong>Produkce je největší segment</strong> a většina rolí z téhle porady vznikne v ní. Návrh mi uleví. Zároveň je to přesně to, co po mně porada chce, takže to nezastírám.</li>
+      <li><strong>Chci předávat, ne sbírat.</strong> Ze sedmi oblastí si nechávám dvě. Všechno ostatní má v tomhle dokumentu jméno nebo odpověď.</li>
+      <li><strong>Metodu jsem psal já,</strong> proto ji aplikuju nejpřísněji na sebe: největší škrt (kapitola 08) je z mého vlastního času a jsem jediný, kdo v soupisu přiznává 150 %.</li>
+      <li><strong>Vlastní tooling.</strong> Odhadem čtvrtina mého času jde do interních nástrojů a AI (hub, herní backend, AMA bot, extrakce playables). Je to činnost, která v žádné kartě z 20. 8. nebyla. Dávám ji do soupisu a rovnou na ni aplikuju vlastní filtr: část škrtám, zbytek má převzít OPS &amp; AI programátor z návrhu Operations.</li>
+    </ul>
+  </section>
+
+  <section id="s04">
+    <h2><span class="no">04</span>Role z činností, ne naopak</h2>
+    <p class="lead-p">Ze společného podkladu přebírám: role je balík činností s jedním výsledkem a jedním vlastníkem, plánujeme na 75 % kapacity, kdo je nad 75 % v soupisu, je přetížený. K tomu přidávám dvě věci.</p>
+
+    <h3>04.1 Od kapacity k počtu lidí</h3>
+    <p>Otázka „potřebujeme víc programátorů" se nedá zodpovědět bez pravidla. Navrhuju: <strong>sečti kapacitu všech činností stejného typu napříč segmenty, vyděl 0,75 a porovnej s počtem lidí, kteří roli dnes nesou.</strong> Zbytek pod celé číslo:</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Zbytek</th><th>Odpověď</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>do 0,3 úvazku</td><td>přidá se k existující roli jako druhá role s vlastním cílem</td></tr>
+          <tr><td>0,3 až 0,7 úvazku</td><td>sdílený člověk mezi segmenty, částečný úvazek nebo externista s interním vlastníkem</td></tr>
+          <tr><td>nad 0,7 úvazku</td><td>celý člověk, tedy business case a nábor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="tbl-note"><strong>Vedení se počítá zvlášť:</strong> u leada 3 až 5 lidí zhruba 20 až 30 % úvazku. Když se to nezapočítá, lead je na papíře na 100 % a v realitě na 130 %.</p>
+
+    <h3>04.2 Lead, vykonavatel a odborná autorita</h3>
+    <ul class="points">
+      <li><strong>Lead</strong> nese balík činností <strong>a rozhodovací pásmo</strong>. Rozhoduje bez eskalace do napsaného limitu, vede lidi, ručí za výsledek balíku.</li>
+      <li><strong>Vykonavatel</strong> nese činnost, pásmo má jen na způsob provedení.</li>
+      <li><strong>Odborná autorita</strong> drží standard, review a mentoring v oboru, ale nevede lidi a neručí za dodání. Tohle je role pro Mirka (tech) a Peka (art): jsou to mistři oboru, ne manažeři, a je poctivější to napsat, než jim rozdat lead role, které nebudou dělat. Autorita je legitimní a placená role, jen jiná.</li>
+    </ul>
+    <p style="margin-top: 22px;">Z toho plyne: <strong>lead není titul za senioritu</strong> a seniorita nikoho k vedení lidí nezavazuje.</p>
+  </section>
+
+  <section id="s05">
+    <h2><span class="no">05</span>Soupis činností Produkce</h2>
+    <p class="lead-p">Segment Produkce, vlastník David, účel: hry vznikají, vycházejí, žijí a zaplatí se. Lidé v segmentu (10, z toho Akimo cca 70 % času): David, Akimo, Hutis, Aldy, Karlík, Čoud, Milan, David C., Mirek, Peko. Kapacity jsou odhady v % úvazku na desítky procent, H = hlavní práce, N = navíc.</p>
+
+    <div class="tscroll">
+      <table class="dense">
+        <thead>
+          <tr><th>#</th><th>Činnost</th><th>Vrstva</th><th>Kdo</th><th>Kap.</th><th>H/N</th><th>Zástup</th><th>Výsledek / číslo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td><strong>Plán produkce a roadmapa titulů</strong>: sprinty, milníky, priority</td><td>C</td><td>David</td><td>20</td><td>H</td><td>Aldy (návrh)</td><td>milníky v termínu, počet přeplánování za kvartál</td></tr>
+          <tr><td>02</td><td><strong>Kapacitní plánování a obsazení projektů</strong></td><td>C</td><td>David</td><td>10</td><td>H</td><td>Aldy (návrh)</td><td>utilizace 70 až 80 %, nikdo nad 100 %</td></tr>
+          <tr><td>03</td><td><strong>Herní design a ekonomika titulů</strong></td><td>C</td><td>Aldy 40, Karlík 40</td><td>80</td><td>H</td><td>vzájemně</td><td>retence D1/D7 a ARPDAU proti cíli</td></tr>
+          <tr><td>04</td><td><strong>Programování a technická architektura</strong></td><td>C</td><td>Mirek 50, Čoud 75, Milan 75, Hutis 35</td><td>235</td><td>H</td><td>vzájemně</td><td>dodané feature za sprint, crash-free rate</td></tr>
+          <tr><td>05</td><td><strong>Herní art a UI</strong> (DEV grafici)</td><td>C</td><td>David C. 75, Peko 60, Aldy 10, Karlík 10</td><td>155</td><td>H</td><td>vzájemně</td><td>art podle plánu sprintu, počet vrácení</td></tr>
+          <tr><td>06</td><td><strong>QA a release readiness buildů</strong></td><td>C</td><td>Hutis 40, Akimo 10</td><td>50</td><td>H</td><td>David</td><td>kritické chyby v produkci po releasu: cíl 0</td></tr>
+          <tr><td>07</td><td><strong>Technický dluh, build pipeline a engine</strong></td><td>P</td><td>Mirek</td><td>10</td><td>N</td><td>Čoud</td><td>doba buildu, blokující technické incidenty</td></tr>
+          <tr><td>08</td><td><strong>Outsourcing a externí dodávky do vývoje</strong></td><td>P</td><td>David</td><td>5</td><td>N</td><td>nevyžaduje</td><td>dodávky převzaté na první pokus</td></tr>
+          <tr><td>09</td><td><strong>R&amp;D: prototypy a podklad pro greenlight</strong>, max 2 sprinty</td><td>C</td><td>David + tým dle konceptu</td><td>15</td><td>N</td><td>Aldy/Karlík</td><td>rozhodnutí do 2 sprintů, ověřené koncepty za kvartál</td></tr>
+          <tr><td>10</td><td><strong>Release management a platformy</strong>: store konzole, review, game setup</td><td>C</td><td>Akimo</td><td>20</td><td>H</td><td>David</td><td>releasy v termínu, zamítnutí review: cíl 0</td></tr>
+          <tr><td>11</td><td><strong>Produktová compliance</strong>: privacy, rating, ATT (T57)</td><td>P</td><td>Akimo</td><td>5</td><td>N</td><td>David</td><td>žádný incident na storech, audit 1× za kvartál</td></tr>
+          <tr><td>12</td><td><strong>LiveOps vydaných titulů</strong>: eventy, kalendář, provozní monetizace</td><td>C</td><td>Akimo</td><td>20</td><td>H</td><td>David → Hutis</td><td>výnos živých titulů proti plánu, kalendář 4 týdny dopředu</td></tr>
+          <tr><td>13</td><td><strong>Provoz produktů</strong>: servery, cloud, monitoring, incidenty</td><td>P</td><td>Akimo</td><td>10</td><td>N</td><td>David</td><td>dostupnost, doba řešení incidentu</td></tr>
+          <tr><td>14</td><td><strong>Komunita hráčů, in-game komunikace a support</strong></td><td>P</td><td>Akimo (reaktivně)</td><td>5</td><td>N</td><td>nevyžaduje</td><td>doba odpovědi, hodnocení na storech</td></tr>
+          <tr><td>15</td><td><strong>Interní tooling, herní backend a AI nástroje</strong>: hub, backend, AMA bot, extrakce playables</td><td>P</td><td>David</td><td>25</td><td>N</td><td><strong>nikdo</strong> → Hutis + runbook</td><td>ušetřené hodiny za měsíc, každý nástroj s business casem</td></tr>
+          <tr><td>16</td><td><strong>B2B pipeline a nabídky</strong>: scoping, pricing podle tarifů</td><td>C</td><td>David</td><td>10</td><td>N</td><td>nevyžaduje</td><td>marže nabídek, počet dealů v pipeline</td></tr>
+          <tr><td>17</td><td><strong>B2B delivery</strong>: playables a externí vývoj, vedení zakázky</td><td>C</td><td>David</td><td>25</td><td>N</td><td>Čoud (návrh)</td><td>skutečná marže proti odhadu, dodávky v termínu</td></tr>
+          <tr><td>18</td><td><strong>Datový stack, eventy a definice metrik</strong></td><td>P</td><td><strong>nikdo formálně</strong>, fakticky Kuba + AI</td><td>10</td><td>N</td><td>nevyžaduje</td><td>jedna definice retence pro firmu, pokrytí eventy</td></tr>
+          <tr><td>19</td><td><strong>Herní analytika</strong>: čtení dat, doporučení k ladění</td><td>P</td><td>Kuba + AI, David 5</td><td>15</td><td>N</td><td>nevyžaduje</td><td>doporučení za sprint promítnutá do buildu</td></tr>
+          <tr><td>20</td><td><strong>Vedení lidí v Produkci</strong>: 1:1, cíle, hodnocení, onboarding</td><td>P</td><td>David</td><td>10</td><td>H</td><td>nevyžaduje</td><td>1:1 v rytmu, cíle první den měsíce</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Mimo tabulku: support a sdílené</h3>
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Činnost</th><th>Kdo</th><th>Kap.</th><th>Návrh</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>S1</td><td><strong>Firemní web a CPI/produktové stránky</strong> (T56)</td><td>David</td><td>5</td><td>vlastnictví ano, výkon: technika jako druhá role v Produkci, obsah MKT částí Marketing</td></tr>
+          <tr><td>S2</td><td><strong>Licence assetů, vývojové nástroje, device park</strong></td><td>David</td><td>5</td><td>předat do Operations jako evidenci a nákup, odbornou potřebu určuje Produkce</td></tr>
+          <tr><td>S3</td><td><strong>AI vzdělávání firmy</strong> (s Operations)</td><td>Břenek + David</td><td>10</td><td>potvrzuju svých 10 % jako vědomou položku svého úvazku</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Co z tabulky vyplývá</h3>
+    <ul class="points">
+      <li><strong>Já: součet cca 145 až 150 %.</strong> Rovnoměrně rozprostřené, na management, plánování a vedení lidí (01, 02, 20) zbývá dohromady 40 bodů ze 150, tedy nejmíň. Přesně obráceně, než co má vlastník segmentu dělat. Stejný problém, jaký Operations popisují u DJ (80/20), jen v jiném poměru.</li>
+      <li><strong>Akimo: součet cca 100 %</strong> (70 Produkce + 30 Operations). Druhý přetížený člověk segmentu, a to mu příprava Operations přidává lead HR a zástup kanceláří.</li>
+      <li><strong>Tři činnosti mají v poli kdo „nikdo" nebo provizorium:</strong> 14 (jen reaktivně), 15 (bez zástupu), 18 (Kuba + AI bez formy). To jsou mezery v kapitole 07.</li>
+      <li>Zástupy u core jsou návrhy a z velké části vedou na mě. To je slabé místo: <strong>zástup, který je sám na 150 %, není zástup.</strong> Řeší se to až tahy z kapitoly 07.</li>
+    </ul>
+  </section>
+
+  <section id="s06">
+    <h2><span class="no">06</span>Role v Produkci: formalizovat málo, škrtnout zbytek</h2>
+    <p class="lead-p">Odvozeno ze soupisu. Proti prvnímu draftu jsem návrh zúžil: dvě role se vědomě nezřizují, dvě se jen formalizují tam, kde už fakticky existují. Rozhodovací pásma heslovitě, částky patří na 17. 9.</p>
+
+    <div class="dwrap map" role="img" aria-label="Diagram rolí v Produkci">
+      <svg viewBox="0 0 920 430">
+        <!-- David -->
+        <g class="orgnode">
+          <rect x="310" y="24" width="300" height="72" rx="10" fill="#211b15" stroke="#57452a" stroke-width="1.4"/>
+          <text x="460" y="54" text-anchor="middle" fill="#ede4d4" font-size="15" font-weight="600">David · vlastník Produkce</text>
+          <text x="460" y="76" text-anchor="middle" fill="#a2947f" font-size="12.5">Vývoj a portfolio · B2B</text>
+        </g>
+        <path d="M460 96 V 128" stroke="#57452a" stroke-width="1.3" fill="none"/>
+        <path d="M92 128 H 828" stroke="#57452a" stroke-width="1.3" fill="none"/>
+        <g stroke="#57452a" stroke-width="1.3" fill="none">
+          <path d="M92 128 V 156"/>
+          <path d="M276 128 V 156"/>
+          <path d="M460 128 V 156"/>
+          <path d="M644 128 V 156"/>
+          <path d="M828 128 V 156"/>
+        </g>
+        <!-- leads row -->
+        <g class="orgnode">
+          <rect x="12" y="156" width="160" height="84" rx="9" fill="#241d16" stroke="#383025" stroke-width="1.2"/>
+          <text x="92" y="184" text-anchor="middle" fill="#ede4d4" font-size="13.5" font-weight="600">Project lead</text>
+          <text x="92" y="203" text-anchor="middle" fill="#c9a266" font-size="12.5">Aldy</text>
+          <text x="92" y="222" text-anchor="middle" fill="#6e6353" font-size="11">své tituly + design</text>
+        </g>
+        <g class="orgnode">
+          <rect x="196" y="156" width="160" height="84" rx="9" fill="#241d16" stroke="#383025" stroke-width="1.2"/>
+          <text x="276" y="184" text-anchor="middle" fill="#ede4d4" font-size="13.5" font-weight="600">Project lead</text>
+          <text x="276" y="203" text-anchor="middle" fill="#c9a266" font-size="12.5">Karlík</text>
+          <text x="276" y="222" text-anchor="middle" fill="#6e6353" font-size="11">své tituly + design</text>
+        </g>
+        <g class="orgnode">
+          <rect x="380" y="156" width="160" height="84" rx="9" fill="#241d16" stroke="#383025" stroke-width="1.2"/>
+          <text x="460" y="184" text-anchor="middle" fill="#ede4d4" font-size="13.5" font-weight="600">Publishing a LiveOps</text>
+          <text x="460" y="203" text-anchor="middle" fill="#c9a266" font-size="12.5">Akimo</text>
+          <text x="460" y="222" text-anchor="middle" fill="#6e6353" font-size="11">release · liveops · provoz</text>
+        </g>
+        <g class="orgnode">
+          <rect x="564" y="156" width="160" height="84" rx="9" fill="#241d16" stroke="#383025" stroke-width="1.2"/>
+          <text x="644" y="184" text-anchor="middle" fill="#ede4d4" font-size="13.5" font-weight="600">QA lead</text>
+          <text x="644" y="203" text-anchor="middle" fill="#c9a266" font-size="12.5">Hutis</text>
+          <text x="644" y="222" text-anchor="middle" fill="#6e6353" font-size="11">přebírá ownership QA</text>
+        </g>
+        <g class="orgnode">
+          <rect x="748" y="156" width="160" height="84" rx="9" fill="none" stroke="#c9a266" stroke-opacity="0.85" stroke-width="1.3" stroke-dasharray="6 7"/>
+          <text x="828" y="184" text-anchor="middle" fill="#ede4d4" font-size="13.5" font-weight="600">Data a analytika</text>
+          <text x="828" y="203" text-anchor="middle" fill="#c9a266" font-size="12.5">nábor</text>
+          <text x="828" y="222" text-anchor="middle" fill="#6e6353" font-size="11">datový analytik/tester</text>
+        </g>
+        <!-- bottom band -->
+        <g>
+          <rect x="12" y="292" width="256" height="72" rx="9" fill="none" stroke="#57452a" stroke-width="1.2" stroke-dasharray="5 6"/>
+          <text x="140" y="320" text-anchor="middle" fill="#a2947f" font-size="13" font-weight="600">Art lead DEV · GD lead</text>
+          <text x="140" y="340" text-anchor="middle" fill="#6e6353" font-size="11.5">vědomě se nezřizují</text>
+        </g>
+        <g>
+          <rect x="292" y="292" width="256" height="72" rx="9" fill="none" stroke="#c9a266" stroke-opacity="0.6" stroke-width="1.2" stroke-dasharray="5 6"/>
+          <text x="420" y="320" text-anchor="middle" fill="#a2947f" font-size="13" font-weight="600">Tech lead napříč</text>
+          <text x="420" y="340" text-anchor="middle" fill="#6e6353" font-size="11.5">k rozhodnutí: Čoud, nebo neosadit</text>
+        </g>
+        <g>
+          <rect x="572" y="292" width="336" height="72" rx="9" fill="#211b15" stroke="#383025" stroke-width="1.2"/>
+          <text x="740" y="314" text-anchor="middle" fill="#ede4d4" font-size="13" font-weight="600">Odborné autority · Mirek (tech), Peko (art)</text>
+          <text x="740" y="333" text-anchor="middle" fill="#6e6353" font-size="11.5">standard, review, mentoring</text>
+          <text x="740" y="351" text-anchor="middle" fill="#6e6353" font-size="11.5">bez vedení lidí a bez ručení za dodání</text>
+        </g>
+        <text x="12" y="404" fill="#6e6353" font-size="11.5">Plné rámečky = existuje nebo se formalizuje · zlatě čárkované = osazuje se · šedě čárkované = vědomě nezřízeno</text>
+      </svg>
+    </div>
+
+    <h3>06.1 Co si nechávám</h3>
+    <div class="tscroll">
+      <table class="wordy">
+        <thead>
+          <tr><th>Oblast</th><th>Řádky</th><th>Proč</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Vývoj a portfolio</strong></td><td>01, 02, 09, 20</td><td>Plán, kapacita, greenlight podklad a vedení. Práce vlastníka segmentu, nepředává se. Cíl: zvednout podíl vedení lidí z 10 na 20 %.</td></tr>
+          <tr><td><strong>B2B</strong></td><td>16, 17</td><td>B2B by měla být vlastní pozice, ale není komu ji dát, takže ji držím já. Delivery budu postupně delegovat po zakázkách (první kandidát: vývojová část na Čouda/Milana), pipeline a pricing si nechávám.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>06.2 Role, které se formalizují (už fakticky existují)</h3>
+    <div class="tscroll">
+      <table class="wordy">
+        <thead>
+          <tr><th>Role</th><th>Kdo</th><th>Rozhoduje sama</th><th>Poznámka</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Project lead</strong></td><td>Aldy a Karlík, každý na svých titulech</td><td>denní priority, spory v projektu, žádost o outsourcing</td><td>dnes to už dělají, dostanou napsané pásmo; design leadership je součást role, samostatný GD lead se nezřizuje</td></tr>
+          <tr><td><strong>Publishing a LiveOps lead</strong></td><td>Akimo</td><td>provozní releasy a hotfixy, liveops kalendář, monetizační parametry uvnitř modelu, komunikace ke hráčům</td><td>fakticky jeho dnešní hlavní práce; podmínky v 06.5</td></tr>
+          <tr><td><strong>QA lead</strong></td><td>Hutis</td><td>testplán, evidence, <strong>zastavit release</strong></td><td>přebírá ownership QA od Akima (odlehčení), Akimo si nechává release gate</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>06.3 Role, které se vědomě nezřizují</h3>
+    <div class="tscroll">
+      <table class="wordy">
+        <thead>
+          <tr><th>Role</th><th>Proč ne</th><th>Jak se to pokryje</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Art lead DEV</strong></td><td>Peko je mistr oboru, ne manažer; jiného kandidáta nemáme a roli bez člověka nezřizujeme</td><td>zadání pro DEV grafiky jde přes project leady (Aldy a Karlík umí art), Peko drží kvalitu jako odborná autorita</td></tr>
+          <tr><td><strong>GD lead napříč</strong></td><td>design leadership už je v roli project leada, samostatná role by byla titul</td><td>Aldy a Karlík na svých titulech, spory arbitruje David</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>06.4 Role k rozhodnutí na poradě</h3>
+    <div class="tscroll">
+      <table class="wordy">
+        <thead>
+          <tr><th>Role</th><th>Varianty</th><th>Můj návrh</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Tech lead napříč tituly</strong> (07, technická část 15, arbitr 04)</td><td>a) Čoud jako tech lead (senior, ale remote a je třeba se ho zeptat) · b) vědomě neosadit: technická rozhodnutí per projekt, Mirek jako odborná autorita a arbitr</td><td>začít variantou b), po zapracování Milana se vrátit k a); Mirek dostane napsanou roli autority, ne leada</td></tr>
+          <tr><td><strong>Data a analytika</strong> (18, 19)</td><td>nábor</td><td><strong>najmout datového analytika/testera</strong>, shodná priorita s Operations; profil s testerskou kapacitou pomůže i QA; do nástupu Kuba + AI s koncem 31. 12. 2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>06.5 Akimo: domovský segment a podmínky</h3>
+    <p>Potvrzuju <strong>scénář A</strong>: domovský segment <strong>Produkce</strong> (publishing manager), do Operations cca <strong>25 až 30 %</strong> jako lead HR administrativy. K tomu dvě podmínky, jinak ho rozpůlíme:</p>
+    <ol class="rules">
+      <li><strong>Kanceláře jdou na part-time externistu.</strong> Akimo může být lead a zástup jen do jeho nástupu, ne trvalý vykonavatel.</li>
+      <li><strong>QA ownership přechází na Hutise.</strong> Akimo si nechává release gate.</li>
+    </ol>
+    <p style="margin-top: 22px;">Po obou tazích je Akimo na cca 85 až 90 a s dalším zúžením komunit a reportů (kapitola 08) se dostane k 75.</p>
+
+    <h3>06.6 Co se stane se mnou</h3>
+    <div class="pull">
+      Dnes cca <strong>150 %</strong>. Po tazích z porady odchází tooling na OPS &amp; AI programátora, B2B delivery postupně po zakázkách, S1, S2 a outsourcing na project leady; roste vedení lidí z 10 na 20. Cíl do konce Q4: <strong>85 až 95 %</strong>, po plné delegaci delivery <strong>pod 75 %</strong>.
+      <span class="fine">Říkám to natvrdo: pod 75 % se nedostanu okamžitě ani rozhodnutím porady. Dostanu se tam kombinací nájmu OPS &amp; AI programátora, delegace B2B delivery a škrtů. Do té doby jsem vědomě přetížený s pojmenovaným rizikem: trpí řádky 01, 02 a 20, tedy přesně to, co má vlastník dělat.</span>
+    </div>
+  </section>
+
+  <section id="s07">
+    <h2><span class="no">07</span>Mezery a přetížení: u každého právě jedna odpověď</h2>
+
+    <div class="tscroll" style="margin-top: 10px;">
+      <table class="dense" style="min-width: 900px;">
+        <thead>
+          <tr><th>#</th><th>Mezera</th><th>Odpověď</th><th>Jméno a termín</th><th>Riziko, když se to nestane</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Data a analytika</strong> (18, 19)</td><td><strong>najmout</strong> datového analytika/testera; do té doby vědomě přechodný stav Kuba + AI</td><td>business case David do 17. 9., nábor Operations; přechodný stav končí 31. 12. 2026 nebo nástupem</td><td>každý má vlastní definici retence; monetizace zůstává odhad</td></tr>
+          <tr><td>2</td><td><strong>Moje přetížení 150 %</strong></td><td><strong>přeřadit + najmout</strong>: kapitola 06 + OPS &amp; AI programátor přebírá tooling</td><td>tahy z 06.6, vyhodnocení 26. 11.</td><td>trpí plán, kapacita a vedení lidí, tedy jádro segmentu</td></tr>
+          <tr><td>3</td><td><strong>Akimo 100 %</strong></td><td><strong>přeřadit</strong>: QA na Hutise, kanceláře na externistu</td><td>06.5, do 1. 10.</td><td>publishing a liveops, dvě core činnosti, spadnou první</td></tr>
+          <tr><td>4</td><td><strong>Komunita a in-game komunikace</strong> (14)</td><td><strong>vědomě jen reaktivně</strong> (Akimo), aktivní komunita neosazená</td><td>potvrdit na poradě, revize při poklesu hodnocení na storech</td><td>žádný aktivní community management; přijatelné a pojmenované</td></tr>
+          <tr><td>5</td><td><strong>B2B pipeline</strong> (16)</td><td><strong>držím já</strong> jako vlastní pozici; podílový systém 5 + 5 % jako druhý zdroj dealů</td><td>vyhodnocení 26. 11.: pokud pipeline stojí jen na mně, na 2027 zvážit nábor</td><td>pipeline závisí na mém čase; když podíly nezaberou, je to nejdražší mezera na najmutí</td></tr>
+          <tr><td>6</td><td><strong>NoxHub bez zástupu</strong> (15)</td><td><strong>jmenovat zástup + runbook</strong> (výstup Operations)</td><td>navrhuju Hutise, runbook do 1. 10.</td><td>výpadek hubu zastaví schvalování plateb a feedback pipeline</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull">
+      <strong>Pravidlo, které chci k přetížení odsouhlasit:</strong> jakmile soupisy ukážou, kdo dělá co a kdo je kde přetížený, u každého přetíženého se konkrétně stanoví, co s tím (přeřadit, zautomatizovat, najmout, škrtnout), se jménem a termínem. A tam, kde se udělat nedá nic, se přetížení <strong>kompenzuje penězi nebo jiným bonusem</strong>, vědomě a napsaně, ne mlčky.
+      <span class="fine">Navazuje na zásadu delegačního návrhu, že kdo se ukáže jako výrazně přetížený, má být odměněn víc. Konkrétní částky patří na 15. 10., pravidlo chci odsouhlasit teď.</span>
+    </div>
+  </section>
+
+  <section id="s08">
+    <h2><span class="no">08</span>Co ruším (povinné tři)</h2>
+    <p class="lead-p">Všechny tři z mého segmentu a z mého času, s datem a se jménem, kdo to vrátí.</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Ruším</th><th>Od kdy</th><th>Co se stane</th><th>Kdo to vrátí</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Stavbu nástrojů bez rozvahy build vs. buy.</strong> Před každým novým interním toolem se zváží, jestli na trhu neexistuje hotové řešení, a rozhodne se podle toho, co vyjde jednodušeji, sedí nám líp nebo je výhodnější; vlastní integrované řešení je legitimní výsledek té rozvahy. K rozhodnutí patří business case (výchozí stav, metrika, náklad, vyhodnocení). Škrtám stavění bez rozvahy a bez business casu.</td><td>ihned</td><td>část mého času z řádku 15 se vrací do plánu a vedení lidí</td><td>OPS &amp; AI programátor, který rozvahu dělá u každého požadavku</td></tr>
+          <tr><td>2</td><td><strong>Ruční reporty a přehledy, které umí vygenerovat hub.</strong> Provozní čísla se čtou v hubu, ne v dokumentech skládaných před poradou.</td><td>1. 10.</td><td>uvolní Akima i mě</td><td>Akimo, jen pokud konkrétní číslo v hubu chybí</td></tr>
+          <tr><td>3</td><td><strong>Synchro meetingy nahraditelné asynchronními prioritami v hubu.</strong> Stav projektů se hlásí async, meeting zůstává jen tam, kde se rozhoduje.</td><td>1. 10.</td><td>méně vyrušení pro celý tým; navazuje na redesign schůzek 17. 9.</td><td>project leadi</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="tbl-note">A čtvrtý námět, který nepatří mně, ale poradě: <strong>sunset titulů bez výnosu a bez plánu.</strong> Uvolnil by kapacitu v údržbě, releasech a provozu, ale je to portfolio rozhodnutí (CEO). Navrhuju otevřít 17. 9.</p>
+  </section>
+
+  <section id="s09">
+    <h2><span class="no">09</span>Moje hlasy k hraničním případům</h2>
+    <p class="lead-p">Sedm činností, o kterých se podle společného podkladu budeme hádat. Rozhoduje vlastník segmentu, kam činnost patří; tohle je můj hlas, ne veto.</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Činnost</th><th>Můj hlas</th><th>Proč</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Herní analytika</td><td><strong>P</strong></td><td>Výstup je rozhodnutí, ne produkt. Klasifikuju níž s pojmenovaným rizikem. Ale musí mít vlastní kapacitu, ne zbytek po core.</td></tr>
+          <tr><td>UA a nákup médií</td><td><strong>C</strong> (pro Marketing)</td><td>Druhá páka výnosu vedle produktu.</td></tr>
+          <tr><td>PR a brand</td><td><strong>S</strong></td><td>Efekt nepřímý a pomalý, publikační plán zautomatizovat, zbytek vědomě omezit.</td></tr>
+          <tr><td>Efektivizace a automatizace</td><td><strong>P</strong></td><td>Zvedá kapacitu ostatních, ale žádnou hru nedodá. Souhlasím s Operations, že roadmapa automatizací je záměr, ne rozhodnutí: každá jednotlivě s business casem, žádný program.</td></tr>
+          <tr><td>Komunita a in-game komunikace</td><td><strong>P</strong></td><td>Hráč to vnímá v týdnech, ne ve dnech. Reaktivní režim stačí.</td></tr>
+          <tr><td>Nábor</td><td><strong>P</strong></td><td>Proces, ne výstup. Vlastník Operations, výkon Akimo, kapacita napsaná číslem v soupisu Operations.</td></tr>
+          <tr><td>Interní tooling a Wiki</td><td><strong>S</strong> s výjimkou</td><td>Pravidlo build vs. buy (kapitola 08, škrt 1): před stavbou zvážit trh a rozhodnout podle jednoduchosti, fitu a výhodnosti, ne dogma jedním ani druhým směrem. Výjimka: herní backend a nástroje přímo zrychlující vývoj jsou P, s business casem.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s10">
+    <h2><span class="no">10</span>Moje odpovědi na známé mezery</h2>
+    <p class="lead-p">Osm mezer z kapitoly 7 společného podkladu, u každé jedna věta.</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Mezera</th><th>Moje odpověď</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>01</td><td><strong>Data a analytika</strong></td><td>najmout, kapitola 07 mezera 1</td></tr>
+          <tr><td>02</td><td><strong>Operativa Operations 80/20</strong></td><td>souhlasím s tahy DJ: HR na Akima (s podmínkami 06.5), kanceláře na externistu, smlouvy na Ambroze; OPS &amp; AI programátor je pak investice, ne záplata</td></tr>
+          <tr><td>03</td><td><strong>Efektivizace a automatizace</strong></td><td>po vyřešení 02; jednotlivé automatizace s business casem, ne roadmapa</td></tr>
+          <tr><td>04</td><td><strong>PR a brand</strong></td><td>zautomatizovat publikační plán; Produkce dodává podklady v pevném rytmu (jeden update na titul za měsíc), ne na vyžádání</td></tr>
+          <tr><td>05</td><td><strong>Komunita</strong></td><td>vědomě reaktivně, kapitola 07 mezera 4</td></tr>
+          <tr><td>06</td><td><strong>Grafická kapacita</strong></td><td>jmenovitě rozhodnout dnes, kapitola 11</td></tr>
+          <tr><td>07</td><td><strong>Nábor</strong></td><td>kapacita Akima na nábor napsaná v soupisu Operations; domovský segment potvrzuju: Produkce</td></tr>
+          <tr><td>08</td><td><strong>Zástupnost</strong></td><td>jména v soupisu (kapitola 05); přebírám standard Operations: zástup činnost 1× za kvartál reálně vykoná, jinak je to jen jméno v tabulce</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s11">
+    <h2><span class="no">11</span>Grafici: jmenovité rozdělení DEV a MKT</h2>
+    <p class="lead-p">Pravidlo z 20. 8. beze změny: konkrétní lidé pod konkrétní segment, uvnitř skupiny prioritizuje vlastník, cross práce po dohodě leadů obou stran, nikdy přes hlavu leada.</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Jméno</th><th>Segment</th><th>Poznámka</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>David C.</strong></td><td>DEV</td><td>junior 2D artist, plně herní art</td></tr>
+          <tr><td><strong>Peko</strong></td><td>DEV</td><td>domovsky DEV art + odborná autorita art directionu; výpomoc MKT po dohodě leadů, orientačně do 10 %</td></tr>
+          <tr><td><strong>Aldy, Karlík</strong></td><td>DEV</td><td>art kapacita uvnitř vlastních projektů (cca 10 % každý), nejde o poolové grafiky</td></tr>
+          <tr><td><strong>Ondra</strong></td><td>MKT</td><td>marketing artist a ASO</td></tr>
+          <tr><td><strong>Ruda</strong></td><td>MKT</td><td>videomaker a motion graphic</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="tbl-note">Lichý člověk je Peko: domovský segment DEV s napsaným podílem pro MKT, ne „sdílený". Sdílený bez čísla je zpátky společný pool.</p>
+  </section>
+
+  <section id="s12">
+    <h2><span class="no">12</span>Firma jako celek: typy rolí a počet lidí</h2>
+    <p class="lead-p">Dostupná kapacita: 16 lidí × 0,75 = <strong>12,0 plánovatelných úvazků</strong>. Součet činností podle mého soupisu, výstupu Operations a odhadu za Marketing vychází orientačně <strong>12,5 až 13</strong> a neobsahuje neosazené činnosti (data, aktivní komunita, efektivizace). Reálný schodek je <strong>1,5 až 2 úvazky</strong> a dnes je schovaný v přetížení dvou lidí a v mlčení o neosazeném.</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table class="dense" style="min-width: 900px;">
+        <thead>
+          <tr><th>Typ role</th><th>Segment</th><th>Dnes lidí (úvazků)</th><th>Stav</th><th>Odpověď</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Programátor</td><td>Produkce</td><td>Mirek, Čoud, Milan, část Hutise (cca 3,3)</td><td>drží, Milan v onboardingu</td><td>po zapracování Milana OK; B2B delivery si z ní ukusuje, hlídat v kapacitním plánu</td></tr>
+          <tr><td>Grafik DEV</td><td>Produkce</td><td>David C., Peko (cca 1,8)</td><td>drží</td><td>rozdělení kapitola 11</td></tr>
+          <tr><td>Grafik MKT</td><td>Marketing</td><td>Ondra, Ruda (2,0)</td><td>Kuba doplní potřebu</td><td></td></tr>
+          <tr><td>Game designer + project lead</td><td>Produkce</td><td>Aldy, Karlík (2,0)</td><td>na limitu (design + lead + art)</td><td>nepřidávat jim nic dalšího</td></tr>
+          <tr><td>QA</td><td>Produkce</td><td>Hutis 0,4 + Akimo gate</td><td>tenké</td><td>QA lead Hutis; testerská kapacita přijde s datovým analytikem/testerem</td></tr>
+          <tr><td>Publishing a LiveOps</td><td>Produkce</td><td>Akimo 0,7</td><td>přetížený vč. Operations</td><td>přeřadit (06.5)</td></tr>
+          <tr><td>Vlastník Produkce</td><td>Produkce</td><td>David 1,5</td><td>přetížený</td><td>kapitola 06.6</td></tr>
+          <tr><td>UA</td><td>Marketing</td><td>Richi + Kuba</td><td>Kuba doplní</td><td></td></tr>
+          <tr><td><strong>Data a analytika</strong></td><td>Produkce</td><td><strong>0</strong></td><td>prázdné</td><td><strong>najmout: datový analytik/tester</strong> (priorita 1, shodně s Operations)</td></tr>
+          <tr><td><strong>OPS &amp; AI programátor</strong></td><td>Operations</td><td><strong>0</strong> (dnes David 0,25 + DJ)</td><td>skryté v přetížení</td><td><strong>najmout jako investici</strong> (priorita 2); přebírá hub a tooling</td></tr>
+          <tr><td><strong>Operativa Operations</strong></td><td>Operations</td><td>DJ 0,73, díry</td><td>80/20 naopak</td><td><strong>externista part-time kanceláře</strong> (priorita 3) + HR na Akima</td></tr>
+          <tr><td>Community a support</td><td>Produkce</td><td>Akimo reaktivně 0,05</td><td>vědomě minimální</td><td>nepřidávat, revize při poklesu hodnocení</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pull">
+      <strong>Balík na schválení: dva nábory a jeden externista.</strong> Datový analytik/tester, OPS &amp; AI programátor, part-time externista na kanceláře. Všechno ostatní se řeší přeřazením a škrty, žádná další pozice se nezřizuje.
+      <span class="fine">To je celá moje odpověď na otázku „je nějakých pozic potřeba více": ano, těchhle tří, a žádné jiné.</span>
+    </div>
+  </section>
+
+  <section id="s13">
+    <h2><span class="no">13</span>Co potvrzuji z výstupu Operations</h2>
+    <p class="lead-p">S přípravou Operations v zásadě souhlasím. Tady jsou moje potvrzení a jedna výhrada.</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Bod DJ</th><th>Moje odpověď</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Domovský segment Akima, scénář A/B</td><td><strong>Scénář A, domovský segment Produkce</strong>, 25 až 30 % do Operations, lead HR ano. Podmínky v 06.5: kanceláře jen do nástupu externisty, QA přechází na Hutise.</td></tr>
+          <tr><td>Lead role Akima pro HR a kanceláře</td><td>HR ano. <strong>Kanceláře výhrada:</strong> lead a zástup jen dočasně; Akimo je na 100 % a tohle je přesně činnost „navíc", která spadne první.</td></tr>
+          <tr><td>10 % mého úvazku na AI vzdělávání</td><td><strong>Potvrzuji</strong> a mám to v soupisu jako S3, tedy vědomě, ne navíc potají.</td></tr>
+          <tr><td>NoxHub zástup David nebo Hutis</td><td><strong>Hutis</strong> + runbook. Já jsem už teď single point na příliš mnoha místech, zástup přes dalšího přetíženého nic neřeší.</td></tr>
+          <tr><td>Odpovědnost segmentů za vlastní data, hranice efektivizace, organické tooly bez režie Operations</td><td>Ano, s pravidlem: organický tool žije bez režie Operations, dokud ho používá jen segment, který ho postavil. Jakmile ho používají dva segmenty, dostane vlastníka, business case a zástup.</td></tr>
+          <tr><td>Standard zástupů: zástup činnost 1× za kvartál reálně vykoná</td><td><strong>Přebírám</strong> pro všechny zástupy v soupisu.</td></tr>
+          <tr><td>Priorita náboru datový analytik/tester</td><td><strong>Shoda</strong>, u mě priorita 1 (kapitola 12).</td></tr>
+          <tr><td>Smlouvy na Ambroze, platby self-service v hubu</td><td>Souhlas, bez připomínek.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s14">
+    <h2><span class="no">14</span>Co potvrzuji z bodů „od Davida"</h2>
+    <p class="lead-p">Pět bodů, které na mně čekají z kompilátu 20. 8. (kapitola 14).</p>
+
+    <div class="tscroll" style="margin-top: 24px;">
+      <table class="wordy">
+        <thead>
+          <tr><th>Bod</th><th>Odpověď</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Produktový cloud, compliance a licence assetů v Produkci</td><td><strong>Ano.</strong> Cloud a compliance řádky 11 a 13 (Akimo), licence jako evidence a nákup do Operations (S2), odborná potřeba Produkce.</td></tr>
+          <tr><td>Odborný onboarding lidí v Produkci</td><td><strong>Ano</strong>, řádek 20, u leada, pod kterého člověk nastupuje.</td></tr>
+          <tr><td>Předávání náborových a nákupních požadavků do Operations</td><td>Jeden kanál a jedna šablona v hubu: co, proč, rozpočet, termín, kdo vybírá. Bez šablony požadavek neexistuje. Postaví Operations do 17. 9.</td></tr>
+          <tr><td>David celkový vlastník firemního webu</td><td><strong>Ano</strong> jako vlastník; výkon podle S1.</td></tr>
+          <tr><td>Které produktové oblasti vyžadují zástupnost</td><td>Řádky 01, 02, 06, 10, 12, 13, 15 a běžící B2B zakázka. Jména v soupisu, standard 1× za kvartál.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="s15">
+    <h2><span class="no">15</span>Otázky, které položím ostatním</h2>
+
+    <ol class="rules">
+      <li><strong>Všem:</strong> souhlasíme s pravidlem z kapitoly 04 (počet lidí = kapacita / 0,75 a tři pásma pro zbytek)? Pokud ano, platí pro všechny segmenty stejně.</li>
+      <li><strong>Jirko:</strong> bereš balík z kapitoly 12 (datový analytik/tester, OPS &amp; AI programátor, externista kanceláře) jako tři business casy do 17. 9.? Bez nich nemá kvartál nanečisto co testovat, protože schodek zůstane schovaný ve mně a v Akimovi.</li>
+      <li><strong>Kubo:</strong> sedí ti termín konce přechodného stavu u analytiky 31. 12. 2026 a role vykonavatele s AI do té doby? A jmenovité rozdělení grafiků z kapitoly 11 včetně Pekova limitu 10 %?</li>
+      <li><strong>DJ:</strong> sedí ti moje podmínky ke scénáři A (06.5)? A převezme Operations S2 (licence, nástroje, devices) jako evidenci a nákup?</li>
+      <li><strong>Všem:</strong> souhlasíme, že role odborné autority (Mirek tech, Peko art) je legitimní placená role bez vedení lidí, a nebudeme jim lead role nutit? Chci to mít zapsané, jinak to za půl roku někdo otevře jako „proč Mirek nikoho nevede".</li>
+      <li><strong>Všem:</strong> kolik rolí leada unese jeden člověk? Můj návrh: dvě, a součet odborné práce plus vedení pod 75 %.</li>
+    </ol>
+
+    <h3>Zbývá před poradou</h3>
+    <ul class="points">
+      <li>Projít soupis (kapitola 05) s Aldym nebo Karlíkem jako validace mimo čtyřku (T61).</li>
+      <li>Reality check mých procent proti kalendáři za poslední dva týdny, hlavně řádky 15 a 17.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="shell">
+  <div class="related">
+    <a href="priprava-2026-09-03-role-a-cinnosti.html">Společný podklad</a>
+    <a href="porada-2026-08-20-kompilat.html">Kompilát 20. 8.</a>
+    <a href="tracker-temat.html">Tracker témat</a>
+    <a href="priprava-2026-08-20-david.html">Moje příprava 20. 8.</a>
+  </div>
+  <div class="colophon">Osobní příprava Davida na poradu vedení 3. 9. 2026 · NOXGAMES</div>
+</footer>
+
+</body>
+</html>
