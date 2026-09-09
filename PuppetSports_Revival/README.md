@@ -34,7 +34,7 @@ Verified from Google Play on **23 Aug 2026**:
 
 Combined ratings figure used on the pages: **567K**.
 
-**Franchise total: 42M downloads across the lineup**, all titles, all stores, lifetime. This is
+**Franchise total: 100M+ downloads across the lineup**, all titles, all stores, lifetime. This is
 Jiri's figure, given 24 Aug 2026, and it replaced the earlier unverified "100M+" everywhere on the
 three pages. It is the headline claim, so if a partner's analyst asks for the source we should have
 it ready (old Play Console exports, App Annie / Sensor Tower history).
@@ -88,7 +88,7 @@ all three pages stay identical.
 | `icon-soccer.png`, `icon-hockey.png` | Play store app icons, 512x512 |
 | `noxgames-logo.png` | copied from `../CPI_Tests/assets` |
 | `sport-{floorball,football,quidditch,polo}.gif` | Jiri's SnapCast gameplay captures (20 Jul 2026), re-encoded to 10 s / 640x360 / 10 fps / 128 colors with ffmpeg (2.2 to 3.6 MB each, originals ~19-32 MB). `sport-football.gif` shows American football, `sport-quidditch.gif` shows Quadball — page labels match the build's watermarks, filenames kept for the svg fallback pairing |
-| `meowcup-1..4.jpg` | **MISSING — drop the four MeowCup Field Hockey creatives here** |
+| `meowcup-1..4.jpg` | MeowCup Field Hockey creatives: modes, match with boards, power-ups, tournament bracket |
 
 Until those files exist, the tiles render as labelled placeholder panels (dark diagonal-stripe
 tiles naming the missing file). The pages do not break. Filenames must match exactly.
@@ -128,3 +128,31 @@ To add another sport, copy one of the four blocks in that script and add a tile 
 Copy `soccer.html`, then change: `<title>`, hero copy, the sport-specific sections, the screenshots,
 the store link and the footer. Everything below "Bundles" is identical across the three pages
 on purpose, so a partner comparing two of our pages sees the same commercial terms.
+
+## Languages
+
+English is the default and always the fallback. `src/index.js` is a Worker that runs before
+static assets (`run_worker_first: true`, `html_handling: "none"` so the Worker owns routing) and
+picks a language in this order:
+
+1. explicit choice: `?lang=cs`, `?lang=en`, or the bare flags `?cs` / `?en` (also stored in the
+   `psr_lang` cookie for a year, so it survives the next click)
+2. the `psr_lang` cookie from a previous explicit choice
+3. the connecting country, `request.cf.country === "CZ"` -> Czech
+4. `Accept-Language`
+5. English
+
+An explicit choice always beats geography, so a Czech visitor who clicks EN is not dragged back.
+Every page carries an EN/CZ switcher in the nav and in the mobile menu.
+
+**Adding a language:** add its code to `LANGS` in `src/index.js`, add a country mapping in
+`COUNTRY_LANG` if relevant, and ship `<page>.<code>.html` files. Anything without a translated
+file falls back to English silently, so partial translations are safe to deploy.
+
+**Translated today:** `index.cs.html` only. `soccer` and `hockey` still serve English to Czech
+visitors. When translating them, keep the four-file parity rule in mind: index, index.cs, soccer
+and hockey all duplicate the term sheet.
+
+Czech copy rules for this project: vykani throughout, no em-dashes, no emojis, decimal comma
+(4,3 / 4,8), non-breaking space in prices (20 000 $). Check for stray Cyrillic before shipping:
+`grep -P '[\x{0400}-\x{04FF}}]' public/*.cs.html` should return nothing.

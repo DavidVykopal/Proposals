@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "montserrat",
+        "createdAt": "2026-09-09T17:45:29.508Z",
+        "reason": "Incumbent site type system: Montserrat is the display face across index/soccer/hockey via assets/style.css; user required the new page reuse the existing design system"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-09-09T17:45:29.543Z",
+        "reason": "Incumbent site type system: Inter is the body face across index/soccer/hockey via assets/style.css; user required the new page reuse the existing design system"
+      }
+    ]
+  }
+}

@@ -75,7 +75,7 @@ Use it deliberately, because it changes who you call:
   budget line, which is a much easier thing to ask a league for.
 - **It turns a club into our sales channel.** A club that wants the edition but cannot fund it
   alone has every reason to go and find its own shirt sponsor. They know their sponsors and we do
-  not, and they are far more persuasive with them than a cold email from Prague ever will be.
+  not, and they are far more persuasive with them than a cold email from Brno ever will be.
 - **Guardrail to state early:** the partner they bring cannot be a competitor inside their own
   exclusive category, and from the third identity onward each one adds $8,000 to the total before
   the split. Say this up front so nobody arrives with twelve clubs expecting $10,000 each.
@@ -141,14 +141,15 @@ Short. No attachment except the mockup image. No deck. Subject line is the club'
 >
 > Hi [name],
 >
-> We are NOXGAMES, a Prague studio. Our game Puppet Ice Hockey has five million downloads and 4.8
+> We are NOXGAMES, a Brno studio. Our game Puppet Ice Hockey has five million downloads and 4.8
 > stars, and it is live on Google Play right now: [link]. Install it and look at the boards around
 > the rink. They say NOXGAMES.
 >
 > Attached is what they look like saying Sparta.
 >
-> We are reviving the Puppet Sports franchise and taking one partner per sport. The entry package
-> is $20,000 and takes four weeks. Worth fifteen minutes?
+> We are reviving the Puppet Sports franchise and taking a maximum of four partners per game, each
+> exclusive in their own category. The entry package is $20,000 and takes four weeks.
+> Worth fifteen minutes?
 >
 > David
 
@@ -157,6 +158,11 @@ Then the sport page as the follow-up link once they reply, not before.
 **Sequence:** mockup email → 5 working days → short follow-up with one number from the page
 (4.8 stars, or 467,000 ratings) → 10 days → LinkedIn message to the same person → park for a
 quarter. Three touches, then stop. Keep a simple tracker; do not improvise this.
+
+---
+
+**Per-archetype templates live in `EMAIL_TEMPLATES.md`** (brand, gear manufacturer, team,
+league, association). The example above is the team/club version.
 
 ---
 
@@ -233,8 +239,8 @@ Ordered by how fast we could realistically get a first call, not by size.
 
 ## 10. Next 30 days
 
-- [ ] Drop the four MeowCup creatives into `public/assets/` so the Proof section is complete
-- [ ] Get the source behind the 42M downloads figure
+- [x] Drop the four MeowCup creatives into `public/assets/` so the Proof section is complete
+- [x] Franchise figure corrected to 100M+ (David, 9 Sep 2026); NOXGAMES overall is 250M+
 - [x] Get Jiri's floorball / football / quadball / horse polo GIFs into `public/assets/` (done 28 Aug 2026,
       cut to 10 s / 640x360 / 10 fps from his SnapCast captures; strip labels now say Quadball and
       American football to match the build's watermarks)

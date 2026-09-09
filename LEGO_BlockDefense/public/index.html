@@ -212,7 +212,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 18px;
     }
 
     .nav-links a {
@@ -220,7 +220,8 @@
       font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
       color: var(--ink);
       padding: 12px 2px;
       transition: color 0.25s ease;
@@ -1250,6 +1251,11 @@
     }
 
     /* ---------- Responsive ---------- */
+    @media (max-width: 1240px) {
+      .nav-links { display: none; }
+      .nav-burger { display: block; }
+    }
+
     @media (max-width: 1020px) {
       .hero-grid { grid-template-columns: 1fr; gap: 60px; }
       .mock-wrap { order: 2; }
@@ -1273,8 +1279,6 @@
     }
 
     @media (max-width: 780px) {
-      .nav-links { display: none; }
-      .nav-burger { display: block; }
       section { padding: 76px 0; }
       .grid-3, .options-grid, .callout, .addons-grid { grid-template-columns: 1fr; }
       .mock-chip.c1 { left: 0; }
@@ -1311,6 +1315,7 @@
         <a href="#ua">UA Model</a>
         <a href="#brand">Safety</a>
         <a href="#timeline">Timeline</a>
+        <a href="#pipeline">Pipeline</a>
         <a href="#terms" class="nav-cta">Term Sheet</a>
       </div>
       <button class="nav-burger" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
@@ -1326,6 +1331,7 @@
       <a href="#ua" onclick="toggleMenu()">UA Model</a>
       <a href="#brand" onclick="toggleMenu()">Brand &amp; Safety</a>
       <a href="#timeline" onclick="toggleMenu()">Timeline</a>
+      <a href="#pipeline" onclick="toggleMenu()">More From Our Pipeline</a>
       <a href="#terms" onclick="toggleMenu()">Term Sheet</a>
     </div>
   </nav>
@@ -2048,6 +2054,56 @@
     </div>
   </section>
 
+  <!-- ===== More prototypes ===== -->
+  <section id="pipeline" class="darker">
+    <span class="studfield"></span>
+    <div class="shell">
+      <div class="sec-head">
+        <div class="reveal">
+          <span class="studs" style="--sc: #00c257;"><i></i><i></i><i></i></span>
+          <span class="sec-label">Beyond this proposal</span>
+          <h2>Block Defense is <span class="grad-green">one of several.</span></h2>
+        </div>
+        <p class="reveal d1">
+          Block Defense is the concept we think fits your brick world best, which is why it is the one written up
+          here in full. It is not the only one we have. We are sitting on several other prototypes that are built
+          and waiting for full development, across different genres and session lengths, and a number of them would
+          translate into the brick world just as naturally.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="glass-card reveal">
+          <div class="icon-badge green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#00c257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><path d="M14 17.5h7M17.5 14v7"/></svg>
+          </div>
+          <h3>Prototypes, not pitch decks</h3>
+          <p class="card-text">These are internally funded builds that already passed our own prototype gate: the loop is playable and the numbers behind it are known. What they are missing is the right IP and a green light, not a design.</p>
+        </div>
+        <div class="glass-card reveal d1">
+          <div class="icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2b9bf4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>We can show you</h3>
+          <p class="card-text">If it is useful, we bring them to the same working session: playable builds on device, the loop, the retention shape and what each would cost to finish in a brick setting. Under NDA, no obligation attached to this proposal.</p>
+        </div>
+        <div class="glass-card reveal d2">
+          <div class="icon-badge gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ffcf00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.6 6.1.5-4.6 4 1.4 6-5.3-3.2L6.7 19l1.4-6-4.6-4 6.1-.5z"/></svg>
+          </div>
+          <h3>Or tell us the direction</h3>
+          <p class="card-text">It also works the other way round. Name the genre, the audience or the theme you want covered next and we will tell you straight away whether something in the pipeline already fits, or prototype against your brief.</p>
+        </div>
+      </div>
+
+      <p class="note reveal">
+        <strong>To be clear:</strong> nothing here changes the Block Defense offer above. Treat it as an open door.
+        Whether the answer to this proposal is yes, no or not yet, we are happy to walk you through the rest of the
+        pipeline and let you pick what deserves a brick version.
+      </p>
+    </div>
+  </section>
+
   <!-- ===== CTA ===== -->
   <section class="cta">
     <div class="shell">
@@ -2055,7 +2111,7 @@
       <h2 class="reveal d1">Let's <span class="grad-gold">snap it together.</span></h2>
       <p class="reveal d2">
         One working session is enough to pick the art direction, confirm the scope and put a date on the contract.
-        We bring the playable proof, you bring the bricks.
+        We bring the playable proof and the rest of the prototype pipeline, you bring the bricks.
       </p>
       <div class="hero-actions reveal d3">
         <a class="btn btn-gold btn-brick" href="mailto:studio@noxgames.com?subject=Block%20Defense%20Proposal">

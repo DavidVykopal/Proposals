@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Outreach Email Templates | Puppet Sports Revival | NOXGAMES</title>
+  <link rel="icon" href="assets/noxgames-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+
+  <!--
+    ============================================================
+    INTERNAL PAGE. Not linked from the proposal navigation.
+    Mirrors EMAIL_TEMPLATES.md in the repo root. If you change a
+    template here, change it there too, and vice versa.
+    Numbers must agree with index.html / soccer.html / hockey.html.
+    ============================================================
+  -->
+
+<style>
+  /* ---------- Page shell ---------- */
+  .doc-bar {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    background: rgba(0, 16, 31, 0.86);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .doc-bar .shell { display: flex; align-items: center; gap: 16px; }
+
+  .doc-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-family: Montserrat, sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .doc-brand img { width: 26px; height: 26px; }
+
+  .badge-internal {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 107, 107, 0.45);
+    background: rgba(255, 107, 107, 0.1);
+    color: var(--red);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .badge-internal::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+  }
+
+  .back-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover { color: var(--cyan); }
+
+  /* ---------- Document head ---------- */
+  .doc-head { padding: 74px 0 10px; }
+  .doc-head h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); max-width: 16ch; }
+  .doc-lede { color: var(--muted); font-size: 1.02rem; max-width: 68ch; }
+  .doc-lede strong { color: var(--ink); }
+
+  .rulebook {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0;
+    margin: 40px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .rulebook div {
+    padding: 20px 22px 20px 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .rulebook div:last-child { border-right: 0; }
+  .rulebook dt {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 7px;
+  }
+  .rulebook dd { margin: 0; color: var(--muted); font-size: 0.87rem; line-height: 1.5; }
+
+  /* ---------- Layout: index rail + templates ---------- */
+  .doc-body {
+    display: grid;
+    grid-template-columns: 218px minmax(0, 1fr);
+    gap: 56px;
+    align-items: start;
+    padding: 64px 0 40px;
+  }
+
+  .rail { position: sticky; top: 88px; }
+
+  .rail-title {
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .rail ol { list-style: none; margin: 0; padding: 0; counter-reset: r; }
+
+  .rail a {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .rail a::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--tone, var(--cyan));
+    opacity: 0.55;
+    flex: 0 0 auto;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .rail a:hover,
+  .rail a.active { color: var(--ink); transform: translateX(5px); }
+  .rail a:hover::before,
+  .rail a.active::before { opacity: 1; transform: scale(1.35); }
+
+  /* ---------- Template block ---------- */
+  .tpl { scroll-margin-top: 92px; padding-bottom: 68px; }
+  .tpl + .tpl { border-top: 1px solid rgba(255, 255, 255, 0.09); padding-top: 60px; }
+
+  .tpl-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; }
+
+  .tpl h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+    margin: 0;
+    color: var(--tone);
+  }
+
+  .tpl-role { color: var(--muted); font-size: 0.9rem; }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1px;
+    margin: 26px 0 30px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .facts > div { background: var(--nox-dark); padding: 16px 18px; }
+
+  .facts dt {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .facts dd { margin: 0; font-size: 0.9rem; font-weight: 600; line-height: 1.45; }
+  .facts dd b { color: var(--tone); font-weight: 800; }
+
+  /* ---------- Copyable field ---------- */
+  .field { margin-bottom: 18px; }
+
+  .field-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 9px;
+  }
+
+  .field-label {
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .copy-btn {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 7px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .copy-btn svg { width: 15px; height: 15px; flex: 0 0 auto; }
+  .copy-btn .ic-done { display: none; }
+
+  .copy-btn:hover {
+    border-color: var(--tone);
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-1px);
+  }
+
+  .copy-btn:focus-visible {
+    outline: 2px solid var(--tone);
+    outline-offset: 3px;
+  }
+
+  .copy-btn.done {
+    border-color: var(--pitch);
+    color: var(--pitch);
+    background: rgba(47, 217, 139, 0.12);
+  }
+
+  .copy-btn.done .ic-copy { display: none; }
+  .copy-btn.done .ic-done { display: block; }
+
+  .sheet {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    padding: 26px 30px;
+  }
+
+  .sheet::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    bottom: 16px;
+    width: 1px;
+    background: var(--tone);
+    opacity: 0.65;
+  }
+
+  .sheet p { margin: 0 0 1.05em; max-width: 72ch; line-height: 1.68; }
+  .sheet p:last-child { margin-bottom: 0; }
+  .sheet strong { color: var(--ink); font-weight: 700; }
+  .sheet .sig { color: var(--muted); }
+
+  .subject-line {
+    font-family: Montserrat, sans-serif;
+    font-weight: 800;
+    font-size: 1.06rem;
+    line-height: 1.4;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background: rgba(255, 255, 255, 0.04);
+    max-width: 72ch;
+  }
+
+  .followup { color: var(--muted); font-size: 0.95rem; line-height: 1.65; max-width: 72ch; }
+  .followup em { color: var(--ink); font-style: normal; }
+
+  /* Placeholders the user must replace before sending */
+  .ph {
+    color: var(--gold);
+    background: rgba(255, 185, 56, 0.13);
+    border-bottom: 1px dashed rgba(255, 185, 56, 0.6);
+    padding: 1px 3px;
+    margin: 0 -1.5px;
+    border-radius: 4px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* ---------- Facts table ---------- */
+  .numbers { padding: 20px 0 100px; }
+  .numbers h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 34px;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(47, 217, 139, 0.5);
+    background: rgba(4, 32, 24, 0.94);
+    backdrop-filter: blur(10px);
+    color: var(--pitch);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, 22px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .toast svg { width: 16px; height: 16px; }
+  .toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+  /* ---------- Browser surfaces ---------- */
+  .doc-scope ::selection { background: rgba(0, 210, 255, 0.32); color: #fff; }
+  .doc-scope a:focus-visible,
+  .rail a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 3px; }
+
+  html { scrollbar-color: rgba(0, 210, 255, 0.4) transparent; }
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: var(--nox-darker); }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 210, 255, 0.28);
+    border-radius: 999px;
+    border: 3px solid var(--nox-darker);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0, 210, 255, 0.5); }
+
+  /* ---------- Entrance ---------- */
+  .rise { opacity: 0; transform: translateY(16px); }
+  .rise.in {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise, .rise.in { opacity: 1; transform: none; transition: none; }
+    .toast { transition: opacity 0.2s linear; }
+    .copy-btn:hover, .rail a:hover, .rail a.active { transform: none; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px) {
+    .doc-body { grid-template-columns: 1fr; gap: 30px; padding-top: 44px; }
+    .rail {
+      position: static;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      padding-bottom: 6px;
+    }
+    .rail ol { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; }
+    .rail li { flex: 0 0 auto; }
+    .rail a {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-size: 0.8rem;
+    }
+    .rail a:hover, .rail a.active { transform: none; }
+  }
+
+  @media (max-width: 640px) {
+    .doc-head { padding-top: 48px; }
+    .sheet { padding: 22px 20px; }
+    .sheet::before { top: 12px; bottom: 12px; }
+    .rulebook div { border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.07); padding-right: 0; }
+    .field-top { flex-wrap: wrap; }
+    .copy-btn { margin-left: 0; }
+    .badge-internal { font-size: 0.56rem; letter-spacing: 0.14em; padding: 5px 10px; }
+    .doc-brand span { display: none; }
+  }
+
+  /* ---------- Print: hand the boss a readable page ---------- */
+  @media print {
+    .doc-bar, .rail, .copy-btn, .toast, .doc-cta { display: none !important; }
+    body { background: #fff; color: #111; }
+    .doc-body { grid-template-columns: 1fr; padding: 0; }
+    .sheet, .subject-line, .facts > div { background: #fff !important; border-color: #bbb !important; }
+    .sheet::before { background: #888 !important; }
+    .tpl { break-inside: avoid; padding-bottom: 26px; }
+    .tpl h2, .facts dd b { color: #111 !important; }
+    .doc-lede, .facts dt, .followup, .rulebook dd, .tpl-role { color: #444 !important; }
+    .ph { color: #7a5200 !important; background: #fdf3dc !important; }
+    .rise { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body class="doc-scope">
+
+  <div class="doc-bar">
+    <div class="shell">
+      <a class="doc-brand" href="index.html">
+        <img src="assets/noxgames-logo.png" alt="" />
+        <span>NOXGAMES</span>
+      </a>
+      <a class="back-link" href="index.html">&larr; Proposal</a>
+      <span class="badge-internal">Internal &middot; not for clients</span>
+    </div>
+  </div>
+
+  <header class="doc-head">
+    <div class="shell">
+      <h1 class="rise">Outreach email templates</h1>
+      <p class="doc-lede rise">
+        Five first-contact emails for the Puppet Sports Revival, one per buyer archetype. They are not
+        interchangeable: the budget the money comes from is different in each case, and that is what the copy is
+        built around. <strong>Copy the subject and the body separately</strong>, replace everything in
+        <span class="ph">brackets</span>, attach the mockup, send.
+      </p>
+
+      <dl class="rulebook rise">
+        <div>
+          <dt>No greeting</dt>
+          <dd>Every body starts on the first real sentence. Add your own "Hi [name]," when you paste.</dd>
+        </div>
+        <div>
+          <dt>One attachment</dt>
+          <dd>The mockup image. No deck, no PDF, no link tree.</dd>
+        </div>
+        <div>
+          <dt>Link the store, not us</dt>
+          <dd>Get them to install the live game and see the NOXGAMES boards. The proposal page is the follow-up.</dd>
+        </div>
+        <div>
+          <dt>Three touches</dt>
+          <dd>Mockup email, 5 days, follow-up, 10 days, LinkedIn. Then park it for a quarter.</dd>
+        </div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="shell">
+    <div class="doc-body">
+
+      <nav class="rail" aria-label="Templates">
+        <p class="rail-title">Archetype</p>
+        <ol>
+          <li><a href="#brand" style="--tone: #00d2ff;">Brand</a></li>
+          <li><a href="#gear" style="--tone: #ff00ff;">Gear maker</a></li>
+          <li><a href="#team" style="--tone: #2fd98b;">Team</a></li>
+          <li><a href="#league" style="--tone: #ffb938;">League</a></li>
+          <li><a href="#association" style="--tone: #7fe3ff;">Association</a></li>
+        </ol>
+      </nav>
+
+      <main>
+
+        <!-- ===== 1. Brand ===== -->
+        <article class="tpl rise" id="brand" style="--tone: #00d2ff;">
+          <div class="tpl-head">
+            <h2>Brand</h2>
+            <span class="tpl-role">Consumer brand buying an activation</span>
+          </div>
+
+          <dl class="facts">
+            <div><dt>Who signs</dt><dd>Head of Sponsorship or Brand Activation Manager, with the CMO</dd></div>
+            <div><dt>Budget</dt><dd><b>Brand activation.</b> Sits next to media spend</dd></div>
+            <div><dt>Angle</dt><dd>A board lasts one second. A match lasts four minutes</dd></div>
+            <div><dt>Send them</dt><dd><b>index.html</b>, the core proposal</dd></div>
+          </dl>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Subject</span>
+              <button class="copy-btn" type="button" data-copy="#s-brand">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="subject-line" id="s-brand"><span class="ph">[Brand]</span> on the boards, for four minutes instead of one second</p>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Email body</span>
+              <button class="copy-btn" type="button" data-copy="#b-brand">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <div class="sheet" id="b-brand">
+              <p>We are NOXGAMES, a Brno studio with over 250 million downloads across our games. Puppet Soccer is one of them: 10 million installs, 4.3 stars, live on Google Play right now, <span class="ph">[store link]</span>. Install it and look at the boards around the pitch. They say NOXGAMES.</p>
+              <p>Attached is what they look like saying <span class="ph">[Brand]</span>.</p>
+              <p>A stadium board gets you a second of peripheral vision. A match in this game holds a player for four minutes, and they play it again tomorrow. We are reviving the franchise and taking a maximum of four partners per game, each one exclusive in their own category, so no competitor of yours turns up alongside you.</p>
+              <p>Entry package is $20,000 and takes four weeks. Worth fifteen minutes?</p>
+              <p class="sig">David</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Follow-up, 5 days</span>
+              <button class="copy-btn" type="button" data-copy="#f-brand">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="followup" id="f-brand"><em>467,000 people have rated Puppet Soccer. The average sponsored post reaches fewer. Still worth fifteen minutes?</em></p>
+          </div>
+        </article>
+
+        <!-- ===== 2. Gear manufacturer ===== -->
+        <article class="tpl rise" id="gear" style="--tone: #ff00ff;">
+          <div class="tpl-head">
+            <h2>Gear manufacturer</h2>
+            <span class="tpl-role">Equipment or apparel maker</span>
+          </div>
+
+          <dl class="facts">
+            <div><dt>Who signs</dt><dd>Brand Manager or Sports Marketing Manager. Sometimes product marketing</dd></div>
+            <div><dt>Budget</dt><dd><b>Brand or product marketing</b></dd></div>
+            <div><dt>Angle</dt><dd>Everyone else buys a logo on a wall. You get the thing the puppets play with</dd></div>
+            <div><dt>Send them</dt><dd><b>index.html</b>, then the matching sport page</dd></div>
+          </dl>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Subject</span>
+              <button class="copy-btn" type="button" data-copy="#s-gear">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="subject-line" id="s-gear">Your <span class="ph">[sticks / boots / kit]</span> in a game with over 100 million downloads</p>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Email body</span>
+              <button class="copy-btn" type="button" data-copy="#b-gear">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <div class="sheet" id="b-gear">
+              <p>We are NOXGAMES, a Brno studio with over 250 million downloads across our games. Puppet Ice Hockey is one of them: 5 million installs, 4.8 stars, live right now, <span class="ph">[store link]</span>.</p>
+              <p>Every puppet in that game is holding a stick. Right now it is a generic one. Attached is what it looks like as a <span class="ph">[product line]</span>.</p>
+              <p>This is the part that is hard to buy anywhere else: for a gear brand the equipment is not decoration, it is the thing the player uses to score. Kids learn what your gear looks like before they are old enough to ask for it. We can go further and tie in-game items to your real product lines, and hand out redeemable codes inside the game that get claimed in your shop.</p>
+              <p>We take a maximum of four partners per game, each exclusive in their category, so you would be the only <span class="ph">[equipment / apparel]</span> brand in there. Entry package is $20,000 and takes four weeks.</p>
+              <p>Worth fifteen minutes?</p>
+              <p class="sig">David</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Follow-up, 5 days</span>
+              <button class="copy-btn" type="button" data-copy="#f-gear">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="followup" id="f-gear"><em>The in-game gear is the one sponsorship slot that survives being muted, skipped or ad-blocked, because it is the game object itself.</em></p>
+          </div>
+        </article>
+
+        <!-- ===== 3. Team ===== -->
+        <article class="tpl rise" id="team" style="--tone: #2fd98b;">
+          <div class="tpl-head">
+            <h2>Team</h2>
+            <span class="tpl-role">Club with its own commercial department</span>
+          </div>
+
+          <dl class="facts">
+            <div><dt>Who signs</dt><dd>Commercial Director or Head of Partnerships. Sometimes Marketing alone</dd></div>
+            <div><dt>Budget</dt><dd><b>Marketing</b>, or digital and fan engagement</dd></div>
+            <div><dt>Angle</dt><dd>Inventory you can resell to your own sponsors and keep 100% of</dd></div>
+            <div><dt>Send them</dt><dd><b>soccer.html</b> or <b>hockey.html</b></dd></div>
+          </dl>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Subject</span>
+              <button class="copy-btn" type="button" data-copy="#s-team">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="subject-line" id="s-team"><span class="ph">[Club]</span> on the boards</p>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Email body</span>
+              <button class="copy-btn" type="button" data-copy="#b-team">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <div class="sheet" id="b-team">
+              <p>We are NOXGAMES, a Brno studio. Our game Puppet Ice Hockey has five million downloads and 4.8 stars, and it is live on Google Play right now, <span class="ph">[store link]</span>. Install it and look at the boards around the rink. They say NOXGAMES.</p>
+              <p>Attached is what they look like saying <span class="ph">[Club]</span>.</p>
+              <p>The crest goes on the kit, the boards and the cup. The part most clubs care about more: the sponsor boards inside your edition are yours to resell to your own sponsors, and you keep all of it. It is new inventory rather than another cost line, and it reaches the fans who follow you but never buy a ticket.</p>
+              <p>Entry package is $20,000 and takes four weeks. Worth fifteen minutes?</p>
+              <p class="sig">David</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Follow-up, 5 days</span>
+              <button class="copy-btn" type="button" data-copy="#f-team">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="followup" id="f-team"><em>One of your existing sponsors probably already pays for a board that gets looked at for one second. This one gets played with for four minutes.</em></p>
+          </div>
+        </article>
+
+        <!-- ===== 4. League ===== -->
+        <article class="tpl rise" id="league" style="--tone: #ffb938;">
+          <div class="tpl-head">
+            <h2>League</h2>
+            <span class="tpl-role">Competition organiser with member clubs</span>
+          </div>
+
+          <dl class="facts">
+            <div><dt>Who signs</dt><dd>Commercial or Marketing Director. The idea usually starts there</dd></div>
+            <div><dt>Budget</dt><dd><b>Commercial</b>, or a central fund shared with clubs</dd></div>
+            <div><dt>Angle</dt><dd>Your season structure is already the game's structure</dd></div>
+            <div><dt>Send them</dt><dd><b>soccer.html</b> or <b>hockey.html</b></dd></div>
+          </dl>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Subject</span>
+              <button class="copy-btn" type="button" data-copy="#s-league">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="subject-line" id="s-league"><span class="ph">[League]</span> as a season mode</p>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Email body</span>
+              <button class="copy-btn" type="button" data-copy="#b-league">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <div class="sheet" id="b-league">
+              <p>We are NOXGAMES, a Brno studio. Puppet Soccer has 10 million downloads and 4.3 stars from 467,000 ratings, live on Google Play right now, <span class="ph">[store link]</span>.</p>
+              <p>Attached is what it looks like with <span class="ph">[League]</span> inside it: your clubs, your table, your fixtures.</p>
+              <p>The reason this fits a league better than a single club is that the game already runs on seasons, ladders and leaderboards, and we ship group stages, straight knockout and elimination tournaments out of the box. Your competition structure drops straight in, and derby week becomes an in-game event. Every club in your league is in one product instead of each doing their own thing.</p>
+              <p>We take a maximum of four partners per game, each exclusive in their category. A league normally takes the whole edition rather than one slot.</p>
+              <p>Bundles run $20,000 to $250,000 depending on how much of the league goes in. Worth a call?</p>
+              <p class="sig">David</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Follow-up, 5 days</span>
+              <button class="copy-btn" type="button" data-copy="#f-league">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="followup" id="f-league"><em>Local multiplayer means four kids can play your league on one phone with no network. That is what makes it work at a school or a fan zone.</em></p>
+          </div>
+        </article>
+
+        <!-- ===== 5. Association ===== -->
+        <article class="tpl rise" id="association" style="--tone: #7fe3ff;">
+          <div class="tpl-head">
+            <h2>Association</h2>
+            <span class="tpl-role">Federation or governing body</span>
+          </div>
+
+          <dl class="facts">
+            <div><dt>Who signs</dt><dd>Secretary General signs. The idea comes from Marketing or Development</dd></div>
+            <div><dt>Budget</dt><dd><b>Grassroots and development</b>, not marketing. This is the difference</dd></div>
+            <div><dt>Angle</dt><dd>The cheapest first touch with a ten-year-old you will ever buy</dd></div>
+            <div><dt>Send them</dt><dd><b>soccer.html</b> or <b>hockey.html</b></dd></div>
+          </dl>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Subject</span>
+              <button class="copy-btn" type="button" data-copy="#s-assoc">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="subject-line" id="s-assoc">A grassroots project for <span class="ph">[Federation]</span> that runs on a phone</p>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Email body</span>
+              <button class="copy-btn" type="button" data-copy="#b-assoc">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <div class="sheet" id="b-assoc">
+              <p>We are NOXGAMES, a Brno studio. Puppet Soccer has 10 million downloads and 4.3 stars, live on Google Play right now, <span class="ph">[store link]</span>. It is a cartoon game, no violence, played by children.</p>
+              <p>Attached is what it looks like as a <span class="ph">[Federation]</span> edition.</p>
+              <p>Three things that usually matter on your side. It is fundable from development and grassroots rather than marketing, because the output is participation and reach among children. Local multiplayer works with no network at all, four players on one phone, so it runs in a school hall or a club day with nothing but the devices already in the room. And we can ship it as a clean edition: no advertising and no purchases, which is usually what makes it approvable.</p>
+              <p>On safety: the base game has no real-time player-versus-player mode. Competition runs through clans, leagues and leaderboards instead. That is deliberate. It removes the surface that cheating and unmoderated contact normally arrive through.</p>
+              <p>Entry package is $20,000 and takes four weeks. Worth fifteen minutes?</p>
+              <p class="sig">David</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-top">
+              <span class="field-label">Follow-up, 5 days</span>
+              <button class="copy-btn" type="button" data-copy="#f-assoc">
+                <svg class="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <svg class="ic-done" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <span class="btn-word">Copy</span>
+              </button>
+            </div>
+            <p class="followup" id="f-assoc"><em>Development budgets are usually looking for projects that produce a number to report. This one produces installs, sessions and an age breakdown.</em></p>
+          </div>
+        </article>
+
+      </main>
+    </div>
+  </div>
+
+  <section class="numbers darker">
+    <div class="shell">
+      <h2 class="rise">The numbers these emails stand on</h2>
+      <p class="doc-lede rise" style="margin-bottom: 30px;">
+        If one of these changes on the proposal site, change it here and in <strong>EMAIL_TEMPLATES.md</strong> too.
+        The three are meant to agree.
+      </p>
+      <div class="table-wrap rise">
+        <table class="terms">
+          <tr><th>Puppet Sports downloads</th><td><strong>100M+</strong> lifetime, all titles, all stores</td></tr>
+          <tr><th>NOXGAMES, all games</th><td><strong>250M+</strong> downloads</td></tr>
+          <tr><th>Puppet Soccer</th><td>10M+ installs, <strong>4.3 stars</strong>, 467K ratings</td></tr>
+          <tr><th>Puppet Ice Hockey</th><td>5M+ installs, <strong>4.8 stars</strong>, 99.9K ratings</td></tr>
+          <tr><th>Partner cap</th><td><strong>Up to 4 partners per game</strong>, each category exclusive</td></tr>
+          <tr><th>Entry bundle</th><td><strong>$20,000</strong>, four weeks to launch</td></tr>
+          <tr><th>Online play</th><td>Co-op, clans, leagues, leaderboards. <strong>Real-time PvP is a paid add-on</strong>, not in the base game</td></tr>
+          <tr><th>Clean edition</th><td>No ads, no purchases. Bundle 03 and up</td></tr>
+        </table>
+      </div>
+
+      <p class="note rise">
+        <strong>Do not send this page to a client.</strong> It carries our pricing angles and the budget each buyer
+        pays from. It is unlisted rather than protected, so anyone with the link can read it. Share the link with
+        the team, send clients <b>index.html</b> or a sport page instead.
+      </p>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    <span id="toastText">Copied</span>
+  </div>
+
+  <script>
+    // Entrance: one authored moment, then the page is static.
+    const rise = document.querySelectorAll('.rise');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      rise.forEach((el) => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      rise.forEach((el) => io.observe(el));
+    }
+
+    // ---- Copy to clipboard -------------------------------------------------
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toastText');
+    let toastTimer;
+
+    function showToast(msg) {
+      toastText.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function plainText(el) {
+      // innerText keeps the paragraph breaks an email needs and reads the
+      // placeholder spans as ordinary text, so there is one source of truth.
+      return el.innerText.replace(/\n{3,}/g, '\n\n').trim();
+    }
+
+    async function writeClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:-9999px;';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach((btn) => {
+      const word = btn.querySelector('.btn-word');
+      btn.addEventListener('click', async () => {
+        const src = document.querySelector(btn.dataset.copy);
+        if (!src) return;
+        const label = btn.closest('.field').querySelector('.field-label').textContent.trim();
+        try {
+          await writeClipboard(plainText(src));
+          btn.classList.add('done');
+          word.textContent = 'Copied';
+          showToast(label + ' copied');
+          setTimeout(() => { btn.classList.remove('done'); word.textContent = 'Copy'; }, 2000);
+        } catch (err) {
+          word.textContent = 'Press Ctrl+C';
+          showToast('Copy blocked, select the text');
+          const range = document.createRange();
+          range.selectNodeContents(src);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          setTimeout(() => { word.textContent = 'Copy'; }, 2600);
+        }
+      });
+    });
+
+    // ---- Rail highlight ----------------------------------------------------
+    const links = [...document.querySelectorAll('.rail a')];
+    const sections = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+      });
+    }, { rootMargin: '-25% 0px -60% 0px' });
+    sections.forEach((s) => spy.observe(s));
+  </script>
+</body>
+</html>

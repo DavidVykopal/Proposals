@@ -1,9 +1,13 @@
 {
   "name": "puppet-sports-revival",
   "compatibility_date": "2026-07-01",
+  "main": "src/index.js",
   "account_id": "0b01374e269cd80008534b2efebe3c58",
   "assets": {
     "directory": "./public",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "404-page"
   }
 }
