@@ -66,6 +66,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // One canonical host: www redirects to the apex, query string preserved.
+    if (url.hostname === "www.puppetsports.com") {
+      url.hostname = "puppetsports.com";
+      return Response.redirect(url.toString(), 301);
+    }
+
     // Assets and anything with a file extension go straight through.
     if (url.pathname.startsWith("/assets/") || /\.[a-z0-9]+$/i.test(url.pathname.replace(/\.html$/, ""))) {
       return env.ASSETS.fetch(request);
