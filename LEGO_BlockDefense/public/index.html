@@ -665,6 +665,164 @@
     .feature-split p:last-child { margin-bottom: 0; }
     .feature-split p strong { color: var(--ink); }
 
+    /* ---------- Trailer phone ---------- */
+    .trailer-phone {
+      position: relative;
+      width: min(300px, 100%);
+      margin: 0 auto;
+      aspect-ratio: 9 / 18.6;
+      border-radius: 42px;
+      border: 10px solid #050d16;
+      background: #0a1725;
+      overflow: hidden;
+      box-shadow: 0 40px 110px rgba(0, 0, 0, 0.6), 0 0 60px rgba(26, 126, 224, 0.18);
+    }
+
+    .trailer-phone video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ---------- Gameplay gallery ---------- */
+    .shot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .screenshot-frame {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: var(--shadow);
+    }
+
+    .screenshot-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hud-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 10px;
+      background: linear-gradient(180deg, rgba(5, 13, 22, 0.8), transparent);
+    }
+
+    .hud-pill {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(10, 20, 32, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .hud-pill svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .hud-wave {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(43, 155, 244, 0.25);
+      border: 1px solid rgba(43, 155, 244, 0.55);
+      font-size: 0.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #cfe9ff;
+      white-space: nowrap;
+    }
+
+    .hud-pause {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      background: rgba(10, 20, 32, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      flex-shrink: 0;
+    }
+
+    .hud-pause svg { width: 11px; height: 11px; }
+
+    .hud-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      padding: 10px 12px 14px;
+      background: linear-gradient(0deg, rgba(5, 13, 22, 0.85), transparent);
+    }
+
+    .hud-hp-track {
+      position: relative;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(5, 13, 22, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      overflow: hidden;
+    }
+
+    .hud-hp-fill {
+      position: absolute;
+      inset: 0;
+      right: var(--hp-empty, 0%);
+      border-radius: 999px;
+      background: linear-gradient(180deg, #7be89f, var(--brick-green));
+    }
+
+    .hud-hp-value {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 0.6rem;
+      font-weight: 800;
+      color: #04170c;
+      letter-spacing: 0.02em;
+    }
+
+    .shot-caption {
+      margin-top: 16px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .shot-caption h4 {
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .shot-caption span { font-size: 0.74rem; color: var(--muted); text-align: right; }
+
     /* ---------- Options ---------- */
     .options-grid {
       display: grid;
@@ -1260,7 +1418,7 @@
       .hero-grid { grid-template-columns: 1fr; gap: 60px; }
       .mock-wrap { order: 2; }
       .sec-head { grid-template-columns: 1fr; align-items: start; }
-      .grid-4, .addons-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-4, .addons-grid, .shot-grid { grid-template-columns: repeat(2, 1fr); }
       .callout { grid-template-columns: 1fr; }
       .feature-split { grid-template-columns: 1fr; gap: 26px; padding: 26px; }
       .flow { grid-template-columns: 1fr; gap: 30px; }
@@ -1280,7 +1438,7 @@
 
     @media (max-width: 780px) {
       section { padding: 76px 0; }
-      .grid-3, .options-grid, .callout, .addons-grid { grid-template-columns: 1fr; }
+      .grid-3, .options-grid, .callout, .addons-grid, .shot-grid { grid-template-columns: 1fr; }
       .mock-chip.c1 { left: 0; }
       .mock-chip.c2 { right: 0; }
       .mock-chip.c3 { left: 4%; }
@@ -1455,6 +1613,27 @@
         </p>
       </div>
 
+      <div class="feature-split reveal">
+        <div class="trailer-phone">
+          <video src="assets/block-trailer.mp4" autoplay muted loop playsinline></video>
+        </div>
+        <div>
+          <span class="studs" style="--sc: #2b9bf4;"><i></i><i></i><i></i></span>
+          <h3>Watch it in motion</h3>
+          <p>
+            An early concept trailer in the same brick-built art direction: a pass over the world map, a tower
+            going up brick by brick, a wave breaking against the defense line, an attacker bursting back into
+            the loose bricks it came from.
+          </p>
+          <p><strong>This is previz, not the finished game</strong> &mdash; made to show the tone we are building toward.</p>
+        </div>
+      </div>
+
+      <p class="note reveal" style="margin-top: 26px;">
+        <strong>Concept captures below:</strong> the screenshots and trailer on this page are pre-production
+        mockups produced to pitch the direction, not shipped footage. In-game HUD elements shown are illustrative.
+      </p>
+
       <div class="grid-4">
         <div class="glass-card world-card reveal" style="--wc: #ffcf00;">
           <span class="enemy-tag">Swarm waves</span>
@@ -1495,6 +1674,86 @@
           <span class="enemy-tag">Endgame</span>
           <h3>Master Builder</h3>
           <p class="card-text">The mastery tier. Endless waves, leaderboards and live-ops events.</p>
+        </div>
+      </div>
+
+      <div class="shot-grid">
+        <div class="reveal">
+          <div class="screenshot-frame">
+            <img src="assets/block-shot-castle.jpg" alt="In-game capture: the Castle fortress holding the line against a robot swarm" />
+            <div class="hud-top">
+              <span class="hud-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffcf00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="7" rx="1.4"/><rect x="6" y="6" width="12" height="7" rx="1.4"/><path d="M9 6V4.4A1.4 1.4 0 0 1 10.4 3h3.2A1.4 1.4 0 0 1 15 4.4V6"/></svg>
+                1,248
+              </span>
+              <span class="hud-wave">Wave 4 / 10</span>
+              <span class="hud-pause">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#eef4fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+              </span>
+            </div>
+            <div class="hud-bottom">
+              <div class="hud-hp-track">
+                <span class="hud-hp-fill" style="--hp-empty: 14%;"></span>
+                <span class="hud-hp-value">2,640</span>
+              </div>
+            </div>
+          </div>
+          <div class="shot-caption">
+            <h4>Castle</h4>
+            <span>Siege bruisers, wave 4</span>
+          </div>
+        </div>
+
+        <div class="reveal d1">
+          <div class="screenshot-frame">
+            <img src="assets/block-shot-space.jpg" alt="In-game capture: the Space fortress firing on shielded droid attackers" />
+            <div class="hud-top">
+              <span class="hud-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffcf00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="7" rx="1.4"/><rect x="6" y="6" width="12" height="7" rx="1.4"/><path d="M9 6V4.4A1.4 1.4 0 0 1 10.4 3h3.2A1.4 1.4 0 0 1 15 4.4V6"/></svg>
+                2,065
+              </span>
+              <span class="hud-wave">Wave 7 / 10</span>
+              <span class="hud-pause">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#eef4fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+              </span>
+            </div>
+            <div class="hud-bottom">
+              <div class="hud-hp-track">
+                <span class="hud-hp-fill" style="--hp-empty: 38%;"></span>
+                <span class="hud-hp-value">1,410</span>
+              </div>
+            </div>
+          </div>
+          <div class="shot-caption">
+            <h4>Space</h4>
+            <span>Shielded tech, wave 7</span>
+          </div>
+        </div>
+
+        <div class="reveal d2">
+          <div class="screenshot-frame">
+            <img src="assets/block-shot-pirates.jpg" alt="In-game capture: the Pirates fortress firing on amphibious raiders wading ashore" />
+            <div class="hud-top">
+              <span class="hud-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ffcf00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="18" height="7" rx="1.4"/><rect x="6" y="6" width="12" height="7" rx="1.4"/><path d="M9 6V4.4A1.4 1.4 0 0 1 10.4 3h3.2A1.4 1.4 0 0 1 15 4.4V6"/></svg>
+                860
+              </span>
+              <span class="hud-wave">Wave 2 / 10</span>
+              <span class="hud-pause">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#eef4fb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+              </span>
+            </div>
+            <div class="hud-bottom">
+              <div class="hud-hp-track">
+                <span class="hud-hp-fill" style="--hp-empty: 5%;"></span>
+                <span class="hud-hp-value">3,050</span>
+              </div>
+            </div>
+          </div>
+          <div class="shot-caption">
+            <h4>Pirates</h4>
+            <span>Flanking raiders, wave 2</span>
+          </div>
         </div>
       </div>
 
