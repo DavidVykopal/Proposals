@@ -237,6 +237,22 @@ Ordered by how fast we could realistically get a first call, not by size.
 
 ---
 
+## 10b. Sent log
+
+| Date | Org | Sport | Touch | Discount | Follow-up |
+| --- | --- | --- | --- | --- | --- |
+| 14. 9. 2026 | BPA / Maxa liga (Petr Nitsche) | Hockey, 2nd tier league | 2 | 50% personal, exclusive in hockey | 22. 9. |
+| 14. 9. 2026 | Sparta Brno | Football | 1 | 50% personal, exclusive in football | 21. 9. |
+| 14. 9. 2026 | HC Kometa Brno | Hockey | 1 | 25% public | 21. 9. |
+| 14. 9. 2026 | FC Zbrojovka Brno | Football | 1 | 25% public | 21. 9. |
+| 14. 9. 2026 | SK Artis Brno | Football | 1 | 25% public | 21. 9. |
+
+Full copy of every message is in `OUTREACH_CZ_2026-09.md`. Read the discount note there before
+quoting a price to any other Czech club: three Brno football clubs are already in play and two of
+them were given different terms.
+
+---
+
 ## 10. Next 30 days
 
 - [x] Drop the four MeowCup creatives into `public/assets/` so the Proof section is complete
@@ -244,13 +260,18 @@ Ordered by how fast we could realistically get a first call, not by size.
 - [x] Get Jiri's floorball / football / quadball / horse polo GIFs into `public/assets/` (done 28 Aug 2026,
       cut to 10 s / 640x360 / 10 fps from his SnapCast captures; strip labels now say Quadball and
       American football to match the build's watermarks)
-- [ ] Deploy the three pages (`npm run cf:deploy`) and get the URLs
+- [x] Deploy the pages (done, live on **puppetsports.com**, EN default with a CZ version at `?lang=cs`)
 - [ ] Build the mockup pipeline: one reusable PSD or template per sport, so a branded screenshot
       takes 30 minutes not half a day
-- [ ] Make 6 mockups: Sparta hockey, Sparta football, Kometa, Slavia, Škoda, Danish federation
-- [ ] Send Tier A, six emails, one per week is too slow. Send all six in one week and track replies
+- [ ] Make the mockups. **Note:** the five emails sent on 14. 9. carried no attachment. The ask
+      changed from "here is your mockup" to "send us a logo and get a full concept pack in five
+      days", which is a smaller yes for them and no art up front for us. Mockups are now only
+      needed once someone replies.
+- [x] Send Tier A (**five sent 14. 9. 2026**, all in Czech: BPA/Maxa liga, Sparta Brno, HC Kometa
+      Brno, FC Zbrojovka Brno, SK Artis Brno). Copy archived in `OUTREACH_CZ_2026-09.md`, tracking in
+      `CONTACTS.csv`. Follow-ups due 21. and 22. 9.
 - [ ] Decide on Brand Licensing Europe, 6 to 8 Oct, London. Book by mid September
-- [ ] Build the tracker: name, org, role, date sent, touch number, outcome
+- [x] Tracker in use: `CONTACTS.csv` columns Date Sent / Touch # / Outcome / Notes
 
 ---
 
