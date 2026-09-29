@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model odměňování</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --ink: #1b1a17;
+    --ink-2: #4a4740;
+    --ink-3: #7a766c;
+    --rule: #d9d3c6;
+    --accent: #0f5a4a;
+    --accent-soft: #d6e6df;
+    --risk: #9b4a2c;
+    --risk-soft: #f0ddd3;
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #cfcac0; font-family: var(--sans); color: var(--ink); font-size: 10.5pt; line-height: 1.5; font-variant-numeric: tabular-nums lining-nums; }
+  ::selection { background: var(--accent-soft); }
+
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 8mm; background: var(--paper);
+    padding: 20mm 20mm 16mm; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; page-break-after: always; break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; margin-bottom: 0; }
+  @media print { body { background: var(--paper); } .page { margin: 0; } }
+
+  .foot {
+    margin-top: auto; padding-top: 5mm; border-top: 0.5pt solid var(--rule);
+    display: flex; justify-content: space-between; font-size: 8pt; color: var(--ink-3); letter-spacing: 0.02em;
+  }
+  .brand { font-weight: 700; letter-spacing: 0.14em; color: var(--ink-2); }
+
+  h1 { font-family: var(--serif); font-weight: 500; font-size: 40pt; line-height: 1.02; letter-spacing: -0.02em; text-wrap: balance; }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 22pt; line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 5mm; text-wrap: balance; }
+  h3 { font-size: 10.5pt; font-weight: 700; margin-bottom: 1.5mm; }
+  p { max-width: 68ch; }
+  p + p { margin-top: 2.5mm; }
+  .lead { font-family: var(--serif); font-size: 14pt; line-height: 1.4; color: var(--ink-2); max-width: 34em; }
+  .muted { color: var(--ink-3); }
+  strong { font-weight: 700; }
+  .nb { white-space: nowrap; }
+  section + section { margin-top: 9mm; }
+
+  /* cover */
+  .cover-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 9pt; color: var(--ink-3); }
+  .cover-title { margin-top: 30mm; }
+  .cover-title .lead { margin-top: 7mm; }
+  .ask { margin-top: 16mm; border-top: 1.5pt solid var(--ink); }
+  .ask-row { display: grid; grid-template-columns: 50mm 1fr; gap: 6mm; padding: 4.2mm 0; border-bottom: 0.5pt solid var(--rule); align-items: baseline; }
+  .ask-row .v { font-family: var(--serif); font-size: 21pt; line-height: 1; letter-spacing: -0.01em; }
+  .ask-row .v small { font-size: 11pt; color: var(--ink-3); letter-spacing: 0; }
+  .ask-row .d { color: var(--ink-2); }
+  .ask-row.bonus .v { color: var(--accent); }
+  .ask-row.cut .v { color: var(--risk); }
+  .principle { margin-top: 12mm; font-family: var(--serif); font-size: 16pt; line-height: 1.3; max-width: 30em; }
+  .principle em { font-style: italic; color: var(--accent); }
+
+  /* tables */
+  table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+  th { text-align: left; font-weight: 600; font-size: 8.5pt; color: var(--ink-3); letter-spacing: 0.03em; padding: 0 3mm 2mm 0; border-bottom: 1pt solid var(--ink); }
+  td { padding: 2.4mm 3mm 2.4mm 0; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+  td.n, th.n { text-align: right; padding-right: 0; padding-left: 3mm; }
+  tr.total td { font-weight: 700; border-bottom: 1pt solid var(--ink); }
+  .hl { color: var(--accent); font-weight: 700; }
+  .rk { color: var(--risk); font-weight: 700; }
+
+  .callout { margin-top: 6mm; display: grid; grid-template-columns: auto 1fr; gap: 6mm; align-items: center; padding: 5mm 6mm; background: var(--accent-soft); border-radius: 2mm; }
+  .callout .big { font-family: var(--serif); font-size: 34pt; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+  .callout p { color: #1f3d35; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7mm; margin-top: 2mm; }
+  .cols > div { border-top: 1pt solid var(--ink); padding-top: 3mm; }
+  .cols p { font-size: 9.5pt; color: var(--ink-2); }
+
+  /* variant header */
+  .variant { display: flex; align-items: baseline; gap: 4mm; margin-bottom: 2mm; font-size: 9pt; font-weight: 600; color: var(--ink-3); letter-spacing: 0.03em; }
+  .tag { display: inline-block; font-size: 8pt; font-weight: 700; padding: 0.6mm 2.4mm; border-radius: 1mm; letter-spacing: 0.04em; }
+  .tag.pref { background: var(--accent); color: #fff; }
+  .tag.alt { background: var(--ink); color: var(--paper); }
+
+  .band { margin: 4mm 0 2mm; }
+  .band svg { width: 100%; height: auto; display: block; }
+
+  .kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-top: 3mm; }
+  .kpi > div { padding-top: 2.5mm; border-top: 2pt solid var(--accent); }
+  .kpi .amt { font-family: var(--serif); font-size: 17pt; line-height: 1.1; color: var(--accent); }
+  .kpi .lbl { font-weight: 700; font-size: 9.5pt; margin-top: 1mm; }
+  .kpi p { font-size: 8.8pt; color: var(--ink-2); margin-top: 1mm; line-height: 1.4; }
+
+  .malus { display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 3mm; border-top: 1pt solid var(--ink); }
+  .malus > div { padding: 3mm 4mm 3mm 0; }
+  .malus > div + div { padding-left: 4mm; border-left: 0.5pt solid var(--rule); }
+  .malus .cond { font-size: 8.5pt; color: var(--ink-3); font-weight: 600; letter-spacing: 0.02em; }
+  .malus .res { font-family: var(--serif); font-size: 17pt; margin-top: 1mm; line-height: 1.1; }
+  .malus .res.bad { color: var(--risk); }
+  .malus .res.good { color: var(--accent); }
+  .malus p { font-size: 8.8pt; color: var(--ink-2); margin-top: 1mm; }
+
+  ul.plain { list-style: none; }
+  ul.plain li { padding: 2mm 0 2mm 5mm; border-bottom: 0.5pt solid var(--rule); position: relative; }
+  ul.plain li::before { content: ""; position: absolute; left: 0; top: 4.1mm; width: 2mm; height: 0.8pt; background: var(--ink-2); }
+
+  .final { margin-top: 7mm; padding: 7mm 8mm; background: var(--ink); color: var(--paper); border-radius: 2mm; }
+  .final h2 { color: var(--paper); margin-bottom: 3mm; font-size: 19pt; }
+  .final p { color: #d8d3c7; max-width: none; }
+  .final strong { color: #fff; }
+
+  .closing { margin-top: 8mm; font-family: var(--serif); font-size: 17pt; line-height: 1.3; max-width: 30em; }
+  .sign { margin-top: 5mm; font-size: 9.5pt; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<div class="page">
+  <div class="cover-top"><span class="brand">NOXGAMES</span><span>Interní podklad · září 2026</span></div>
+
+  <div class="cover-title">
+    <h1>Odměna za odpovědnost a&nbsp;výsledky, ne za hodiny</h1>
+    <p class="lead">Návrh přechodu z hodinové sazby na fixní odměnu s výkonnostní složkou, navázaný na delegaci rolí ve firmě.</p>
+  </div>
+
+  <div class="ask">
+    <div class="ask-row"><div class="v">140 000 <small>Kč</small></div><div class="d"><strong>Fixní měsíční odměna</strong> odpovídající roli produkčního ředitele. Finální částka, dál se nezvyšuje.</div></div>
+    <div class="ask-row bonus"><div class="v">+ až 40 000</div><div class="d"><strong>Měsíční výkonnostní bonus</strong> za předem dohodnutá a měřitelná KPI.</div></div>
+    <div class="ask-row cut"><div class="v">− až 20 000</div><div class="d"><strong>Srážka z fixu</strong> při slabých výsledcích. Riziko nenese jen firma.</div></div>
+    <div class="ask-row"><div class="v">5 % <small>profitu</small></div><div class="d"><strong>Podíl na profitu firmy</strong> zůstává jako dnes.</div></div>
+    <div class="ask-row"><div class="v">5 % <small>z dealů</small></div><div class="d"><strong>Nově podíl na profitu dealů, které přinesu jako sales.</strong> Motivace přivádět firmě další business.</div></div>
+  </div>
+
+  <p class="principle">Firma nekupuje můj čas. Kupuje <em>odpovědnost za výsledek</em> a&nbsp;platí víc jen tehdy, když výsledek přijde.</p>
+
+  <div class="foot"><span>David Vykopal, produkční ředitel</span><span>1 / 5</span></div>
+</div>
+
+<!-- 2 -->
+<div class="page">
+  <section>
+    <h2>Kde jsme dnes</h2>
+    <p>Pracuji na hodinovou sazbu <span class="nb">496 Kč</span> a dlouhodobě odvádím zhruba 1,5 úvazku, typicky kolem 210 hodin měsíčně. Za poslední rok jsem fakturoval přibližně <span class="nb">1,5 mil. Kč</span>. Část z toho ale nejsou peníze za práci, jsou to přefakturované náklady na office a hardware.</p>
+
+    <table style="margin-top:6mm">
+      <thead><tr><th>Položka</th><th class="n">Měsíčně</th><th class="n">Ročně</th></tr></thead>
+      <tbody>
+        <tr><td>Celková fakturace</td><td class="n">125 000 Kč</td><td class="n">1 500 000 Kč</td></tr>
+        <tr><td>z toho přefakturace office a HW</td><td class="n">−8 500 Kč</td><td class="n">−102 000 Kč</td></tr>
+        <tr class="total"><td>Skutečná odměna za práci</td><td class="n">116 500 Kč</td><td class="n">1 398 000 Kč</td></tr>
+        <tr><td>Navrhovaný fix</td><td class="n hl">140 000 Kč</td><td class="n hl">1 680 000 Kč</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="big">+20 %</div>
+      <p>Garantovaná část odměny roste o dvacet procent proti tomu, co dnes skutečně dostávám za práci. Přefakturace se dál řeší zvlášť podle skutečných nákladů, do odměny se nepočítají.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Proč měnit model</h2>
+    <div class="cols">
+      <div>
+        <h3>Hodiny motivují ke špatné věci</h3>
+        <p>Dnes vydělám víc jen tak, že odpracuji víc hodin. To je přesně opačná motivace, než jakou má mít člověk, který má delegovat a řídit.</p>
+      </div>
+      <div>
+        <h3>Role se mění</h3>
+        <p>S delegací rolí přebírám odpovědnost za konkrétní oblasti a jejich výsledky. Odměna by měla odpovídat rozsahu odpovědnosti, ne výkazu.</p>
+      </div>
+      <div>
+        <h3>Firma má jistotu nákladu</h3>
+        <p>Fix je předvídatelný. Každá koruna nad něj je podmíněná výsledkem a při slabém období se náklad firmy naopak snižuje.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot"><span>Model odměňování</span><span>2 / 5</span></div>
+</div>
+
+<!-- 3 -->
+<div class="page">
+  <div class="variant"><span class="tag pref">VARIANTA A · PREFEROVANÁ</span></div>
+  <h2>140 tis. fix, až 40 tis. bonus, až 20 tis. srážka</h2>
+  <p>Měsíční odměna se pohybuje v pásmu <strong class="nb">120 až 180 tis. Kč</strong> podle výsledků. Firma má garantováno, že za slabé období neplatí plnou částku, a já mám jasně dané, co musím splnit pro bonus.</p>
+
+  <div class="band">
+    <svg viewBox="0 0 600 120" role="img" aria-label="Pásmo měsíční odměny varianty A: srážka do 120 tisíc, fix 140 tisíc, bonus do 180 tisíc">
+      <g font-family="Hanken Grotesk, sans-serif" font-size="11" fill="#7a766c">
+        <line x1="40" y1="84" x2="560" y2="84" stroke="#d9d3c6" stroke-width="1"/>
+        <g text-anchor="middle">
+          <text x="83.3" y="102">100</text><text x="170" y="102">120</text><text x="256.7" y="102">140</text><text x="343.3" y="102">160</text><text x="430" y="102">180</text><text x="516.7" y="102">200</text>
+        </g>
+        <text x="560" y="102" text-anchor="end">tis. Kč</text>
+      </g>
+      <line x1="154.8" y1="22" x2="154.8" y2="84" stroke="#1b1a17" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="150" y="16" text-anchor="end" font-family="Hanken Grotesk, sans-serif" font-size="10.5" fill="#4a4740">dnes 116,5</text>
+      <rect x="170" y="40" width="86.7" height="26" fill="#f0ddd3"/>
+      <rect x="256.7" y="40" width="173.3" height="26" fill="#0f5a4a"/>
+      <line x1="256.7" y1="32" x2="256.7" y2="74" stroke="#1b1a17" stroke-width="2.5"/>
+      <g font-family="Hanken Grotesk, sans-serif" font-size="11" font-weight="600">
+        <text x="213.3" y="57" text-anchor="middle" fill="#9b4a2c">srážka</text>
+        <text x="343.3" y="57" text-anchor="middle" fill="#ffffff">bonus za KPI</text>
+        <text x="256.7" y="26" text-anchor="middle" fill="#1b1a17">fix 140</text>
+      </g>
+    </svg>
+  </div>
+
+  <section style="margin-top:6mm">
+    <h3 style="font-size:12pt">Bonus 40 tis. rozdělený na čtyři měřitelná KPI</h3>
+    <p class="muted" style="font-size:9.5pt">Konkrétní cíle a jejich váhy nastavujeme kvartálně podle priorit firmy. Rozhoduje výpočet, ne dojem, jestli byl měsíc „dobrý“.</p>
+    <div class="kpi">
+      <div><div class="amt">10 tis.</div><div class="lbl">Finance</div><p>Profitabilita a ROI portfolia proti plánu.</p></div>
+      <div><div class="amt">10 tis.</div><div class="lbl">Produkt</div><p>Metriky klíčových titulů, retence a monetizace.</p></div>
+      <div><div class="amt">10 tis.</div><div class="lbl">Produkce</div><p>Delivery strategických projektů v termínu a kvalitě.</p></div>
+      <div><div class="amt">10 tis.</div><div class="lbl">Business</div><p>Publishing, nové dealy a B2B příležitosti.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h3 style="font-size:12pt">Srážka při slabých výsledcích</h3>
+    <p class="muted" style="font-size:9.5pt">Vyhodnocení probíhá kvartálně. Bonus i případná srážka se promítnou do výplat následujícího kvartálu. Prahy jsou návrh k odsouhlasení.</p>
+    <div class="malus">
+      <div><div class="cond">SPLNĚNO 50 % KPI A VÍC</div><div class="res good">fix + bonus</div><p>Bonus poměrně podle splněných KPI, až 40 tis. měsíčně.</p></div>
+      <div><div class="cond">SPLNĚNO 25 AŽ 50 % KPI</div><div class="res bad">−10 tis. z fixu</div><p>Odměna klesá na 130 tis. měsíčně.</p></div>
+      <div><div class="cond">SPLNĚNO MÉNĚ NEŽ 25 % KPI</div><div class="res bad">−20 tis. z fixu</div><p>Odměna klesá na 120 tis. měsíčně.</p></div>
+    </div>
+  </section>
+
+  <div class="foot"><span>Model odměňování</span><span>3 / 5</span></div>
+</div>
+
+<!-- 4 -->
+<div class="page">
+  <div class="variant"><span class="tag alt">VARIANTA B · VÍCE VÝKONU</span></div>
+  <h2>Pokud je prioritou nižší fixní náklad</h2>
+  <p>Jsem připravený vzít na sebe větší část rizika: <strong class="nb">120 tis. fix</strong> a <strong class="nb">až 80 tis. bonus</strong>, se stejnou srážkou až 20 tis. Firma tak ve slabém období platí jen 100 tis. Za převzetí většího rizika ale potřebuji vyšší upside, když výsledky přinesu.</p>
+
+  <div class="band">
+    <svg viewBox="0 0 600 160" role="img" aria-label="Srovnání pásem: varianta A 120 až 180 tisíc s fixem 140, varianta B 100 až 200 tisíc s fixem 120, dnešní odměna 116,5 tisíce">
+      <g font-family="Hanken Grotesk, sans-serif" font-size="11" fill="#7a766c">
+        <line x1="40" y1="124" x2="560" y2="124" stroke="#d9d3c6" stroke-width="1"/>
+        <g text-anchor="middle">
+          <text x="83.3" y="142">100</text><text x="170" y="142">120</text><text x="256.7" y="142">140</text><text x="343.3" y="142">160</text><text x="430" y="142">180</text><text x="516.7" y="142">200</text>
+        </g>
+        <text x="560" y="142" text-anchor="end">tis. Kč</text>
+      </g>
+      <line x1="154.8" y1="22" x2="154.8" y2="124" stroke="#1b1a17" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="150" y="16" text-anchor="end" font-family="Hanken Grotesk, sans-serif" font-size="10.5" fill="#4a4740">dnes 116,5</text>
+      <g font-family="Hanken Grotesk, sans-serif" font-size="11" font-weight="700" fill="#1b1a17">
+        <text x="0" y="52">A</text><text x="0" y="98">B</text>
+      </g>
+      <rect x="170" y="36" width="86.7" height="22" fill="#f0ddd3"/>
+      <rect x="256.7" y="36" width="173.3" height="22" fill="#0f5a4a"/>
+      <line x1="256.7" y1="30" x2="256.7" y2="64" stroke="#1b1a17" stroke-width="2.5"/>
+      <rect x="83.3" y="82" width="86.7" height="22" fill="#f0ddd3"/>
+      <rect x="170" y="82" width="346.7" height="22" fill="#0f5a4a" opacity="0.72"/>
+      <line x1="170" y1="76" x2="170" y2="110" stroke="#1b1a17" stroke-width="2.5"/>
+      <g font-family="Hanken Grotesk, sans-serif" font-size="10.5" font-weight="600" fill="#ffffff" text-anchor="middle">
+        <text x="343.3" y="51">bonus až 40</text><text x="343.3" y="97">bonus až 80</text>
+      </g>
+    </svg>
+  </div>
+
+  <table style="margin-top:4mm">
+    <thead><tr><th>Ročně, bez profit share a dealů</th><th class="n">Dnes</th><th class="n">Varianta A</th><th class="n">Varianta B</th></tr></thead>
+    <tbody>
+      <tr><td>Nejnižší možná odměna</td><td class="n muted">podle hodin</td><td class="n rk">1 440 000</td><td class="n rk">1 200 000</td></tr>
+      <tr><td>Fix bez bonusu i srážky</td><td class="n">1 398 000</td><td class="n">1 680 000</td><td class="n">1 440 000</td></tr>
+      <tr class="total"><td>Maximum při splnění všech KPI</td><td class="n muted">podle hodin</td><td class="n hl">2 160 000</td><td class="n hl">2 400 000</td></tr>
+    </tbody>
+  </table>
+
+  <section style="margin-top:8mm">
+    <h3 style="font-size:12pt">Podmínka varianty B: bonus musí být matematický</h3>
+    <p>Při 80 tis. v bonusu tvoří výkonnostní složka až 40 % odměny. To funguje jen tehdy, když KPI jsou předem daná, mají jasnou váhu, způsob výpočtu a termín vyhodnocení, a jsou z velké části v mém vlivu. Rozdělení by bylo stejné jako u varianty A, jen po 20 tis. na každou oblast.</p>
+  </section>
+
+  <section style="margin-top:7mm">
+    <h3 style="font-size:12pt">Proč preferuji variantu A</h3>
+    <p>Dává stabilitu odpovídající rozsahu role a firma má nižší maximum. Varianta B je pro firmu levnější ve slabém období, za cenu vyššího stropu v dobrém. Obě stojí na stejném principu: víc vydělám jen tehdy, když vytvořím víc hodnoty pro NOXGAMES.</p>
+  </section>
+
+  <div class="foot"><span>Model odměňování</span><span>4 / 5</span></div>
+</div>
+
+<!-- 5 -->
+<div class="page">
+  <h2>Podíly na profitu a náklady</h2>
+  <ul class="plain">
+    <li><strong>5 % z profitu firmy</strong> beze změny, jako dnes.</li>
+    <li><strong>Nově 5 % z profitu dealů, které přinesu jako sales.</strong> Firma platí jen z peněz, které díky dealu skutečně vydělá.</li>
+    <li><strong>Přefakturace skutečných nákladů</strong> na office a hardware odděleně od odměny, jako dnes.</li>
+  </ul>
+
+  <div class="final">
+    <h2>Fix je finální. Další růst jen s růstem firmy.</h2>
+    <p>Nový model beru jako <strong>plně férovou kompenzaci</strong> za roli, kterou ve firmě nesu. Fixní částka je konečná a <strong>nebudu žádat o její další navýšení</strong>. Jsem připravený se k tomu písemně zavázat.</p>
+    <p>Jakýkoli můj další příjmový růst tak půjde výhradně přes <strong>podíl na profitu</strong> a případné <strong>rozšíření pásma bonusu a srážky</strong>, tedy vždy symetricky: vyšší možný bonus znamená i vyšší možnou srážku. Když firma poroste, porostu s ní. Když ne, neporostu ani já.</p>
+    <p>Je to podle mě maximální možné napojení odměny na úspěch firmy. <strong>Stejný princip bych navrhl i pro ostatní členy exekutivy</strong>: stabilní fix za roli a veškerý další růst skrz výsledky NOXGAMES.</p>
+  </div>
+
+  <section style="margin-top:9mm">
+    <h3 style="font-size:12pt">Navržený postup</h3>
+    <table>
+      <tbody>
+        <tr><td style="width:10mm" class="muted">1.</td><td>Odsouhlasit model a variantu, včetně principu finálního fixu.</td></tr>
+        <tr><td class="muted">2.</td><td>Společně nadefinovat KPI na první kvartál, jejich váhy a prahy srážky.</td></tr>
+        <tr><td class="muted">3.</td><td>Stanovit datum přechodu z hodinové sazby na nový model.</td></tr>
+        <tr><td class="muted">4.</td><td>Po prvním kvartálu vyhodnotit, jak model funguje, a případně upravit KPI. Fix se neotevírá.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <p class="closing">Nejsem placený za to, kolik hodin v práci strávím, ale za odpovědnost, kterou nesu, a výsledky, které přinesu.</p>
+  <p class="sign">David Vykopal, produkční ředitel NOXGAMES</p>
+
+  <div class="foot"><span>Model odměňování</span><span>5 / 5</span></div>
+</div>
+
+</body>
+</html>

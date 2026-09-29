@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cost and Payback Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f6f3ec; --sheet: #fffdf8; --ink: #1d1b17; --ink-2: #57524a; --ink-3: #7a7468;
+  --rule: #e2dccf; --rule-strong: #cfc6b4;
+  --sd: #b4471f; --sd-soft: #f4e2d8; --rc: #2f5d7c; --rc-soft: #dce8ef; --ron: #5d6b2f; --ron-soft: #e6ead6; --neg: #a33a2c;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #15140f; --sheet: #1d1c16; --ink: #ede8dc; --ink-2: #b9b2a3; --ink-3: #928b7c;
+    --rule: #302e26; --rule-strong: #444036;
+    --sd: #e8845c; --sd-soft: #3a2419; --rc: #7fb2d4; --rc-soft: #1b2c37; --ron: #b3c27a; --ron-soft: #282d19; --neg: #e8897a;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 "Public Sans", system-ui, sans-serif; font-variant-numeric: tabular-nums; }
+::selection { background: var(--sd-soft); }
+.wrap { max-width: 980px; margin: 0 auto; padding: 36px 16px 48px; }
+.brand { font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--ink-3); }
+h1, h2 { font-family: "Newsreader", Georgia, serif; font-weight: 500; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.08; margin-top: 14px; }
+h2 { font-size: 1.5rem; line-height: 1.2; margin: 44px 0 12px; }
+.lede { color: var(--ink-2); max-width: 64ch; margin: 12px 0 0; }
+.answer { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 2px solid var(--ink); margin-top: 28px; }
+.answer > div { padding: 16px 18px 0 0; }
+.answer > div + div { padding-left: 18px; border-left: 1px solid var(--rule); }
+.k { font-size: 14px; color: var(--ink-2); }
+.v { font-family: "Newsreader", serif; font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.1; margin-top: 4px; }
+.s { font-size: 14px; color: var(--ink-3); margin-top: 4px; }
+.sd { color: var(--sd); } .rc { color: var(--rc); } .ron { color: var(--ron); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-size: 13px; font-weight: 600; color: var(--ink-2); border-bottom-color: var(--rule-strong); }
+td.n, th.n { text-align: right; white-space: nowrap; }
+tr.total td { border-top: 2px solid var(--ink); border-bottom: 0; font-weight: 700; }
+tr.hl td { background: var(--sd-soft); }
+.sub { display: block; color: var(--ink-3); font-size: 13px; }
+.scroll { overflow-x: auto; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.bars { display: grid; gap: 6px; margin-top: 8px; }
+.bars .row { display: grid; grid-template-columns: 3.2rem 1fr 5.5rem; gap: 10px; align-items: center; font-size: 14px; }
+.bars .track { height: 12px; position: relative; }
+.bars .track i { position: absolute; top: 0; height: 100%; border-radius: 3px; background: var(--ron); }
+.bars .track i.neg { background: var(--neg); }
+.bars .row b { text-align: right; font-weight: 600; }
+.note { font-size: 14px; color: var(--ink-2); max-width: 70ch; margin: 10px 0 0; }
+.callout { margin-top: 16px; padding: 14px 16px; border-radius: 10px; background: var(--rc-soft); font-size: 15px; }
+footer { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-3); }
+@media (max-width: 760px) {
+  .answer, .two { grid-template-columns: 1fr; }
+  .answer > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); margin-top: 12px; }
+  table { font-size: 14px; }
+  th, td { padding: 8px 5px; }
+  th.n { white-space: normal; }
+}
+@page { size: A4; margin: 12mm 13mm; }
+@media print {
+  :root { --paper: #fff; color-scheme: light; }
+  body { background: #fff; font-size: 12px; line-height: 1.45; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .wrap { max-width: none; padding: 0; }
+  .brand { font-size: 10px; }
+  h1 { font-size: 23px; margin-top: 6px; }
+  .lede { font-size: 12px; margin-top: 6px; }
+  h2 { font-size: 17px; margin: 18px 0 6px; break-after: avoid; }
+  .v { font-size: 23px; }
+  table { font-size: 11.5px; }
+  th, td { padding: 4px 6px; }
+  .sub, .note, .s, .k { font-size: 10.5px; }
+  .note { margin-top: 6px; }
+  .answer { margin-top: 12px; }
+  .answer > div { padding-top: 10px; }
+  .callout { font-size: 11.5px; padding: 10px 12px; margin-top: 10px; }
+  .bars .row { font-size: 11.5px; }
+  .two { gap: 22px; }
+  footer { font-size: 9.5px; margin-top: 16px; padding-top: 10px; }
+  h2.pb { break-before: page; margin-top: 0; }
+  .scroll, table, .callout, .bars, .two > * { break-inside: avoid; }
+  footer { margin-top: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">NOXGAMES · internal · exec only · 23 Sep 2026</div>
+  <h1>Cost and payback: Sector Defense, Red Command, RON_India</h1>
+  <p class="lede">What Sector Defense cost in Q3, what Red Command cost and has earned back, when Sector Defense could earn back its cost, and where the RON_India side project stands. USD, at 20.83 CZK/USD.</p>
+
+  <div class="answer">
+    <div><div class="k">Sector Defense, Q3 cost</div><div class="v sd">$83k to $146k</div><div class="s">depending on how labour is counted; not launched yet</div></div>
+    <div><div class="k">Red Command, cost vs. profit</div><div class="v rc">$100k → $151k</div><div class="s">our 50 % of the game's profit, split with the publishing sister company; paid back 1.5× in under 5 months</div></div>
+    <div><div class="k">RON_India, net so far</div><div class="v ron">+$38.6k</div><div class="s">$40k received on about $1.4k of cost: ROI 2,717 %</div></div>
+  </div>
+
+  <h2>Sector Defense: Q3 cost</h2>
+  <p class="note" style="margin-top:0">Labour plus 80 % (the Q3 focus share) of 500,000 CZK a month of other and fixed costs over 3 months = <b>$57,609</b> in every row.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Labour counted as</th><th class="n">Labour</th><th class="n">Other + fixed</th><th class="n">Q3 total</th></tr></thead>
+    <tbody>
+      <tr><td>Manday estimate<span class="sub">1,596 h ÷ 8 = 199.5 mandays × $125</span></td><td class="n">$24,942</td><td class="n">$57,609</td><td class="n"><b>$82,551</b></td></tr>
+      <tr><td>Direct cost<span class="sub">tracked hours × each person's hourly rate</span></td><td class="n">$35,546</td><td class="n">$57,609</td><td class="n"><b>$93,155</b></td></tr>
+      <tr><td>80 % of all Q3 labour<span class="sub">also covers untracked and "no task" time</span></td><td class="n">$88,867</td><td class="n">$57,609</td><td class="n"><b>$146,476</b></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">1,596 h were logged to Voldemort in August and September by 8 people; nothing was logged to it in July. 1,681 of the company's 5,192 Q3 hours have no task, which is why the third row exists. UA spend for the launch (about €138k in month one, released in tranches) is not included; it is judged by the ROAS gates.</p>
+
+  <h2>Red Command: cost and payback</h2>
+  <div class="two">
+    <div>
+      <table>
+        <tbody>
+          <tr><td>Total dev cost incl. fixed costs</td><td class="n"><b>$100,000</b></td></tr>
+          <tr><td>of which labour<span class="sub">866 h, Nov 2025 to Jun 2026</span></td><td class="n">$24,969</td></tr>
+          <tr><td>Game net revenue since launch<span class="sub">ads + IAP, whole game</span></td><td class="n">$787,704</td></tr>
+          <tr><td>Game UA spend</td><td class="n">−$485,706</td></tr>
+          <tr><td>Game profit</td><td class="n">$301,998</td></tr>
+          <tr class="total"><td>Our 50 % of the profit<span class="sub">split with the sister company that publishes Red Command</span></td><td class="n">$150,999</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><b>Paid back in August</b>, month 4 after the May launch: our cumulative half of the profit passed $100k at $111.9k. Our half runs at about <b>$51k a month</b> (July and August).</div>
+    </div>
+    <div>
+      <div class="k">Profit by month, our 50 %</div>
+      <div class="bars" aria-label="Red Command monthly profit">
+        <div class="row"><span>May</span><span class="track"><i class="neg" style="left:0;width:4.8%"></i></span><b>−$2,624</b></div>
+        <div class="row"><span>Jun</span><span class="track"><i style="left:0;width:22.2%"></i></span><b>$12,176</b></div>
+        <div class="row"><span>Jul</span><span class="track"><i style="left:0;width:86.4%"></i></span><b>$47,448</b></div>
+        <div class="row"><span>Aug</span><span class="track"><i style="left:0;width:100%"></i></span><b>$54,938</b></div>
+        <div class="row"><span>Sep*</span><span class="track"><i style="left:0;width:71.1%"></i></span><b>$39,061</b></div>
+      </div>
+      <p class="note">*September to the 20th (data lags about 3 days). Our half of the game's profit (net ads + IAP revenue minus UA); the other half goes to the publishing sister company.</p>
+    </div>
+  </div>
+
+  <h2 class="pb">Sector Defense: when could it earn its cost back?</h2>
+  <p class="note" style="margin-top:0">Months after launch needed to cover the Q3 cost, if Sector Defense earns profit at the pace shown in each column. Scenarios, not a forecast.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Q3 cost</th><th class="n">At RC's average<span class="sub">$32k / month, our half</span></th><th class="n">At RC's run rate<span class="sub">$51k / month, our half</span></th><th class="n">At $100k / month<span class="sub">mid of the $50k–150k estimate</span></th></tr></thead>
+    <tbody>
+      <tr><td>$82,551 <span class="sub">manday estimate</span></td><td class="n">2.6 months</td><td class="n">1.6 months</td><td class="n">0.8 months</td></tr>
+      <tr><td>$93,155 <span class="sub">direct cost</span></td><td class="n">2.9 months</td><td class="n">1.8 months</td><td class="n">0.9 months</td></tr>
+      <tr class="hl"><td>$146,476 <span class="sub">80 % of all labour</span></td><td class="n">4.5 months</td><td class="n">2.9 months</td><td class="n">1.5 months</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">The Red Command rates are what reaches us after the 50/50 split; the average includes the slow launch month, the run rate is July and August. The $50k–150k per month range is Jirka's estimate of Sector Defense's potential. Every month of further development before launch adds roughly $27k to $49k to the cost.</p>
+
+  <h2>RON_India: the solo side project</h2>
+  <div class="two">
+    <table>
+      <thead><tr><th>Cost so far (6 weeks)</th><th class="n">USD</th></tr></thead>
+      <tbody>
+        <tr><td>David's time<span class="sub">6 weeks, solo</span></td><td class="n">$1,143</td></tr>
+        <tr><td>Claude account<span class="sub">$200 a month</span></td><td class="n">$277</td></tr>
+        <tr class="total"><td>Total cost</td><td class="n">$1,420</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <thead><tr><th>Payments</th><th class="n">USD</th></tr></thead>
+      <tbody>
+        <tr><td>Prototype prepayment<span class="sub">received</span></td><td class="n"><b>$40,000</b></td></tr>
+        <tr><td>Next 4 weeks<span class="sub">offered, client decides within 14 days</span></td><td class="n">$60,000</td></tr>
+        <tr><td>Full game<span class="sub">$800k with the $100k credited, lands H1 2027</span></td><td class="n">+$700,000</td></tr>
+        <tr class="total"><td>Net so far</td><td class="n">+$38,580</td></tr>
+        <tr><td>ROI so far<span class="sub">net ÷ cost</span></td><td class="n"><b>2,717 %</b></td></tr>
+        <tr><td>ROI after the $60k phase<span class="sub">if David stays solo for the 4 more weeks at the same pace (cost $2,367)</span></td><td class="n"><b>4,125 %</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note">Full game ($800k with $100k credited): ROI depends on the production cost, which is not estimated yet. At 100 % markup the build must cost no more than $400k; at 50 % markup, no more than $533k.</p>
+
+  <footer>Sources: hub time tracking and contractor rates, finance warehouse (BigQuery, TNG partner view), Red Command labour sheet, figures from David Vykopal (80 % focus, 500k CZK/month other and fixed costs, $100k Red Command total, RON_India deal). Interactive version with adjustable assumptions: sector-defense-q3-naklady.html. Contains compensation-derived totals: do not forward outside the exec team.</footer>
+</div>
+</body>
+</html>

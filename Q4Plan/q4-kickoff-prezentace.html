@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q4 kickoff 2026 · NOXGAMES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #001a33; --navy-2: #003366; --blue: #004d99; --accent: #007bff; --cyan: #00d2ff;
+  --ink: #ffffff; --muted: #a3c4e4; --faint: #6f93b8; --line: rgba(0, 210, 255, 0.16); --panel: rgba(0, 77, 153, 0.22);
+  --ok: #27b978; --amber: #ffbd4a; --red: #f75d5d;
+  --c-david: #2f8fff; --c-martin: #19b8a6; --c-jirka: #8c6dff; --c-kuba: #ff7d3f;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000c18; overflow: hidden; }
+body { font-family: Inter, system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--cyan); color: var(--navy); }
+.viewport { position: fixed; inset: 0; }
+.stage { width: 1920px; height: 1080px; position: absolute; left: 50%; top: 50%; transform-origin: center; }
+.slide {
+  position: absolute; inset: 0; padding: 150px 130px 120px; opacity: 0; visibility: hidden;
+  transition: opacity 0.5s var(--ease), visibility 0s linear 0.5s;
+  background:
+    radial-gradient(900px 600px at 88% -10%, rgba(0, 123, 255, 0.28), transparent 70%),
+    radial-gradient(700px 500px at -5% 110%, rgba(0, 210, 255, 0.10), transparent 70%),
+    linear-gradient(180deg, #002244 0%, var(--navy) 60%);
+  overflow: hidden;
+}
+.slide::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 96px 96px; opacity: 0.22;
+  mask-image: radial-gradient(1200px 700px at 70% 20%, #000 10%, transparent 75%);
+}
+.slide.active { opacity: 1; visibility: visible; transition: opacity 0.5s var(--ease); }
+.slide > * { position: relative; }
+
+/* chrome */
+.rail { position: absolute; top: 56px; left: 130px; right: 130px; display: flex; gap: 10px; align-items: center; }
+.rail img { height: 40px; margin-right: 26px; }
+.rail span { font: 600 17px Montserrat, sans-serif; color: var(--faint); padding: 8px 16px; border-radius: 999px; border: 1px solid transparent; letter-spacing: 0.01em; }
+.rail span.on { color: var(--navy); background: var(--cyan); }
+.rail span.past { color: var(--muted); border-color: var(--line); }
+.foot { position: absolute; left: 130px; right: 130px; bottom: 48px; display: flex; justify-content: space-between; align-items: center; font-size: 18px; color: var(--faint); }
+.who { display: inline-flex; align-items: center; gap: 8px; font: 600 18px Inter, sans-serif; color: #fff; padding: 6px 14px 6px 8px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid var(--line); }
+.who::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--c, var(--cyan)); }
+.who.david { --c: var(--c-david); } .who.martin { --c: var(--c-martin); } .who.jirka { --c: var(--c-jirka); } .who.kuba { --c: var(--c-kuba); }
+
+/* type */
+h1, h2 { font-family: Montserrat, sans-serif; margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+h2 { font-weight: 900; font-size: 84px; line-height: 1.02; max-width: 1400px; }
+.sub { font-size: 32px; line-height: 1.4; color: var(--muted); margin: 22px 0 0; max-width: 1300px; }
+.num { font-family: Montserrat, sans-serif; font-weight: 900; font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+.cyan { color: var(--cyan); }
+.muted { color: var(--muted); }
+
+/* title */
+.title { display: flex; flex-direction: column; justify-content: center; }
+.title h1 { font-weight: 900; font-size: 250px; line-height: 0.9; letter-spacing: -0.045em; }
+.title h1 .arrow { color: var(--cyan); font-weight: 700; margin: 0 0.04em; }
+.title .sub { font-size: 40px; }
+.title .rail span { display: none; }
+.big-logo { position: absolute; right: 120px; bottom: 110px; width: 360px; opacity: 0.9; }
+
+/* agenda */
+.agenda { margin-top: 64px; display: grid; gap: 0; max-width: 1500px; }
+.agenda .row { display: grid; grid-template-columns: 90px 1fr 420px 120px; align-items: center; padding: 22px 0; border-top: 1px solid var(--line); font-size: 36px; }
+.agenda .row:last-child { border-bottom: 1px solid var(--line); }
+.agenda .row b { font-family: Montserrat, sans-serif; font-weight: 800; }
+.agenda .row .l { font: 800 30px Montserrat, sans-serif; color: var(--cyan); }
+.agenda .row .t { color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.agenda .who { font-size: 20px; margin-right: 8px; }
+
+/* timeline */
+.tl { margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.tl .m { border-top: 4px solid var(--accent); padding-top: 22px; }
+.tl .m h3 { font: 800 34px Montserrat, sans-serif; margin: 0 0 16px; }
+.tl ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.tl li { font-size: 26px; line-height: 1.35; color: var(--muted); padding-left: 26px; position: relative; }
+.tl li::before { content: ''; position: absolute; left: 0; top: 12px; width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); }
+.tl li b { color: #fff; font-weight: 600; }
+.tl li.hot::before { background: var(--amber); box-shadow: 0 0 0 5px rgba(255, 189, 74, 0.2); }
+.band { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 24px; }
+.band > span:first-child { color: var(--faint); margin-right: 8px; }
+.pill { padding: 10px 18px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); color: #e3f1ff; }
+
+/* hero numbers */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: end; margin-top: 70px; }
+.hero-n { font-size: 190px; line-height: 0.9; white-space: nowrap; }
+.hero-n small { font-size: 0.32em; font-weight: 700; color: var(--muted); letter-spacing: 0; margin-left: 12px; }
+.note { font-size: 22px; color: var(--faint); margin-top: 18px; }
+
+/* bars */
+.hbar { height: 88px; border-radius: 14px; background: rgba(255,255,255,0.05); display: flex; overflow: hidden; }
+.hbar i { display: block; height: 100%; transform-origin: left; }
+.legend { display: flex; justify-content: space-between; margin-top: 16px; font-size: 26px; color: var(--muted); }
+.legend b { color: #fff; font-family: Montserrat, sans-serif; font-weight: 800; }
+
+.cols { display: flex; align-items: flex-end; gap: 44px; height: 470px; margin-top: 70px; padding-bottom: 60px; position: relative; border-bottom: 2px solid rgba(255,255,255,0.25); }
+.cols .c { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; position: relative; }
+.cols .c i { width: 100%; background: linear-gradient(180deg, var(--cyan), var(--accent)); border-radius: 10px 10px 0 0; transform-origin: bottom; }
+.cols .c i.neg { background: var(--red); border-radius: 0 0 10px 10px; position: absolute; top: 100%; }
+.cols .c i.part { background: repeating-linear-gradient(135deg, var(--accent) 0 12px, #0a5fc0 12px 24px); }
+.cols .c .v { font: 800 30px Montserrat, sans-serif; margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+.cols .c .k { position: absolute; bottom: -54px; font-size: 24px; color: var(--muted); }
+.cols .c .cum { position: absolute; bottom: -92px; font-size: 20px; color: var(--faint); white-space: nowrap; }
+.cols .c .cum.win { color: var(--ok); font-weight: 700; }
+.side { display: grid; gap: 34px; align-content: start; margin-top: 80px; }
+.side div b { display: block; font: 900 64px Montserrat, sans-serif; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.side div span { font-size: 24px; color: var(--muted); }
+.two { display: grid; grid-template-columns: 1.55fr 1fr; gap: 90px; }
+
+.rows { display: grid; gap: 26px; margin-top: 60px; }
+.rows .r { display: grid; grid-template-columns: 360px 1fr 170px; align-items: center; gap: 28px; font-size: 28px; }
+.rows .r .bar { height: 56px; background: rgba(255,255,255,0.05); border-radius: 10px; position: relative; }
+.rows .r .bar i { position: absolute; inset: 0 auto 0 0; border-radius: 10px; background: linear-gradient(90deg, var(--accent), var(--cyan)); transform-origin: left; }
+.rows .r .bar i.rc { background: rgba(255,255,255,0.22); }
+.rows .r b { font: 800 34px Montserrat, sans-serif; text-align: right; font-variant-numeric: tabular-nums; }
+.refline { position: absolute; top: -14px; bottom: -14px; width: 3px; background: var(--amber); }
+.refline span { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 20px; color: var(--amber); font-weight: 600; }
+.scen { display: flex; gap: 22px; margin-top: 56px; }
+.scen div { flex: 1; padding: 26px 30px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+.scen div b { display: block; font: 900 54px Montserrat, sans-serif; }
+.scen div span { font-size: 24px; color: var(--muted); }
+.scen div.mid { border-color: var(--cyan); background: rgba(0, 210, 255, 0.1); }
+
+.okgrid { display: grid; grid-template-columns: 520px 1fr; gap: 90px; margin-top: 50px; align-items: start; }
+.area { display: grid; grid-template-columns: 250px 1fr 130px; gap: 22px; align-items: center; font-size: 26px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+.area .dots { display: flex; gap: 6px; flex-wrap: wrap; }
+.area .dots i { width: 26px; height: 26px; border-radius: 6px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
+.area .dots i.y { background: var(--ok); border-color: var(--ok); }
+.area b { font: 800 28px Montserrat, sans-serif; text-align: right; font-variant-numeric: tabular-nums; }
+
+.fails { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 56px; }
+.fails div { padding: 30px 34px; border-radius: 18px; background: var(--panel); border: 1px solid var(--line); }
+.fails h3 { font: 800 34px Montserrat, sans-serif; margin: 0 0 10px; }
+.fails p { font-size: 25px; line-height: 1.45; color: var(--muted); margin: 0; }
+.lesson { margin-top: 36px; font-size: 30px; line-height: 1.4; padding: 26px 34px; border-radius: 18px; background: rgba(0, 210, 255, 0.1); border: 1px solid rgba(0, 210, 255, 0.4); }
+.lesson b { color: var(--cyan); }
+
+.gates { position: relative; margin-top: 90px; display: grid; grid-template-columns: repeat(5, 1fr); }
+.gates::before { content: ''; position: absolute; left: 7%; right: 7%; top: 38px; height: 4px; background: linear-gradient(90deg, var(--cyan), var(--accent) 70%, var(--amber)); }
+.gate { text-align: center; position: relative; padding: 0 12px; }
+.gate .dot { width: 80px; height: 80px; margin: 0 auto 22px; border-radius: 50%; background: var(--navy); border: 4px solid var(--cyan); display: grid; place-items: center; font: 900 24px Montserrat, sans-serif; }
+.gate.go .dot { background: var(--cyan); color: var(--navy); }
+.gate.end .dot { border-color: var(--amber); color: var(--amber); }
+.gate h3 { font: 800 32px Montserrat, sans-serif; margin: 0 0 6px; }
+.gate p { font-size: 23px; color: var(--muted); margin: 0; line-height: 1.4; }
+.verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 70px; }
+.verdict div { padding: 28px 34px; border-radius: 18px; font-size: 28px; line-height: 1.4; background: var(--panel); border: 1px solid var(--line); }
+.verdict div b { display: block; font: 800 34px Montserrat, sans-serif; margin-bottom: 6px; }
+.verdict .g b { color: var(--ok); } .verdict .s b { color: var(--red); }
+
+.port { margin-top: 50px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 70px; }
+.port .p { display: grid; grid-template-columns: 280px 210px 1fr; gap: 20px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); font-size: 25px; }
+.port .p b { font: 800 29px Montserrat, sans-serif; }
+.port .p span.s { font: 700 18px Inter, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 12px; border-radius: 8px; justify-self: start; white-space: nowrap; }
+.port .p em { font-style: normal; color: var(--muted); }
+.s.grow { background: rgba(39, 185, 120, 0.18); color: #6fe0ad; }
+.s.hold { background: rgba(163, 196, 228, 0.14); color: var(--muted); }
+.s.dec { background: rgba(255, 189, 74, 0.16); color: var(--amber); }
+.s.stop { background: rgba(247, 93, 93, 0.16); color: #ff9b9b; }
+
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; margin-top: 56px; }
+.duo h3 { font: 800 40px Montserrat, sans-serif; margin: 0 0 22px; color: var(--cyan); }
+.duo ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 20px; }
+.duo li { font-size: 28px; line-height: 1.4; color: var(--muted); padding-left: 34px; position: relative; }
+.duo li::before { content: ''; position: absolute; left: 0; top: 15px; width: 16px; height: 4px; background: var(--cyan); border-radius: 2px; }
+.duo li b { color: #fff; font-weight: 600; }
+
+.hire { margin-top: 56px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; }
+.hire .card { padding: 44px 48px; border-radius: 22px; background: linear-gradient(135deg, rgba(0, 123, 255, 0.35), rgba(0, 210, 255, 0.12)); border: 1px solid rgba(0, 210, 255, 0.45); }
+.hire .card h3 { font: 900 56px/1.05 Montserrat, sans-serif; margin: 0 0 18px; }
+.hire .card p { font-size: 28px; line-height: 1.45; color: #d7ebff; margin: 0; }
+
+.track { position: relative; margin-top: 150px; height: 110px; border-radius: 18px; background: rgba(255,255,255,0.05); }
+.track .fill { position: absolute; inset: 0 auto 0 0; border-radius: 18px; background: linear-gradient(90deg, var(--accent), var(--cyan)); transform-origin: left; }
+.track .air { position: absolute; top: 0; bottom: 0; border-radius: 0 18px 18px 0; background: repeating-linear-gradient(135deg, rgba(0, 210, 255, 0.35) 0 14px, rgba(0, 210, 255, 0.12) 14px 28px); transform-origin: left; }
+.track .tier { position: absolute; top: -70px; bottom: -20px; width: 3px; background: rgba(255,255,255,0.5); }
+.track .tier span { position: absolute; top: 0; left: 12px; white-space: nowrap; font: 800 30px Montserrat, sans-serif; }
+.track .tier small { display: block; font: 500 20px Inter, sans-serif; color: var(--muted); }
+.track .now { position: absolute; top: 50%; transform: translateY(-50%); left: 22px; font: 900 44px Montserrat, sans-serif; color: var(--navy); }
+.air-list { display: flex; gap: 20px; margin-top: 80px; }
+.air-list div { flex: 1; padding: 22px 26px; border-radius: 16px; border: 1px dashed rgba(0, 210, 255, 0.45); }
+.air-list b { display: block; font: 900 44px Montserrat, sans-serif; }
+.air-list span { font-size: 22px; color: var(--muted); }
+
+.okrs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+.okrs div { padding: 28px 30px 26px; border-radius: 18px; background: var(--panel); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+.okrs .id { font: 900 26px Montserrat, sans-serif; color: var(--cyan); }
+.okrs h3 { font: 800 31px/1.18 Montserrat, sans-serif; margin: 0; }
+.okrs p { font-size: 23px; line-height: 1.4; color: var(--muted); margin: 0; flex: 1; }
+.okrs .who { align-self: flex-start; font-size: 18px; }
+.rules { margin-top: 30px; font-size: 24px; color: var(--muted); }
+.rules b { color: #fff; }
+
+.prio { display: grid; gap: 26px; margin-top: 56px; }
+.prio .p { display: grid; grid-template-columns: 140px 1fr; gap: 34px; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.prio .p .n { font: 900 130px/0.85 Montserrat, sans-serif; color: var(--cyan); letter-spacing: -0.05em; }
+.prio .p h3 { font: 900 52px/1.05 Montserrat, sans-serif; margin: 0 0 8px; }
+.prio .p p { font-size: 27px; color: var(--muted); margin: 0; }
+.not { display: flex; gap: 14px; align-items: center; margin-top: 40px; font-size: 24px; flex-wrap: wrap; }
+.not > span:first-child { font-weight: 700; color: var(--red); margin-right: 6px; }
+.not .pill { text-decoration: line-through; text-decoration-color: rgba(247, 93, 93, 0.7); text-decoration-thickness: 2px; color: var(--muted); }
+
+.end { display: flex; flex-direction: column; justify-content: center; }
+.end h2 { font-size: 180px; }
+.end .where { display: flex; gap: 20px; margin-top: 60px; }
+
+/* the authored moment: data grows in when a slide arrives */
+.slide .grow-x { transform: scaleX(0); }
+.slide .grow-y { transform: scaleY(0); }
+.slide.active .grow-x, .slide.active .grow-y { transform: none; transition: transform 1.1s var(--ease); transition-delay: calc(var(--i, 0) * 90ms + 150ms); }
+
+/* HUD */
+.hud { position: fixed; left: 0; right: 0; bottom: 0; height: 4px; background: rgba(255,255,255,0.06); z-index: 10; }
+.hud i { display: block; height: 100%; background: var(--cyan); width: 0; transition: width 0.4s var(--ease); }
+.help { position: fixed; right: 16px; bottom: 14px; z-index: 10; font-size: 13px; color: var(--faint); background: rgba(0, 26, 51, 0.8); padding: 6px 10px; border-radius: 8px; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+body:hover .help { opacity: 1; }
+.notes-panel { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 11; max-height: 40vh; overflow: auto; background: rgba(0, 16, 32, 0.96); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; font-size: 17px; line-height: 1.5; color: #d9ecff; display: none; }
+.notes-panel.on { display: block; }
+.notes-panel b { color: var(--cyan); }
+aside.notes { display: none; }
+.navbtn { position: fixed; top: 0; bottom: 0; width: 18%; z-index: 5; cursor: pointer; background: none; border: 0; }
+.navbtn.prev { left: 0; cursor: w-resize; } .navbtn.next { right: 0; cursor: e-resize; }
+.navbtn:focus-visible { outline: 2px solid var(--cyan); outline-offset: -6px; }
+
+@media print {
+  .stage { position: static; }
+  @page { size: 1920px 1080px; margin: 0; }
+  html, body { overflow: visible; height: auto; background: var(--navy); }
+  .viewport { position: static; display: block; }
+  .stage { transform: none !important; width: 1920px; height: auto; }
+  .slide { position: relative; opacity: 1; visibility: visible; width: 1920px; height: 1080px; break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .slide .grow-x, .slide .grow-y { transform: none; }
+  .hud, .help, .notes-panel, .navbtn { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide, .slide.active { transition: none; }
+  .slide .grow-x, .slide .grow-y { transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="viewport"><div class="stage" id="stage">
+
+<!-- 1 -->
+<section class="slide title" data-part="" data-who="david">
+  <h1>Q3<span class="arrow">→</span>Q4</h1>
+  <p class="sub">Q4 kickoff 2026. Co se povedlo, co ne, a na co jdeme do konce roku.</p>
+  <img class="big-logo" src="assets/noxgames-logo.png" alt="NOXGAMES">
+  <aside class="notes">Krátké otevření. Q3 je zavřený, 30. 9. vyšel Sector Defense. Q4 není o nových projektech, ale o tom vytáhnout maximum z toho, co máme. Na konci prostor na otázky.</aside>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-part="" data-who="david">
+  <h2>Program</h2>
+  <div class="agenda">
+    <div class="row"><span class="l">A</span><b>Co se dělo v Q3</b><span><span class="who david">David</span></span><span class="t">4 min</span></div>
+    <div class="row"><span class="l">B</span><b>Data: revenue, projekty, čas</b><span><span class="who martin">Martin</span><span class="who david">David</span></span><span class="t">12 min</span></div>
+    <div class="row"><span class="l">C</span><b>Q3 cíle: co jsme splnili</b><span><span class="who jirka">Jirka</span></span><span class="t">6 min</span></div>
+    <div class="row"><span class="l">D</span><b>Rozhodnutí a proč</b><span><span class="who kuba">Kuba</span><span class="who jirka">Jirka</span><span class="who david">David</span></span><span class="t">13 min</span></div>
+    <div class="row"><span class="l">E</span><b>Q4 cíle</b><span><span class="who martin">Martin</span><span class="who david">David</span></span><span class="t">6 min</span></div>
+    <div class="row"><span class="l">F</span><b>Tři priority a otázky</b><span><span class="who david">David</span></span><span class="t">7 min</span></div>
+  </div>
+  <aside class="notes">Šest částí, cca 50 minut. Otázky prosím až na konec, ať stihneme data i cíle.</aside>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-part="A" data-who="david">
+  <h2>Q3 v událostech</h2>
+  <div class="tl">
+    <div class="m"><h3>Červenec</h3><ul>
+      <li><b>Red Command</b> vydělává <b>$47k</b> měsíčně (náš podíl)</li>
+      <li><b>Sector Defense</b>: preprodukce, guidebook, výběr tématik</li>
+      <li><b>CPI testy</b> tématik: 4 862 instalací, vítěz V3_rpg</li>
+    </ul></div>
+    <div class="m"><h3>Srpen</h3><ul>
+      <li><b>Start vývoje</b> Sector Defense</li>
+      <li class="hot">Red Command rekord: <b>$55k</b> za měsíc</li>
+      <li><b>Delegace 1 a 2</b>: segmenty, role, odpovědnosti</li>
+    </ul></div>
+    <div class="m"><h3>Září</h3><ul>
+      <li class="hot"><b>RON_India</b>: MVP doručeno, <b>$40k</b></li>
+      <li><b>Retro Q3</b>: Mecha Fortress do údržby, Tankzor končí</li>
+      <li class="hot"><b>30. 9. release</b> Sector Defense</li>
+    </ul></div>
+  </div>
+  <div class="band"><span>Během Q3</span><span class="pill">Red Command na iOS</span><span class="pill">První payout za Red Command</span><span class="pill">NoxHub používá všech 16 lidí</span><span class="pill">Stěhování kanceláří</span></div>
+  <aside class="notes">Projít rychle po měsících. Důraz: Red Command se stal stabilním zdrojem, Sector Defense prošel celou preprodukcí a vývojem za jeden kvartál, RON_India je nový typ příjmu. Retro 21. 9. poslalo MF do údržby.</aside>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-part="B" data-who="martin">
+  <h2>Revenue Q3: tři čtvrtiny z nového portfolia</h2>
+  <div class="split">
+    <div><div class="num hero-n">$742k</div><p class="note">Revenue studia 1. 7. až 20. 9. (finanční sklad)</p></div>
+    <div>
+      <div class="hbar"><i class="grow-x" style="width:75%;background:linear-gradient(90deg,var(--accent),var(--cyan))"></i><i class="grow-x" style="--i:2;width:25%;background:rgba(255,255,255,0.14)"></i></div>
+      <div class="legend"><span><b>75 %</b> Red Command, Mecha Fortress, Hexapolis</span><span><b>25 %</b> ostatní</span></div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:70px">Nové portfolio už nese firmu. Cíl na Q4 posouváme na 80, 85 a 90 %.</p>
+  <aside class="notes">Martin: čísla doplnit za celé Q3 k 30. 9. Pozor, hub ukazuje 71 %, finanční sklad 75 %. Definici sjednotit (KR O1.4).</aside>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-part="B" data-who="martin">
+  <h2>Red Command se zaplatil 1,5×</h2>
+  <div class="two">
+    <div class="cols">
+      <div class="c"><span class="v" style="color:var(--red)">−$2,6k</span><i class="neg grow-y" style="height:14px;transform-origin:top"></i><span class="k">květen</span><span class="cum">−2,6k</span></div>
+      <div class="c"><span class="v">$12,2k</span><i class="grow-y" style="--i:1;height:22%"></i><span class="k">červen</span><span class="cum">9,6k</span></div>
+      <div class="c"><span class="v">$47,4k</span><i class="grow-y" style="--i:2;height:86%"></i><span class="k">červenec</span><span class="cum">57k</span></div>
+      <div class="c"><span class="v">$54,9k</span><i class="grow-y" style="--i:3;height:100%"></i><span class="k">srpen</span><span class="cum win">112k splaceno</span></div>
+      <div class="c"><span class="v">$39,1k</span><i class="part grow-y" style="--i:4;height:71%"></i><span class="k">září*</span><span class="cum">151k</span></div>
+    </div>
+    <div class="side">
+      <div><b class="cyan">$151k</b><span>náš podíl na profitu od launche</span></div>
+      <div><b>$100k</b><span>vývoj včetně fixních nákladů</span></div>
+      <div><b>50 / 50</b><span>profit dělíme se sesterskou firmou, která RC publikuje</span></div>
+    </div>
+  </div>
+  <p class="note" style="margin-top:70px">Náš 50% podíl na profitu po měsících, pod sloupci kumulativně. *září do 20. 9.</p>
+  <aside class="notes">První měsíc po launchi mínus 2,6k, druhý už plus 12k. Za červenec a srpen jsme měli v průměru cca 50k a vývoj se splatil v srpnu. To je benchmark pro Sector Defense.</aside>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-part="B" data-who="martin">
+  <h2>Sector Defense stál tolik co Red Command</h2>
+  <div class="rows" style="margin-top:80px">
+    <div class="r"><span>Odhad podle mandays</span><div class="bar"><i class="grow-x" style="width:56.4%"></i><div class="refline" style="left:68.3%"><span>Red Command cca $100k</span></div></div><b>$83k</b></div>
+    <div class="r"><span>Odpracované hodiny</span><div class="bar"><i class="grow-x" style="--i:1;width:63.6%"></i><div class="refline" style="left:68.3%"></div></div><b>$93k</b></div>
+    <div class="r"><span>80 % fokusu firmy</span><div class="bar"><i class="grow-x" style="--i:2;width:100%"></i><div class="refline" style="left:68.3%"></div></div><b>$146k</b></div>
+  </div>
+  <p class="note">Všechny tři včetně podílu fixních nákladů za Q3. Čísla se ještě revidují.</p>
+  <div class="scen">
+    <div><b>2 měsíce</b><span>návratnost v nejlepším případě</span></div>
+    <div class="mid"><b>3 měsíce</b><span>očekávaná návratnost, jako Red Command</span></div>
+    <div><b>4 až 5 měsíců</b><span>v horším případě</span></div>
+  </div>
+  <aside class="notes">Tři metody, protože třetina hodin nebyla přiřazená k tasku (viz další slidy). Sector Defense je náš, ne sdílený, takže ze stejné hry máme dvojnásobný podíl na profitu než u Red Command. Proto čekáme návratnost do konce roku.</aside>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-part="B" data-who="david">
+  <h2>RON_India: nový typ příjmu</h2>
+  <div class="split" style="align-items:center;grid-template-columns:1.1fr 1fr">
+    <div><div class="num hero-n cyan">2 700 %</div><p class="note">ROI MVP fáze</p></div>
+    <div class="rows" style="margin-top:0">
+      <div class="r" style="grid-template-columns:200px 1fr 150px"><span>Příjem</span><div class="bar"><i class="grow-x" style="width:100%"></i></div><b>$40k</b></div>
+      <div class="r" style="grid-template-columns:200px 1fr 150px"><span>Náklady</span><div class="bar"><i class="grow-x" style="--i:1;width:3.5%;background:var(--amber)"></i></div><b>$1,4k</b></div>
+    </div>
+  </div>
+  <div class="band" style="margin-top:80px"><span>Co dál</span><span class="pill">Další fáze $60k: čekáme na podpis</span><span class="pill">Nabídka plné hry $800k, dodání H1 2027</span><span class="pill">Platby se počítají do H2 profitu</span></div>
+  <aside class="notes">MVP za 4 až 6 týdnů, jeden člověk část úvazku, AI nástroje. Náklady cca 1,4k. Výrazně zvedá ROI celé firmy. Deal vede David.</aside>
+</section>
+
+<!-- 8 -->
+<section class="slide" data-part="B" data-who="martin">
+  <h2>Třetina času nemá task</h2>
+  <div class="split">
+    <div><div class="num hero-n">5 192 h</div><p class="note">vykázáno v time trackingu za Q3</p></div>
+    <div>
+      <div class="hbar" style="position:relative;overflow:visible"><i class="grow-x" style="width:68%;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:14px 0 0 14px"></i><i class="grow-x" style="--i:2;width:32%;background:rgba(247,93,93,0.45);border-radius:0 14px 14px 0"></i><div class="refline" style="left:95%"><span>cíl Q4: 95 %</span></div></div>
+      <div class="legend"><span><b>68 %</b> s taskem</span><span><b>1 681 h</b> bez tasku</span></div>
+    </div>
+  </div>
+  <p class="sub" style="margin-top:70px">Bez přiřazeného času nejde spočítat, kolik stojí projekt. Od Q4 timer vždy na task.</p>
+  <aside class="notes">Nejde o kontrolu lidí, jde o to umět říct, kolik stál Sector Defense nebo Red Command. Proto máme tři odhady místo jednoho čísla. Cíl: u většiny lidí přes 95 % času přiřazeno.</aside>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-part="C" data-who="jirka">
+  <h2>Q3 cíle: 35 z 52</h2>
+  <div class="okgrid">
+    <div>
+      <div class="num hero-n" style="font-size:170px">67 %</div>
+      <p class="note">cílů splněno</p>
+      <p class="sub" style="font-size:28px">Činnosti jsme z velké části zvládli. Finanční výsledky zůstaly pod cílem.</p>
+    </div>
+    <div id="areas"></div>
+  </div>
+  <aside class="notes">Nejlépe nový produkt (celá preprodukce a vývoj) a HR. Nejhůř finanční KPI: daily profit 30denní průměr $1 370 (bronz ano, stříbro $2 500 jsme v Q3 dosáhli, ale nedrželi), ROI firmy 42 % proti cíli 50 %.</aside>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-part="C" data-who="jirka">
+  <h2>Co nevyšlo a proč</h2>
+  <div class="fails">
+    <div><h3>Nový titul nevyšel v Q3</h3><p>Sector Defense jde ven 30. 9., těsně za hranou kvartálu. Releasable build a vydání zůstaly otevřené.</p></div>
+    <div><h3>Finanční KPI pod cílem</h3><p>Daily profit $1 370 proti stříbru $2 500, ROI firmy 42 % proti 50 %.</p></div>
+    <div><h3>Reporting se nedělal</h3><p>Týdenní finanční reporty a měsíční review neproběhly. Chyběl automatický datový základ.</p></div>
+    <div><h3>LiveOps nevydělávají</h3><p>0 % revenue z LiveOps. Hráči nekupují nabídky ani nesledují reklamy v eventech.</p></div>
+  </div>
+  <div class="lesson"><b>Poučení:</b> nesplněné věci neměly jasného vlastníka ani termín. Každý Q4 cíl má obojí, plus DoD a blokery.</div>
+  <aside class="notes">Neukazovat prstem. Společné mají jen to, že za ně nikdo konkrétní neodpovídal. Proto nová pravidla OKR.</aside>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-part="D" data-who="kuba">
+  <h2>Sector Defense: launch a gaty</h2>
+  <div class="gates">
+    <div class="gate go"><div class="dot">D0</div><h3>30. 9.</h3><p>Release na Android, první tranše UA</p></div>
+    <div class="gate"><div class="dot">1</div><h3>7. 10.</h3><p>Gate D7: retence, eCPI, ROAS D1</p></div>
+    <div class="gate"><div class="dot">2</div><h3>14. 10.</h3><p>Gate D14: ROAS D7, platící</p></div>
+    <div class="gate"><div class="dot">3</div><h3>21. 10.</h3><p>Gate D21: ROAS D7 ≥ 65 %, pak iOS</p></div>
+    <div class="gate end"><div class="dot">?</div><h3>do 28. 10.</h3><p>Pokračovat, nebo konec</p></div>
+  </div>
+  <div class="verdict">
+    <div class="g"><b>Blíží se Red Command nebo výš</b>Pokračujeme, škálujeme a ladíme. Cíl Q4: čísla Red Command.</div>
+    <div class="s"><b>Výrazně pod pásmem MF až RC</b>Po analýze projekt končí. Pevný počet iterací nemáme.</div>
+  </div>
+  <p class="note" style="margin-top:34px">Gaty řídí marketing. Vyladěné od prvního dne to nebude, na ladění máme celý Q4.</p>
+  <aside class="notes">Kuba: doplnit první data z gate D7, pokud už budou. 2 až 4 týdny sbíráme data. Když nejsou technické problémy a kampaně běží, jak mají, a přesto je CPI nebo retence zásadně mimo, projekt končí.</aside>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-part="D" data-who="jirka">
+  <h2>Portfolio: kdo dostane kapacitu</h2>
+  <div class="port">
+    <div class="p"><b>Sector Defense</b><span class="s grow">hlavní fokus</span><em>launch, data, škálování</em></div>
+    <div class="p"><b>Hexapolis 2</b><span class="s dec">rozhodnout</span><em>turn-based koncept, do konce října</em></div>
+    <div class="p"><b>Red Command</b><span class="s grow">škálovat</span><em>A/B testy, monetizace, iOS</em></div>
+    <div class="p"><b>Puppet Sports</b><span class="s dec">rozhodnout</span><em>partner na financování, do konce října</em></div>
+    <div class="p"><b>Mecha Fortress</b><span class="s hold">údržba</span><em>ladění podle externího review</em></div>
+    <div class="p"><b>Legacy tituly</b><span class="s stop">pod $100/den</span><em>dál neřešíme</em></div>
+    <div class="p"><b>Hexapolis 1</b><span class="s hold">údržba</span><em>test multiplayeru z Hex 2</em></div>
+    <div class="p"><b>Nový titul</b><span class="s stop">v Q4 ne</span><em>jen test reskin nástroje</em></div>
+  </div>
+  <aside class="notes">První 2 až 3 sprinty Q4 jdou na ladění Red Command a Mecha Fortress. Hexapolis 2 sám o sobě je na tu práci málo, proto jako širší turn-based koncept se stejnou meta vrstvou. Tankzor byl vyřazen už 21. 9.</aside>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-part="D" data-who="david">
+  <h2>B2B, RON_India a R&amp;D</h2>
+  <div class="duo">
+    <div><h3>B2B bez outreache</h3><ul>
+      <li><b>Dotáhnout RON_India</b>: podpis fáze za $60k</li>
+      <li>Když přijde plná hra: <b>externí kontrakty</b>, AI assety, <b>+1 grafik</b>, bez dopadu na SD a RC</li>
+      <li>Příležitosti bereme, když přijdou. Aktivně je do konce roku nehledáme.</li>
+    </ul></div>
+    <div><h3>R&amp;D staví základ</h3><ul>
+      <li><b>Shared Game Backend</b>: první nasazení v Hexapolisu nebo Mecha Fortress</li>
+      <li>Základ pro <b>membership</b> (dřív Nox ID): kontakty, re-engagement, nabídky</li>
+      <li>Na něm pak <b>social features a PvP</b></li>
+    </ul></div>
+  </div>
+  <aside class="notes">LEGO a TinySoft zmínit jen obecně, pokud to není veřejné. Shared Game Backend je dlouhodobá investice, ne Q4 revenue.</aside>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-part="D" data-who="kuba martin">
+  <h2>Tým a organizace</h2>
+  <div class="hire">
+    <div class="card"><h3>Hledáme testera a komunitního správce</h3><p>Napůl manuální testování, napůl správa Discord komunit našich her. Nábor startuje na začátku Q4. Znáte někoho? Pošlete ho Kubovi.</p></div>
+    <div class="duo" style="grid-template-columns:1fr;margin-top:0;gap:30px"><ul>
+      <li><b>Komunity:</b> obnovíme a založíme Discord pro naše hry</li>
+      <li><b>Delegace:</b> role, segmenty, činnosti a budgety do konce roku</li>
+      <li><b>Odměňování:</b> jak se budgety promítnou do platů a bonusů, rozhodneme v Q4</li>
+      <li><b>Time tracking:</b> přes 95 % času přiřazeno k práci</li>
+    </ul></div>
+  </div>
+  <aside class="notes">Kuba: nábor a komunity. Martin: delegace, budgety, time tracking. Konkrétní mzdové věci tady neprobírat, jen že se to v Q4 rozhoduje a včas dáme vědět.</aside>
+</section>
+
+<!-- 15 -->
+<section class="slide" data-part="E" data-who="martin">
+  <h2>H2 profit: $107k a co visí ve vzduchu</h2>
+  <div class="track">
+    <div class="fill grow-x" style="width:10.7%"></div>
+    <div class="air grow-x" style="--i:3;left:10.7%;width:35%"></div>
+    <div class="tier" style="left:20%"><span>$200k<small>bronz</small></span></div>
+    <div class="tier" style="left:50%"><span>$500k<small>stříbro, bonusy</small></span></div>
+    <div class="tier" style="left:99.7%"><span style="left:auto;right:12px;text-align:right">$1M<small>zlato, strop</small></span></div>
+    <span class="now">$107k</span>
+  </div>
+  <div class="air-list">
+    <div><b>$150k</b><span>Red Command do konce roku</span></div>
+    <div><b>$50k</b><span>ostatní tituly</span></div>
+    <div><b>$50k</b><span>Sector Defense, pokud se rozjede</span></div>
+    <div><b>$100k</b><span>RON_India, pokud pokračuje vývoj</span></div>
+  </div>
+  <p class="note">Dohromady $300k až $350k. To nás posouvá k druhému tieru. $1M je realistický strop, ne předpoklad.</p>
+  <aside class="notes">Martin: aktualizovat $107k k datu kickoffu. Když vyjde všechno, jsme kolem $450k, tedy těsně pod stříbrem. Každý dolar ze SD a Indie rozhoduje.</aside>
+</section>
+
+<!-- 16 -->
+<section class="slide" data-part="E" data-who="david">
+  <h2>Q4 cíle</h2>
+  <div class="okrs">
+    <div><span class="id">O1</span><h3>H2 profit k druhému tieru</h3><p>≥ $200k jistě, $500k stretch. ROI firmy ≥ 50 %.</p><span class="who jirka">Jirka</span></div>
+    <div><span class="id">O2</span><h3>Sector Defense na čísla Red Command</h3><p>Launch 30. 9., gaty, rozhodnutí do 28. 10.</p><span class="who david">David</span></div>
+    <div><span class="id">O3</span><h3>Live-ops a retence</h3><p>RC a MF laděné, 25 % revenue z LiveOps, D1 +2 až 3 p. b.</p><span class="who david">David</span></div>
+    <div><span class="id">O4</span><h3>RON_India dotažená</h3><p>Podpis fáze $60k, plán pro plnou hru.</p><span class="who david">David</span></div>
+    <div><span class="id">O5</span><h3>Portfolio a R&amp;D rozhodnuté</h3><p>Hex 2 a Puppet do října, Shared Backend live.</p><span class="who jirka">Jirka</span></div>
+    <div><span class="id">O6</span><h3>Tým a řízení</h3><p>Tester a komunita, delegace s budgety, 95 % času s taskem.</p><span class="who martin">Martin</span></div>
+  </div>
+  <p class="rules">Každý podkrok má <b>vlastníka, DoD, start, termín a blokery</b>. Status na <b>každé druhé firemní poradě</b>. Celé znění v hubu v sekci Cíle.</p>
+  <aside class="notes">Vlastník odpovídá za výsledek, nemusí všechno dělat sám. Podkroků je hodně a jsou malé, hlavních cílů je šest.</aside>
+</section>
+
+<!-- 17 -->
+<section class="slide" data-part="F" data-who="david">
+  <h2>Tři priority Q4</h2>
+  <div class="prio">
+    <div class="p"><span class="n">1</span><div><h3>Sector Defense: launch, data, škálování</h3><p>Do konce října víme, jestli jedeme. Pak ho dostat na čísla Red Command.</p></div></div>
+    <div class="p"><span class="n">2</span><div><h3>Víc z her, které už máme</h3><p>Live-ops a retence Red Command a Mecha Fortress. První sprinty jdou sem.</p></div></div>
+    <div class="p"><span class="n">3</span><div><h3>Profit H2 s RON_India</h3><p>Podpis další fáze a každý dolar k tieru $500k.</p></div></div>
+  </div>
+  <div class="not"><span>V Q4 neděláme</span><span class="pill">nový titul</span><span class="pill">B2B outreach</span><span class="pill">záchranu legacy pod $100/den</span></div>
+  <aside class="notes">Pokud si má někdo zapamatovat jediný slide, je to tenhle. Když se u něčeho rozhodujete, jestli na tom dělat, zkontrolujte, jestli to spadá do jedné z těch tří věcí.</aside>
+</section>
+
+<!-- 18 -->
+<section class="slide end" data-part="F" data-who="david martin jirka kuba">
+  <h2>Otázky?</h2>
+  <div class="where"><span class="pill">Q4 cíle: hub, sekce Cíle</span><span class="pill">Rozhodnutí: Wiki, dekret Q4</span><span class="pill">Status: každá druhá firemní porada</span></div>
+  <aside class="notes">Otevřená diskuse. Otázky, na které teď neodpovíme, zapsat a vrátit se k nim na další poradě.</aside>
+</section>
+
+</div></div>
+<button class="navbtn prev" aria-label="Předchozí slide"></button><button class="navbtn next" aria-label="Další slide"></button>
+<div class="hud"><i id="bar"></i></div>
+<div class="help">← → listování · N poznámky · F celá obrazovka</div>
+<div class="notes-panel" id="notes" aria-live="polite"></div>
+<script>
+(function () {
+  var AREAS = [['Finanční KPI', 0, 2], ['Portfolio', 4, 7], ['Nový produkt', 11, 13], ['Publishing / RC', 4, 7], ['R&D', 6, 10], ['HR', 5, 6], ['Firma', 5, 7]];
+  var box = document.getElementById('areas');
+  AREAS.forEach(function (a) {
+    var dots = '';
+    for (var i = 0; i < a[2]; i++) dots += '<i class="' + (i < a[1] ? 'y' : '') + '"></i>';
+    box.insertAdjacentHTML('beforeend', '<div class="area"><span>' + a[0].replace('&', '&amp;') + '</span><span class="dots">' + dots + '</span><b>' + a[1] + ' / ' + a[2] + '</b></div>');
+  });
+
+  var PARTS = [['A', 'Review Q3'], ['B', 'Data'], ['C', 'Cíle Q3'], ['D', 'Rozhodnutí'], ['E', 'Cíle Q4'], ['F', 'Priority']];
+  var NAMES = { david: 'David', martin: 'Martin', jirka: 'Jirka', kuba: 'Kuba' };
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  slides.forEach(function (s, idx) {
+    var part = s.dataset.part, reached = false;
+    var rail = '<div class="rail"><img src="assets/noxgames-logo.png" alt="NOXGAMES">' + PARTS.map(function (p) {
+      var cls = p[0] === part ? 'on' : '';
+      if (part && !cls && PARTS.findIndex(function (q) { return q[0] === part; }) > PARTS.indexOf(p)) cls = 'past';
+      return '<span class="' + cls + '">' + p[1] + '</span>';
+    }).join('') + '</div>';
+    var who = s.dataset.who.split(' ').map(function (w) { return '<span class="who ' + w + '">' + NAMES[w] + '</span>'; }).join(' ');
+    s.insertAdjacentHTML('afterbegin', rail);
+    s.insertAdjacentHTML('beforeend', '<div class="foot"><span>' + who + '</span><span>' + (idx + 1) + ' / ' + slides.length + '</span></div>');
+  });
+
+  var stage = document.getElementById('stage'), bar = document.getElementById('bar'), notes = document.getElementById('notes');
+  function fit() {
+    var k = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    stage.style.transform = 'translate(-50%, -50%) scale(' + k + ')';
+  }
+  window.addEventListener('resize', fit); fit();
+
+  var cur = 0;
+  function show(n) {
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+    bar.style.width = ((cur + 1) / slides.length * 100) + '%';
+    var aside = slides[cur].querySelector('aside.notes');
+    notes.innerHTML = '<b>' + (cur + 1) + '.</b> ' + (aside ? aside.innerHTML : '');
+    if (location.hash !== '#' + (cur + 1)) history.replaceState(null, '', '#' + (cur + 1));
+  }
+  document.addEventListener('keydown', function (e) {
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur + 1); }
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].indexOf(e.key) >= 0) { e.preventDefault(); show(cur - 1); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'n' || e.key === 'N') notes.classList.toggle('on');
+    else if (e.key === 'f' || e.key === 'F') { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function () {}); else document.exitFullscreen(); }
+  });
+  document.querySelector('.navbtn.prev').addEventListener('click', function () { show(cur - 1); });
+  document.querySelector('.navbtn.next').addEventListener('click', function () { show(cur + 1); });
+  var tx = null;
+  document.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
+    tx = null;
+  });
+  show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+})();
+</script>
+</body>
+</html>

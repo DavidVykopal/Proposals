@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q4 porada: témata a otázky</title>
+<style>
+:root { --ink: #1a1a1a; --ink-2: #4a4a4a; --rule: #d6d6d6; --bg: #ffffff; --tag: #8a3a17; color-scheme: light; }
+@media screen and (prefers-color-scheme: dark) {
+  :root { --ink: #ece8df; --ink-2: #b3ada2; --rule: #3a3833; --bg: #1a1916; --tag: #e59770; color-scheme: dark; }
+}
+@page { size: A4; margin: 13mm 15mm 13mm 16mm; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 10pt/1.38 Georgia, "Times New Roman", serif; }
+.page { max-width: 780px; margin: 0 auto; padding: 32px 16px; }
+header { border-bottom: 1.5pt solid var(--ink); padding-bottom: 8px; margin-bottom: 14px; }
+h1 { font-size: 19pt; font-weight: normal; margin: 0; line-height: 1.15; }
+.meta { font: 9pt/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin-top: 4px; }
+.facts { font: 9pt/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin: 0 0 12px; padding: 0; list-style: none; columns: 2; column-gap: 24px; }
+.facts li { break-inside: avoid; }
+.facts b { color: var(--ink); }
+section { margin-top: 9px; }
+h2, h3 { break-after: avoid; }
+ol { break-inside: avoid; }
+h2 { font-size: 12pt; margin: 0 0 3px; font-weight: bold; }
+h2 .no { display: inline-block; min-width: 1.8em; color: var(--ink-2); font-weight: normal; }
+h2 .who { font: normal 8.5pt -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin-left: 6px; }
+h2 .new { font: bold 7.5pt -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--tag); border: 0.75pt solid var(--tag); border-radius: 3px; padding: 0 4px; margin-left: 6px; vertical-align: 1.5pt; letter-spacing: .04em; }
+.ctx { font: 9pt/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin: 0 0 3px 1.8em; }
+ol { margin: 0 0 0 1.8em; padding: 0 0 0 1.2em; }
+ol li { margin: 1.5px 0; padding-left: 2px; }
+h3 { font-size: 10.5pt; font-style: italic; font-weight: normal; margin: 5px 0 1px 1.8em; }
+footer { margin-top: 16px; padding-top: 6px; border-top: 0.75pt solid var(--rule); font: 8pt -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); }
+@media print { .page { padding: 0; max-width: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <h1>Q4 porada vedení: témata a otázky</h1>
+  <div class="meta">čt 24. 9. 2026 · NOXGAMES · interní, vedení · podklady: porada-2026-09-24-q4-plan.html, cost-roi-overview.html</div>
+</header>
+
+<ul class="facts">
+  <li>Revenue studia Q3 (do 20. 9.): <b>$742k</b>; RC + MF + Hexapolis <b>75 %</b></li>
+  <li>Red Command: náš 50% podíl na profitu <b>cca $51k / měsíc</b>, od launche <b>$151k</b></li>
+  <li>Sector Defense, náklad Q3: <b>$83k až $146k</b></li>
+  <li>India deal: <b>$40k</b> zaplaceno, $60k na stole, plná hra $800k</li>
+  <li>Běžné náklady mimo mzdy: <b>cca 500k Kč / měsíc</b></li>
+  <li>Hodiny bez tasku v Q3: <b>1 681 h</b> z 5 192 h</li>
+</ul>
+
+<section>
+  <h2><span class="no">1</span>Sector Defense: launch a škálování<span class="who">David, Kuba</span></h2>
+  <ol>
+    <li>Jaké je D0 a co ho ještě může posunout?</li>
+    <li>Bereme gaty marketingu (D7 / D14 / D21, €138k ve čtyřech tranších) jako společný výklad scale / hold / stop?</li>
+    <li>Co dělá produkce, když Gate 3 neprojde kvůli produktu: kolik sprintů iterace, s kolika lidmi, kdy stop?</li>
+    <li>Jak zajistíme, že LiveOps poběží od prvního dne a nedopadne to jako u MF?</li>
+    <li>Každý měsíc vývoje navíc stojí cca $27k až $49k. Kde je hranice?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">2</span>Red Command<span class="who">David</span></h2>
+  <ol>
+    <li>Kolik dev a design kapacity se po launchi SD vrátí na RC?</li>
+    <li>Co musí ukázat review monetizace a hooku, abychom přidali další sprint?</li>
+    <li>iOS: kdy řekneme, že škálovat nemá smysl?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">3</span>India deal<span class="who">David</span></h2>
+  <ol>
+    <li>Když klient kývne na plnou hru, z jaké kapacity ji postavíme bez dopadu na SD a RC?</li>
+    <li>Kdo deal povede, pokud nemá zůstat na Davidovi?</li>
+    <li>Jak se platby z Indie promítnou do bonusového tieru ($500k / $1m)?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">4</span>Portfolio a R&amp;D<span class="who">Jirka</span></h2>
+  <ol>
+    <li>Mecha Fortress v údržbě: kde je stop moment pro levné experimenty?</li>
+    <li>Hexapolis 2 (PvP, cheateři, balanc): pokračovat, zmrazit, nebo stop?</li>
+    <li>Puppet Sports: najít partnera na brainstorm, nebo ukončit?</li>
+    <li>Pravidlo pro legacy: kdy revenue titulu přestane vyvažovat QA, údržbu a režii?</li>
+    <li>Jsme firma na 1 až 2 typy projektů? Které?</li>
+    <li>Potvrzujeme, že drahý nový titul se neotevře, dokud nevydělá SD a India deal? Které malé testy v Q4?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">5</span>Finance, reporting a cíl firmy<span class="who">Martin</span></h2>
+  <ol>
+    <li>Cíl firmy na Q4: $100k profitu měsíčně v prosinci, nebo kumulativní tier $200k / $500k?</li>
+    <li>Kdo dělá týdenní review, kdy začíná a nad jakými čísly?</li>
+    <li>Zavádíme od 1. 10. povinné zapisování času na task s projektem?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">6</span>LiveOps, monetizace, komunita<span class="who">David, Kuba, Jirka</span></h2>
+  <ol>
+    <li>25 % revenue z LiveOps: na kterém titulu začneme a kdo to vlastní?</li>
+    <li>Retence D1 +2 až 3 p. b.: jakými změnami a s jakým A/B designem?</li>
+    <li>Sociální sítě a komunita dnes nemají nikoho. Děláme to v Q4, a pokud ano, kdo a co za to padá?</li>
+    <li>Cross-promo a invite friends: kdy nasadíme Shared Backend do RC a SD?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">7</span>HR a nábor<span class="new">NOVÉ</span><span class="who">všichni</span></h2>
+  <h3>QA</h3>
+  <ol>
+    <li>Stačí Hutis (cca 40 % QA) a Akimův release gate na launch SD, provoz RC a případně India deal?</li>
+    <li>Tester samostatně, nebo v kombinaci s datovým analytikem? Kdy?</li>
+  </ol>
+  <h3>Komunita</h3>
+  <ol>
+    <li>Chceme community managera (i part-time), nebo komunitu vědomě jen reaktivně?</li>
+    <li>Hráči jako moderátoři: kdo je vybere, vede a hlídá?</li>
+  </ol>
+  <h3>Analytika</h3>
+  <ol>
+    <li>Datový analytik: nábor hned, nebo až po novém roce při stabilním profitu (Kuba)?</li>
+    <li>Co nábor spustí: Gate 3 SD, podpis India dealu, nebo konkrétní výše profitu?</li>
+    <li>Končí přechodný stav (Kuba + AI) opravdu 31. 12. 2026?</li>
+  </ol>
+  <h3>Ostatní pozice</h3>
+  <ol>
+    <li>OPS &amp; AI programátor a part-time externista na kanceláře: schvalujeme, kdy?</li>
+    <li>Externí designéři (Mirek, Michal) místo in-house designera: pokračujeme i v Q4?</li>
+    <li>Programátorská kapacita: jaký je plán, pokud jednání s Milanem nedopadne?</li>
+  </ol>
+  <h3>Návrat Katky z mateřské</h3>
+  <ol>
+    <li>Kdy se vrací a na jaký úvazek?</li>
+    <li>Do jaké role a pod který segment (budget)? Vrací se na původní práci, nebo může pokrýt některou z mezer (QA, komunita, analytika)?</li>
+    <li>Kdo ji zapracuje a jak se změní rozpočet segmentu?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">8</span>Rozpočty, mzdy a smlouvy<span class="new">NOVÉ</span><span class="who">Martin, Jirka</span></h2>
+  <h3>Rozpočty segmentů</h3>
+  <ol>
+    <li>Jak budou rozpočty segmentů pracovat s mzdami a smlouvami: nese payroll domovský segment celý?</li>
+    <li>Jak se do rozpočtu promítnou kontraktoři (IČO), zaměstnanci a externisté? Liší se to v něčem?</li>
+    <li>Jak se platí práce člověka pro jiný segment: interní tarif, nebo přesun v rozpočtu?</li>
+  </ol>
+  <h3>Normalizace platů a struktura rolí</h3>
+  <ol>
+    <li>Normalizujeme platy podle řádné struktury rolí (role a úrovně, platová pásma)?</li>
+    <li>Kdo strukturu navrhne a do kdy? Stihne se to před 1. 1. 2027?</li>
+    <li>Co s lidmi, kteří jsou dnes nad pásmem nebo pod ním? Platí "nikdo si nepohorší"?</li>
+    <li>Jak kompenzujeme vědomé přetížení (nad 75 %): penězi, bonusem, jinak?</li>
+  </ol>
+  <h3>Fixní plat + bonusy</h3>
+  <ol>
+    <li>Jdeme na fixní plat + variabilní složku (formát potvrzený 6. 8.)? Od kdy: Q4 nanečisto, ostře od 1. 1.?</li>
+    <li>Flexibilní složka 0 až 15 %, dělení tým / osobní 50 : 50: platí?</li>
+    <li>Profit share 2× ročně a bonusy od tieru $500k: jak se to potká s variabilní složkou?</li>
+    <li>Co se stane s dnešními hodinovými sazbami a vykazováním hodin: mandays místo hodin?</li>
+  </ol>
+  <h3>Účtování</h3>
+  <ol>
+    <li>Jak se mzdy, faktury kontraktorů a bonusy zaúčtují do nákladů segmentu a projektu?</li>
+    <li>Kdy se bonus stane nákladem: při výplatě, nebo průběžně (dohadná položka)?</li>
+    <li>Rozpočítáváme náklady na projekty podle vykázaných hodin? Pak je přiřazení času povinné.</li>
+    <li>V jaké měně a s jakým kurzem vedeme rozpočty (CZK náklady, USD výnosy)?</li>
+    <li>Kdy je rozpočtová porada? Původní termín 1. 10. teď zabírá Delegace 4.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">9</span>Hub a nástroje<span class="who">Martin</span></h2>
+  <ol>
+    <li>Top 3 na Q4: UA a akvizice, ASO, competitor scraping, nebo Asset Studio a reskin?</li>
+    <li>Kdo je u každého nástroje zadavatel a jak poznáme, že se vyplatil?</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">10</span>Q4 cíle a další kroky<span class="who">všichni</span></h2>
+  <ol>
+    <li>Max 10 cílů, u každého jedno číslo a jeden vlastník: které to jsou?</li>
+    <li>Co z dneška jde do Delegace 4 (čt 1. 10.) a co na rozpočtovou poradu?</li>
+    <li>Kdo zapíše dekret do Wiki a Q4 cíle do hubu?</li>
+  </ol>
+</section>
+
+<footer>Interní podklad pro vedení NOXGAMES · Obsahuje údaje odvozené z odměn, nešířit mimo vedení · Podrobnosti: porada-2026-09-24-q4-plan.html</footer>
+</div>
+</body>
+</html>

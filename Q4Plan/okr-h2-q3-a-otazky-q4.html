@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OKR: stav H2 a Q3, otázky pro Q4</title>
+<style>
+:root { --ink: #1a1a1a; --ink-2: #4a4a4a; --ink-3: #6f6f6f; --rule: #d6d6d6; --bg: #ffffff; --ok: #2e6b2f; --no: #9a3412; --band: #f3f1ec; color-scheme: light; }
+@media screen and (prefers-color-scheme: dark) {
+  :root { --ink: #ece8df; --ink-2: #b3ada2; --ink-3: #8f897e; --rule: #3a3833; --bg: #1a1916; --ok: #9cc58f; --no: #e59770; --band: #24221d; color-scheme: dark; }
+}
+@page { size: A4; margin: 12mm 14mm 12mm 15mm; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 9.3pt/1.34 Georgia, "Times New Roman", serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { max-width: 780px; margin: 0 auto; padding: 32px 16px; }
+.sans { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+header { border-bottom: 1.5pt solid var(--ink); padding-bottom: 6px; margin-bottom: 10px; }
+h1 { font-size: 18pt; font-weight: normal; margin: 0; line-height: 1.15; }
+.meta { font: 8.5pt/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin-top: 3px; }
+h2 { font-size: 12.5pt; margin: 12px 0 5px; break-after: avoid; }
+h2 small { font: normal 8.5pt -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin-left: 6px; }
+table { width: 100%; border-collapse: collapse; font: 8.5pt/1.35 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; break-inside: avoid; }
+th, td { text-align: left; padding: 3px 5px; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); border-bottom: 0.75pt solid var(--ink-2); }
+td.n, th.n { text-align: right; white-space: nowrap; }
+td.cat { font-weight: 600; white-space: nowrap; }
+.ok { color: var(--ok); font-weight: 600; }
+.no { color: var(--no); font-weight: 600; }
+.band { background: var(--band); }
+.kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 4px 0 2px; }
+.kpi div { border: 0.75pt solid var(--rule); border-radius: 4px; padding: 6px 8px; font: 8.5pt/1.35 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); }
+.kpi b { display: block; font: 15pt/1.15 Georgia, serif; color: var(--ink); margin: 2px 0; }
+.note { font: 8.5pt/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin: 4px 0 0; }
+.q { break-inside: avoid; margin-top: 5px; }
+.q h3 { font-size: 10.5pt; margin: 0 0 1px; }
+.q h3 span { display: inline-block; min-width: 1.6em; color: var(--ink-3); font-weight: normal; }
+.q .ctx { font: 8.5pt/1.35 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin: 0 0 2px 1.6em; }
+ol { margin: 0 0 0 1.6em; padding: 0 0 0 1.2em; }
+ol li { margin: 0; }
+ul.chk { list-style: none; margin: 0; padding: 0; font: 8.6pt/1.3 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+ul.chk li { position: relative; padding: 1.5px 0 1.5px 17px; }
+ul.chk li::before { content: ''; position: absolute; left: 1px; top: 3.5px; width: 8px; height: 8px; border: 0.9pt solid var(--ink-2); border-radius: 1.5px; }
+ul.chk li.y { color: var(--ink-2); }
+ul.chk li.y::before { background: var(--ok); border-color: var(--ok); }
+ul.chk li.n { color: var(--ink); font-weight: 600; }
+ul.chk li.n::before { border-color: var(--no); }
+ul.chk li small { font-weight: normal; color: var(--ink-3); }
+.cols { columns: 2; column-gap: 22px; }
+.area { break-inside: avoid; margin: 0 0 8px; }
+.area h3 { font-size: 10pt; margin: 0 0 2px; }
+.area h3 small { font: normal 8pt -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-3); margin-left: 4px; }
+.legend { font: 8pt -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin: 0 0 8px; }
+.legend i { display: inline-block; width: 8px; height: 8px; border: 0.9pt solid var(--ink-2); border-radius: 1.5px; vertical-align: -0.5px; margin: 0 4px 0 10px; }
+.legend i.y { background: var(--ok); border-color: var(--ok); }
+.legend i.n { border-color: var(--no); }
+.pb { break-before: page; }
+footer { margin-top: 12px; padding-top: 5px; border-top: 0.75pt solid var(--rule); font: 7.5pt -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); }
+@media print { .page { padding: 0; max-width: none; } }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <h1>OKR: kde jsme v H2 a Q3, a otázky pro nastavení Q4</h1>
+  <div class="meta">čt 24. 9. 2026 · NOXGAMES · interní, vedení · stav z hubu (Firemní cíle), sync 24. 9. 2026 8:30</div>
+</header>
+
+<h2>H2 2026: finanční cíl<small>0 / 3 tierů</small></h2>
+<div class="kpi">
+  <div>Kumulativní profit H2<b>$107 031</b>z cíle $1 000 000</div>
+  <div>Do bronzu ($200k) chybí<b>$92 969</b>v Q4 cca $31k profitu firmy měsíčně</div>
+  <div>Do stříbra ($500k) chybí<b>$392 969</b>v Q4 cca $131k měsíčně; zlato $1m cca $298k</div>
+</div>
+<p class="note">Profit se počítá z Cashflow API. Bonusy se otevírají od tieru $500k. Platby z India dealu v číslu zatím nejsou.</p>
+
+<h2>Q3 2026: souhrn<small>35 / 52 cílů · 4 / 12 tierů</small></h2>
+<table>
+  <thead><tr><th>Oblast</th><th class="n">Splněno</th><th>Hlavní výsledek</th><th>Nesplněno, k rozhodnutí pro Q4</th></tr></thead>
+  <tbody>
+    <tr class="band"><td class="cat">Finanční KPI</td><td class="n no">0 / 2</td><td>Daily profit (30denní průměr) <b>$1 370</b>: bronz $1 000 ano, stříbro $2 500 dosaženo v průběhu Q3, dnes zpět na bronzu, zlato $5 000 ne. ROI firmy <b>42 %</b>: bronz 50 % nedosažen.</td><td>Oba KPI pod cílem. Definice ROI pro Q4.</td></tr>
+    <tr><td class="cat">Portfolio</td><td class="n">4 / 7</td><td>MF dokončena a zmražena, LiveOps update a jeho analýza, marketingové experimenty v MF. Nové portfolio cca 71 % příjmů, tier bronz 75 % označen jako splněný.</td><td>Vydání nového titulu. Dokumentace features převedených pod R&amp;D. Stříbro 80 %, zlato 85 %.</td></tr>
+    <tr class="band"><td class="cat">Nový produkt</td><td class="n ok">11 / 13</td><td>Celá preprodukce: guidebook, tématiky, kreativy, CPI testy, breakdown MF + RC, design dokument, externí konzultace, start vývoje, interní MVP.</td><td>Releasable build. Vydání nového titulu.</td></tr>
+    <tr><td class="cat">Publishing / RC</td><td class="n">4 / 7</td><td>Backport features z MF, řešení Diff spike, první payout od TinySoftu, vydání iOS. Daily profit RC: bronz $2 000 ano, stříbro $6 000, zlato $10 000 ne.</td><td>Retrospektivně zasmluvnit spolupráci na RC. Guidebook a rámce dalších publishing spoluprací.</td></tr>
+    <tr class="band"><td class="cat">R&amp;D</td><td class="n">6 / 10</td><td>AMA bot, SGB InviteFriends a CrossPromo, SGA Clans a PvP layer, agentic "kolegové".</td><td>SharedGameBackend vydaný v MF. Utilita pro reskin MF-branch. AppMagic trend analyser. Trend analyser + idea validator.</td></tr>
+    <tr><td class="cat">HR</td><td class="n ok">5 / 6</td><td>1:1 pro nováčky, onboarding Čalty a Vavra, Čalta prošel zkušební dobou. Nábor senior system designera uzavřen (bez náboru, pokračují externisté).</td><td>Milan Vavro: zkušební doba.</td></tr>
+    <tr class="band"><td class="cat">Firma</td><td class="n">5 / 7</td><td>Konec third-party nástrojů, NoxHub schválen všemi, balance sheets validní, retro po skupinkách, stěhování.</td><td>Týdenní finanční reporty na EXEC. Měsíční strategy a finance review.</td></tr>
+  </tbody>
+</table>
+<p class="note"><b>Čtení Q3:</b> činnosti z velké části splněny (35 z 52), ale oba finanční výsledky pod cílem a nový titul nevyšel. Nesplněné zůstaly hlavně věci, které nemají jasného vlastníka nebo termín (reporting, smlouvy, dokumentace).</p>
+
+<h2 class="pb">Q3 a H2: všechny body<small>stav z hubu k 24. 9. 2026</small></h2>
+<p class="legend">Legenda:<i class="y"></i>splněno<i class="n"></i>nesplněno (tučně, k rozhodnutí pro Q4)</p>
+<div class="cols"><div class="area"><h3>Finanční KPI<small>0 / 2 · tiery 2 / 6</small></h3><ul class="chk"><li class="y">Daily profit: bronz $1 000 <small>(dnes $1 370, 30denní průměr)</small></li><li class="y">Daily profit: stříbro $2 500 <small>(dosaženo v průběhu Q3, dnes zpět pod)</small></li><li class="n">Daily profit: zlato $5 000</li><li class="n">ROI firmy: bronz 50 % <small>(dnes 42 %)</small></li><li class="n">ROI firmy: stříbro 100 %</li><li class="n">ROI firmy: zlato 200 %</li></ul></div><div class="area"><h3>Portfolio<small>4 / 7</small></h3><ul class="chk"><li class="n">Vydání nového titulu <small>(označeno jako rizikové)</small></li><li class="y">Dokončení a zamražení MechaFortress</li><li class="y">Vydání LiveOps update v MF</li><li class="y">Analyzovat přínos Challenges a LiveOps update v MF</li><li class="y">Otestovat a ideálně zařadit do MF marketing experiment features <small>(had, barvy, pozice mechů…)</small></li><li class="n">Sepsání základních dokumentací k features převedeným pod R&amp;D</li><li class="y">Nové portfolio tvoří většinu příjmů: bronz 75 % <small>(hub uvádí „nyní zhruba 71 %“)</small></li><li class="n">Nové portfolio: stříbro 80 %</li><li class="n">Nové portfolio: zlato 85 %</li></ul></div><div class="area"><h3>Nový produkt<small>11 / 13</small></h3><ul class="chk"><li class="y">Sepsaný guidebook a proces preprodukce a nové tvorby</li><li class="y">Vytvořit užší seznam tématik</li><li class="y">Výběr tématik k testování</li><li class="y">Vytvořené kreativy na vybrané tématiky</li><li class="y">Spuštění CPI testu</li><li class="y">Vyhodnocení CPI testů</li><li class="y">Dokončen breakdown MF + RC</li><li class="y">Vytvořen základní design dokument vybraného titulu</li><li class="y">Externí design konzultace</li><li class="y">Začátek vývoje nového titulu</li><li class="y">Preprodukční build / interní MVP</li><li class="n">Releasable build</li><li class="n">Vydání nového titulu</li></ul></div><div class="area"><h3>Publishing / Red Command<small>4 / 7</small></h3><ul class="chk"><li class="y">Zvážit vhodné features na backport z MF a případně zaimplementovat</li><li class="y">Měřitelně vyřešit hlášení issues jako Diff spike</li><li class="y">Daily profit RedCommand: bronz $2 000</li><li class="n">Daily profit RedCommand: stříbro $6 000</li><li class="n">Daily profit RedCommand: zlato $10 000</li><li class="y">Obdržet první payout od TinySoft za RedCommand</li><li class="y">iOS vydání RedCommand</li><li class="n">Retrospektivně zasmluvnit spolupráci na RedCommand</li><li class="n">Připravit guidebook a rámce dalších publishing spoluprací</li></ul></div><div class="area"><h3>R&amp;D<small>6 / 10</small></h3><ul class="chk"><li class="n">Obecný SharedGameBackend integrovaný a vydaný v MF</li><li class="y">Plné zprovoznění a ověření v praxi: AMA BOT</li><li class="y">SGB: InviteFriends</li><li class="y">SGB: CrossPromo</li><li class="y">SGA: Clans</li><li class="y">SGA: PvP layer feature</li><li class="y">Implementace OpenClaw-style kolegů ve formě agentic loops</li><li class="n">Vytvoření utility pro manual / AI-driven reskinning MF-branch</li><li class="n">Automatizovaný AppMagic trend analyser</li><li class="n">Automatizovaný trend analyser + idea validator <small>(Google Trends, X-API, Reddit a další signály)</small></li></ul></div><div class="area"><h3>HR<small>5 / 6</small></h3><ul class="chk"><li class="y">Nováčci Milan a David budou mít 2× proper 1:1</li><li class="y">David Čalta splní onboarding</li><li class="y">Milan Vavro splní onboarding</li><li class="y">David Čalta splní zkušebku <small>(24. 9.)</small></li><li class="n">Milan Vavro splní zkušebku</li><li class="y">Nábor Senior System Game Designer <small>(uzavřeno, pokračují externisté)</small></li></ul></div><div class="area"><h3>Firma<small>5 / 7</small></h3><ul class="chk"><li class="y">Odstranění third-party nástrojů pro management práce a týmu</li><li class="y">NoxHub obdrží od každého člena schválení k plnému užívání</li><li class="y">Dotáhnout validitu a historickou přesnost balance sheets</li><li class="n">Pravidelně dodržovat týdenní finanční reporty na EXEC</li><li class="n">Pravidelně dodržovat měsíční strategy / finance reviews na EXEC</li><li class="y">Vyzkoušet retrospektivu po skupinkách</li><li class="y">Zvládnout stěhování</li></ul></div><div class="area"><h3>H2 2026: Kumulativní profit<small>0 / 3 tierů · $107 031</small></h3><ul class="chk"><li class="n">Bronz $200 000</li><li class="n">Stříbro $500 000</li><li class="n">Zlato $1 000 000</li></ul></div></div>
+
+<h2 class="pb">Otázky pro nastavení OKR do konce roku</h2>
+<p class="note" style="margin-top:0">Navádějící otázky, na které by měl odpovědět každý návrh Q4 cíle. Pořadí odpovídá oblastem v hubu, dvě oblasti jsou nové.</p>
+
+<div class="q"><h3><span>0</span>Pravidla pro Q4 cíle</h3>
+<ol>
+  <li>Q3 měl 52 cílů a hodnotili jsme hlavně činnosti. Kolik cílů chceme v Q4 (návrh max 10 až 15) a kolik z nich má být výsledek, ne úkol?</li>
+  <li>Má každý cíl jednoho vlastníka a jedno číslo, podle kterého se v prosinci pozná úspěch?</li>
+  <li>Co s nesplněnými cíli z Q3: přenést, přeformulovat, nebo vědomě zrušit? Pro každý jedno rozhodnutí.</li>
+</ol></div>
+
+<div class="q"><h3><span>1</span>Finance</h3>
+<ol>
+  <li>Je $1m za H2 pořád realistický strop, nebo tiery přepočítáme? Bronz znamená cca $31k profitu firmy měsíčně, stříbro $131k.</li>
+  <li>Počítají se platby z India dealu do kumulativního profitu a do bonusového tieru?</li>
+  <li>Daily profit: necháme tiery $1 000 / $2 500 / $5 000, nebo je posuneme podle Q4 plánu (SD launch, sezóna)?</li>
+  <li>ROI firmy 42 %: měříme správnou věc? Jakou definici ROI chceme v Q4 a jaký bronz je dosažitelný?</li>
+</ol></div>
+
+<div class="q"><h3><span>2</span>Nový produkt (Sector Defense)</h3>
+<ol>
+  <li>Je cílem Q4 "vydat", nebo "vydat a projít Gate 3 (D7 ROAS ≥ 65 %)"? Co je bronz, stříbro a zlato?</li>
+  <li>Které produktové metriky dáme jako výsledek: retence D1, D7, podíl LiveOps na revenue?</li>
+  <li>Co je cíl, pokud gate neprojde: počet iterací, nebo rozhodnutí stop do data?</li>
+</ol></div>
+
+<div class="q"><h3><span>3</span>Publishing / Red Command</h3>
+<ol>
+  <li>Daily profit RC $2 000 / $6 000 / $10 000: počítá se za celou hru, nebo za náš 50% podíl? Je stříbro v Q4 reálné?</li>
+  <li>Jaký výsledek chceme z review monetizace a A/B testů (ARPDAU, podíl IAP)?</li>
+  <li>Smlouva na RC a publishing guidebook se v Q3 nestihly: kdo je vlastník a jaký je termín?</li>
+</ol></div>
+
+<div class="q"><h3><span>4</span>Portfolio</h3>
+<ol>
+  <li>Nové portfolio: 71 % příjmů, nebo bronz 75 % splněn? Sjednotit definici. Cíl 80 až 85 % i v Q4?</li>
+  <li>Jaký cíl pro MF v údržbě: nákladový strop, nebo minimální revenue?</li>
+  <li>Hexapolis 2 a Puppet Sports: patří rozhodnutí (pokračovat / stop) do OKR s termínem?</li>
+</ol></div>
+
+<div class="q"><h3><span>5</span>B2B a India deal<span style="font:bold 7pt sans-serif;color:var(--no);margin-left:6px">NOVÁ OBLAST</span></h3>
+<ol>
+  <li>Chceme B2B jako samostatnou oblast OKR? Výsledky: podepsaná fáze za $60k, smlouva na plnou hru, marže nad X %.</li>
+  <li>Jaký je cíl pipeline dalších B2B dealů a kdo ji vlastní?</li>
+</ol></div>
+
+<div class="q"><h3><span>6</span>R&amp;D a nástroje</h3>
+<ol>
+  <li>SharedGameBackend "vydaný v MF": dává smysl, když je MF v údržbě? Přesměrovat na RC nebo SD?</li>
+  <li>AppMagic analyser, trend validator, reskin utilita: které přinesou měřitelný výsledek v Q4 a jaký?</li>
+  <li>Nástroje v hubu (UA, ASO, competitor scraping): cíl je "hotovo", nebo "používá se a ušetří X"?</li>
+</ol></div>
+
+<div class="q"><h3><span>7</span>LiveOps a retence<span style="font:bold 7pt sans-serif;color:var(--no);margin-left:6px">NOVÁ OBLAST</span></h3>
+<ol>
+  <li>Bereme cíl 25 % revenue z LiveOps? Na kterém titulu a s jakými tiery?</li>
+  <li>Retence D1 +2 až 3 p. b.: na kterém titulu a proti jaké baseline?</li>
+</ol></div>
+
+<div class="q"><h3><span>8</span>HR</h3>
+<ol>
+  <li>Milan: zkušební doba jako cíl, a jaký je plán B?</li>
+  <li>Nábory (analytik / tester, OPS &amp; AI programátor, externista na kanceláře): cíl je nábor, nebo rozhodnutí s podmínkou (Gate 3, India)?</li>
+  <li>Návrat Katky: patří do OKR (role, segment, zapracování do data)?</li>
+  <li>Chceme cíl na přetížení: nikdo dlouhodobě nad 75 %, nebo aspoň u každého přetíženého napsané řešení?</li>
+</ol></div>
+
+<div class="q"><h3><span>9</span>Firma a řízení</h3>
+<ol>
+  <li>Týdenní reporty a měsíční review nevyšly celý Q3. Proč, a co musí platit, aby v Q4 vyšly (vlastník, den, podklad z hubu)?</li>
+  <li>Delegace a rozpočty: je cílem Q4 "pilot běží" a "rozpočty segmentů schválené do data"?</li>
+  <li>Odměňování (fixní plat + bonus, struktura rolí): rozhodnutí do konce roku jako OKR s termínem?</li>
+  <li>Time tracking: cíl ≥ 95 % hodin přiřazených k tasku, aby šly počítat náklady projektů?</li>
+</ol></div>
+
+<div class="q"><h3><span>10</span>Marketing a komunita</h3>
+<ol>
+  <li>Sociální sítě a komunita: cíl s číslem, nebo vědomě mimo Q4 OKR?</li>
+  <li>Portfolio ROAS a payback: jaké tiery pro celé portfolio, ne jen SD?</li>
+</ol></div>
+
+<footer>Interní podklad pro vedení NOXGAMES · Stav cílů z hubu (Firemní cíle, H2 2026 a Q3 2026) k 24. 9. 2026 · Navazuje na porada-2026-09-24-q4-plan.html</footer>
+</div>
+</body>
+</html>

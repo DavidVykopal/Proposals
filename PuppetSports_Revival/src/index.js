@@ -23,7 +23,7 @@ const LANGS = ["en", "cs"];
 const COUNTRY_LANG = { CZ: "cs" };
 
 // Pages that exist in translation. Everything else is served as-is.
-const PAGES = new Set(["index", "soccer", "hockey"]);
+const PAGES = new Set(["index", "soccer", "hockey", "onepager"]);
 
 const COOKIE = "psr_lang";
 const YEAR = 60 * 60 * 24 * 365;

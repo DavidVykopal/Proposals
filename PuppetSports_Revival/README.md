@@ -10,6 +10,8 @@ sport associations we want as licensing / sponsorship partners for the Puppet Sp
 | `public/index.html` | **Core offer.** Franchise, whole lineup, all four bundles. | Anyone, first contact |
 | `public/soccer.html` | Soccer-only cut of the offer | Football clubs, leagues, federations, football brands |
 | `public/hockey.html` | Ice hockey-only cut of the offer | Hockey clubs, leagues, federations, winter-sport brands |
+| `public/onepager.html` | **One-page A4 brief**, built to be printed or forwarded as a PDF | A CEO handing it to peers who have never heard of us |
+| `public/emails.html` | Internal first-contact email templates. Unlisted, not protected. | Nobody outside the studio |
 
 The two sport pages are forks of the core page: same CSS system, same bundles, sport-specific
 copy, screenshots and examples. When the commercials change, change all three.
@@ -19,6 +21,8 @@ copy, screenshots and examples. When the commercials change, change all three.
 ```bash
 npm run cf:deploy     # deploy to production
 npm run cf:preview    # local wrangler dev (start it yourself, do not leave it running)
+./tools/build-pdf.sh  # render both one-pager PDFs (serves ./public, renders, kills the server)
+./tools/build-pdf.sh cs   # just one language
 ```
 
 Worker name: `puppet-sports-revival`. Account: NOXGAMES (`0b01374e269cd80008534b2efebe3c58`).
@@ -149,10 +153,50 @@ Every page carries an EN/CZ switcher in the nav and in the mobile menu.
 `COUNTRY_LANG` if relevant, and ship `<page>.<code>.html` files. Anything without a translated
 file falls back to English silently, so partial translations are safe to deploy.
 
-**Translated today:** `index.cs.html` only. `soccer` and `hockey` still serve English to Czech
-visitors. When translating them, keep the four-file parity rule in mind: index, index.cs, soccer
+**Translated today:** `index.cs.html` and `onepager.cs.html`. `soccer` and `hockey` still serve
+English to Czech visitors. When translating them, keep the four-file parity rule in mind: index, index.cs, soccer
 and hockey all duplicate the term sheet.
 
 Czech copy rules for this project: vykani throughout, no em-dashes, no emojis, decimal comma
 (4,3 / 4,8), non-breaking space in prices (20 000 $). Check for stray Cyrillic before shipping:
 `grep -P '[\x{0400}-\x{04FF}}]' public/*.cs.html` should return nothing.
+
+## The one-pager (`/onepager`)
+
+An A4 sheet built to leave the website: our CEO hands it to other CEOs in a networking group,
+who either take the deal themselves or recognise who to forward it to. That second audience is
+why the page carries a plain-language **Who this is for** row and a **Not for your company?**
+block. Nobody reading it is assumed to know what Puppet Sports is.
+
+| | |
+| --- | --- |
+| Source | `public/onepager.html`, `public/onepager.cs.html` |
+| Output | `public/PuppetSports-Partnership-EN.pdf`, `-CS.pdf` (also downloadable from the page) |
+| Live | `puppetsports.com/onepager` (Czech served automatically on a CZ connection or `?lang=cs`) |
+| Render | `./tools/build-pdf.sh` |
+
+**It is budgeted to exactly one A4 page and it is full.** Each block has a fixed vertical
+allowance; adding a sentence pushes the closing band off the sheet. The sheet is
+`height:297mm; overflow:hidden`, so an overflow is silently **clipped, not paginated** and the
+PDF still reports one page. After any edit, re-render and look at the image:
+
+```bash
+./tools/build-pdf.sh
+sips -s format png --out /tmp/check.png -Z 1500 public/PuppetSports-Partnership-EN.pdf
+```
+
+The bottom line of the sheet is the small grey source note. If you cannot see it, the page
+overflowed and something above it has to get shorter.
+
+Other things worth knowing before editing it:
+
+- **Prices must match `index.html` and `EMAIL_TEMPLATES.md`.** The Czech file converts at a flat
+  25 CZK/USD, the same rate as `index.cs.html`.
+- **The partner cap and category exclusivity are two different claims.** Four partners per game
+  is absolute; category exclusivity only starts at Bundle 02. The facts strip states the cap
+  alone and the term sheet column scopes the exclusivity. Do not merge them back together.
+- Below A4 width the sheet stops behaving like a sheet and reflows: the four-column table becomes
+  four stacked entries and type steps up to mobile sizes. The A4 composition only has to survive
+  in print, which is what the PDF is for.
+- Chrome embeds the webfonts as **Type 3** subsets. Text stays selectable and searchable and it
+  renders correctly everywhere; it is not a fault to chase.

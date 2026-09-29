@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Puppet Sports Revival | Nabídka partnerství | NOXGAMES</title>
+<link rel="icon" href="assets/noxgames-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+
+<!--
+  ONE-PAGE PARTNERSHIP BRIEF (A4, print-to-PDF).
+  Czech edition. Vykani throughout, no em-dashes, prices in CZK.
+  Two outcomes it must serve: take the deal, or recognise who to forward it to.
+
+  Numbers here must agree with index.html and EMAIL_TEMPLATES.md.
+    Puppet Sports franchise 100M+ lifetime   NOXGAMES overall 250M+
+    Puppet Soccer 10M+ / 4.3 / 467K ratings  Puppet Ice Hockey 5M+ / 4.8 / 99.9K ratings
+    Bundles 20K / 60K / 120K / 250K USD. Clean editions 150K / 300K.
+    4 partners per game ever. 25% off for the first partner in a sport.
+
+  THE PAGE IS FULL. It is budgeted to 297mm with ~10mm of slack; every block below
+  carries a fixed vertical allowance. Adding a sentence pushes the footer off the
+  sheet and Chrome renders page 2. Re-render and look at the PNG after any edit.
+
+  English original: onepager.html. Prices converted at a flat 25 CZK/USD, same as index.cs.html.
+  Render both: ./tools/build-pdf.sh
+-->
+
+<style>
+:root{
+  --paper:#ffffff;
+  --ink:#08182a;
+  --soft:#4b6379;
+  --rule:#d5e0ea;
+  --rule-strong:#9fb4c6;
+  --navy:#001a33;
+  --navy-2:#003366;
+  --gold:#ffb938;
+  --ice:#7fe3ff;
+  --sky:#a8c8e2;
+}
+
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+
+html{background:#e7ecf1;}
+
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:12px;
+  line-height:1.5;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+
+::selection{background:rgba(0,123,255,.22);}
+
+h1,h2,h3{font-family:Montserrat,Inter,sans-serif;margin:0;letter-spacing:-.005em;}
+p{margin:0;}
+b,strong{font-weight:700;}
+
+a{color:inherit;text-decoration:none;}
+a:focus-visible{outline:2px solid var(--navy-2);outline-offset:3px;border-radius:2px;}
+
+/* ---------- sheet ---------- */
+
+.sheet{
+  width:210mm;
+  height:297mm;
+  margin:26px auto;
+  background:var(--paper);
+  box-shadow:0 18px 50px rgba(8,24,42,.22);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.pad{padding:0 13mm;}
+
+/* ---------- masthead ---------- */
+
+.top{
+  flex:0 0 auto;
+  background:var(--navy);
+  color:#eaf4ff;
+  padding:6mm 13mm 4.5mm;
+  position:relative;
+}
+
+.top::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--gold) 20%,var(--navy-2) 20%,var(--navy-2) 100%);
+}
+
+.brandline{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:4.5mm;
+}
+
+.brandline .mark{display:flex;align-items:center;gap:9px;}
+.brandline img{width:21px;height:21px;object-fit:contain;}
+.brandline .name{
+  font-family:Montserrat,sans-serif;
+  font-weight:900;
+  font-size:13px;
+  letter-spacing:.2em;
+}
+.top-cta{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:1px;
+  background:var(--gold);
+  color:#2a1a00;
+  padding:6px 13px;
+  text-align:right;
+}
+.top-cta span{
+  font-size:8.4px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.top-cta b{
+  font-family:Montserrat,sans-serif;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:-.01em;
+  line-height:1.05;
+}
+
+.top-grid{
+  display:grid;
+  grid-template-columns:1.02fr 1fr;
+  gap:0 11mm;
+  align-items:start;
+}
+
+h1{
+  font-weight:900;
+  font-size:24px;
+  line-height:1.09;
+  text-transform:uppercase;
+}
+h1 .lit{color:var(--gold);}
+
+.lede{
+  font-size:11.2px;
+  line-height:1.62;
+  color:#d4e6f7;
+}
+.lede strong{color:#ffffff;font-weight:700;}
+.lede + .lede{margin-top:2.5mm;}
+
+.facts{
+  display:flex;
+  margin-top:4.5mm;
+  border-top:1px solid rgba(127,227,255,.26);
+  padding-top:3.5mm;
+}
+.facts div{
+  flex:1;
+  padding:0 12px;
+  border-right:1px solid rgba(127,227,255,.18);
+}
+.facts div:first-child{padding-left:0;}
+.facts div:last-child{border-right:0;padding-right:0;}
+.facts b{
+  display:block;
+  font-family:Montserrat,sans-serif;
+  font-weight:800;
+  font-size:14px;
+  line-height:1.1;
+  letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums;
+}
+.facts span{
+  display:block;
+  margin-top:2px;
+  font-size:8.6px;
+  line-height:1.36;
+  color:var(--sky);
+}
+
+/* ---------- board strip ---------- */
+
+.strip{
+  flex:0 0 27mm;
+  position:relative;
+  overflow:hidden;
+  background:var(--navy);
+}
+.strip img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 75%;
+  display:block;
+}
+.strip .tag{
+  position:absolute;
+  right:13mm;
+  top:0;
+  bottom:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:rgba(0,26,51,.94);
+  color:#ffffff;
+  font-size:9.8px;
+  font-weight:600;
+  line-height:1.4;
+  padding:0 13px;
+}
+.strip .tag b{color:var(--gold);}
+
+/* ---------- body ---------- */
+
+main{
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  padding-top:3.5mm;
+}
+
+h2{
+  font-weight:800;
+  font-size:10.5px;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--navy-2);
+  margin-bottom:2.2mm;
+  padding-bottom:1.4mm;
+  border-bottom:1.5px solid var(--navy-2);
+}
+
+/* ---------- deal table ---------- */
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:10.3px;
+}
+thead th{
+  text-align:left;
+  font-size:8px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--soft);
+  font-weight:700;
+  padding:0 0 1.6mm;
+  border-bottom:1px solid var(--rule-strong);
+}
+thead th.num{text-align:right;}
+tbody td{
+  padding:1.2mm 0;
+  border-bottom:1px solid var(--rule);
+  vertical-align:baseline;
+  line-height:1.45;
+}
+tbody tr:last-child td{border-bottom:0;padding-bottom:0;}
+td.tier{
+  font-family:Montserrat,sans-serif;
+  font-weight:800;
+  font-size:10.8px;
+  white-space:nowrap;
+  padding-right:8px;
+  width:29mm;
+}
+td.what{color:var(--ink);padding-right:10px;}
+td.when{
+  white-space:nowrap;
+  text-align:right;
+  font-family:Montserrat,sans-serif;
+  font-weight:800;
+  font-size:12px;
+  font-variant-numeric:tabular-nums;
+  width:24mm;
+  padding-left:8px;
+}
+
+.price-note{
+  margin-top:2mm;
+  font-size:10.5px;
+  line-height:1.42;
+  color:var(--ink);
+}
+.price-note strong{font-weight:700;}
+
+.fine{
+  font-size:9.3px;
+  line-height:1.5;
+  color:var(--soft);
+  margin-top:1.8mm;
+}
+.fine strong{color:var(--ink);font-weight:600;}
+
+.deal-chip{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  margin-top:2.2mm;
+  background:var(--gold);
+  color:#2a1a00;
+  padding:2mm 4mm;
+}
+.deal-chip .pct{
+  font-family:Montserrat,sans-serif;
+  font-weight:900;
+  font-size:18px;
+  line-height:1;
+  letter-spacing:-.02em;
+  white-space:nowrap;
+}
+.deal-chip p{font-size:9.8px;line-height:1.45;}
+.deal-chip strong{font-weight:800;}
+
+/* ---------- two columns ---------- */
+
+.cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 11mm;
+  margin-top:3.5mm;
+}
+
+.pts{margin:0;padding:0;list-style:none;}
+.pts li{
+  font-size:9.9px;
+  line-height:1.5;
+  color:var(--soft);
+  padding:0 0 2mm;
+}
+.pts li:last-child{padding-bottom:0;}
+.pts b{
+  display:block;
+  color:var(--ink);
+  font-family:Montserrat,sans-serif;
+  font-weight:700;
+  font-size:10.4px;
+  line-height:1.3;
+  margin-bottom:1px;
+}
+
+/* ---------- who ---------- */
+
+.who{margin-top:3mm;padding-bottom:1.5mm;}
+.who-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:0 5mm;
+}
+.who-grid div{
+  font-size:9.2px;
+  line-height:1.45;
+  color:var(--soft);
+  padding-left:6px;
+  border-left:1px solid var(--rule-strong);
+}
+.who-grid b{
+  display:block;
+  font-family:Montserrat,sans-serif;
+  font-weight:800;
+  font-size:10px;
+  color:var(--navy-2);
+  margin-bottom:2px;
+  line-height:1.2;
+}
+
+/* ---------- ask ---------- */
+
+.ask{
+  flex:0 0 auto;
+  background:var(--navy);
+  color:#eaf4ff;
+  padding:4mm 13mm 3mm;
+  margin-top:auto;
+  position:relative;
+}
+.ask::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--navy-2) 0%,var(--navy-2) 80%,var(--gold) 80%,var(--gold) 100%);
+}
+
+.ask-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:0 11mm;
+  align-items:start;
+}
+.ask h3{
+  font-weight:900;
+  font-size:12.5px;
+  text-transform:uppercase;
+  margin-bottom:2mm;
+  color:#ffffff;
+}
+.ask p{font-size:10.1px;line-height:1.55;color:#cfe3f5;}
+.ask p + p{margin-top:2mm;}
+.ask strong{color:#ffffff;font-weight:700;}
+.ask .pass{border-left:1px solid rgba(255,185,56,.6);padding-left:11px;}
+.ask .pass strong{color:var(--gold);}
+.ask .play{margin-top:3.4mm;font-size:9.4px;line-height:1.5;color:#9dbdd8;}
+.ask .play strong{color:#ffffff;font-weight:600;}
+
+.ask .who-line{
+  margin-top:2.6mm;
+  padding-top:2.2mm;
+  border-top:1px solid rgba(127,227,255,.22);
+  font-size:10.3px;
+  line-height:1.5;
+  color:#cfe3f5;
+}
+.ask .who-line b{color:#ffffff;font-family:Montserrat,sans-serif;font-weight:800;font-size:11.5px;}
+.ask .who-line span{color:var(--ice);}
+.ask .src{
+  margin-top:2.6mm;
+  font-size:7.4px;
+  line-height:1.45;
+  color:#7e9cb8;
+}
+
+/* ---------- screen-only chrome ---------- */
+
+.toolbar{
+  width:210mm;
+  margin:26px auto -10px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  font-size:12px;
+}
+.toolbar button,.toolbar a.tb{
+  font:inherit;
+  font-weight:600;
+  border:1px solid #bccbd8;
+  background:#fff;
+  color:#08182a;
+  padding:7px 13px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.toolbar button:hover,.toolbar a.tb:hover{border-color:var(--navy-2);}
+.toolbar .sep{flex:1;}
+
+@media print{
+  html{background:#fff;}
+  .toolbar{display:none;}
+  .sheet{margin:0;box-shadow:none;}
+  @page{size:A4;margin:0;}
+}
+
+/* Below A4 the sheet stops being a sheet: it reflows into a readable page.
+   The A4 composition only has to survive in print, which is what the PDF is. */
+@media screen and (max-width:230mm){
+  .sheet,.toolbar{width:auto;max-width:calc(100% - 20px);height:auto;overflow:visible;}
+  .sheet{margin:16px auto;}
+  .toolbar{margin:16px auto -6px;flex-wrap:wrap;}
+  .toolbar button,.toolbar a.tb{padding:12px 16px;min-height:44px;}
+
+  .pad{padding:0 18px;}
+  .top{padding:20px 18px 16px;}
+  .ask{padding:18px;}
+
+  .top-grid,.ask-grid,.cols{grid-template-columns:1fr;gap:6mm 0;}
+  h1{font-size:30px;}
+  .lede{font-size:15.5px;}
+  .price-note{font-size:15px;}
+  .top-cta{align-items:flex-start;text-align:left;padding:10px 14px;}
+  .top-cta b{font-size:15px;}
+  .top-cta span{font-size:10px;}
+
+  .facts{flex-wrap:wrap;gap:5mm 0;}
+  .facts div{flex:0 0 50%;padding:0 12px 0 0;border-right:0;}
+  .facts b{font-size:19px;}
+  .facts span{font-size:12px;}
+
+  .strip{flex:none;height:150px;}
+  .strip .tag{position:static;display:block;padding:10px 18px;background:var(--navy);font-size:13px;}
+
+  /* the four-column table becomes four stacked entries */
+  table,tbody,tr,td{display:block;width:auto;}
+  thead{display:none;}
+  tbody tr{padding:12px 0;border-bottom:1px solid var(--rule);}
+  tbody tr:last-child{border-bottom:0;}
+  tbody td{border:0;padding:0;}
+  td.tier{font-size:16px;white-space:normal;margin-bottom:3px;}
+  td.what{font-size:14.5px;padding:0 0 5px;}
+  td.when{display:block;text-align:left;width:auto;padding:0;font-size:16px;}
+
+  .fine{font-size:13px;}
+  .deal-chip{flex-direction:column;align-items:flex-start;gap:5px;padding:14px 16px;}
+  .deal-chip p{font-size:13.5px;}
+
+  .pts li{font-size:14.5px;padding-bottom:12px;}
+  .pts b{font-size:15px;}
+
+  .who-grid{grid-template-columns:1fr;gap:0;}
+  .who-grid div{
+    font-size:14.5px;
+    border-left:0;
+    border-top:1px solid var(--rule-strong);
+    padding:9px 0 0;
+    margin-bottom:9px;
+  }
+  .who-grid b{font-size:15px;}
+
+  .ask h3{font-size:18px;}
+  .ask p{font-size:14.5px;}
+  .ask .play{font-size:13.5px;}
+  .ask .who-line{font-size:14.5px;}
+  .ask .who-line b{font-size:16px;}
+  .ask .src{font-size:11.5px;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="window.print()">Vytisknout nebo uložit jako PDF</button>
+  <a class="tb" href="PuppetSports-Partnership-CS.pdf" download>Stáhnout PDF</a>
+  <span class="sep"></span>
+  <a class="tb" href="?lang=en">English version</a>
+  <a class="tb" href="/">Celá nabídka</a>
+</div>
+
+<div class="sheet">
+
+  <!-- ===== masthead ===== -->
+  <header class="top">
+    <div class="brandline">
+      <span class="mark">
+        <img src="assets/noxgames-logo.png" alt="" />
+        <span class="name">NOXGAMES</span>
+      </span>
+      <a class="top-cta" href="https://puppetsports.com">
+        <span>Celá nabídka včetně ukázek</span>
+        <b>puppetsports.com</b>
+      </a>
+    </div>
+
+    <div class="top-grid">
+      <h1>Vaše značka ve hře, kterou si stáhlo <span class="lit">100 milionů lidí</span>.</h1>
+      <div>
+        <p class="lede">
+          NOXGAMES je brněnské studio s více než 250 miliony stažení. Puppet Soccer a Puppet Ice Hockey jsou naše,
+          dnes živé na Google Play a deset let po vydání drží <strong>4,3 a 4,8 hvězdy</strong>. Kód vlastníme, takže
+          dostat dovnitř vaše jméno je <strong>reskin s pevným datem vydání</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div><b>5 dnů</b><span>Do konceptu vaší edice, zdarma</span></div>
+      <div><b>4 týdny</b><span>Do vydání, termín je ve smlouvě</span></div>
+      <div><b>4 partneři</b><span>Na hru, navždy. Ne za sezonu</span></div>
+      <div><b>100M+</b><span>Stažení série Puppet Sports</span></div>
+    </div>
+  </header>
+
+  <!-- ===== the boards ===== -->
+  <div class="strip">
+    <img src="assets/hockey-1.jpg" alt="Mantinely ve hře Puppet Ice Hockey, dnes s logem NOXGAMES" />
+    <span class="tag">Dnes je na mantinelech NOXGAMES.<br /><b>Ve vaší edici tam bude vaše jméno.</b></span>
+  </div>
+
+  <main class="pad">
+
+    <!-- ===== deal ===== -->
+    <section>
+      <h2>Nabídka</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Balíček</th>
+            <th>Co dostanete</th>
+            <th class="num">Do vydání</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tier">Sponzorský drop</td>
+            <td class="what">Vaše logo v rotaci mantinelů, vaše barvy na míči nebo puku.</td>
+            <td class="when">4 týdny</td>
+          </tr>
+          <tr>
+            <td class="tier">Značkový tým</td>
+            <td class="what">Hratelný tým ve vašem dresu a znaku, váš stadion jako aréna.</td>
+            <td class="when">8 týdnů</td>
+          </tr>
+          <tr>
+            <td class="tier">Licencovaná edice</td>
+            <td class="what">Vlastní aplikace v obou obchodech, vaše liga uvnitř, rok provozu.</td>
+            <td class="when">12 týdnů</td>
+          </tr>
+          <tr>
+            <td class="tier">Franšízový partner</td>
+            <td class="what">Dva sporty, turnajová vrstva a reálné odměny, dva roky provozu.</td>
+            <td class="when">20 týdnů</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="price-note">
+        <strong>Cenu stavíme podle toho, co skutečně potřebujete, a jsme otevření domluvě.</strong>
+        Řekněte nám sport a rozpočet, se kterým pracujete, a nabídku postavíme kolem toho, ne naopak.
+      </p>
+
+      <p class="fine">
+        Jedna cena za balíček, bez DPH, řekneme ji na hovoru. <strong>Polovina při podpisu, druhá až ve chvíli, kdy
+        si zahrajete poloviční build a odsouhlasíte ho.</strong> Od Licencované edice výš hra buď nechá reklamu i
+        nákupy a vyplácí vám <strong>polovinu čistého výnosu</strong> čtvrtletně, nebo vyjde <strong>čistá, bez reklam
+        a bez nákupů</strong>. <strong>Nebo se o ni rozdělte:</strong> přiveďte do stejné edice další firmu, klub nebo
+        ligu a cena se mezi vás dělí.
+      </p>
+
+      <div class="deal-chip">
+        <span class="pct">&minus;25%</span>
+        <p><strong>První partner v daném sportu má 25 % dolů, jednou,</strong> a mizí to ve chvíli, kdy ten sport
+        podepíše někdo před vámi. Fotbal a hokej jsou hotové. Basketbal, házená, volejbal, futsal a florbal běží na
+        stejném jádru a nikde na světě nemají vlastní hru.</p>
+      </div>
+    </section>
+
+    <!-- ===== columns ===== -->
+    <div class="cols">
+      <section>
+        <h2>Proč je místa málo</h2>
+        <ul class="pts">
+          <li><b>Čtyři partneři na hru. Navždy.</b>Ne čtyři za sezonu. Strop je ve smlouvě a platí po celou životnost titulu.</li>
+          <li><b>Exkluzivita v kategorii</b>Od Značkového týmu výš se ve hře po celou dobu neobjeví žádný váš konkurent.</li>
+          <li><b>Inventář je váš k dalšímu prodeji</b>Mantinely, eventy a odměny ve hře prodáte vlastním sponzorům a necháte si vše.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Co je ve smlouvě</h2>
+        <ul class="pts">
+          <li><b>Druhou polovinu platíte až po schválení</b>Zahrajete si poloviční build a odsouhlasíte ho. Pokud to není, na čem jsme se domluvili, druhá polovina není splatná.</li>
+          <li><b>Termín vydání je krytý pokutou</b>Pevně při podpisu. Za každý týden skluzu na naší straně dostáváte slevu z ceny.</li>
+          <li><b>Jste krytí, i kdybychom skončili</b>Pokud provoz ukončíme uvnitř termínu, build i všechna aktiva z vašich podkladů přecházejí na vás.</li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- ===== who ===== -->
+    <section class="who">
+      <h2>Pro koho to je: pro vás, nebo pro někoho, koho znáte</h2>
+      <div class="who-grid">
+        <div><b>Značka</b>Rozpočet na sponzoring. Čtyři minuty pozornosti, ne vteřina.</div>
+        <div><b>Výrobce vybavení</b>Vaše hole, kopačky nebo dresy jsou tím, čím hráč skóruje.</div>
+        <div><b>Klub</b>Znak na dresu i na poháru a inventář, který prodáte sami.</div>
+        <div><b>Liga</b>Vaše tabulka a rozlosování jsou už teď struktura, na které hra běží.</div>
+        <div><b>Svaz</b>Rozpočet na mládež, ne na marketing. Hraje se offline, bez reklam.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== ask ===== -->
+  <footer class="ask">
+    <div class="ask-grid">
+      <div>
+        <h3>Vlastní edici uvidíte první, do pěti dnů</h3>
+        <p>Pošlete nám sport a brandový balíček. Do pěti pracovních dnů máte <strong>koncept art vaší edice, plán,
+        jak bychom ji postavili, a nabídku s cenou a termínem</strong>. Bez poplatku a bez závazku. Nebo si vezměte
+        hovor: třicet minut a odcházíte se sportem, balíčkem a termínem.</p>
+        <p class="who-line">
+          <b>David Vykopal</b>, produkční ředitel, NOXGAMES<br />
+          <span>studio@noxgames.com</span> &nbsp;&middot;&nbsp; <span>puppetsports.com</span>
+        </p>
+      </div>
+      <div>
+        <div class="pass">
+          <p><strong>Není to pro vaši firmu?</strong></p>
+          <p>Pak to skoro jistě je pro někoho, koho už znáte. Přepošlete tuto stránku, nebo nám pošlete jméno a my se
+          ozveme sami.</p>
+        </div>
+        <p class="play">Nejdřív si to zahrajte: na Google Play najdete <strong>Puppet Soccer</strong> i
+        <strong>Puppet Ice Hockey</strong>. Podívejte se na mantinely.</p>
+      </div>
+    </div>
+
+    <p class="src">
+      Puppet Soccer 10M+ instalací, 4,3 hvězdy. Puppet Ice Hockey 5M+ instalací, 4,8 hvězdy. Google Play, 23. 8. 2026.
+      NOXGAMES Brno, 9/2026. Důvěrné.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
