@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Výdaje a rozpočet 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f7f4ee;
+    --ink: #1b1a17;
+    --ink-2: #4a4740;
+    --ink-3: #7a766c;
+    --rule: #d9d3c6;
+    --accent: #0f5a4a;
+    --accent-soft: #d6e6df;
+    --risk: #9b4a2c;
+    --risk-soft: #f0ddd3;
+    --serif: 'Newsreader', Georgia, serif;
+    --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #cfcac0; font-family: var(--sans); color: var(--ink); font-size: 10.5pt; line-height: 1.5; font-variant-numeric: tabular-nums lining-nums; }
+  ::selection { background: var(--accent-soft); }
+
+  .page {
+    width: 210mm; height: 297mm; margin: 0 auto 8mm; background: var(--paper);
+    padding: 20mm 20mm 16mm; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; page-break-after: always; break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; margin-bottom: 0; }
+  @media print { body { background: var(--paper); } .page { margin: 0; } }
+
+  .foot {
+    margin-top: auto; padding-top: 5mm; border-top: 0.5pt solid var(--rule);
+    display: flex; justify-content: space-between; font-size: 8pt; color: var(--ink-3); letter-spacing: 0.02em;
+  }
+  .brand { font-weight: 700; letter-spacing: 0.14em; color: var(--ink-2); }
+
+  h1 { font-family: var(--serif); font-weight: 500; font-size: 40pt; line-height: 1.02; letter-spacing: -0.02em; text-wrap: balance; }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: 22pt; line-height: 1.12; letter-spacing: -0.01em; margin-bottom: 5mm; text-wrap: balance; }
+  h3 { font-size: 10.5pt; font-weight: 700; margin-bottom: 1.5mm; }
+  p { max-width: 68ch; }
+  p + p { margin-top: 2.5mm; }
+  .lead { font-family: var(--serif); font-size: 14pt; line-height: 1.4; color: var(--ink-2); max-width: 34em; }
+  .muted { color: var(--ink-3); }
+  strong { font-weight: 700; }
+  .nb { white-space: nowrap; }
+  section + section { margin-top: 9mm; }
+
+  /* cover */
+  .cover-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 9pt; color: var(--ink-3); }
+  .cover-title { margin-top: 30mm; }
+  .cover-title .lead { margin-top: 7mm; }
+  .ask { margin-top: 16mm; border-top: 1.5pt solid var(--ink); }
+  .ask-row { display: grid; grid-template-columns: 50mm 1fr; gap: 6mm; padding: 4.2mm 0; border-bottom: 0.5pt solid var(--rule); align-items: baseline; }
+  .ask-row .v { font-family: var(--serif); font-size: 21pt; line-height: 1; letter-spacing: -0.01em; }
+  .ask-row .v small { font-size: 11pt; color: var(--ink-3); letter-spacing: 0; }
+  .ask-row .d { color: var(--ink-2); }
+  .ask-row.bonus .v { color: var(--accent); }
+  .ask-row.cut .v { color: var(--risk); }
+  .principle { margin-top: 12mm; font-family: var(--serif); font-size: 16pt; line-height: 1.3; max-width: 30em; }
+  .principle em { font-style: italic; color: var(--accent); }
+
+  /* tables */
+  table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+  th { text-align: left; font-weight: 600; font-size: 8.5pt; color: var(--ink-3); letter-spacing: 0.03em; padding: 0 3mm 2mm 0; border-bottom: 1pt solid var(--ink); }
+  td { padding: 2.4mm 3mm 2.4mm 0; border-bottom: 0.5pt solid var(--rule); vertical-align: top; }
+  td.n, th.n { text-align: right; padding-right: 0; padding-left: 3mm; }
+  tr.total td { font-weight: 700; border-bottom: 1pt solid var(--ink); }
+  .hl { color: var(--accent); font-weight: 700; }
+  .rk { color: var(--risk); font-weight: 700; }
+
+  .callout { margin-top: 6mm; display: grid; grid-template-columns: auto 1fr; gap: 6mm; align-items: center; padding: 5mm 6mm; background: var(--accent-soft); border-radius: 2mm; }
+  .callout .big { font-family: var(--serif); font-size: 34pt; line-height: 1; color: var(--accent); letter-spacing: -0.02em; }
+  .callout p { color: #1f3d35; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7mm; margin-top: 2mm; }
+  .cols > div { border-top: 1pt solid var(--ink); padding-top: 3mm; }
+  .cols p { font-size: 9.5pt; color: var(--ink-2); }
+
+  /* variant header */
+  .variant { display: flex; align-items: baseline; gap: 4mm; margin-bottom: 2mm; font-size: 9pt; font-weight: 600; color: var(--ink-3); letter-spacing: 0.03em; }
+  .tag { display: inline-block; font-size: 8pt; font-weight: 700; padding: 0.6mm 2.4mm; border-radius: 1mm; letter-spacing: 0.04em; }
+  .tag.pref { background: var(--accent); color: #fff; }
+  .tag.alt { background: var(--ink); color: var(--paper); }
+
+  .band { margin: 4mm 0 2mm; }
+  .band svg { width: 100%; height: auto; display: block; }
+
+  .kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-top: 3mm; }
+  .kpi > div { padding-top: 2.5mm; border-top: 2pt solid var(--accent); }
+  .kpi .amt { font-family: var(--serif); font-size: 17pt; line-height: 1.1; color: var(--accent); }
+  .kpi .lbl { font-weight: 700; font-size: 9.5pt; margin-top: 1mm; }
+  .kpi p { font-size: 8.8pt; color: var(--ink-2); margin-top: 1mm; line-height: 1.4; }
+
+  .malus { display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 3mm; border-top: 1pt solid var(--ink); }
+  .malus > div { padding: 3mm 4mm 3mm 0; }
+  .malus > div + div { padding-left: 4mm; border-left: 0.5pt solid var(--rule); }
+  .malus .cond { font-size: 8.5pt; color: var(--ink-3); font-weight: 600; letter-spacing: 0.02em; }
+  .malus .res { font-family: var(--serif); font-size: 17pt; margin-top: 1mm; line-height: 1.1; }
+  .malus .res.bad { color: var(--risk); }
+  .malus .res.good { color: var(--accent); }
+  .malus p { font-size: 8.8pt; color: var(--ink-2); margin-top: 1mm; }
+
+  ul.plain { list-style: none; }
+  ul.plain li { padding: 2mm 0 2mm 5mm; border-bottom: 0.5pt solid var(--rule); position: relative; }
+  ul.plain li::before { content: ""; position: absolute; left: 0; top: 4.1mm; width: 2mm; height: 0.8pt; background: var(--ink-2); }
+
+  .final { margin-top: 7mm; padding: 7mm 8mm; background: var(--ink); color: var(--paper); border-radius: 2mm; }
+  .final h2 { color: var(--paper); margin-bottom: 3mm; font-size: 19pt; }
+  .final p { color: #d8d3c7; max-width: none; }
+  .final strong { color: #fff; }
+
+  .closing { margin-top: 8mm; font-family: var(--serif); font-size: 17pt; line-height: 1.3; max-width: 30em; }
+  .sign { margin-top: 5mm; font-size: 9.5pt; color: var(--ink-2); }
+
+  .conf { font-weight: 700; color: var(--risk); letter-spacing: 0.08em; }
+  .stats { margin-top: 14mm; border-top: 1.5pt solid var(--ink); }
+  table.tight td { padding: 1.7mm 2.5mm 1.7mm 0; }
+  table.tight { font-size: 9.3pt; }
+  td.sub { padding-left: 5mm; color: var(--ink-2); }
+  .pos { color: var(--risk); }
+  .neg { color: var(--accent); }
+  .note { font-size: 8.8pt; color: var(--ink-3); margin-top: 3mm; max-width: none; }
+  ol.q { margin-top: 2mm; padding-left: 0; list-style: none; counter-reset: q; }
+  ol.q li { counter-increment: q; padding: 2.2mm 0 2.2mm 8mm; border-bottom: 0.5pt solid var(--rule); position: relative; }
+  ol.q li::before { content: counter(q); position: absolute; left: 0; top: 2.2mm; font-family: var(--serif); font-size: 12pt; color: var(--accent); }
+  .find td:first-child { font-family: var(--serif); font-size: 13pt; color: var(--accent); width: 7mm; }
+  .p4 section + section { margin-top: 6mm; }
+  .p4 table.tight td { padding: 1.3mm 2.5mm 1.3mm 0; }
+  .p4 ol.q li { padding: 1.5mm 0 1.5mm 8mm; }
+  .p4 ol.q li::before { top: 1.3mm; }
+  .p4 h2 { margin-bottom: 3mm; }
+</style>
+</head>
+<body>
+<!-- 1 -->
+<div class="page">
+  <div class="cover-top"><span class="brand">NOXGAMES</span><span><span class="conf">DŮVĚRNÉ</span> · Interní podklad · září 2026</span></div>
+
+  <div class="cover-title">
+    <h1>Výdaje, odměňování a&nbsp;rozpočet 2027</h1>
+    <p class="lead">Rozbor posledních dvanácti měsíců z&nbsp;bankovních dat a finančního warehouse. Kde šetřit, kolik by stálo sjednocení odměn podle rolí a jak vychází příští rok.</p>
+  </div>
+
+  <div class="stats ask">
+    <div class="ask-row"><div class="v">6,6 <small>mil. Kč</small></div><div class="d"><strong>Provozní zisk 2027 při dnešním modelu.</strong> Tržby na úrovni roku 2026, náklady podle posledních 12 měsíců.</div></div>
+    <div class="ask-row cut"><div class="v">+3,1 <small>mil. Kč</small></div><div class="d"><strong>Ročně navíc jen na fixech</strong>, pokud by se všechny role srovnaly na mřížku s ředitelem za 140 tis. S&nbsp;bonusy +4,5 mil.</div></div>
+    <div class="ask-row cut"><div class="v">2/3 <small>zisku</small></div><div class="d"><strong>Tolik provozního zisku by plná mřížka spotřebovala.</strong> Bez růstu nebo úspor ji firma neunese.</div></div>
+    <div class="ask-row bonus"><div class="v">4,5 <small>mil. Kč</small></div><div class="d"><strong>Ročně stojí kancelář a coworking.</strong> Největší prostor k úspoře mimo lidi a UA.</div></div>
+  </div>
+
+  <p class="principle">Sjednotit odměny podle rolí dává smysl. Finančně ale <em>jen s&nbsp;úsporami nebo růstem</em>, ne samo o sobě.</p>
+
+  <div class="foot"><span>Připravil David Vykopal pro Martina Břenka</span><span>1 / 4</span></div>
+</div>
+
+<!-- 2 -->
+<div class="page">
+  <section>
+    <h2>Co ukazují data</h2>
+    <p><strong>Pokles tržeb v tabu Rok není skutečný.</strong> Příjem z reklamních sítí v bance klesá z 5,2 mil. v březnu na 1,8 mil. v srpnu. Sítě ale vyplácejí se zpožděním jednoho až dvou měsíců. Finanční warehouse (BigQuery) ukazuje reklamní tržby stabilně na 220 až 250 tis. USD měsíčně a marketingový zisk na 110 až 140 tis. USD. Poslední dva měsíce v tabu Rok proto nelze číst jako trend.</p>
+  </section>
+
+  <section>
+    <h3>Kde šetřit a co uklidit</h3>
+    <table class="find" style="margin-top:3mm">
+      <thead><tr><th></th><th>Zjištění</th><th class="n">Ročně</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Fieldspace s.r.o.</strong> je největší náklad po lidech a UA. Je zařazený jako Kancelář, ale text faktur uvádí „strategické a technické poradenství“. K&nbsp;tomu každý kontraktor přefakturovává zhruba 7,5 tis. za coworking, takže kancelář platíme fakticky dvakrát. Vychází to asi na 23 tis. na člověka měsíčně.</td><td class="n nb">3,3 + 1,2 mil.</td></tr>
+        <tr><td>2</td><td><strong>Skutečné provozní náklady leží pod čarou</strong> v&nbsp;kategorii Mimo provoz: ASO, monetizace, březnová UA kampaň, Langino a dva externí konzultanti. Provozní výsledek pak vypadá lépe, než ve skutečnosti je.</td><td class="n nb">1,5 mil.</td></tr>
+        <tr><td>3</td><td><strong>Šest poplatků za ochranné známky je zařazeno ve Mzdách.</strong></td><td class="n nb">0,5 mil.</td></tr>
+        <tr><td>4</td><td><strong>Asi 24 % odpracovaných hodin nemá úkol</strong> (568 z 2&nbsp;346 hodin v srpnu). Zhruba 230 tis. měsíčně práce tak nejde přiřadit k projektu.</td><td class="n nb">2,8 mil.</td></tr>
+        <tr><td>5</td><td><strong>AI nástroje platíme na pěti místech</strong> (Cursor, OpenAI, Claude, Anthropic, Higgsfield). Unity už kleslo z přibližně 300 tis. na 21 tis.</td><td class="n nb">0,35 mil.</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Body 2 a 3 nejsou úspora, ale oprava zařazení. Bez ní je výsledovka zkreslená. U bodu 1 je potřeba nejdřív vyjasnit, co Fieldspace přesně fakturuje.</p>
+  </section>
+
+  <section>
+    <h3>Jak data sedí</h3>
+    <p>Náklady na kontraktory v bance (přibližně 1,12 mil. Kč měsíčně) odpovídají hodinám krát sazbám v hubu, coworkingu a fakturám foundera. Hub je proto spolehlivý základ pro modelování odměn. Faktury chodí po kvartálech nebo dvou měsících, a proto se měsíční náklad počítá z&nbsp;odpracovaných hodin, ne z faktur.</p>
+  </section>
+
+  <div class="foot"><span class="brand">NOXGAMES</span><span>2 / 4</span></div>
+</div>
+
+<!-- 3 -->
+<div class="page">
+  <section>
+    <h2>Fixní odměna podle rolí</h2>
+    <p>Model pro 13 lidí mimo foundery. Dnes je to dnešní sazba krát průměr hodin za 12 měsíců: <strong>832 tis. Kč měsíčně, 10,0 mil. ročně</strong>. Struktura podle návrhu Model odměňování: fix za roli, bonus za KPI a srážka ve výši poloviny bonusu. Foundery a coworking model nemění.</p>
+    <table style="margin-top:5mm">
+      <thead><tr><th>Scénář</th><th class="n">Fixy měsíčně</th><th class="n">Δ fixy / rok</th><th class="n">Δ s bonusem při 50 % KPI</th></tr></thead>
+      <tbody>
+        <tr><td><strong>S1</strong> fix = dnešní sazba × 167 h</td><td class="n">822 tis.</td><td class="n neg">−0,1 mil.</td><td class="n muted">bez bonusu</td></tr>
+        <tr><td><strong>A</strong> ředitel 140 / senior 85 / medior 62 / junior 42</td><td class="n">1&nbsp;089 tis.</td><td class="n pos">+3,1 mil.</td><td class="n pos"><strong>+4,5 mil.</strong></td></tr>
+        <tr><td><strong>B</strong> 120 / 78 / 56 / 38, vyšší bonus</td><td class="n">968 tis.</td><td class="n pos">+1,6 mil.</td><td class="n pos">+4,0 mil.</td></tr>
+        <tr><td><strong>C</strong> produkční ředitel 140, ostatní exekutiva 110 / 80 / 58 / 40</td><td class="n">988 tis.</td><td class="n pos">+1,9 mil.</td><td class="n pos">+2,9 mil.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>Dopad na jednotlivce (tis. Kč měsíčně)</h3>
+    <table class="tight" style="margin-top:2mm">
+      <thead><tr><th>Jméno</th><th>Role (předpoklad)</th><th class="n">Dnes</th><th class="n">S1</th><th class="n">A</th><th class="n">Δ A</th><th class="n">B</th><th class="n">Δ B</th></tr></thead>
+      <tbody>
+        <tr><td>David Vykopal</td><td>ředitel</td><td class="n">107</td><td class="n">83</td><td class="n">140</td><td class="n pos">+33</td><td class="n">120</td><td class="n pos">+13</td></tr>
+        <tr><td>Jakub Burian</td><td>ředitel</td><td class="n">78</td><td class="n">71</td><td class="n">140</td><td class="n pos">+62</td><td class="n">120</td><td class="n pos">+42</td></tr>
+        <tr><td>Martin Břenek</td><td>ředitel</td><td class="n">75</td><td class="n">79</td><td class="n">140</td><td class="n pos">+65</td><td class="n">120</td><td class="n pos">+45</td></tr>
+        <tr><td>Jan Ševčík</td><td>senior</td><td class="n">79</td><td class="n">91</td><td class="n">85</td><td class="n pos">+6</td><td class="n">78</td><td class="n neg">−1</td></tr>
+        <tr><td>Richard Horák</td><td>senior</td><td class="n">63</td><td class="n">66</td><td class="n">85</td><td class="n pos">+22</td><td class="n">78</td><td class="n pos">+15</td></tr>
+        <tr><td>Milan Vavro</td><td>senior</td><td class="n">70</td><td class="n">72</td><td class="n">85</td><td class="n pos">+15</td><td class="n">78</td><td class="n pos">+8</td></tr>
+        <tr><td>David Bém</td><td>medior</td><td class="n">69</td><td class="n">67</td><td class="n">62</td><td class="n neg">−7</td><td class="n">56</td><td class="n neg">−13</td></tr>
+        <tr><td>Martin Vajsar</td><td>medior</td><td class="n">63</td><td class="n">49</td><td class="n">62</td><td class="n neg">−1</td><td class="n">56</td><td class="n neg">−7</td></tr>
+        <tr><td>Ondřej Kopidol</td><td>medior</td><td class="n">57</td><td class="n">63</td><td class="n">62</td><td class="n pos">+5</td><td class="n">56</td><td class="n neg">−1</td></tr>
+        <tr><td>Karel Kunc</td><td>medior</td><td class="n">48</td><td class="n">51</td><td class="n">62</td><td class="n pos">+14</td><td class="n">56</td><td class="n pos">+8</td></tr>
+        <tr><td>Jakub Hutěčka</td><td>medior</td><td class="n">44</td><td class="n">47</td><td class="n">62</td><td class="n pos">+18</td><td class="n">56</td><td class="n pos">+12</td></tr>
+        <tr><td>Rudolf Dyr</td><td>medior</td><td class="n">43</td><td class="n">46</td><td class="n">62</td><td class="n pos">+19</td><td class="n">56</td><td class="n pos">+13</td></tr>
+        <tr><td>David Calta</td><td>junior</td><td class="n">36</td><td class="n">38</td><td class="n">42</td><td class="n pos">+6</td><td class="n">38</td><td class="n pos">+2</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Role jsou zatím odhad podle hubu a sazeb, finální přiřazení je potřeba potvrdit. Ve scénáři A tvoří víc než polovinu navýšení posun dvou členů exekutivy ze 75 až 78 tis. na 140 tis. (+1,5 mil. ročně). S1 nic nestojí, ale lidé s&nbsp;dlouhodobě vysokými hodinami (kolem 216 h měsíčně) by na něm ztratili.</p>
+  </section>
+
+  <div class="foot"><span class="brand">NOXGAMES</span><span>3 / 4</span></div>
+</div>
+
+<!-- 4 -->
+<div class="page p4">
+  <section>
+    <h2>Rozpočet 2027</h2>
+    <p>Tržby na úrovni roku 2026 (BigQuery leden až září, kurz 21 Kč/USD), náklady podle posledních 12 měsíců v&nbsp;bance. Částky v mil. Kč za rok.</p>
+    <table class="tight" style="margin-top:4mm">
+      <thead><tr><th>Položka</th><th class="n">mil. Kč</th></tr></thead>
+      <tbody>
+        <tr><td>Tržby her</td><td class="n">70,6</td></tr>
+        <tr><td>UA kampaně</td><td class="n">−41,4</td></tr>
+        <tr class="total"><td>Marketingový zisk</td><td class="n">29,3</td></tr>
+        <tr><td class="sub">Lidé (kontraktoři, foundeři, coworking, mzdy)</td><td class="n">−15,1</td></tr>
+        <tr><td class="sub">Kancelář a Fieldspace</td><td class="n">−3,5</td></tr>
+        <tr><td class="sub">Software a nástroje</td><td class="n">−1,4</td></tr>
+        <tr><td class="sub">Právní, účetní, ochranné známky</td><td class="n">−0,9</td></tr>
+        <tr><td class="sub">Tým a vzdělávání</td><td class="n">−0,3</td></tr>
+        <tr><td class="sub">Provozní náklady přesunuté zpod čáry</td><td class="n">−1,5</td></tr>
+        <tr class="total"><td>Provozní zisk</td><td class="n hl">6,6</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>Provozní zisk podle modelu odměňování</h3>
+    <table class="tight" style="margin-top:2mm">
+      <thead><tr><th>Model</th><th class="n">Provozní zisk</th><th class="n">Podíly na zisku</th><th class="n">Před zdaněním</th></tr></thead>
+      <tbody>
+        <tr><td>Hodinově, jako dnes</td><td class="n">6,6</td><td class="n">1,3</td><td class="n hl">5,2</td></tr>
+        <tr><td>S1 fix = sazba × 167 h</td><td class="n">6,7</td><td class="n">1,3</td><td class="n">5,3</td></tr>
+        <tr><td>C, očekávaný bonus</td><td class="n">3,6</td><td class="n">0,7</td><td class="n">2,9</td></tr>
+        <tr><td>B, očekávaný bonus</td><td class="n">2,6</td><td class="n">0,5</td><td class="n">2,1</td></tr>
+        <tr><td>A, očekávaný bonus</td><td class="n">2,1</td><td class="n">0,4</td><td class="n rk">1,7</td></tr>
+        <tr><td>A, všechna KPI splněna</td><td class="n">0,7</td><td class="n">0,1</td><td class="n rk">0,6</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Podíly na zisku počítané jako 4 × 5 % provozního zisku (předpoklad podle výplat 2026). Příjem z vývoje na zakázku (2,8 mil. za červen až srpen) v rozpočtu není, bereme ho jako upside.</p>
+  </section>
+
+  <section>
+    <h3>K rozhodnutí</h3>
+    <ol class="q">
+      <li>Přiřazení rolí jednotlivým lidem a výše fixu pro každou roli.</li>
+      <li>Zda foundeři vstupují do mřížky, nebo zůstávají mimo ni.</li>
+      <li>Co fix kryje: úvazek 1,0 (167 h), nebo dnešní skutečné hodiny.</li>
+      <li>Co fakturuje Fieldspace a proč se vedle toho přefakturovává coworking.</li>
+      <li>Zda se vývoj na zakázku opakuje i v roce 2027.</li>
+    </ol>
+  </section>
+
+  <div class="foot"><span class="brand">NOXGAMES</span><span>4 / 4</span></div>
+</div>
+
+</body>
+</html>
