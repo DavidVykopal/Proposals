@@ -135,7 +135,7 @@ h2 { font-weight: 900; font-size: 84px; line-height: 1.02; max-width: 1400px; }
 .area .dots i.y { background: var(--ok); border-color: var(--ok); }
 .area b { font: 800 28px Montserrat, sans-serif; text-align: right; font-variant-numeric: tabular-nums; }
 
-.fails { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 56px; }
+.fails { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 56px; }
 .fails div { padding: 30px 34px; border-radius: 18px; background: var(--panel); border: 1px solid var(--line); }
 .fails h3 { font: 800 34px Montserrat, sans-serif; margin: 0 0 10px; }
 .fails p { font-size: 25px; line-height: 1.45; color: var(--muted); margin: 0; }
@@ -194,7 +194,7 @@ h2 { font-weight: 900; font-size: 84px; line-height: 1.02; max-width: 1400px; }
 .air-list b { display: block; font: 900 44px Montserrat, sans-serif; }
 .air-list span { font-size: 22px; color: var(--muted); }
 
-.okrs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+.okrs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; }
 .okrs div { padding: 28px 30px 26px; border-radius: 18px; background: var(--panel); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
 .okrs .id { font: 900 26px Montserrat, sans-serif; color: var(--cyan); }
 .okrs h3 { font: 800 31px/1.18 Montserrat, sans-serif; margin: 0; }
@@ -212,6 +212,18 @@ h2 { font-weight: 900; font-size: 84px; line-height: 1.02; max-width: 1400px; }
 .not > span:first-child { font-weight: 700; color: var(--red); margin-right: 6px; }
 .not .pill { text-decoration: line-through; text-decoration-color: rgba(247, 93, 93, 0.7); text-decoration-thickness: 2px; color: var(--muted); }
 
+.pie-wrap { display: flex; align-items: center; gap: 56px; }
+.pie { flex: none; width: 400px; height: 400px; border-radius: 50%; background: conic-gradient(var(--cyan) 0 28.06%, var(--accent) 0 64.51%, #8c6dff 0 85.95%, rgba(255,255,255,0.18) 0); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.pie-legend { display: grid; gap: 20px; font-size: 26px; color: var(--muted); }
+.pie-legend div { display: grid; grid-template-columns: 22px 1fr; column-gap: 16px; align-items: center; }
+.pie-legend i { width: 22px; height: 22px; border-radius: 6px; background: var(--k); }
+.pie-legend b { display: block; font: 800 34px Montserrat, sans-serif; color: #fff; font-variant-numeric: tabular-nums; }
+.okrs div { position: relative; }
+.okrs h3 { padding-right: 84px; min-height: 2.36em; }
+.okrs svg { position: absolute; top: 26px; right: 26px; width: 68px; height: 68px; fill: none; stroke: var(--cyan); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+.track .air.sure { background: color-mix(in srgb, var(--k) 55%, transparent); }
+.air-list div.sure { border-style: solid; border-top-style: solid; }
+.air-list em { display: block; font: 700 16px Inter, sans-serif; font-style: normal; text-transform: uppercase; letter-spacing: 0.08em; color: var(--k); margin-bottom: 6px; }
 .photos { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 318px; gap: 14px; margin-top: 40px; }
 .photos img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; grid-column: span var(--w, 4); border: 1px solid var(--line); }
 .video { position: relative; display: block; margin-top: 40px; height: 650px; border-radius: 22px; overflow: hidden; border: 1px solid rgba(0, 210, 255, 0.45); text-decoration: none; color: #fff; }
@@ -316,15 +328,15 @@ aside.notes { display: none; }
   <aside class="notes">Teambuildingy za Q3: motokáry, minigolf, grilování na balkoně. Na dalším slidu video z motokár.</aside>
 </section>
 
-<!-- 5: po dokončení videa doplnit YouTube odkaz do href níže a upravit popisek -->
+<!-- 5 -->
 <section class="slide" data-part="A" data-who="jirka">
   <h2>Motokáry: video</h2>
-  <a class="video" id="karts-video" href="#" target="_blank" rel="noopener">
+  <a class="video" id="karts-video" href="https://youtu.be/zl5TSj_P3sE" target="_blank" rel="noopener">
     <img src="assets/events/karts-track.jpg" alt="Motokáry na trati">
     <span class="play" aria-hidden="true"></span>
-    <span class="cap">Video z motokár<small>Stříhá se, odkaz na YouTube doplníme</small></span>
+    <span class="cap">Video z motokár<small>Přehrát na YouTube</small></span>
   </a>
-  <aside class="notes">Až bude video hotové, doplnit YouTube odkaz (href u odkazu karts-video) a pustit ho tady.</aside>
+  <aside class="notes">Kliknutím na obrázek se video otevře na YouTube v novém panelu: https://youtu.be/zl5TSj_P3sE</aside>
 </section>
 
 <!-- 6 -->
@@ -332,38 +344,39 @@ aside.notes { display: none; }
   <h2>Q3 v událostech</h2>
   <div class="tl">
     <div class="m"><h3>Červenec</h3><ul>
-      <li><b>Red Command</b>: <b>$40k</b> za měsíc (náš podíl)</li>
       <li><b>Sector Defense</b>: preprodukce, guidebook, výběr tématik</li>
       <li><b>CPI testy</b> tématik: 4 862 instalací, vítěz V3_rpg</li>
     </ul></div>
     <div class="m"><h3>Srpen</h3><ul>
-      <li><b>Red Command</b>: <b>$47k</b> za měsíc</li>
       <li><b>Start vývoje</b> Sector Defense</li>
-      <li><b>Delegace 1 a 2</b>: segmenty, role, odpovědnosti</li>
     </ul></div>
     <div class="m"><h3>Září</h3><ul>
-      <li class="hot"><b>Red Command</b>: rekord <b>$50k</b>, vývoj splacen, iOS i Android v plusu</li>
       <li class="hot"><b>RON_India</b>: MVP doručeno, <b>$40k</b></li>
       <li><b>Retro Q3</b>: Mecha Fortress do údržby</li>
       <li class="hot"><b>30. 9. release</b> Sector Defense</li>
     </ul></div>
   </div>
   <div class="band"><span>Během Q3</span><span class="pill">Red Command na iOS</span><span class="pill">První payout za Red Command</span><span class="pill">NoxHub používá všech 16 lidí</span><span class="pill">Stěhování kanceláří</span></div>
-  <aside class="notes">Projít rychle po měsících. Red Command je v každém měsíci na prvním řádku, ať je vidět trend, detail je na vlastním slidu. Důraz: Red Command se stal stabilním zdrojem, Sector Defense prošel celou preprodukcí a vývojem za jeden kvartál, RON_India je nový typ příjmu. Retro 21. 9. poslalo MF do údržby.</aside>
+  <aside class="notes">Projít rychle po měsících, jen události. Peníze z Red Command jsou až na vlastním slidu. Důraz: Red Command se stal stabilním zdrojem, Sector Defense prošel celou preprodukcí a vývojem za jeden kvartál, RON_India je nový typ příjmu. Retro 21. 9. poslalo MF do údržby.</aside>
 </section>
 
 <!-- 7 -->
 <section class="slide" data-part="B" data-who="martin">
-  <h2>Revenue Q3: tři čtvrtiny z nového portfolia</h2>
-  <div class="split">
-    <div><div class="num hero-n">$742k</div><p class="note">Revenue studia 1. 7. až 20. 9. (finanční sklad)</p></div>
-    <div>
-      <div class="hbar"><i class="grow-x" style="width:75%;background:linear-gradient(90deg,var(--accent),var(--cyan))"></i><i class="grow-x" style="--i:2;width:25%;background:rgba(255,255,255,0.14)"></i></div>
-      <div class="legend"><span><b>75 %</b> Red Command, Mecha Fortress, Hexapolis</span><span><b>25 %</b> ostatní</span></div>
+  <h2>Revenue Q3: 85 % z nového portfolia</h2>
+  <div class="split" style="align-items:center;margin-top:50px;grid-template-columns:0.8fr 1.2fr">
+    <div><div class="num hero-n">$486k</div><p class="note">Revenue her za Q3. S RON_India ($40k) celkem $526k.</p></div>
+    <div class="pie-wrap">
+      <div class="pie" role="img" aria-label="Koláčový graf: Mecha Fortress 36 %, Red Command 28 %, Hexapolis 21 %, ostatní 14 %"></div>
+      <div class="pie-legend">
+        <div><i style="--k:var(--cyan)"></i><span><b>$136k · 28 %</b>Red Command</span></div>
+        <div><i style="--k:var(--accent)"></i><span><b>$177k · 36 %</b>Mecha Fortress</span></div>
+        <div><i style="--k:#8c6dff"></i><span><b>$104k · 21 %</b>Hexapolis</span></div>
+        <div><i style="--k:rgba(255,255,255,0.18)"></i><span><b>$68k · 14 %</b>ostatní tituly</span></div>
+      </div>
     </div>
   </div>
-  <p class="sub" style="margin-top:70px">Nové portfolio už nese firmu. Cíl na Q4 posouváme na 80, 85 a 90 %.</p>
-  <aside class="notes">Martin: čísla doplnit za celé Q3 k 30. 9. Z review: přidat další grafy od Kuby B. (jako v minulých prezentacích), ať tu není jen jedno číslo. Pozor, hub ukazuje 71 %, finanční sklad 75 %. Definici sjednotit (KR O1.4).</aside>
+  <p class="sub" style="margin-top:44px">Nové portfolio už nese firmu, proto cíl na Q4 posouváme na 85, 90 a 95 %.</p>
+  <aside class="notes">Martin: čísla od Kuby za celé Q3. Red Command $136 338, Mecha Fortress $177 110 (z toho iOS $39 553), Hexapolis $104 157 (z toho iOS $7 923 a Play Pass $6 392, bez září). Nové portfolio $417 605 z $485 877, tedy 85 %. Indie v tom není: s ní je celkem $525 877 a podíl nového portfolia 79 %. Protože jsme přes 80 %, posouváme tiery na 85 / 90 / 95.</aside>
 </section>
 
 <!-- 8 -->
@@ -398,13 +411,36 @@ aside.notes { display: none; }
   <p class="note">Stejný nápočet u obou her: odpracované hodiny a podíl fixních nákladů firmy.</p>
   <div class="scen">
     <div><b>2 měsíce</b><span>návratnost v nejlepším případě</span></div>
-    <div class="mid"><b>3 měsíce</b><span>očekávaná návratnost, jako Red Command</span></div>
-    <div><b>4 až 5 měsíců</b><span>v horším případě</span></div>
+    <div class="mid"><b>3 měsíce</b><span>očekávaná návratnost, tedy do konce roku</span></div>
+    <div><b>4 až 5 měsíců</b><span>v horším případě, tedy Q1 2027</span></div>
   </div>
   <aside class="notes">Ukazujeme jednu hodnotu, počítanou stejně jako u Red Command, ať se to dá porovnat. Cílem je, aby si lidi uvědomili cenu projektu. Sector Defense je náš, ne sdílený, takže ze stejné hry máme dvojnásobný podíl na profitu než u Red Command. Proto čekáme návratnost do konce roku.</aside>
 </section>
 
 <!-- 10 -->
+<section class="slide" data-part="B" data-who="martin">
+  <h2>Kanceláře a hub v číslech</h2>
+  <div class="duo">
+    <div><h3>Nové kanceláře</h3>
+      <div class="num" style="font-size:120px;line-height:1;margin-bottom:26px">690 tis. Kč</div>
+      <ul>
+        <li>Celé stěhování <b>včetně vybavení</b></li>
+        <li><b>Rozhodnutí se vyplatilo:</b> už teď jsme na tom líp než předtím</li>
+        <li><b>Break-even v listopadu</b>, do konce roku už úspora proti variantě zůstat v Rozmarýnu</li>
+        <li>Další výdaje do kanceláří <b>neplánujeme</b></li>
+      </ul></div>
+    <div><h3>Dotazník k hubu</h3>
+      <div class="num" style="font-size:120px;line-height:1;margin-bottom:26px">2 h <small style="font-size:0.32em;font-weight:700;color:var(--muted);letter-spacing:0">na člověka</small></div>
+      <ul>
+        <li>Průměrná <b>uváděná úspora času</b>, cca 15 odpovědí</li>
+        <li>Nejvíc oceňujete <b>jedno místo pro všechna data</b>, k tomu úspora za zrušené nástroje</li>
+        <li>Slabší místo: <b>kvalita a důvěryhodnost dat</b>. Na tom zapracujeme.</li>
+      </ul></div>
+  </div>
+  <aside class="notes">Martin: stěhování stálo celkem cca 690 tis. Kč, projekce ukazuje break-even v listopadu, pak už šetříme. Kanceláře jsou v režimu konzervace. Hub: lidi ho hodnotí dobře, hlavně jako jedno místo pro data. Z přání zazněly kvízy místo Kahootu a tipovačka. Další krok je určit, kdo za hub a jeho oblasti odpovídá.</aside>
+</section>
+
+<!-- 11 -->
 <section class="slide" data-part="B" data-who="david">
   <h2>RON_India: nový typ příjmu</h2>
   <div class="split" style="align-items:center;grid-template-columns:1.1fr 1fr">
@@ -414,11 +450,11 @@ aside.notes { display: none; }
       <div class="r" style="grid-template-columns:200px 1fr 150px"><span>Náklady</span><div class="bar"><i class="grow-x" style="--i:1;width:3.5%;background:var(--amber)"></i></div><b>$1,4k</b></div>
     </div>
   </div>
-  <div class="band" style="margin-top:80px"><span>Co dál</span><span class="pill">Další fáze $60k: čekáme na podpis</span><span class="pill">Nabídka plné hry $800k, dodání H1 2027</span><span class="pill">Platby se počítají do H2 profitu</span></div>
-  <aside class="notes">MVP za 4 až 6 týdnů, jeden člověk část úvazku, AI nástroje. Náklady cca 1,4k. Výrazně zvedá ROI celé firmy. Deal vede David.</aside>
+  <div class="band" style="margin-top:80px"><span>Co dál</span><span class="pill">Klient se rozhoduje o plné hře</span><span class="pill">Při podpisu $100k ještě letos</span><span class="pill">Další platby příští rok po dodání</span></div>
+  <aside class="notes">Mezifáze za $60k už není ve hře. Buď to skončí u MVP, nebo jdeme do plné hry: při podpisu $100k hned letos, další platby příští rok po dodání. Finální rozhodnutí klienta ještě nepadlo. MVP za 4 až 6 týdnů, jeden člověk část úvazku, AI nástroje. Náklady cca 1,4k. Výrazně zvedá ROI celé firmy. Deal vede David.</aside>
 </section>
 
-<!-- 11 -->
+<!-- 12 -->
 <section class="slide" data-part="B" data-who="david">
   <h2>Třetina času nemá task</h2>
   <div class="split">
@@ -432,78 +468,77 @@ aside.notes { display: none; }
   <aside class="notes">Poprosit všechny, ať mají čas vždy zatrackovaný na task a zpětně si doplní, co chybí. Nejde o kontrolu lidí, jde o to umět říct, kolik stál Sector Defense nebo Red Command. Proto máme tři odhady místo jednoho čísla. Cíl: u většiny lidí přes 95 % času přiřazeno.</aside>
 </section>
 
-<!-- 12 -->
+<!-- 13 -->
 <section class="slide" data-part="C" data-who="david">
   <h2>Q3 cíle: 35 z 52</h2>
   <div class="okgrid">
     <div>
       <div class="num hero-n" style="font-size:170px">67 %</div>
       <p class="note">cílů splněno</p>
-      <p class="sub" style="font-size:28px">Činnosti jsme z velké části zvládli. Finanční výsledky zůstaly pod cílem.</p>
+      <p class="sub" style="font-size:28px">Činnosti jsme z velké části zvládli. Finanční výsledky zůstaly pod cílem. Každý cíl a jeho stav najdete v hubu.</p>
     </div>
     <div id="areas"></div>
   </div>
-  <aside class="notes">Nejlépe nový produkt (celá preprodukce a vývoj) a HR. Nejhůř finanční KPI: daily profit 30denní průměr $1 370 (bronz ano, stříbro $2 500 jsme v Q3 dosáhli, ale nedrželi), ROI firmy 42 % proti cíli 50 %.</aside>
+  <aside class="notes">Nejlépe nový produkt (celá preprodukce a vývoj) a HR. Nejhůř finanční KPI: daily profit 30denní průměr $1 370 (bronz ano, stříbro $2 500 jsme v Q3 dosáhli, ale nedrželi), ROI firmy 44 % proti cíli 50 %.</aside>
 </section>
 
-<!-- 13 -->
+<!-- 14 -->
 <section class="slide" data-part="C" data-who="david">
   <h2>Co nevyšlo a proč</h2>
   <div class="fails">
-    <div><h3>Nový titul až poslední den</h3><p>Sector Defense vyšel 30. 9., kvartál jsme tedy stihli. První data ale uvidíme až v Q4.</p></div>
-    <div><h3>Finanční KPI pod cílem</h3><p>Daily profit $1 370 proti stříbru $2 500, ROI firmy 42 % proti 50 %.</p></div>
+    <div><h3>Finanční KPI pod cílem</h3><p>Daily profit $1 370 proti stříbru $2 500, ROI firmy 44 % proti 50 %.</p></div>
     <div><h3>Reporting se nedělal</h3><p>Týdenní finanční reporty a měsíční review neproběhly. Chyběl automatický datový základ.</p></div>
     <div><h3>LiveOps nedostaly fokus</h3><p>Nevěnovali jsme se jim tak, jak jsme si na začátku kvartálu řekli. V Q4 jsou jednou ze dvou priorit.</p></div>
   </div>
   <div class="lesson"><b>Poučení:</b> nesplněné věci neměly jasného vlastníka ani termín. Každý Q4 cíl má obojí, plus DoD a blokery.</div>
-  <aside class="notes">Neukazovat prstem. Společné mají jen to, že za ně nikdo konkrétní neodpovídal. Proto nová pravidla OKR.</aside>
+  <aside class="notes">Nový titul tu není: Sector Defense vyšel 30. 9., v plánovaném kvartálu, to se povedlo. Neukazovat prstem. Společné mají jen to, že za ně nikdo konkrétní neodpovídal. Proto nová pravidla OKR.</aside>
 </section>
 
-<!-- 14 -->
+<!-- 15 -->
 <section class="slide" data-part="D" data-who="kuba">
   <h2>Sector Defense: launch a gaty</h2>
   <div class="gates" style="margin-top:64px">
-    <div class="gate go"><div class="dot">D0</div><h3>30. 9.</h3><p><b>Release</b>Android, první tranše UA</p></div>
+    <div class="gate go"><div class="dot">D0</div><h3>30. 9.</h3><p><b>Release v termínu</b>Android, kampaně o pár dní později</p></div>
     <div class="gate"><div class="dot">1</div><h3>7. den</h3><p><b>Gate 1</b>D1 ROAS ≥ 28 %<br>D1 retence ≥ 24 %<br>D3 retence ≥ 14 %</p></div>
     <div class="gate"><div class="dot">2</div><h3>14. den</h3><p><b>Gate 2</b>D7 ROAS dozrálých kohort ≥ 65 %<br>predikce D30 ROAS ≥ 90 %</p></div>
     <div class="gate"><div class="dot">3</div><h3>21. den</h3><p><b>Gate 3</b>D7 ROAS ≥ 65 % ve dvou oknech<br>predikce D30 ROAS ≥ 100 %<br>růst CPI max. o 20 %</p></div>
     <div class="gate end"><div class="dot">?</div><h3>do 28. 10.</h3><p><b>Rozhodnutí</b>Pokračovat, nebo konec</p></div>
   </div>
   <div class="verdict" style="margin-top:44px">
-    <div class="g"><b>Gate splněný: další tranše</b>Škálujeme a ladíme, cíl Q4 jsou čísla Red Command. iOS, až Gate 3 potvrdí D7 ROAS nad 65 %.</div>
+    <div class="g" style="font-size:25px"><b>Gate splněný: další tranše</b>Cíl do konce roku: <strong>$50k měsíčně</strong>, úroveň Red Command. První měsíc je úspěch, když se vrátí spend. iOS, až Gate 3 potvrdí D7 ROAS nad 65 %.</div>
     <div class="s"><b>Kdy neškálujeme</b><ul>
       <li>Nespolehlivé měření revenue: stop value kampaním</li>
       <li>D1 ROAS pod 15 %: stop škálování, prověřit ekonomiku</li>
       <li>D7 ROAS pod 45 %: další tranše se neuvolní</li>
     </ul></div>
   </div>
-  <p class="note" style="margin-top:26px">Gaty řídí marketing a počítají se od spuštění UA. Výrazně pod pásmem MF až RC projekt po analýze končí.</p>
-  <aside class="notes">Kuba: prahy gatů jsou finální (2. 10.), doplnit první naměřená data z Gate 1, až budou. 2 až 4 týdny sbíráme data. Když nejsou technické problémy a kampaně běží, jak mají, a přesto je CPI nebo retence zásadně mimo, projekt končí.</aside>
+  <p class="note" style="margin-top:26px"><b style="color:var(--muted)">ROAS</b> = kolik procent útraty za reklamu se vrátilo v revenue. <b style="color:var(--muted)">D1, D7, D30</b> = 1., 7. a 30. den po instalaci. <b style="color:var(--muted)">Retence</b> = kolik hráčů se vrátí. <b style="color:var(--muted)">CPI</b> = cena za instalaci. Gaty se počítají od spuštění kampaní.</p>
+  <aside class="notes">Kuba: krátce vysvětlit pojmy, ne každý v nich jede. Každé pondělí report na poradě. Benchmark: pod Mecha Fortress špatné, mezi MF a RC se dá pracovat, nad RC výborné. Release na store proběhl v termínu 30. 9., první kampaně šly ven o pár dní později a od nich se gaty počítají. Prahy gatů jsou finální (2. 10.), doplnit první naměřená data z Gate 1, až budou. 2 až 4 týdny sbíráme data. Když nejsou technické problémy a kampaně běží, jak mají, a přesto je CPI nebo retence zásadně mimo, projekt končí.</aside>
 </section>
 
-<!-- 15 -->
+<!-- 16 -->
 <section class="slide" data-part="D" data-who="david">
   <h2>Portfolio: kdo dostane kapacitu</h2>
   <div class="port">
     <div class="p"><b>Sector Defense</b><span class="s grow">hlavní fokus</span><em>launch, data, škálování</em></div>
     <div class="p"><b>Hexapolis 2</b><span class="s dec">rozhodnout</span><em>turn-based koncept, do konce října</em></div>
-    <div class="p"><b>Red Command</b><span class="s grow">škálovat</span><em>A/B testy, monetizace, iOS</em></div>
+    <div class="p"><b>Red Command</b><span class="s grow">škálovat</span><em>nový content a jednotky ze Sector Defense, A/B testy, iOS</em></div>
     <div class="p"><b>Puppet Sports</b><span class="s dec">rozhodnout</span><em>partner na financování, do konce října</em></div>
-    <div class="p"><b>Mecha Fortress</b><span class="s hold">údržba</span><em>ladění podle externího review</em></div>
+    <div class="p"><b>Mecha Fortress</b><span class="s hold">údržba</span><em>zkoušíme návrhy externích designérů, pak vyhodnotíme</em></div>
     <div class="p"><b>Legacy tituly</b><span class="s dec">review</span><em>podle profitu za den</em></div>
     <div class="p"><b>Hexapolis 1</b><span class="s hold">údržba</span><em>test multiplayeru z Hex 2</em></div>
     <div class="p"><b>Nový titul</b><span class="s stop">v Q4 ne</span><em>jen test reskin nástroje</em></div>
   </div>
   <div class="band" style="margin-top:44px"><span>Legacy podle profitu za den</span><span class="pill">pod $10: končí</span><span class="pill">pod $50: otazník</span><span class="pill">pod $100: individuální review</span><span class="pill">merge hry se počítají jako jeden projekt</span></div>
-  <aside class="notes">První 2 až 3 sprinty Q4 jdou na ladění Red Command a Mecha Fortress. Hexapolis 2 sám o sobě je na tu práci málo, proto jako širší turn-based koncept se stejnou meta vrstvou. Tankzor byl vyřazen už 21. 9.</aside>
+  <aside class="notes">Nejdřív dořešit Red Command: designový plán a nový content pro partnera, levně přenesené prvky ze Sector Defense, ať jsou hry připravené na Vánoce. Pak optimalizace tam, kde je největší návratnost. U Mecha Fortress zkoušíme návrhy externích designérů a vyhodnotíme, jestli se investice vyplatí. Hexapolis 2 sám o sobě je na tu práci málo, proto jako širší turn-based koncept se stejnou meta vrstvou. Tankzor byl vyřazen už 21. 9.</aside>
 </section>
 
-<!-- 16 -->
+<!-- 17 -->
 <section class="slide" data-part="D" data-who="david">
   <h2>B2B, RON_India a R&amp;D</h2>
   <div class="duo">
     <div><h3>B2B bez outreache</h3><ul>
-      <li><b>Dotáhnout RON_India</b>: podpis fáze za $60k</li>
+      <li><b>Dotáhnout RON_India</b>: když klient podepíše plnou hru, <b>$100k</b> ještě letos</li>
       <li>Když přijde plná hra: <b>externí kontrakty</b>, AI assety, <b>+1 grafik</b>, bez dopadu na SD a RC</li>
       <li>Příležitosti bereme, když přijdou. Aktivně je do konce roku nehledáme.</li>
     </ul></div>
@@ -511,33 +546,33 @@ aside.notes { display: none; }
       <li><b>Shared Game Backend</b>: první nasazení v Hexapolisu nebo Mecha Fortress</li>
       <li>Základ pro <b>membership</b> (dřív Nox ID): kontakty, re-engagement, nabídky</li>
       <li>Na něm pak <b>social features a PvP</b></li>
+      <li><b>Web verze Sector Defense</b> pro CrazyGames a Poki, další kanály mimo placenou UA</li>
     </ul></div>
   </div>
   <aside class="notes">LEGO a TinySoft zmínit jen obecně, pokud to není veřejné. Shared Game Backend je dlouhodobá investice, ne Q4 revenue.</aside>
 </section>
 
-<!-- 17 -->
+<!-- 18 -->
 <section class="slide" data-part="D" data-who="david">
   <h2>Tým a organizace</h2>
   <div class="hire">
     <div class="card"><h3>Hledáme testera a komunitního správce</h3><p>Napůl manuální testování, napůl správa Discord komunit našich her. Nábor startuje na začátku Q4. Znáte někoho? Pošlete ho Kubovi.</p></div>
     <div class="duo" style="grid-template-columns:1fr;margin-top:0;gap:30px"><ul>
       <li><b>Komunity:</b> obnovíme a založíme Discord pro naše hry</li>
-      <li><b>Delegace:</b> role, segmenty, činnosti a budgety do konce roku</li>
-      <li><b>Odměňování:</b> jak se budgety promítnou do platů a bonusů, rozhodneme v Q4</li>
+      <li><b>Postmortem Sector Defense:</b> čtvrtek 8. 10., připravte si, co se povedlo, co ne a co si odnášíme</li>
       <li><b>Time tracking:</b> přes 95 % času přiřazeno k práci</li>
     </ul></div>
   </div>
-  <aside class="notes">Nábor a komunity vede Kuba, delegaci, budgety a time tracking Martin. Konkrétní mzdové věci tady neprobírat, jen že se to v Q4 rozhoduje a včas dáme vědět.</aside>
+  <aside class="notes">Nábor a komunity vede Kuba, time tracking Martin. Interně k náboru: pokud člověk nemůže nastoupit do 15. 11., nastoupí až kolem 5. 1. Do té doby komunity nastavíme sami. Postmortem se nahraje a přepis půjde do wiki. Delegaci a odměňování tady neotevírat, to je téma na konec roku.</aside>
 </section>
 
-<!-- 18 -->
+<!-- 19 -->
 <section class="slide" data-part="E" data-who="jirka">
   <h2>H2 profit: $175k a co visí ve vzduchu</h2>
   <div class="track">
     <div class="fill grow-x" style="width:17.5%"></div>
-    <div class="air seg k-rc grow-x" style="--i:3;left:17.5%;width:15%"></div>
-    <div class="air seg k-other grow-x" style="--i:5;left:32.5%;width:5%"></div>
+    <div class="air seg sure k-rc grow-x" style="--i:3;left:17.5%;width:15%"></div>
+    <div class="air seg sure k-other grow-x" style="--i:5;left:32.5%;width:5%"></div>
     <div class="air seg k-sd grow-x" style="--i:6;left:37.5%;width:5%"></div>
     <div class="air seg k-india grow-x" style="--i:7;left:42.5%;width:10%"></div>
     <div class="tier" style="left:20%"><span>$200k<small>bronz</small></span></div>
@@ -546,42 +581,42 @@ aside.notes { display: none; }
     <span class="now">$175k</span>
   </div>
   <div class="air-list">
-    <div class="k-rc"><b>+$150k</b><span>Red Command, 3 měsíce po cca $50k</span></div>
-    <div class="k-other"><b>+$50k</b><span>ostatní tituly</span></div>
-    <div class="k-sd"><b>+$50k</b><span>Sector Defense, pokud se rozjede</span></div>
-    <div class="k-india"><b>+$100k</b><span>RON_India, pokud pokračuje vývoj</span></div>
+    <div class="k-rc sure"><em>mělo by být jisté</em><b>+$150k</b><span>Red Command, 3 měsíce po cca $50k</span></div>
+    <div class="k-other sure"><em>mělo by být jisté</em><b>+$50k</b><span>ostatní tituly</span></div>
+    <div class="k-sd"><em>navíc, když se povede</em><b>+$50k</b><span>Sector Defense, pokud se rozjede</span></div>
+    <div class="k-india"><em>navíc, když se povede</em><b>+$100k</b><span>RON_India, pokud klient podepíše plnou hru</span></div>
   </div>
-  <p class="note">Adjusted EBITDA k 30. 9. je cca $315k. Prvních $140k umazalo ztráty (cíl H1), do tierů H2 se počítá $175k. Ve vzduchu dalších $300k až $350k, tedy hrana druhého tieru.</p>
-  <aside class="notes">Dobrá zpráva na úvod cílů. Podklad od Martina: $175k = adjusted EBITDA $315k k 30. 9. minus $140k na umazání ztrát z H1. Každý případ má svou barvu a je promítnutý na lince, ať je vidět, že je druhý tier dosažitelný. Predikce jsou zatím z porady 24. 9., čeká se na Martinovu analýzu. Když vyjde všechno, jsme kolem $475k až $525k, tedy na hraně stříbra. Každý dolar ze SD a Indie rozhoduje.</aside>
-</section>
-
-<!-- 19 -->
-<section class="slide" data-part="E" data-who="jirka">
-  <h2>Q4 cíle</h2>
-  <div class="okrs">
-    <div><span class="id">O1</span><h3>H2 profit k druhému tieru</h3><p>≥ $200k jistě, $500k stretch. ROI firmy ≥ 50 %.</p><span class="who jirka">Jirka</span></div>
-    <div><span class="id">O2</span><h3>Sector Defense na čísla Red Command</h3><p>Launch 30. 9., gaty, rozhodnutí do 28. 10.</p><span class="who david">David</span></div>
-    <div><span class="id">O3</span><h3>Live-ops a retence</h3><p>RC a MF laděné, 25 % revenue z LiveOps, D1 +2 až 3 p. b.</p><span class="who david">David</span></div>
-    <div><span class="id">O4</span><h3>RON_India dotažená</h3><p>Podpis fáze $60k, plán pro plnou hru.</p><span class="who david">David</span></div>
-    <div><span class="id">O5</span><h3>Portfolio a R&amp;D rozhodnuté</h3><p>Hex 2 a Puppet do října, Shared Backend live.</p><span class="who jirka">Jirka</span></div>
-    <div><span class="id">O6</span><h3>Tým a řízení</h3><p>Tester a komunita, delegace s budgety, 95 % času s taskem.</p><span class="who martin">Martin</span></div>
-  </div>
-  <p class="rules">Každý podkrok má <b>vlastníka, DoD, start, termín a blokery</b>. Status na <b>každé druhé firemní poradě</b>. Celé znění v hubu v sekci Cíle.</p>
-  <aside class="notes">Vlastník odpovídá za výsledek, nemusí všechno dělat sám. Podkroků je hodně a jsou malé, hlavních cílů je šest.</aside>
+  <p class="note">Za první tři kvartály máme cca $315k (adjusted EBITDA), z toho $140k umazalo ztrátu z loňska, do tierů H2 se počítá $175k. Odhady počítají se současným výkonem her. Přes $500k se poměrově vyplácí bonusy.</p>
+  <aside class="notes">Dobrá zpráva na úvod cílů. Říct jasně: Red Command a ostatní tituly by měly být jisté, Sector Defense a Indie jsou navíc a musí se povést. Když se to povede, dostaneme se na hodnotu, ze které budou něco mít i lidi (přes tier se vyplácí poměrově). Odhady berou současný výkon, zlepšení her je další prostor. Podklad od Martina: $175k = adjusted EBITDA $315k k 30. 9. minus $140k na umazání ztrát z H1. Každý případ má svou barvu a je promítnutý na lince, ať je vidět, že je druhý tier dosažitelný. Predikce jsou zatím z porady 24. 9., čeká se na Martinovu analýzu. Když vyjde všechno, jsme kolem $475k až $525k, tedy na hraně stříbra. Každý dolar ze SD a Indie rozhoduje.</aside>
 </section>
 
 <!-- 20 -->
+<section class="slide" data-part="E" data-who="jirka">
+  <h2>Q4 cíle</h2>
+  <div class="okrs">
+    <div><span class="id">O1</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg><h3>H2 profit k druhému tieru</h3><p>≥ $200k jistě, $500k stretch. ROI firmy z dnešních 44 % na 50 %, dlouhodobě 100 %.</p><span class="who jirka">Jirka</span></div>
+    <div><span class="id">O2</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><h3>Sector Defense na čísla Red Command</h3><p>Launch 30. 9., gaty, rozhodnutí do 28. 10.</p><span class="who david">David</span></div>
+    <div><span class="id">O3</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11a8 8 0 0 1 14-4l2 2"/><path d="M20 4v5h-5"/><path d="M20 13a8 8 0 0 1-14 4l-2-2"/><path d="M4 20v-5h5"/></svg><h3>Live-ops a retence</h3><p>RC a MF laděné. Podíl LiveOps na revenue nejdřív změříme, pak nastavíme cíl. Směr: růst.</p><span class="who david">David</span></div>
+    <div><span class="id">O4</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 15c1.5-2 2.5-2 3 0s1.500 1 3-1"/></svg><h3>RON_India dotažená</h3><p>Při podpisu plné hry $100k letos a plán vývoje na příští rok.</p><span class="who david">David</span></div>
+    <div><span class="id">O5</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 7v10"/><path d="M18 9c0 5-12 2-12 7"/></svg><h3>Portfolio a R&amp;D rozhodnuté</h3><p>Hex 2 a Puppet do října, Shared Backend live.</p><span class="who jirka">Jirka</span></div>
+    <div><span class="id">O6</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.300 2.700-6 6-6s6 2.700 6 6"/><circle cx="17.500" cy="9" r="2.500"/><path d="M17 14.200c2.500.300 4 2.600 4 5.800"/></svg><h3>Tým a řízení</h3><p>Tester a komunita, první verze delegace, 95 % času s taskem.</p><span class="who martin">Martin</span></div>
+  </div>
+  <p class="rules">Každý podkrok má <b>vlastníka, DoD, start, termín a blokery</b>. Status na <b>každé druhé firemní poradě</b>. <b>Co není v OKR, to se v Q4 neřeší.</b></p>
+  <aside class="notes">Vlastník odpovídá za výsledek, nemusí všechno dělat sám. Podkroků je hodně a jsou malé, hlavních cílů je šest.</aside>
+</section>
+
+<!-- 21 -->
 <section class="slide" data-part="F" data-who="jirka">
   <h2>Dvě priority Q4</h2>
   <div class="prio">
-    <div class="p"><span class="n">1</span><div><h3>Sector Defense: launch, data, škálování</h3><p>Do konce října víme, jestli jedeme. Pak ho dostat na čísla Red Command.</p></div></div>
-    <div class="p"><span class="n">2</span><div><h3>Víc z her, které už máme</h3><p>Live-ops a retence Red Command a Mecha Fortress. První sprinty jdou sem.</p></div></div>
+    <div class="p"><span class="n">1</span><div><h3>Sector Defense: launch, data, škálování</h3><p>Do konce října víme, jestli jedeme. Pak ho dostat na $50k měsíčně jako Red Command.</p></div></div>
+    <div class="p"><span class="n">2</span><div><h3>Víc z her, které už máme</h3><p>Nejdřív Red Command: nový content a designový plán. Pak live-ops a retence tam, kde je největší návratnost.</p></div></div>
   </div>
   <div class="not"><span>V Q4 neděláme</span><span class="pill">nový titul</span><span class="pill">B2B outreach</span><span class="pill">záchranu legacy pod $10/den</span></div>
   <aside class="notes">Pokud si má někdo zapamatovat jediný slide, je to tenhle. Když se u něčeho rozhodujete, jestli na tom dělat, zkontrolujte, jestli to spadá do jedné z těch dvou věcí. Profit z RON_India by pomohl ročnímu výsledku, ale tým ho neovlivní, proto tu není.</aside>
 </section>
 
-<!-- 21 -->
+<!-- 22 -->
 <section class="slide end" data-part="F" data-who="david martin jirka kuba">
   <h2>Otázky?</h2>
   <div class="where"><span class="pill">Q4 cíle: hub, sekce Cíle</span><span class="pill">Rozhodnutí: Wiki, dekret Q4</span><span class="pill">Status: každá druhá firemní porada</span></div>
