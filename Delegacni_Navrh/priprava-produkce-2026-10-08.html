@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Segment Produkce: činnosti a role · NOXGAMES</title>
+<style>
+  @font-face {
+    font-family: 'Gambarino';
+    src: url('assets/fonts/Gambarino-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-hi: #1a1511;
+    --bg-lo: #14100c;
+    --surface: #211b15;
+    --surface-hi: #262019;
+    --edge: #322a20;
+    --ink: #ede4d4;
+    --muted: #a2947f;
+    --faint: #6e6353;
+    --muted-2: #8b7f6d;
+    --gold: #c9a266;
+    --gold-dim: #8a7350;
+    --gold-mid: #6b573a;
+    --gold-deep: #57452a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; background: var(--bg-lo); }
+
+  body {
+    background: linear-gradient(175deg, var(--bg-hi) 0%, var(--bg-lo) 100%);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, header.hero, footer { position: relative; z-index: 1; }
+
+  ::selection { background: var(--gold); color: var(--bg-lo); }
+
+  .shell {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-inline: clamp(22px, 5vw, 52px);
+  }
+
+  h1, h2, .display { font-family: 'Gambarino', Georgia, 'Times New Roman', serif; font-weight: 400; }
+
+  a { color: var(--gold-dim); text-decoration: none; transition: color 0.2s ease; }
+  a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 34px;
+  }
+
+  .wordmark {
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--ink);
+  }
+
+  .topbar .meta { font-size: 0.85rem; color: var(--faint); }
+
+  .hero-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .art {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    width: min(54%, 620px);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .art-inner { animation: artdrift 11s ease-in-out infinite alternate; }
+    @keyframes artdrift {
+      from { transform: translateY(-6px); }
+      to   { transform: translateY(6px); }
+    }
+  }
+
+  .hero-copy { position: relative; max-width: 620px; }
+
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 6.8vw, 4.9rem);
+    line-height: 1.06;
+    letter-spacing: 0.005em;
+  }
+
+  .hero-copy h1 em { font-style: normal; color: var(--gold-dim); }
+
+  .hero-copy .sub {
+    margin-top: 26px;
+    font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+    color: var(--muted);
+    max-width: 30em;
+  }
+
+  .hero-copy .origin { margin-top: 14px; font-size: 0.88rem; color: var(--faint); }
+
+  .toc {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(2, max-content);
+    gap: 8px 64px;
+    padding-bottom: 40px;
+  }
+
+  .toc a { font-size: 0.88rem; color: var(--muted); white-space: nowrap; }
+  .toc a:hover { color: var(--ink); }
+  .toc a span { color: var(--gold-deep); margin-right: 8px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sections ---------- */
+
+  section { padding-top: clamp(84px, 12vh, 130px); }
+  section:last-of-type { padding-bottom: 40px; }
+
+  h2 {
+    font-size: clamp(1.85rem, 3.8vw, 2.55rem);
+    line-height: 1.15;
+    margin-bottom: 34px;
+  }
+
+  h2 .no { color: var(--gold-deep); margin-right: 14px; }
+
+  h3 {
+    font-family: 'Gambarino', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-top: 48px;
+    margin-bottom: 14px;
+  }
+
+  h4.sub-h {
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 30px;
+    margin-bottom: 8px;
+  }
+
+  p { color: var(--muted); max-width: 46em; }
+  p strong, li strong, td strong { color: var(--ink); font-weight: 600; }
+  p + p { margin-top: 16px; }
+
+  .lead-p { font-size: 1.06rem; }
+
+  ol.rules { margin: 26px 0 0 0; list-style: none; counter-reset: r; display: grid; gap: 14px; max-width: 52em; }
+  ol.rules li { counter-increment: r; position: relative; padding-left: 54px; color: var(--muted); font-size: 0.98rem; }
+  ol.rules li::before {
+    content: counter(r);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 36px;
+    font-family: 'Gambarino', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--gold-deep);
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  ul.points { list-style: none; margin-top: 10px; display: grid; gap: 15px; max-width: 52em; }
+  ul.points li { position: relative; padding-left: 30px; color: var(--muted); font-size: 0.97rem; }
+  ul.points li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.58em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-deep);
+  }
+
+  /* tables */
+
+  .tscroll { overflow-x: auto; margin-top: 6px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 560px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--faint);
+    padding: 10px 16px 12px;
+    border-bottom: 1px solid var(--edge);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 13px 16px;
+    border-bottom: 1px solid #241e17;
+    color: var(--muted);
+    vertical-align: top;
+  }
+
+  td:first-child { color: var(--gold-dim); white-space: nowrap; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.88rem; }
+
+  table.wordy td:first-child { white-space: normal; font-family: inherit; font-size: 0.95rem; color: var(--ink); }
+
+  tbody tr { transition: background-color 0.2s ease; }
+  tbody tr:hover { background-color: #1d1813; }
+
+  .tbl-note { margin-top: 18px; font-size: 0.9rem; color: var(--muted-2); max-width: 52em; }
+
+  /* area cards */
+
+  .dept {
+    display: grid;
+    grid-template-columns: 244px 1fr;
+    gap: 36px;
+    padding: 26px 0 28px;
+    border-top: 1px solid #241e17;
+    margin-top: 22px;
+  }
+
+  .dept + .dept { margin-top: 0; }
+
+  .dept-id h4 { font-size: 1.06rem; font-weight: 600; color: var(--ink); line-height: 1.35; }
+  .dept-id h4 span { color: var(--gold-deep); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.82rem; margin-right: 8px; }
+  .dept-id p { font-size: 0.88rem; color: var(--muted-2); margin-top: 5px; }
+
+  .dept-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 42px; }
+  .dept-fields div { font-size: 0.93rem; color: var(--muted); line-height: 1.6; }
+  .dept-fields b { display: block; font-size: 0.79rem; font-weight: 500; color: var(--gold-dim); margin-bottom: 2px; }
+  .dept-fields .wide { grid-column: 1 / -1; }
+
+  /* pull statement */
+
+  .pull {
+    margin-top: 26px;
+    padding: 22px 30px;
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: 14px;
+    max-width: 46em;
+    color: var(--ink);
+    font-size: 1.02rem;
+    line-height: 1.6;
+  }
+
+  /* figures / stat row */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px 30px;
+    margin-top: 36px;
+    max-width: 52em;
+  }
+  .stats div b {
+    display: block;
+    font-family: 'Gambarino', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 4.6vw, 3rem);
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: 0.012em;
+  }
+  .stats div span { display: block; margin-top: 12px; font-size: 0.85rem; color: var(--faint); line-height: 1.45; }
+
+  /* code block */
+
+  pre.sheet {
+    margin-top: 24px;
+    padding: 22px 24px;
+    background: var(--surface);
+    border: 1px solid var(--edge);
+    border-radius: 12px;
+    overflow-x: auto;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  /* diagrams */
+
+  .dwrap { overflow-x: auto; margin-top: 8px; }
+  .dwrap svg { display: block; width: 100%; height: auto; }
+  .dwrap.map svg { min-width: 880px; }
+  .dwrap.wide svg { min-width: 700px; }
+  .dwrap.bar svg { min-width: 520px; }
+
+  svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+
+  .orgnode rect { transition: fill 0.25s ease; }
+  .orgnode:hover rect { fill: var(--surface-hi); }
+
+  .legend { margin-top: 20px; font-size: 0.88rem; color: var(--faint); display: flex; flex-wrap: wrap; gap: 10px 30px; }
+  .legend span { display: inline-flex; align-items: center; gap: 9px; }
+  .legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+  /* footer */
+
+  footer { padding: 90px 0 44px; }
+  footer .related { font-size: 0.9rem; color: var(--faint); margin-bottom: 14px; }
+  footer .related a { margin-right: 22px; }
+  footer .colophon { font-size: 0.85rem; color: var(--faint); }
+
+  /* responsive */
+
+  @media (max-width: 920px) {
+    .art { opacity: 0.5; width: 88%; right: -22%; }
+    .dept { grid-template-columns: 1fr; gap: 20px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .toc { grid-auto-flow: row; grid-template-rows: none !important; grid-template-columns: 1fr; gap: 8px 0; }
+    .dept-fields { grid-template-columns: 1fr; gap: 16px; }
+    .topbar { flex-direction: column; gap: 4px; }
+    .topbar .meta { font-size: 0.8rem; }
+    .art { display: none; }
+    .pull { padding: 18px 20px; }
+    .stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+  }
+
+  .hero { min-height: auto; padding-bottom: 20px; }
+  .hero-body { padding-block: 90px 56px; }
+  .hero-copy { max-width: 760px; }
+  .hero-copy h1 { font-size: clamp(2.3rem, 5.6vw, 4.1rem); }
+  .origin code, p code, li code, td code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.86em; color: var(--gold-dim); }
+  .origin { max-width: 46em; line-height: 1.6; }
+  .origin p { color: var(--faint); font-size: 0.88rem; max-width: none; }
+  .origin p + p { margin-top: 8px; }
+  table.wordy td:first-child { color: var(--ink); }
+  ul.points li ol { margin: 10px 0 0 0; padding-left: 20px; display: grid; gap: 8px; }
+  ul.points li ol li { padding-left: 4px; }
+  ul.points li ol li::before { display: none; }
+  ul.checks { list-style: none; margin-top: 10px; display: grid; gap: 12px; max-width: 52em; }
+  ul.checks li { position: relative; padding-left: 32px; color: var(--muted); font-size: 0.97rem; }
+  ul.checks li::before { content: ''; position: absolute; left: 2px; top: 0.3em; width: 14px; height: 14px; border: 1px solid var(--gold-dim); border-radius: 3px; }
+  p.label { margin-top: 26px; }
+  :root { color-scheme: dark; --muted-2: #8f826e; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="shell topbar"><span class="wordmark">NOXGAMES</span><span class="meta">Delegační porada · segment Produkce</span></div>
+  <div class="shell hero-body">
+    <div class="hero-copy">
+      <h1>Segment Produkce: činnosti a role</h1>
+      <p class="sub">8. 10. 2026</p>
+      <div class="origin"><p>Podklad segmentu Produkce na delegační poradu 8. 10. 2026. Stejný formát, jaký jsme 1. 10. odsouhlasili nad podkladem Operations (Martin B.): činnosti rozdělené do oblastí s kódem, u každé popis a důvod, <strong>role</strong>, která ji nese, a zvlášť sloupec, <strong>kdo tu roli nese dnes</strong>. Role jsou pak rozepsané samostatně, aby systém stál i bez konkrétních jmen.</p><p>Navazuje na <code>PRIPRAVA_2026-09-03_DAVID.md</code> (soupis 20 činností), na karty lidí z <code>../Q4Plan/PORADA_2026-10-01_DELEGACE_4.md</code>, na rozhodnutí z 21. 9. (budget, personální pravomoci a reporting nese vlastník segmentu) a na Q4 OKR (<code>../Q4Plan/Q4_OKR_2026.md</code>). Procenta jsou z úvazku daného člověka, odhad na pětky. Částky a limity sem nepatří, ty jsou téma rozpočtové porady 22. 10.</p></div>
+    </div>
+  </div>
+  <nav class="shell toc" style="grid-template-rows: repeat(6, auto)"><a href="#s1"><span>01</span>TL;DR</a><a href="#s2"><span>02</span>Co je nové proti podkladu z 3. 9.</a><a href="#s3"><span>03</span>Mapa segmentu: pět oblastí</a><a href="#s4"><span>04</span>Soupis činností</a><a href="#s5"><span>05</span>Role segmentu</a><a href="#s6"><span>06</span>Rozhodovací pásma rolí</a><a href="#s7"><span>07</span>Lidé a role dnes</a><a href="#s8"><span>08</span>Mezery a tahy</a><a href="#s9"><span>09</span>Hranice s Marketingem, Operations a EXEC</a><a href="#s10"><span>10</span>K potvrzení na poradě</a><a href="#s11"><span>11</span>Vstup pro rozpočtovou poradu 22. 10.</a><a href="#s12"><span>12</span>Po poradě</a></nav>
+</header>
+<main class="shell"><section id="s1"><h2><span class="no">01</span>TL;DR</h2><p><strong>Situace</strong></p><ul class="points"><li>Produkce je největší segment: 10 lidí, pět oblastí, 24 činností. Účel: hry vznikají, vycházejí, žijí a zaplatí se.</li><li>Součet činností vychází na <strong>cca 7,85 úvazku</strong>, plánovatelná kapacita segmentu (75 % na člověka, po odečtení práce pro Operations) je <strong>cca 7,2</strong>. Schodek kolem půl úvazku sedí celý u vlastníka segmentu.</li><li>Vlastník segmentu je na cca 150 %. Na řízení (plán, kapacity, lidé, budget) z toho jde 45 bodů, zbytek je exekuce: B2B, backend a tooling, R&amp;D. Stejný problém jako u Operations, jen v jiném poměru.</li></ul><p><strong>Hlavní problém</strong></p><ul class="points"><li>Exekuce se sbíhá u vlastníka a řízení dostává zbytek. Od 21. 9. k tomu přibyla odpovědnost za budget a reporting segmentu, která kapacitu zatím nemá.</li><li>Tři činnosti nemají roli osazenou: data a analytika (přechodně Kuba s AI do 31. 12.), aktivní komunita, výroba playable ads pro Marketing.</li><li>Dva lidé nesou roli pro jiný segment bez čísla v kartě: Akimo (kanceláře) a nově Hutis (DevOps a IT).</li></ul><p><strong>Co navrhuju</strong></p><ul class="points"><li><strong>11 rolí</strong>, z toho 9 osazených, 1 přechodně osazená a 1 nově k náboru. Žádná nová vedoucí role, žádný art lead ani GD lead.</li><li>Vlastník segmentu si nechává řízení a B2B obchod. Odchází hub (do Operations pod DevOps roli), outsourcing (na project leady), licence (evidence do Operations) a postupně B2B delivery.</li><li>Project leadi dostávají vedení projektu vyčíslené: 20 % úvazku každý. Dosud to v kartách nebylo.</li><li>Hutis: QA lead 40, programování 20, DevOps a IT pro Operations 15. Bez snížení programování by byl na 90.</li></ul><p><strong>K potvrzení na poradě:</strong> kapitola 10, devět bodů.</p></section><section id="s2"><h2><span class="no">02</span>Co je nové proti podkladu z 3. 9.</h2><div class="tscroll"><table class="wordy"><thead><tr><th>Změna</th><th>Odkud</th><th>Dopad na Produkci</th></tr></thead><tbody><tr><td>Formát: činnost má roli a zvlášť jméno, role jsou popsané samostatně</td><td>porada 1. 10., review podkladu Operations</td><td>kap. 4 a 5 jsou přepsané do tohoto tvaru</td></tr><tr><td>Budget, personální pravomoci a reporting nese vlastník segmentu</td><td>rozhodnutí 21. 9.</td><td>nová činnost R4, v soupisu z 3. 9. nebyla</td></tr><tr><td>HR a nábor zastřešuje Martin B., Akimovi zůstává faktický onboarding v kanceláři a balík kanceláří s vlastním budgetem</td><td>záznam 1. 10., k potvrzení</td><td>Akimo dává Operations méně než 25 až 30 %, odhadem 10 až 15 %</td></tr><tr><td>NoxHub dostává DevOps roli, kandidát Hutis</td><td>záznam 1. 10., shoda u stolu</td><td>hub odchází z mých 25 % toolingu, Hutis potřebuje číslo v kartě</td></tr><tr><td>AI vzdělávání není vyhrazená kapacita, dělá se, když zbyde čas</td><td>záznam 1. 10.</td><td>mých 10 % pro Operations padá na 0 až 5</td></tr><tr><td>V Q4 se nehledá samostatný herní analytik, hledá se tester a komunitní správce (půl QA, půl Discord)</td><td>Q4 OKR, O6.1 a "co neděláme"</td><td>přechodný stav analytiky nemá po 31. 12. pokračování, viz kap. 9</td></tr><tr><td>Sector Defense je venku, Q4 je o live-ops a ladění, žádný nový titul</td><td>Q4 OKR, O2 a O3</td><td>těžiště kapacity se přesouvá z vývoje do oblasti P</td></tr></tbody></table></div></section><section id="s3"><h2><span class="no">03</span>Mapa segmentu: pět oblastí</h2><div class="tscroll"><table><thead><tr><th>Kód</th><th>Oblast</th><th>Co pokrývá</th><th>Činnosti</th><th>Kapacita (% úvazku)</th></tr></thead><tbody><tr><td>R</td><td><strong>Řízení segmentu</strong></td><td>plán a roadmapa, kapacity, lidé, budget a reporting</td><td>R1 až R4</td><td>45</td></tr><tr><td>V</td><td><strong>Vývoj her</strong></td><td>design, kód, art, vedení projektu, technický základ, R&amp;D</td><td>V5 až V11</td><td>540</td></tr><tr><td>P</td><td><strong>Publishing a LiveOps</strong></td><td>QA, release, compliance, live-ops, provoz, komunita</td><td>P12 až P17</td><td>110</td></tr><tr><td>B</td><td><strong>B2B</strong></td><td>pipeline a nabídky, delivery, playable ads</td><td>B18 až B20</td><td>35 + playables</td></tr><tr><td>D</td><td><strong>Data a produkční tooling</strong></td><td>datový stack, herní analytika, herní backend, web</td><td>D21 až D24</td><td>55</td></tr></tbody></table></div><p>Celkem cca <strong>785 %</strong>, tedy 7,85 úvazku. Z toho 20 bodů dnes vykonává Kuba (D21, D22).</p><p>Vrstvy: <strong>C</strong> core (bez toho se hra nevydá nebo nevydělá), <strong>P</strong> podstatné (bez toho to jde týdny, ne měsíce), <strong>S</strong> support.</p></section><section id="s4"><h2><span class="no">04</span>Soupis činností</h2><p>Sloupec "Tah" říká, co se s činností stane: <strong>držet</strong>, <strong>předat</strong>, <strong>zautomatizovat</strong>, <strong>najmout</strong>, <strong>zúžit</strong> nebo <strong>zrušit</strong>.</p><h3>4.1 R · Řízení segmentu</h3><div class="tscroll"><table><thead><tr><th>Kód</th><th>Činnost a proč se dělá</th><th>Vrstva</th><th>Role</th><th>Dnes nese (%)</th><th>Zástup</th><th>Výsledek / číslo</th><th>Tah</th></tr></thead><tbody><tr><td>R1</td><td><strong>Plán produkce a roadmapa titulů.</strong> Sprinty, milníky a priority mezi projekty. Bez toho si každý projekt plánuje sám a o prioritách rozhoduje ten, kdo je nejhlasitější.</td><td>C</td><td>Vlastník segmentu</td><td>David 20</td><td>Aldy</td><td>milníky v termínu, počet přeplánování za kvartál</td><td>držet</td></tr><tr><td>R2</td><td><strong>Kapacitní plánování a obsazení projektů.</strong> Kdo na čem dělá v jakém sprintu, včetně rezervace pro B2B a playables. Chrání tým před přetížením a projekty před tichým odsáváním lidí.</td><td>C</td><td>Vlastník segmentu</td><td>David 10</td><td>Aldy</td><td>utilizace 70 až 80 %, nikdo nad 100 %</td><td>držet</td></tr><tr><td>R3</td><td><strong>Vedení lidí v segmentu.</strong> 1:1, cíle, hodnocení, odměna, odborný onboarding. Od 21. 9. sem patří i rozhodnutí o odměně a setrvání lidí v mém budgetu.</td><td>P</td><td>Vlastník segmentu</td><td>David 10</td><td>nevyžaduje</td><td>1:1 v rytmu, cíle první den měsíce</td><td>držet, zvednout na 15 až 20</td></tr><tr><td>R4</td><td><strong>Budget a reporting segmentu.</strong> Návrh rozpočtu, čerpání, měsíční čísla segmentu připravená bez vyžádání. Nové od 21. 9.: CEO reporty jen sbírá, nevyhledává.</td><td>P</td><td>Vlastník segmentu</td><td>David 5</td><td>nevyžaduje</td><td>budget vs. skutečnost do 5. dne měsíce, čísla v hubu</td><td>držet, čísla tahat z hubu</td></tr></tbody></table></div><h3>4.2 V · Vývoj her</h3><div class="tscroll"><table><thead><tr><th>Kód</th><th>Činnost a proč se dělá</th><th>Vrstva</th><th>Role</th><th>Dnes nese (%)</th><th>Zástup</th><th>Výsledek / číslo</th><th>Tah</th></tr></thead><tbody><tr><td>V5</td><td><strong>Herní design a ekonomika titulů.</strong> Mechaniky, progres, balanc, monetizační model hry v produkci. Určuje retenci a výnos na hráče dřív, než se napíše řádek kódu.</td><td>C</td><td>Game designer</td><td>Aldy 40, Karlík 40</td><td>vzájemně</td><td>retence D1 a D7, ARPDAU proti cíli</td><td>držet</td></tr><tr><td>V6</td><td><strong>Programování a technická architektura.</strong> Feature, opravy, integrace SDK, výkon.</td><td>C</td><td>Programátor</td><td>Čoud 75, Milan 75, Mirek 50, Hutis 35</td><td>vzájemně</td><td>dodané feature za sprint, crash-free rate</td><td>držet, Hutis na 20</td></tr><tr><td>V7</td><td><strong>Herní art a UI.</strong> Postavy, prostředí, UI, animace do buildu.</td><td>C</td><td>Grafik DEV</td><td>David Č. 75, Peko 60, Aldy 10, Karlík 10</td><td>vzájemně</td><td>art podle plánu sprintu, počet vrácení</td><td>držet</td></tr><tr><td>V8</td><td><strong>Vedení projektu.</strong> Denní priority, zadání pro kód a art, řešení sporů v projektu, stav do hubu. Dosud nevyčíslené, proto to project leadům v kartách chybělo.</td><td>C</td><td>Project lead</td><td>Aldy 20, Karlík 20</td><td>vzájemně</td><td>sprint dodaný podle plánu, stav projektu v hubu bez dotazu</td><td>držet, zapsat číslo</td></tr><tr><td>V9</td><td><strong>Technický dluh, build pipeline a engine.</strong> Verze Unity, build stroje, sdílené knihovny, standard kódu a review. Bez toho roste doba buildu a každý projekt řeší totéž znovu.</td><td>P</td><td>Odborná autorita tech</td><td>Mirek 10</td><td>Čoud</td><td>doba buildu, blokující technické incidenty</td><td>držet</td></tr><tr><td>V10</td><td><strong>R&amp;D: prototypy a podklad pro greenlight.</strong> Nejvýš 2 sprinty na koncept, pak rozhodnutí. V Q4 bez nového titulu jen Hexapolis 2 a testy.</td><td>C</td><td>Vlastník segmentu + tým podle konceptu</td><td>David 15</td><td>Aldy, Karlík</td><td>rozhodnutí do 2 sprintů, ověřené koncepty za kvartál</td><td>zúžit na 10</td></tr><tr><td>V11</td><td><strong>Outsourcing a externí dodávky do vývoje.</strong> Zadání, převzetí a kontrola externích dodávek (art, překlady, externí designér).</td><td>P</td><td>Project lead (zadání a převzetí), Vlastník segmentu (smlouva a budget)</td><td>David 5</td><td>nevyžaduje</td><td>dodávky převzaté na první pokus</td><td>předat project leadům</td></tr></tbody></table></div><h3>4.3 P · Publishing a LiveOps</h3><div class="tscroll"><table><thead><tr><th>Kód</th><th>Činnost a proč se dělá</th><th>Vrstva</th><th>Role</th><th>Dnes nese (%)</th><th>Zástup</th><th>Výsledek / číslo</th><th>Tah</th></tr></thead><tbody><tr><td>P12</td><td><strong>QA a release readiness.</strong> Testplán, evidence chyb, rozhodnutí, jestli je build připravený ven.</td><td>C</td><td>QA lead</td><td>Hutis 40, Akimo 10 (release gate)</td><td>Akimo</td><td>kritické chyby v produkci po releasu: 0</td><td>držet, posílit testerem</td></tr><tr><td>P13</td><td><strong>Release management a platformy.</strong> Store konzole, review, game setup, rollout po procentech.</td><td>C</td><td>Publishing a LiveOps lead</td><td>Akimo 20</td><td>David</td><td>releasy v termínu, zamítnutí review: 0</td><td>držet</td></tr><tr><td>P14</td><td><strong>Produktová compliance.</strong> Privacy, rating, ATT, licence použitých assetů ve hře. V září se u licencí ukázalo, že nebylo jasné, kdo je řeší.</td><td>P</td><td>Publishing a LiveOps lead</td><td>Akimo 5</td><td>David</td><td>žádný incident na storech, audit 1× za kvartál</td><td>držet, zapsat vlastníka do Wiki</td></tr><tr><td>P15</td><td><strong>LiveOps vydaných titulů.</strong> Eventy, kalendář, battle pass, provozní monetizace uvnitř modelu. Hlavní téma Q4 (O3.4: 25 % revenue živého titulu z LiveOps).</td><td>C</td><td>Publishing a LiveOps lead</td><td>Akimo 20</td><td>David, výhledově Hutis</td><td>podíl LiveOps na revenue, kalendář 4 týdny dopředu</td><td>držet, v Q4 priorita</td></tr><tr><td>P16</td><td><strong>Provoz produktů.</strong> Servery, produktový cloud, monitoring, incidenty.</td><td>P</td><td>Publishing a LiveOps lead</td><td>Akimo 10</td><td>David</td><td>dostupnost, doba řešení incidentu</td><td>držet</td></tr><tr><td>P17</td><td><strong>Komunita hráčů, in-game komunikace a support.</strong> Odpovědi na recenze a tickety, oznámení ve hře. Dnes jen reaktivně.</td><td>P</td><td>Komunitní správce (neosazeno), do nástupu Publishing a LiveOps lead</td><td>Akimo 5</td><td>nevyžaduje</td><td>doba odpovědi, hodnocení na storech</td><td>najmout (O6.1), viz kap. 9</td></tr></tbody></table></div><h3>4.4 B · B2B</h3><div class="tscroll"><table><thead><tr><th>Kód</th><th>Činnost a proč se dělá</th><th>Vrstva</th><th>Role</th><th>Dnes nese (%)</th><th>Zástup</th><th>Výsledek / číslo</th><th>Tah</th></tr></thead><tbody><tr><td>B18</td><td><strong>B2B pipeline a nabídky.</strong> Scoping, pricing podle interních tarifů, dojednání. V Q4 bez outreache, jen RON_India a příchozí příležitosti.</td><td>C</td><td>B2B lead</td><td>David 10</td><td>nevyžaduje</td><td>marže nabídek, podpis další fáze RON_India</td><td>držet</td></tr><tr><td>B19</td><td><strong>B2B delivery.</strong> Vedení zakázky, klient, kontrola dodávky (playables a externí vývoj).</td><td>C</td><td>B2B lead (klient a marže), Programátor (výroba)</td><td>David 25</td><td>Čoud</td><td>skutečná marže proti odhadu, dodávky v termínu</td><td>předat výrobu po zakázkách, cíl 15 do konce Q4</td></tr><tr><td>B20</td><td><strong>Playable ads pro Marketing.</strong> Interní zakázka: zadání a priorita z Marketingu, výroba v Produkci stejnou pipeline jako B2B. Dnes bez rezervované kapacity.</td><td>P</td><td>Programátor (výroba), zadává Marketing přes vlastníky</td><td>nevyčísleno</td><td>nevyžaduje</td><td>playable dodaný do termínu kampaně, počet za kvartál</td><td>zapsat procento a jméno, viz kap. 9</td></tr></tbody></table></div><h3>4.5 D · Data a produkční tooling</h3><div class="tscroll"><table><thead><tr><th>Kód</th><th>Činnost a proč se dělá</th><th>Vrstva</th><th>Role</th><th>Dnes nese (%)</th><th>Zástup</th><th>Výsledek / číslo</th><th>Tah</th></tr></thead><tbody><tr><td>D21</td><td><strong>Datový stack, eventy v buildech a definice metrik.</strong> Co se loguje, jak se počítá retence a ROAS, aby celá firma četla jedno číslo.</td><td>P</td><td>Datový analytik</td><td>Kuba + AI 10 (hostuje z Marketingu)</td><td>nevyžaduje</td><td>jedna definice retence, pokrytí eventy</td><td>přechodně do 31. 12., pak rozhodnout</td></tr><tr><td>D22</td><td><strong>Herní analytika.</strong> Čtení dat, doporučení k ladění a monetizaci, vyhodnocení A/B testů.</td><td>P</td><td>Datový analytik</td><td>Kuba + AI 10, David 5</td><td>nevyžaduje</td><td>doporučení za sprint promítnutá do buildu</td><td>přechodně do 31. 12., pak rozhodnout</td></tr><tr><td>D23</td><td><strong>Herní backend a produkční tooling.</strong> Shared Game Backend, extrakce playables, nástroje zrychlující vývoj. Hub a AMA sem od teď nepatří, jdou pod Operations.</td><td>P</td><td>Vlastník segmentu, výhledově Programátor</td><td>David 25 včetně hubu</td><td>nikdo</td><td>SGB v prvním titulu (O5.4), každý nástroj s business casem</td><td>zúžit na 10, hub předat</td></tr><tr><td>D24</td><td><strong>Firemní web a produktové a CPI stránky.</strong> Technický provoz a nasazení. Obsah a marketingové části jsou Marketing.</td><td>S</td><td>Vlastník segmentu</td><td>David 5</td><td>nevyžaduje</td><td>stránky dostupné, nová stránka do 2 dnů od zadání</td><td>zautomatizovat šablonou</td></tr></tbody></table></div><h3>4.6 Co ze soupisu odchází mimo segment</h3><div class="tscroll"><table class="wordy"><thead><tr><th>Činnost</th><th>Dnes</th><th>Kam</th><th>Stav</th></tr></thead><tbody><tr><td>NoxHub a AMA: vývoj a provoz</td><td>David, část z D23</td><td>Operations, role DevOps</td><td>shoda 1. 10., zapsat</td></tr><tr><td>Licence assetů, vývojové nástroje, device park: evidence a nákup</td><td>David 5</td><td>Operations (evidence a nákup), odbornou potřebu určuje Produkce</td><td>návrh z 3. 9., bez odpovědi</td></tr><tr><td>AI vzdělávání firmy</td><td>David 10</td><td>Operations, bez vyhrazené kapacity</td><td>záznam 1. 10.</td></tr><tr><td>Kanceláře a faktický onboarding</td><td>Akimo</td><td>Operations, s vlastním budgetem</td><td>záznam 1. 10.</td></tr></tbody></table></div></section><section id="s5"><h2><span class="no">05</span>Role segmentu</h2><p>Jedenáct rolí. Role je balík činností s jedním výsledkem. Jeden člověk může nést víc rolí, každá má pak v jeho kartě vlastní číslo.</p><div class="tscroll"><table class="wordy"><thead><tr><th>Role</th><th>Účel jednou větou</th><th>Činnosti</th><th>Dnes nese</th><th>Zástup</th><th>Stav</th></tr></thead><tbody><tr><td><strong>Vlastník segmentu</strong></td><td>Segment dodává hry podle plánu, v budgetu a s lidmi, kteří vědí, co mají dělat.</td><td>R1 až R4, V10, D23, D24</td><td>David</td><td>Aldy (plán a kapacity)</td><td>osazeno, přetíženo</td></tr><tr><td><strong>Project lead</strong></td><td>Titul jde podle plánu sprintu a tým ví, co je dnes priorita.</td><td>V8, V11</td><td>Aldy, Karlík, každý na svých titulech</td><td>vzájemně</td><td>osazeno, formalizovat</td></tr><tr><td><strong>Game designer</strong></td><td>Hra drží hráče a vydělává podle cíle.</td><td>V5</td><td>Aldy, Karlík</td><td>vzájemně</td><td>osazeno</td></tr><tr><td><strong>Programátor</strong></td><td>Funkční a stabilní build podle zadání sprintu.</td><td>V6, výroba B19 a B20</td><td>Čoud, Milan, Mirek, Hutis</td><td>vzájemně</td><td>osazeno, Milan do 31. 10. (O6.3)</td></tr><tr><td><strong>Odborná autorita tech</strong></td><td>Jeden technický standard napříč tituly a rozhodnutý spor, když se projekty neshodnou.</td><td>V9, review a arbitráž ve V6</td><td>Mirek</td><td>Čoud</td><td>osazeno, roli napsat</td></tr><tr><td><strong>Grafik DEV</strong></td><td>Art a UI v buildu podle plánu sprintu.</td><td>V7</td><td>David Č., Peko</td><td>vzájemně</td><td>osazeno</td></tr><tr><td><strong>Odborná autorita art</strong></td><td>Jeden vizuální standard, review a mentoring grafiků.</td><td>review ve V7</td><td>Peko</td><td>nevyžaduje</td><td>osazeno, roli napsat</td></tr><tr><td><strong>Publishing a LiveOps lead</strong></td><td>Co je hotové, vyjde včas, žije a vydělává i po vydání.</td><td>P13 až P16, release gate v P12</td><td>Akimo</td><td>David</td><td>osazeno, na hraně kapacity</td></tr><tr><td><strong>QA lead</strong></td><td>Ven nejde build s kritickou chybou.</td><td>P12</td><td>Hutis</td><td>Akimo</td><td>osazeno, potvrdit</td></tr><tr><td><strong>B2B lead</strong></td><td>Zakázky s marží nad prahem, dodané v termínu.</td><td>B18, B19</td><td>David</td><td>Čoud (delivery)</td><td>osazeno vlastníkem segmentu, bez vlastního člověka</td></tr><tr><td><strong>Datový analytik</strong></td><td>Jedna pravda v číslech a doporučení, podle kterých se ladí hry.</td><td>D21, D22</td><td>přechodně Kuba + AI</td><td>nevyžaduje</td><td>přechodně do 31. 12.</td></tr></tbody></table></div><p><strong>Neosazená role k náboru:</strong> tester a komunitní správce (O6.1, půl QA, půl Discord). V QA půlce spadá pod QA leada (P12), v komunitní půlce nese P17.</p><p class="label"><strong>Role, které se vědomě nezřizují:</strong></p><ul class="points"><li><strong>Art lead DEV.</strong> Zadání pro grafiky jde přes project leady, kvalitu drží odborná autorita art.</li><li><strong>GD lead napříč tituly.</strong> Design leadership je součást role project leada, spory arbitruje vlastník segmentu.</li><li><strong>Tech lead napříč tituly.</strong> Zatím ne. Technická rozhodnutí per projekt, arbitrem je odborná autorita tech. Vrátit se k tomu po rozhodnutí o Milanovi (31. 10.).</li></ul></section><section id="s6"><h2><span class="no">06</span>Rozhodovací pásma rolí</h2><p>Bez částek a bez čísel úrovní, ty čekají na rozhodnutí o stupnici (T17) a na schvalovací matici.</p><div class="tscroll"><table class="wordy"><thead><tr><th>Role</th><th>Rozhoduje sama</th><th>Eskaluje, komu</th><th>Hodnotí se podle</th></tr></thead><tbody><tr><td><strong>Vlastník segmentu</strong></td><td>priority mezi projekty, obsazení lidí, čerpání uvnitř schváleného budgetu, odměna a setrvání lidí segmentu, provozní release</td><td>CEO: greenlight a ukončení titulu, nový headcount, překročení budgetu, víceletý závazek, zásah do IP a značky</td><td>profit segmentu proti plánu, milníky v termínu, utilizace 70 až 80 %</td></tr><tr><td><strong>Project lead</strong></td><td>denní priority, zadání pro kód a art, spory v projektu, žádost o outsourcing, vyřazení člověka z projektu</td><td>vlastník segmentu: změna rozsahu nebo termínu milníku, potřeba kapacity mimo projekt</td><td>sprinty dodané podle plánu, metriky titulu</td></tr><tr><td><strong>Game designer</strong></td><td>mechaniky, balanc a parametry uvnitř schváleného modelu</td><td>project lead: změna rozsahu. Vlastník segmentu: změna monetizačního modelu</td><td>retence a ARPDAU proti cíli</td></tr><tr><td><strong>Programátor</strong></td><td>způsob provedení, technické řešení uvnitř standardu</td><td>project lead: odhad mimo sprint. Autorita tech: odchylka od standardu</td><td>dodané feature, crash-free rate</td></tr><tr><td><strong>Odborná autorita tech</strong></td><td>standard kódu, verze enginu a knihoven, výsledek technického sporu mezi projekty</td><td>vlastník segmentu: změna s dopadem na termín nebo budget</td><td>doba buildu, blokující incidenty</td></tr><tr><td><strong>Grafik DEV</strong></td><td>způsob provedení uvnitř art direction</td><td>project lead: priorita a rozsah</td><td>art podle plánu, počet vrácení</td></tr><tr><td><strong>Odborná autorita art</strong></td><td>vizuální standard, výsledek art review</td><td>vlastník segmentu: změna stylu s dopadem na rozsah</td><td>konzistence, počet vrácení</td></tr><tr><td><strong>Publishing a LiveOps lead</strong></td><td>provozní releasy a hotfixy, liveops kalendář, monetizační parametry uvnitř modelu, komunikace ke hráčům</td><td>vlastník segmentu: změna monetizačního modelu, stažení titulu ze storu. CEO: krizová komunikace</td><td>releasy v termínu, podíl LiveOps na revenue, incidenty</td></tr><tr><td><strong>QA lead</strong></td><td>testplán, evidence, <strong>zastavit release</strong></td><td>vlastník segmentu: vydat build se známou chybou</td><td>kritické chyby v produkci: 0</td></tr><tr><td><strong>B2B lead</strong></td><td>scoping a cena nad prahem marže, přidělení lidí na zakázku uvnitř kapacitního plánu</td><td>CEO: zakázka pod prahem marže, závazek delší než kvartál, exkluzivita nebo zásah do IP</td><td>marže proti odhadu, dodávky v termínu</td></tr><tr><td><strong>Datový analytik</strong></td><td>definice metrik, metodika vyhodnocení testů</td><td>vlastník segmentu: změna definice, která mění historická čísla</td><td>doporučení promítnutá do buildu</td></tr></tbody></table></div><p><strong>Jednosměrné dveře Produkce</strong> (vždy přes CEO, bez ohledu na částku): greenlight nebo ukončení titulu, změna monetizačního modelu živé hry, podpis B2B zakázky s exkluzivitou nebo převodem IP, přijetí a propuštění, platformní závazek delší než rok.</p></section><section id="s7"><h2><span class="no">07</span>Lidé a role dnes</h2><div class="tscroll"><table class="wordy"><thead><tr><th>Člověk</th><th>Role</th><th>Dnes (%)</th><th>Po tazích (%)</th><th>Co se mění</th></tr></thead><tbody><tr><td><strong>David</strong></td><td>Vlastník segmentu, B2B lead</td><td>cca 150</td><td>cca 95 do konce Q4</td><td>hub do Operations, V11 na project leady, licence do Operations, AI vzdělávání bez vyhrazené kapacity, výroba B19 po zakázkách na programátory</td></tr><tr><td><strong>Akimo</strong></td><td>Publishing a LiveOps lead; hostuje v Operations (kanceláře, faktický onboarding)</td><td>70 + 25 až 30</td><td>70 + 10 až 15</td><td>HR a nábor u Martina B., kanceláře s budgetem a možností externisty, P17 odejde s nástupem komunitního správce</td></tr><tr><td><strong>Hutis</strong></td><td>QA lead, Programátor; hostuje v Operations (DevOps a IT)</td><td>75</td><td>40 + 20 + 15 = 75</td><td>programování z 35 na 20, jinak by byl na 90</td></tr><tr><td><strong>Aldy</strong></td><td>Project lead, Game designer</td><td>50 + nevyčísleno</td><td>20 + 40 + 10 art = 70</td><td>vedení projektu má číslo, přibývá V11 na vlastních titulech, zástup vlastníka za plán a kapacity</td></tr><tr><td><strong>Karlík</strong></td><td>Project lead, Game designer</td><td>50 + nevyčísleno</td><td>20 + 40 + 10 art = 70</td><td>stejně jako Aldy</td></tr><tr><td><strong>Čoud</strong></td><td>Programátor</td><td>75</td><td>75</td><td>výroba B2B zakázek uvnitř 75, zástup B19</td></tr><tr><td><strong>Milan</strong></td><td>Programátor</td><td>75</td><td>75</td><td>trvalý kontrakt, nebo ukončení do 31. 10. (O6.3)</td></tr><tr><td><strong>Mirek</strong></td><td>Odborná autorita tech, Programátor</td><td>60</td><td>60</td><td>role autority napsaná do Wiki, Hex 2 dostane projekt v hubu</td></tr><tr><td><strong>David Č.</strong></td><td>Grafik DEV</td><td>75</td><td>75</td><td>beze změny</td></tr><tr><td><strong>Peko</strong></td><td>Odborná autorita art, Grafik DEV</td><td>60 až 70</td><td>60 + MKT do 10</td><td>role autority napsaná, strop pro Marketing 10 %</td></tr></tbody></table></div><p>Po tazích zůstává nad 75 % jen vlastník segmentu. Pod 75 se dostane až po plné delegaci B2B delivery a herního backendu, tedy ne v Q4.</p></section><section id="s8"><h2><span class="no">08</span>Mezery a tahy</h2><p>U každé mezery právě jedna odpověď, jméno a termín.</p><div class="tscroll"><table><thead><tr><th>#</th><th>Mezera</th><th>Činnosti</th><th>Odpověď</th><th>Kdo a do kdy</th><th>Riziko, když se to nestane</th></tr></thead><tbody><tr><td>1</td><td>Vlastník segmentu na 150 %</td><td>R1 až R4, V10, B18, B19, D23</td><td><strong>předat</strong>: hub, V11, licence, výroba B19</td><td>David, vyhodnocení 26. 11.</td><td>trpí plán, kapacity a lidé, tedy jádro role</td></tr><tr><td>2</td><td>Data a analytika bez vlastního člověka</td><td>D21, D22</td><td><strong>přechodně</strong> Kuba + AI do 31. 12., pak rozhodnutí</td><td>David a Kuba, rozhodnout do 26. 11.</td><td>od 1. 1. činnost nemá nikdo, monetizace zůstane odhad</td></tr><tr><td>3</td><td>Aktivní komunita</td><td>P17</td><td><strong>najmout</strong> testera a komunitního správce</td><td>podle O6.1 do 30. 11., domovský segment rozhodnout dnes</td><td>Discord pro RC a SD bez správce, Akimo to vedle LiveOps neunese</td></tr><tr><td>4</td><td>Playable ads pro Marketing bez kapacity</td><td>B20</td><td><strong>zapsat</strong> procento a jméno do kapacitního plánu</td><td>David a Kuba, do 22. 10.</td><td>kampaně čekají na výrobu, která se dělá po večerech</td></tr><tr><td>5</td><td>Herní backend a tooling bez zástupu</td><td>D23</td><td><strong>zúžit a předat</strong>: SGB po prvním nasazení na programátora</td><td>David, po O5.4</td><td>výpadek stojí na jednom člověku</td></tr><tr><td>6</td><td>QA kapacita tenká</td><td>P12</td><td><strong>najmout</strong> (QA půlka nového člověka), do té doby Hutis 40 + Akimo gate</td><td>podle O6.1</td><td>chyby projdou do produkce při souběhu dvou releasů</td></tr><tr><td>7</td><td>Hutis ve třech rolích</td><td>V6, P12, DevOps</td><td><strong>zapsat</strong> 40 / 20 / 15 a zadávat přes vlastníky</td><td>David a Martin B., dnes</td><td>DevOps a QA si budou kapacitu brát potichu z programování</td></tr></tbody></table></div></section><section id="s9"><h2><span class="no">09</span>Hranice s Marketingem, Operations a EXEC</h2><h3>9.1 S Marketingem</h3><div class="tscroll"><table class="wordy"><thead><tr><th>Téma</th><th>Návrh Produkce</th><th>Otázka na Kubu</th></tr></thead><tbody><tr><td><strong>Herní analytika po 31. 12.</strong></td><td>Role Datový analytik patří Produkci. Q4 OKR říká, že se analytik do konce roku nehledá. Do 26. 11. rozhodnout jednu ze tří cest: nábor v Q1, trvalé hostování Kuby s procentem a platbou podle P4, nebo zúžení na automatické reporty v hubu.</td><td>Kterou z těch tří cest unese Marketing? Kolik z dnešních 30 % je po automatizaci reálně potřeba?</td></tr><tr><td><strong>Playable ads</strong></td><td>Výroba v Produkci (B20), zadání a pořadí z Marketingu, kapacita rezervovaná v plánu sprintu.</td><td>Kolik playables za kvartál Marketing potřebuje a s jakým předstihem přijde zadání?</td></tr><tr><td><strong>Tester a komunitní správce</strong></td><td>Domovsky Produkce: QA půlku vede QA lead, komunitu hráčů má podle T05 Produkce. Značkovou komunikaci a PR zadává Marketing přes vlastníky.</td><td>Nábor podle OKR vede Kuba. Souhlasí s domovským segmentem Produkce, nebo chce komunitní půlku pod sebou?</td></tr><tr><td><strong>Peko pro Marketing</strong></td><td>Strop 10 %, zadání přes vlastníky.</td><td>Stačí 10 % i pro další tranše Sector Defense?</td></tr><tr><td><strong>Ruda na Sector Defense</strong></td><td>Jednorázová výpomoc s launchem. Pokud má být trvalá, napsat procento do karty.</td><td>Jednorázově, nebo trvale?</td></tr><tr><td><strong>Release</strong></td><td>Co je v buildu a kdy jde ven: Produkce. Store page, ASO a kampaň: Marketing (T02).</td><td>potvrdit zápisem</td></tr></tbody></table></div><h3>9.2 S Operations</h3><div class="tscroll"><table class="wordy"><thead><tr><th>Téma</th><th>Návrh Produkce</th><th>Otázka na Martina B.</th></tr></thead><tbody><tr><td><strong>Hutis jako DevOps a IT</strong></td><td>Domovsky Produkce, 15 % pro Operations, zadání přes vlastníky. Architektonická rozhodnutí (síť, infrastruktura) posvěcuje odborná autorita tech.</td><td>Stačí 15 %? Co přesně je v balíku: hub, buildy, IT v kanceláři?</td></tr><tr><td><strong>Akimo</strong></td><td>Domovsky Produkce, pro Operations 10 až 15 %: balík kanceláří a faktický onboarding. HR a nábor u Martina B.</td><td>Platí rozdělení z 1. 10.? Jaký budget a jaká KPI dostane balík kanceláří?</td></tr><tr><td><strong>NoxHub</strong></td><td>Vlastní Operations. Produkce je uživatel a zadavatel přes roadmapu hubu. Herní backend (SGB) zůstává Produkci.</td><td>Kde je hranice mezi hubem a herním backendem u sdílených částí (účty, API)?</td></tr><tr><td><strong>Licence, nástroje, device park</strong></td><td>Evidence a nákup Operations, odbornou potřebu určuje Produkce.</td><td>Přebírá to Operations? Odkdy?</td></tr><tr><td><strong>Odborný onboarding</strong></td><td>Dělá lead, pod kterého člověk nastupuje, s přizvaným odborníkem na roli. Faktický onboarding Operations.</td><td>potvrdit zápisem</td></tr></tbody></table></div><h3>9.3 S EXEC a CEO</h3><ul class="points"><li><strong>Greenlight a ukončení titulu</strong> rozhoduje CEO na podklad Produkce. Experiment do 2 sprintů rozhoduje vlastník segmentu (T01).</li><li><strong>Legacy review</strong> (O3.6) vlastní Jirka. Produkce dodá dopad na kapacitu v P13 a P16.</li><li><strong>Zadání do segmentu jde přes vlastníka</strong> i od CEO (T06). Týká se hlavně přímých zadání project leadům a grafikům.</li></ul></section><section id="s10"><h2><span class="no">10</span>K potvrzení na poradě</h2><div class="tscroll"><table><thead><tr><th>#</th><th>Co potvrdit</th><th>Kdo rozhoduje</th></tr></thead><tbody><tr><td>1</td><td>Pět oblastí a 24 činností jako soupis Produkce</td><td>všichni</td></tr><tr><td>2</td><td>Jedenáct rolí z kap. 5 a tři role, které se vědomě nezřizují</td><td>všichni</td></tr><tr><td>3</td><td>Vedení projektu vyčíslené na 20 % u obou project leadů</td><td>David</td></tr><tr><td>4</td><td>Hutis 40 / 20 / 15: QA lead, programování, DevOps a IT pro Operations</td><td>David, Martin B.</td></tr><tr><td>5</td><td>Akimo: domovsky Produkce, pro Operations 10 až 15 % (kanceláře a faktický onboarding), HR u Martina B.</td><td>David, Martin B.</td></tr><tr><td>6</td><td>Hub, licence a AI vzdělávání odchází z Produkce do Operations</td><td>Martin B.</td></tr><tr><td>7</td><td>Playable ads pro Marketing: výroba v Produkci s rezervovaným procentem, jméno a číslo do 22. 10.</td><td>David, Kuba</td></tr><tr><td>8</td><td>Domovský segment testera a komunitního správce</td><td>Kuba, David, Jirka</td></tr><tr><td>9</td><td>Termín rozhodnutí o analytice po 31. 12.: do 26. 11.</td><td>David, Kuba, Jirka</td></tr></tbody></table></div></section><section id="s11"><h2><span class="no">11</span>Vstup pro rozpočtovou poradu 22. 10.</h2><p>Z tohoto podkladu vychází struktura budgetu Produkce. Čísla doplním po baseline od Martina B.</p><div class="tscroll"><table class="wordy"><thead><tr><th>Řádek budgetu</th><th>Z čeho se počítá</th></tr></thead><tbody><tr><td>Payroll domovských lidí</td><td>10 lidí podle kap. 7</td></tr><tr><td>Hostující kapacita přijatá</td><td>Kuba (D21, D22), Ruda a Ondra podle rozhodnutí z kap. 9.1</td></tr><tr><td>Hostující kapacita poskytnutá</td><td>Akimo 10 až 15 % a Hutis 15 % pro Operations, Peko do 10 % pro Marketing</td></tr><tr><td>Nábor</td><td>tester a komunitní správce podle domovského segmentu</td></tr><tr><td>Externí dodávky</td><td>outsourcing artu, překlady, externí designér (V11)</td></tr><tr><td>Produktový cloud a nástroje</td><td>servery, SDK, licence enginu a assetů (P16, V9)</td></tr><tr><td>R&amp;D obálka</td><td>prototypy do 2 sprintů (V10)</td></tr><tr><td>B2B</td><td>vlastní řádek s výnosem i nákladem, aby šla vidět marže zakázky (B18, B19)</td></tr></tbody></table></div></section><section id="s12"><h2><span class="no">12</span>Po poradě</h2><ul class="checks"><li>Zapracovat opravy z porady do tohoto podkladu a vystavit ho ve Wiki vedle Operations a EXEC.</li><li>Projít kartu s každým člověkem segmentu, opravit procenta podle reality.</li><li>Napsat role odborné autority tech a art (Mirek, Peko) a roli project leada do Wiki.</li><li>Dohodnout s Martinem B. balík DevOps a IT pro Hutise a zadávání přes vlastníky.</li><li>S Kubou vyčíslit playable ads na kvartál a zapsat jméno do kapacitního plánu.</li><li>Připravit návrh budgetu segmentu podle kap. 11 na 22. 10.</li><li>Aktualizovat <code>TRACKER_TEMAT.md</code>.</li></ul></section></main>
+<footer class="shell">
+  <div class="related"><a href="../Q4Plan/porada-2026-10-01-delegace-4.html">Delegace 4 · karty lidí</a><a href="priprava-2026-09-03-david.html">Příprava Produkce 3. 9.</a><a href="priprava-2026-09-03-role-a-cinnosti.html">Metoda: role a činnosti</a><a href="tracker-temat.html">Tracker témat</a></div>
+  <div class="colophon">NOXGAMES · interní podklad pro vedení · render z PRIPRAVA_2026-10-08_PRODUKCE.md</div>
+</footer>
+</body>
+</html>
