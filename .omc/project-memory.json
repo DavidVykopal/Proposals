@@ -1,0 +1,321 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1792735287814,
+  "projectRoot": "/Users/davidvykopal/Documents/Projects/_PROPOSALS",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "CPI_Tests": {
+      "path": "CPI_Tests",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1792735287807,
+      "keyFiles": [
+        "mecha-fortress-cpi-proposal-embedded.html",
+        "mecha-fortress-cpi-proposal.html"
+      ]
+    },
+    "Delegacni_Navrh": {
+      "path": "Delegacni_Navrh",
+      "purpose": null,
+      "fileCount": 32,
+      "lastAccessed": 1792735287807,
+      "keyFiles": [
+        "DELEGACNI_NAVRH.md",
+        "PORADA_2026-08-06_KOMPILAT.md",
+        "PORADA_2026-08-20_KOMPILAT.md",
+        "PRIPRAVA_2026-08-20_DAVID.md",
+        "PRIPRAVA_2026-08-20_ODDELENI.md"
+      ]
+    },
+    "HexaFort_Development": {
+      "path": "HexaFort_Development",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1792735287807,
+      "keyFiles": [
+        "budget-plan.csv",
+        "hexafort-development-proposal.html",
+        "preview.png"
+      ]
+    },
+    "Hexapolis_India": {
+      "path": "Hexapolis_India",
+      "purpose": null,
+      "fileCount": 10,
+      "lastAccessed": 1792735287808,
+      "keyFiles": [
+        "EMAIL_phases_budget_timeline.md",
+        "PRELIMINARY_AGREEMENT.md",
+        "PROJECT_BRIEF.md",
+        "PROTOTYPE_AGREEMENT.md",
+        "Rise of a nation- updated.pdf"
+      ]
+    },
+    "LEGO_BlockDefense": {
+      "path": "LEGO_BlockDefense",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1792735287808,
+      "keyFiles": [
+        "package.json",
+        "wrangler.jsonc"
+      ]
+    },
+    "Odmenovani_David": {
+      "path": "Odmenovani_David",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1792735287808,
+      "keyFiles": [
+        "NOXGAMES-Model-odmenovani-David-Vykopal.pdf",
+        "navrh-odmenovani.html"
+      ]
+    },
+    "PixelFederation_DiggyTD": {
+      "path": "PixelFederation_DiggyTD",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1792735287809,
+      "keyFiles": [
+        "package.json",
+        "wrangler.jsonc"
+      ]
+    },
+    "PostQ4Plan": {
+      "path": "PostQ4Plan",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1792735287809,
+      "keyFiles": [
+        "Q4_OKR_2026.md",
+        "ZAZNAM_2026-09-24_EXEC_PORADA.md",
+        "q4-kickoff-prezentace.html",
+        "q4-kickoff-prezentace.pdf",
+        "q4-vystup.html"
+      ]
+    },
+    "PuppetSports_Revival": {
+      "path": "PuppetSports_Revival",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1792735287810,
+      "keyFiles": [
+        "CONTACTS.csv",
+        "EMAIL_TEMPLATES.md",
+        "OUTREACH.md",
+        "OUTREACH_CZ_2026-09.md",
+        "README.md"
+      ]
+    },
+    "Q4Plan": {
+      "path": "Q4Plan",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1792735287810,
+      "keyFiles": [
+        "PORADA_2026-09-24_Q4_PLAN.md",
+        "PORADA_2026-10-01_DELEGACE_4.md",
+        "Q4_OKR_2026.md",
+        "ZAZNAM_2026-09-24_EXEC_PORADA.md",
+        "build_q4.py"
+      ]
+    },
+    "Rozpocet_2027_Odmenovani": {
+      "path": "Rozpocet_2027_Odmenovani",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1792735287811,
+      "keyFiles": [
+        "NOXGAMES-Vydaje-odmenovani-rozpocet-2027.pdf",
+        "rozpocet-2027.html"
+      ]
+    },
+    "Vanecek_DesignReview": {
+      "path": "Vanecek_DesignReview",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1792735287811,
+      "keyFiles": [
+        "package.json",
+        "wrangler.jsonc"
+      ]
+    },
+    "Warhorse_KCD_Dominion": {
+      "path": "Warhorse_KCD_Dominion",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1792735287812,
+      "keyFiles": [
+        "package.json",
+        "wrangler.jsonc"
+      ]
+    },
+    "Warhorse_KCD_TowerDefense": {
+      "path": "Warhorse_KCD_TowerDefense",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1792735287812,
+      "keyFiles": [
+        "package.json",
+        "wrangler.jsonc"
+      ]
+    },
+    "CPI_Tests/assets": {
+      "path": "CPI_Tests/assets",
+      "purpose": "Static assets",
+      "fileCount": 5,
+      "lastAccessed": 1792735287812,
+      "keyFiles": [
+        "README.md",
+        "T1-CPI.png",
+        "T2-CPI.png"
+      ]
+    },
+    "HexaFort_Development/assets": {
+      "path": "HexaFort_Development/assets",
+      "purpose": "Static assets",
+      "fileCount": 1,
+      "lastAccessed": 1792735287813,
+      "keyFiles": [
+        "noxgames-logo.png"
+      ]
+    },
+    "LEGO_BlockDefense/public": {
+      "path": "LEGO_BlockDefense/public",
+      "purpose": "Public files",
+      "fileCount": 1,
+      "lastAccessed": 1792735287813,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "PixelFederation_DiggyTD/public": {
+      "path": "PixelFederation_DiggyTD/public",
+      "purpose": "Public files",
+      "fileCount": 1,
+      "lastAccessed": 1792735287813,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "PostQ4Plan/assets": {
+      "path": "PostQ4Plan/assets",
+      "purpose": "Static assets",
+      "fileCount": 1,
+      "lastAccessed": 1792735287813,
+      "keyFiles": [
+        "noxgames-logo.png"
+      ]
+    },
+    "PuppetSports_Revival/public": {
+      "path": "PuppetSports_Revival/public",
+      "purpose": "Public files",
+      "fileCount": 9,
+      "lastAccessed": 1792735287813,
+      "keyFiles": [
+        "PuppetSports-Partnership-CS.pdf",
+        "PuppetSports-Partnership-EN.pdf",
+        "emails.html"
+      ]
+    },
+    "Q4Plan/assets": {
+      "path": "Q4Plan/assets",
+      "purpose": "Static assets",
+      "fileCount": 1,
+      "lastAccessed": 1792735287814,
+      "keyFiles": [
+        "noxgames-logo.png"
+      ]
+    },
+    "Vanecek_DesignReview/public": {
+      "path": "Vanecek_DesignReview/public",
+      "purpose": "Public files",
+      "fileCount": 3,
+      "lastAccessed": 1792735287814,
+      "keyFiles": [
+        "index.html",
+        "prototype.html",
+        "vanecek-analysis.pdf"
+      ]
+    },
+    "Warhorse_KCD_Dominion/public": {
+      "path": "Warhorse_KCD_Dominion/public",
+      "purpose": "Public files",
+      "fileCount": 1,
+      "lastAccessed": 1792735287814,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "Warhorse_KCD_TowerDefense/public": {
+      "path": "Warhorse_KCD_TowerDefense/public",
+      "purpose": "Public files",
+      "fileCount": 1,
+      "lastAccessed": 1792735287814,
+      "keyFiles": [
+        "index.html"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "Delegacni_Navrh/PRIPRAVA_2026-10-29.md",
+      "accessCount": 3,
+      "lastAccessed": 1792736472429,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/PRIPRAVA_2026-10-22_DAVID.md",
+      "accessCount": 2,
+      "lastAccessed": 1792613812174,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/TRACKER_TEMAT.md",
+      "accessCount": 2,
+      "lastAccessed": 1792736492899,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/roastroom-2026-10-20-bonus-gate.html",
+      "accessCount": 1,
+      "lastAccessed": 1792614797852,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/PORADA_2026-10-22_KOMPILAT.md",
+      "accessCount": 1,
+      "lastAccessed": 1792736406323,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

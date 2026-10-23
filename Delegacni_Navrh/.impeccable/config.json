@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "Delegacni_Navrh/roastroom-2026-10-20-bonus-gate.html"
+        ],
+        "createdAt": "2026-10-21T20:33:38.580Z",
+        "reason": "claude: measured all text/background token pairs, lowest 4.56:1 light and 6.23:1 dark, all pass AA"
+      }
+    ]
+  }
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Bonus Gate · Roast Room</title>
+<style>
+  :root {
+    --bg: #fbfaf7; --ink: #1d1c1a; --ink-2: #5d5a55; --rule: #d9d4ca; --soft: #f1eee7;
+    --accent: #b4532a; --go: #2f7a4b; --go-bg: #e6f2ea;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a1916; --ink: #ece8df; --ink-2: #b3ada2; --rule: #3a3833; --soft: #24221e;
+      --accent: #e59770; --go: #7fcf9b; --go-bg: #1f3027;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a1916; --ink: #ece8df; --ink-2: #b3ada2; --rule: #3a3833; --soft: #24221e;
+    --accent: #e59770; --go: #7fcf9b; --go-bg: #1f3027;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 Georgia, "Times New Roman", serif; }
+  .page { max-width: 820px; margin: 0 auto; padding: 40px 16px 56px; }
+  .sans { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 24px; }
+  .kicker { font: 600 0.78rem/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: normal; line-height: 1.15; margin: 6px 0 8px; }
+  .lede { color: var(--ink-2); margin: 0; }
+  h2 { font-size: 1.25rem; margin: 34px 0 10px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  h3 { font-size: 1rem; font-style: italic; font-weight: normal; margin: 18px 0 4px; }
+  p { margin: 8px 0; }
+  .verdict { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; background: var(--go-bg); border-left: 4px solid var(--go); padding: 18px 20px; border-radius: 4px; }
+  .badge { font: 700 1.5rem/1 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--go); letter-spacing: 0.04em; }
+  .badge small { display: block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.08em; margin-top: 6px; color: var(--ink-2); text-transform: uppercase; }
+  .verdict p { margin: 0; font-size: 1.05rem; }
+  .verdict .meta { margin-top: 10px; font: 0.88rem/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); }
+  .tscroll { overflow-x: auto; margin: 10px 0 6px; }
+  table { width: 100%; border-collapse: collapse; font: 0.9rem/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+  th { text-align: left; font-weight: 600; border-bottom: 1.5px solid var(--ink); padding: 6px 10px 6px 0; white-space: nowrap; }
+  td { border-bottom: 1px solid var(--rule); padding: 7px 10px 7px 0; vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.rec td { font-weight: 600; }
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; color: var(--go); margin-left: 8px; }
+  .bar { display: inline-block; height: 8px; border-radius: 2px; background: var(--rule); vertical-align: middle; margin-right: 8px; }
+  tr.rec .bar { background: var(--go); }
+  .note { font: 0.84rem/1.45 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); }
+  ul, ol { padding-left: 1.3em; margin: 8px 0; }
+  li { margin: 6px 0; }
+  .quote { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; margin: 10px 0; font-style: italic; }
+  .quote cite { display: block; font-style: normal; font: 0.84rem -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--ink-2); margin-top: 4px; }
+  .who { font-weight: bold; }
+  .steps { list-style: none; padding: 0; }
+  .steps li { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule); margin: 0; }
+  .steps .when { font: 600 0.85rem/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--accent); }
+  .box { background: var(--soft); padding: 12px 16px; border-radius: 4px; margin: 10px 0; }
+  footer { margin-top: 40px; padding-top: 10px; border-top: 1px solid var(--rule); }
+  @media (max-width: 560px) {
+    .verdict { grid-template-columns: 1fr; gap: 10px; }
+    .steps li { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media print { body { background: #fff; } .page { padding: 0; } h2 { break-after: avoid; } tr, li { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="kicker">Roast Room · Verdict report · October 20, 2026</div>
+  <h1>Staff bonus gate at $500k</h1>
+  <p class="lede">The $500k EBITDA gate won't open in 2026. Pay staff for the turnaround, and fix the scheme?</p>
+  <p class="note">Full council · 7 advisors · 3 rounds · Internal, leadership only</p>
+</header>
+
+<section>
+  <div class="verdict">
+    <div class="badge">GO<small>Council's call</small></div>
+    <div>
+      <p><strong>Option D:</strong> pay staff a $56k turnaround reward in December, move $25k of management's bonus into a June 2027 staff retention top-up, show both at a live all-hands by Dec 15, and from 2027 run one pool for everyone: 40% of Adjusted EBITDA above $100k.</p>
+      <div class="meta">Confidence 7/10 · 2 endorse, 5 amend, 0 dissent · Support for the resolution 8.1/10</div>
+    </div>
+  </div>
+</section>
+
+<h2>Scores</h2>
+<div class="tscroll">
+<table>
+  <thead><tr><th></th><th>Option</th><th class="num">Score</th></tr></thead>
+  <tbody>
+    <tr><td>A</td><td>Keep the gate, pay nothing</td><td class="num"><span class="bar" style="width:16px"></span>1.6</td></tr>
+    <tr><td>B</td><td>One-off discretionary 2026 pool</td><td class="num"><span class="bar" style="width:46px"></span>4.6</td></tr>
+    <tr><td>C</td><td>Move the gate now (to ~$300k)</td><td class="num"><span class="bar" style="width:25px"></span>2.5</td></tr>
+    <tr class="rec"><td>D</td><td>One-off pool now + new scheme for 2027<span class="tag">RECOMMENDED</span></td><td class="num"><span class="bar" style="width:90px"></span>9.0</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">Each advisor scores every option from 1 to 10, weighted by how much their area matters to this decision.</p>
+
+<h2>Why the council landed here</h2>
+<ul>
+  <li><span class="who">Dan Martell:</span> Keeping the gate loses the team to save $56k, about 0.6 months of reserve.</li>
+  <li><span class="who">Warren Buffett:</span> The hidden ungated $91k management bonus is the real trust problem; disclose it and have management fund part of the fix.</li>
+  <li><span class="who">Gino Wickman:</span> Moving the gate teaches that targets bend; a one-off reward plus a new rule fixes the root.</li>
+  <li><span class="who">Alex Hormozi:</span> One pool only works if it carries management: 40% above $100k gives staff about $58k at Conservative.</li>
+</ul>
+
+<h2>How each advisor scored it</h2>
+<div class="tscroll">
+<table>
+  <thead><tr><th>Advisor</th><th class="num">Weight</th><th class="num">A</th><th class="num">B</th><th class="num">C</th><th class="num">D</th><th>Vote</th></tr></thead>
+  <tbody>
+    <tr><td>Jeff Bezos</td><td class="num">2</td><td class="num">2</td><td class="num">4</td><td class="num">3</td><td class="num">9</td><td>Amend</td></tr>
+    <tr><td>Paul Graham</td><td class="num">1</td><td class="num">2</td><td class="num">5</td><td class="num">3</td><td class="num">9</td><td>Endorse</td></tr>
+    <tr><td>Alex Hormozi</td><td class="num">2</td><td class="num">1</td><td class="num">4</td><td class="num">2</td><td class="num">9</td><td>Amend</td></tr>
+    <tr><td>Gary Vaynerchuk</td><td class="num">1</td><td class="num">2</td><td class="num">5</td><td class="num">3</td><td class="num">9</td><td>Endorse</td></tr>
+    <tr><td>Dan Martell</td><td class="num">3</td><td class="num">1</td><td class="num">5</td><td class="num">3</td><td class="num">9</td><td>Amend</td></tr>
+    <tr><td>Gino Wickman</td><td class="num">2</td><td class="num">2</td><td class="num">4</td><td class="num">2</td><td class="num">9</td><td>Amend</td></tr>
+    <tr><td>Warren Buffett</td><td class="num">3</td><td class="num">2</td><td class="num">5</td><td class="num">2</td><td class="num">9</td><td>Amend</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>The 2027 rule</h2>
+<div class="box">40% of pre-bonus Adjusted EBITDA above $100k, staff at least two thirds, split by the existing seniority and position multipliers, capped at three months' pay each. Paid in two halves, at year close and six months later, to people still employed, and only if the cash reserve stays at 8 months or more.</div>
+<div class="tscroll">
+<table>
+  <thead><tr><th>2027 outcome</th><th class="num">Adj. EBITDA</th><th class="num">Pool</th><th class="num">Staff (≥ 2/3)</th><th class="num">Company keeps</th></tr></thead>
+  <tbody>
+    <tr><td>Trend</td><td class="num">$246k</td><td class="num">$58k</td><td class="num">$39k</td><td class="num">$188k</td></tr>
+    <tr><td>Conservative</td><td class="num">$317k</td><td class="num">$87k</td><td class="num">$58k</td><td class="num">$230k</td></tr>
+    <tr><td>Favorable</td><td class="num">$382k</td><td class="num">$113k</td><td class="num">$75k</td><td class="num">$269k</td></tr>
+    <tr><td>Maximum</td><td class="num">$482k</td><td class="num">$153k</td><td class="num">$102k</td><td class="num">$329k</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">At Conservative the company keeps $230k, against $170k in 2026. Management's share falls from $91k to at most $29k.</p>
+
+<h2>Conditions before the Dec 15 announcement</h2>
+<ol>
+  <li>Dec 1 forecast: 2026 Adjusted EBITDA at least $200k, otherwise halve the reward to $28k (never to zero).</li>
+  <li>Cash reserve stays at 9 months or more after the payout (estimated about 9.4).</li>
+  <li>By Dec 1, management signs the $25k transfer and the 2027 rule, after seeing its own line in all four scenarios.</li>
+  <li>By Dec 10, a one-pager with a named owner who is not the founder, a written list of allowed EBITDA adjustments (no capitalized development counted as profit), and changes applying only to future years.</li>
+  <li>Two senior developers read the one-pager and both call it a raise, not a cut.</li>
+</ol>
+
+<h2>Watch out</h2>
+<div class="quote">"I'd still have taken a $150k floor, but $100k with the three-month cap is something I can live with."<cite>Gino Wickman</cite></div>
+<p><strong>For this to be right:</strong> 2027 does not land near Trend while the new titles burn cash. If it does, a low floor drains the reserve.</p>
+<p><strong>Least-tested assumption:</strong> management accepts a cut from $91k to about $29k at Conservative. If management signs without seeing its own numbers, the side deal comes back.</p>
+
+<h2>What to do next</h2>
+<ul class="steps">
+  <li><span class="when">This week</span><span>Name a non-founder scheme owner and model all four scenarios with management's line.</span></li>
+  <li><span class="when">Dec 1</span><span>Forecast check (at least $200k) and management signs on its own numbers.</span></li>
+  <li><span class="when">Dec 10</span><span>One-pager finished; cheapest test with two senior developers.</span></li>
+  <li><span class="when">Dec 15</span><span>Live all-hands: both bonus lines and the 2027 rule on one slide, thank each person by name. Reward paid with December payroll.</span></li>
+  <li><span class="when">Jun 30, 2027</span><span>Retention top-up ($25k of management money) paid to everyone still employed.</span></li>
+  <li><span class="when">Feb 2028</span><span>Revisit with 2027 Adjusted EBITDA, reserve months, retention and new-title launch results.</span></li>
+</ul>
+<p><strong>Cheapest test:</strong> show the one-page 2027 rule to two senior developers before Dec 10 and ask whether it reads as a raise or a cut.</p>
+<p><strong>Kill it if:</strong> management refuses the 2027 rule: don't announce one pool (pay the 2026 reward and disclose anyway). Forecast under $200k or reserve under 9 months: halve the reward.</p>
+
+<h2>Where they fought</h2>
+<h3>Lump sum or deferred?</h3>
+<p>Wickman argued deferral; five seats said earned pay gets no strings. Resolved: lump sum plus $25k of management money paid in June 2027 to people still employed.</p>
+<h3>Fix the management bonus from 2027 or now?</h3>
+<p>Opened 5–2 for 2027. Graham showed that announcing one pool discloses it anyway; by Round 3 all seven backed disclosure and the $25k transfer.</p>
+<h3>2027 formula numbers</h3>
+<p>Floors from $100k to $200k and shares from 15% to 50%. Once management was priced in, five seats raised their numbers; the draft took 40% above $100k. Wickman still prefers $150k.</p>
+
+<footer class="note">
+  Roast Room session 2026-10-20 · staff-bonus-gate. Simulated advisors built from each person's public work. They are not the people and do not speak for them.
+</footer>
+
+</div>
+</body>
+</html>

@@ -8,7 +8,12 @@
 > Plán schůzek: `TEMATA_DALSICH_PORAD.md` · Kompiláty: `PORADA_2026-08-06_KOMPILAT.md`,
 > `PORADA_2026-08-20_KOMPILAT.md` · Delegační návrh: `DELEGACNI_NAVRH.md`
 >
-> **Poslední aktualizace: 22. 8. 2026, po poradě 20. 8.**
+> **Poslední aktualizace: 23. 10. 2026, po poradě 22. 10.** (doplněna jen kap. 2 a úkoly z 22. 10.)
+>
+> **Pozor:** porady 3. 9., 21. 9., 1. 10. a 8. 10. se do tohoto trackeru nepropsaly. Jejich
+> rozhodnutí jsou sjednocená ve Wiki (Procesy → Delegační dekrety → Rejstřík, D01 až D06),
+> která je od 15. 10. živým zdrojem stavu. Kapitoly 1, 3 až 8 tu odpovídají stavu k 22. 8.
+> Rozhodnutí z 22. 10. mají číslování R-22-xx a úkoly U-22-xx (`PORADA_2026-10-22_KOMPILAT.md`).
 
 ---
 
@@ -83,6 +88,37 @@ do konce roku hotové:
 | **R09** | **Přístup k datům**: vlastníci segmentů mají absolutní přístup ke všem datům svého segmentu a ke klíčovým datům celé firmy |
 
 **Ke zpracování:** R05 až R09 zapsat jako dekret do Wiki (úkol U05).
+
+### Z porad 3. 9. až 8. 10. 2026
+
+Zapsáno ve Wiki: D03 (budgety, personální pravomoci, reporting, 21. 9.), D04 (pravidla
+delegace, část čeká na potvrzení), D05 (fix + variabilní složka, budgety po segmentech,
+testovací režim, roční plánování od prosince, H2 cíl z Adjusted EBITDA, 1. 10.), D06 (role
+a činnosti segmentů, 1. 10. a 8. 10.), CPI testy patří Marketingu (8. 10.).
+
+### Z porady 22. 10. 2026
+
+| # | Rozhodnutí | Stav | Dekret |
+|---|---|---|---|
+| **R-22-01** | Gate H2 2026 se neposouvá, stupně se zpětně nemění | shoda | D05 |
+| **R-22-02** | Za 2026 jednorázová odměna týmu i bez splnění stupně 500k | shoda, výše 29. 10. | D05 |
+| **R-22-03** | Exekutiva a foundeři z odměny vyjmutí, týmu se řekne princip bez částek | shoda | D05 |
+| **R-22-04** | Klíč váhově podle měsíční odměny, minimum na člověka, bez seniority matice | směr | D05 |
+| **R-22-05** | Odměna se představí na all-hands spolu s pravidlem 2027 | shoda | D05 |
+| **R-22-06** | 2027: jeden bonusový pool („prasátko“) plněný měsíčně ze zisku, výplata po prvním stupni | princip | D05 |
+| **R-22-07** | Sazba poolu nebude 40 % Adj. EBITDA, určí se z modelu | otevřeno | D05 |
+| **R-22-08** | Fix podle role a odpovědností + bonus i malus podle cílů s mentorem, jeden systém | princip | D05 |
+| **R-22-09** | Revize fixu jednou ročně | shoda | D05 |
+| **R-22-10** | Odměna za přinesený deal nebo úsporu, ne procento z úspory | princip | D05 |
+| **R-22-11** | Rozpočet: pevná část z reálných dat + volná část 4 až 6 %, nevyčerpané do rezervy | shoda | D05 |
+| **R-22-12** | Rozhodná částka pevně 50 / 150 tis. Kč, opakované závazky celkovou částkou | shoda | D03 |
+| **R-22-13** | UA mimo položkové limity, řízené návratností a cashflow rámcem | shoda | D03, D05 |
+| **R-22-14** | Rozpočtové provizorium od 1. 1. 2027, OKR a budgety do 15. 1. | shoda | D05 |
+| **R-22-15** | Akimo domovsky Operations, Hutis Produkce + DevOps pro Operations, playables vyrábí Produkce, komunita stávajících hráčů Produkce, noví hráči Marketing, analytika Produkce | shoda | D04, segmenty |
+
+Úkoly U-22-01 až U-22-12 jsou v kompilátu 22. 10., kap. 10. Hlavní: Martin B. scénáře
+jednorázové odměny a odhad rozpočtu 2027, David varianty struktury fixu s bonusy, vše na
+poradu **29. 10. 2026 v 10:00** (`PRIPRAVA_2026-10-29.md`).
 
 ---
 
