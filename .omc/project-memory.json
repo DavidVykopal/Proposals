@@ -287,27 +287,27 @@
   },
   "hotPaths": [
     {
+      "path": "Delegacni_Navrh/model_odmenovani_2027.py",
+      "accessCount": 5,
+      "lastAccessed": 1793205005657,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/PRIPRAVA_2026-10-29_ODMENOVANI.md",
+      "accessCount": 5,
+      "lastAccessed": 1793205005999,
+      "type": "file"
+    },
+    {
       "path": "Delegacni_Navrh/PRIPRAVA_2026-10-29.md",
       "accessCount": 4,
       "lastAccessed": 1793189735519,
       "type": "file"
     },
     {
-      "path": "Delegacni_Navrh/PRIPRAVA_2026-10-29_ODMENOVANI.md",
-      "accessCount": 4,
-      "lastAccessed": 1793197137693,
-      "type": "file"
-    },
-    {
       "path": "Delegacni_Navrh/PRIPRAVA_2026-10-22_DAVID.md",
       "accessCount": 3,
       "lastAccessed": 1793189739644,
-      "type": "file"
-    },
-    {
-      "path": "Delegacni_Navrh/model_odmenovani_2027.py",
-      "accessCount": 3,
-      "lastAccessed": 1793197043272,
       "type": "file"
     },
     {
