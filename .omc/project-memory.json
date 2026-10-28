@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1792735287814,
+  "lastScanned": 1793189402331,
   "projectRoot": "/Users/davidvykopal/Documents/Projects/_PROPOSALS",
   "techStack": {
     "languages": [],
@@ -36,7 +36,7 @@
       "path": "CPI_Tests",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1792735287807,
+      "lastAccessed": 1793189402311,
       "keyFiles": [
         "mecha-fortress-cpi-proposal-embedded.html",
         "mecha-fortress-cpi-proposal.html"
@@ -45,21 +45,21 @@
     "Delegacni_Navrh": {
       "path": "Delegacni_Navrh",
       "purpose": null,
-      "fileCount": 32,
-      "lastAccessed": 1792735287807,
+      "fileCount": 36,
+      "lastAccessed": 1793189402313,
       "keyFiles": [
         "DELEGACNI_NAVRH.md",
         "PORADA_2026-08-06_KOMPILAT.md",
         "PORADA_2026-08-20_KOMPILAT.md",
-        "PRIPRAVA_2026-08-20_DAVID.md",
-        "PRIPRAVA_2026-08-20_ODDELENI.md"
+        "PORADA_2026-10-22_KOMPILAT.md",
+        "PRIPRAVA_2026-08-20_DAVID.md"
       ]
     },
     "HexaFort_Development": {
       "path": "HexaFort_Development",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1792735287807,
+      "lastAccessed": 1793189402313,
       "keyFiles": [
         "budget-plan.csv",
         "hexafort-development-proposal.html",
@@ -70,7 +70,7 @@
       "path": "Hexapolis_India",
       "purpose": null,
       "fileCount": 10,
-      "lastAccessed": 1792735287808,
+      "lastAccessed": 1793189402314,
       "keyFiles": [
         "EMAIL_phases_budget_timeline.md",
         "PRELIMINARY_AGREEMENT.md",
@@ -83,7 +83,7 @@
       "path": "LEGO_BlockDefense",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1792735287808,
+      "lastAccessed": 1793189402314,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -93,7 +93,7 @@
       "path": "Odmenovani_David",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1792735287808,
+      "lastAccessed": 1793189402316,
       "keyFiles": [
         "NOXGAMES-Model-odmenovani-David-Vykopal.pdf",
         "navrh-odmenovani.html"
@@ -103,7 +103,7 @@
       "path": "PixelFederation_DiggyTD",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1792735287809,
+      "lastAccessed": 1793189402317,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -113,7 +113,7 @@
       "path": "PostQ4Plan",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1792735287809,
+      "lastAccessed": 1793189402317,
       "keyFiles": [
         "Q4_OKR_2026.md",
         "ZAZNAM_2026-09-24_EXEC_PORADA.md",
@@ -126,7 +126,7 @@
       "path": "PuppetSports_Revival",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1792735287810,
+      "lastAccessed": 1793189402318,
       "keyFiles": [
         "CONTACTS.csv",
         "EMAIL_TEMPLATES.md",
@@ -139,7 +139,7 @@
       "path": "Q4Plan",
       "purpose": null,
       "fileCount": 23,
-      "lastAccessed": 1792735287810,
+      "lastAccessed": 1793189402318,
       "keyFiles": [
         "PORADA_2026-09-24_Q4_PLAN.md",
         "PORADA_2026-10-01_DELEGACE_4.md",
@@ -152,7 +152,7 @@
       "path": "Rozpocet_2027_Odmenovani",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1792735287811,
+      "lastAccessed": 1793189402319,
       "keyFiles": [
         "NOXGAMES-Vydaje-odmenovani-rozpocet-2027.pdf",
         "rozpocet-2027.html"
@@ -162,7 +162,7 @@
       "path": "Vanecek_DesignReview",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1792735287811,
+      "lastAccessed": 1793189402323,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -172,7 +172,7 @@
       "path": "Warhorse_KCD_Dominion",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1792735287812,
+      "lastAccessed": 1793189402324,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -182,7 +182,7 @@
       "path": "Warhorse_KCD_TowerDefense",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1792735287812,
+      "lastAccessed": 1793189402324,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -192,7 +192,7 @@
       "path": "CPI_Tests/assets",
       "purpose": "Static assets",
       "fileCount": 5,
-      "lastAccessed": 1792735287812,
+      "lastAccessed": 1793189402325,
       "keyFiles": [
         "README.md",
         "T1-CPI.png",
@@ -203,7 +203,7 @@
       "path": "HexaFort_Development/assets",
       "purpose": "Static assets",
       "fileCount": 1,
-      "lastAccessed": 1792735287813,
+      "lastAccessed": 1793189402327,
       "keyFiles": [
         "noxgames-logo.png"
       ]
@@ -212,7 +212,7 @@
       "path": "LEGO_BlockDefense/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1792735287813,
+      "lastAccessed": 1793189402328,
       "keyFiles": [
         "index.html"
       ]
@@ -221,7 +221,7 @@
       "path": "PixelFederation_DiggyTD/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1792735287813,
+      "lastAccessed": 1793189402329,
       "keyFiles": [
         "index.html"
       ]
@@ -230,7 +230,7 @@
       "path": "PostQ4Plan/assets",
       "purpose": "Static assets",
       "fileCount": 1,
-      "lastAccessed": 1792735287813,
+      "lastAccessed": 1793189402329,
       "keyFiles": [
         "noxgames-logo.png"
       ]
@@ -239,7 +239,7 @@
       "path": "PuppetSports_Revival/public",
       "purpose": "Public files",
       "fileCount": 9,
-      "lastAccessed": 1792735287813,
+      "lastAccessed": 1793189402330,
       "keyFiles": [
         "PuppetSports-Partnership-CS.pdf",
         "PuppetSports-Partnership-EN.pdf",
@@ -250,7 +250,7 @@
       "path": "Q4Plan/assets",
       "purpose": "Static assets",
       "fileCount": 1,
-      "lastAccessed": 1792735287814,
+      "lastAccessed": 1793189402330,
       "keyFiles": [
         "noxgames-logo.png"
       ]
@@ -259,7 +259,7 @@
       "path": "Vanecek_DesignReview/public",
       "purpose": "Public files",
       "fileCount": 3,
-      "lastAccessed": 1792735287814,
+      "lastAccessed": 1793189402331,
       "keyFiles": [
         "index.html",
         "prototype.html",
@@ -270,7 +270,7 @@
       "path": "Warhorse_KCD_Dominion/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1792735287814,
+      "lastAccessed": 1793189402331,
       "keyFiles": [
         "index.html"
       ]
@@ -279,7 +279,7 @@
       "path": "Warhorse_KCD_TowerDefense/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1792735287814,
+      "lastAccessed": 1793189402331,
       "keyFiles": [
         "index.html"
       ]
@@ -288,14 +288,26 @@
   "hotPaths": [
     {
       "path": "Delegacni_Navrh/PRIPRAVA_2026-10-29.md",
-      "accessCount": 3,
-      "lastAccessed": 1792736472429,
+      "accessCount": 4,
+      "lastAccessed": 1793189735519,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/PRIPRAVA_2026-10-29_ODMENOVANI.md",
+      "accessCount": 4,
+      "lastAccessed": 1793197137693,
       "type": "file"
     },
     {
       "path": "Delegacni_Navrh/PRIPRAVA_2026-10-22_DAVID.md",
-      "accessCount": 2,
-      "lastAccessed": 1792613812174,
+      "accessCount": 3,
+      "lastAccessed": 1793189739644,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/model_odmenovani_2027.py",
+      "accessCount": 3,
+      "lastAccessed": 1793197043272,
       "type": "file"
     },
     {
@@ -305,15 +317,15 @@
       "type": "file"
     },
     {
-      "path": "Delegacni_Navrh/roastroom-2026-10-20-bonus-gate.html",
-      "accessCount": 1,
-      "lastAccessed": 1792614797852,
+      "path": "Delegacni_Navrh/PORADA_2026-10-22_KOMPILAT.md",
+      "accessCount": 2,
+      "lastAccessed": 1793189740282,
       "type": "file"
     },
     {
-      "path": "Delegacni_Navrh/PORADA_2026-10-22_KOMPILAT.md",
+      "path": "Delegacni_Navrh/roastroom-2026-10-20-bonus-gate.html",
       "accessCount": 1,
-      "lastAccessed": 1792736406323,
+      "lastAccessed": 1792614797852,
       "type": "file"
     }
   ],
