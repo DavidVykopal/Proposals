@@ -1,0 +1,25 @@
+{
+  "_info": "DŮVĚRNÉ. Vstupy modelu odměňování 2027. Částky v tis. Kč měsíčně. 'dnes' = Ø skutečně vyplacené odměny za práci 1–10/2026 z NoxHubu (hodiny × sazba + pravidelné dofakturace), bez coworkingu. 'roky' = dokončené roky ve firmě k 1. 1. 2027 (hub profile_stats.joined_at). V hubu se tyto hodnoty mají brát živě z výplatních karet a profilů, ne z tohoto souboru.",
+  "tym": [
+    {"nick": "Čoud", "segment": "Produkce", "dnes": 82.5, "roky": 7, "uroven": "senior", "role": {"Programátor": 1}, "priplatky": [["zástup B2B delivery a autority tech", 5]], "pasivni": {"lead": 1}, "pasmo": "J"},
+    {"nick": "Milan", "segment": "Produkce", "dnes": 71.4, "roky": 0, "uroven": "senior", "role": {"Programátor": 1}, "priplatky": [], "pasivni": {}, "pasmo": "J", "dohoda": 85.0, "dohoda_popis": "dohoda 85 tis. (cca 3 510 EUR), zápis 21. 9."},
+    {"nick": "Aldy", "segment": "Produkce", "dnes": 73.4, "roky": 2, "uroven": "senior", "role": {"Game designer": 0.8, "Grafik DEV": 0.2}, "priplatky": [["project lead (Sektor)", 12], ["druhý aktivní projekt (Mecha)", 6], ["zástup vlastníka za plán a kapacity", 5], ["mentor 2 lidí", 4]], "pasivni": {}, "pasmo": "L"},
+    {"nick": "Karlík", "segment": "Produkce", "dnes": 49.1, "roky": 7, "uroven": "senior", "role": {"Game designer": 0.8, "Grafik DEV": 0.2}, "priplatky": [["project lead (Red Command)", 12]], "pasivni": {}, "pasmo": "L"},
+    {"nick": "Akimo", "segment": "Produkce + Operations", "dnes": 62.9, "roky": 4, "uroven": "senior", "role": {"Publishing a LiveOps": 1}, "priplatky": [["Publishing a LiveOps lead", 10], ["správa kanceláří (Operations)", 5]], "pasivni": {}, "pasmo": "L"},
+    {"nick": "Hutis", "segment": "Produkce + Operations", "dnes": 45.3, "roky": 3, "uroven": "senior", "role": {"QA": 0.53, "Programátor": 0.27, "DevOps a IT": 0.20}, "priplatky": [["QA lead", 8], ["zástup za NoxHub", 5]], "pasivni": {}, "pasmo": "L"},
+    {"nick": "David Č.", "segment": "Produkce", "dnes": 36.8, "roky": 0, "uroven": "junior", "role": {"Grafik DEV": 1}, "priplatky": [], "pasivni": {}, "pasmo": "J"},
+    {"nick": "Richi", "segment": "Marketing", "dnes": 79.4, "roky": 4, "uroven": "senior", "role": {"UA manager": 1}, "priplatky": [], "pasivni": {}, "pasmo": "J", "_pozn": "59,4 hodiny + 20 tis. měsíčně dofakturace"},
+    {"nick": "Ondra", "segment": "Marketing", "dnes": 58.8, "roky": 4, "uroven": "senior", "role": {"Grafik MKT": 1}, "priplatky": [["správa celého ASO", 4]], "pasivni": {}, "pasmo": "J"},
+    {"nick": "Ruda", "segment": "Marketing", "dnes": 42.8, "roky": 2, "uroven": "senior", "role": {"Video a motion": 1}, "priplatky": [], "pasivni": {}, "pasmo": "J"}
+  ],
+  "exekutiva": [
+    {"nick": "David", "segment": "Produkce", "dnes": 105.5, "roky": 6, "lidi_pod_sebou": 7, "opex_segmentu_pct": 45, "role_navic": [["consigliere: agenda exekutivy, plány a strategie", 5]], "pasivni": {"lead": 2, "speaker": 3}},
+    {"nick": "DJ", "segment": "Operations", "dnes": 77.7, "roky": 9, "lidi_pod_sebou": 1, "opex_segmentu_pct": 24, "role_navic": [["finance, rozpočet a smlouvy celé firmy", 5]], "pasivni": {"lead": 1}},
+    {"nick": "Kuba", "segment": "Marketing", "dnes": 81.4, "roky": 5, "lidi_pod_sebou": 3, "opex_segmentu_pct": 20, "role_navic": [["analytika pro Produkci (přechodně)", 2]], "pasivni": {}}
+  ],
+  "foundeři": [
+    {"nick": "Mirek", "role": "founder, autorita tech + programátor", "dnes": 110.6, "zdroj": "Ø hodiny × sazba, 1–9/2026"},
+    {"nick": "Peko", "role": "founder, autorita art + grafik", "dnes": 245.0, "zdroj": "Ø fakturace 1–8/2026, míchá práci s dalšími plněními (ověřit)"},
+    {"nick": "Jirka", "role": "CEO, majitel", "dnes": 99.6, "zdroj": "mzda 16,1 + měsíční platby 83,5 (TM, royalties), 1–9/2026"}
+  ]
+}

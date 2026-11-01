@@ -1,0 +1,69 @@
+{
+  "_info": "Výchozí parametry. Každý klíč je jeden ovladač budoucí kalkulačky. Částky v tis. Kč měsíčně, pokud není řečeno jinak. Scénáře níže přepisují jen to, co uvádějí.",
+
+  "zaklady_roli": {
+    "Programátor": 80, "UA manager": 62, "Game designer": 60, "DevOps a IT": 60,
+    "Publishing a LiveOps": 58, "Grafik MKT": 56, "Video a motion": 52, "Grafik DEV": 52, "QA": 52
+  },
+  "benchmark_koeficient": 1.0,
+  "uroven": {"junior": 0.80, "medior": 0.90, "senior": 1.00},
+  "tenure_krok": 0.02,
+  "tenure_strop": 0.20,
+  "priplatky_strop_podil_zakladu": 0.40,
+  "pasivni": {"lead": [2.0, 2], "speaker": [1.0, 3], "event": [1.0, 3], "mentor": [0.5, 4]},
+  "pasivni_strop": 8,
+
+  "exekutiva_zaklad": 110,
+  "exekutiva_za_cloveka": 1.0,
+  "exekutiva_za_cloveka_strop": 6,
+  "exekutiva_za_procento_opex": 0.10,
+  "exekutiva_role_navic": true,
+  "exekutiva_pasivni": true,
+  "strop_fixu": 150,
+
+  "narovnani": 1.0,
+  "dohoda_skalovat": false,
+
+  "rezim_variabilni": "podil_z_celku",
+  "variabilni_podil": {"J": 0.10, "L": 0.25, "D": 0.50},
+  "variabilni_max_nasobek": {"J": 1.5, "L": 1.5, "D": 1.5},
+  "variabilni_slozky": {
+    "_info": "Variabilní složka = 4 části. vaha = relativní váha (výchozí 1 : 1 : 1 : 1, tedy např. při 20 % variabilní 4 × 5 %). plneni = 0 až variabilni_max_nasobek (1,0 = splněno na plán).",
+    "mentor":       {"nazev": "Osobní hodnocení mentora",               "vaha": 1, "plneni": 1.0},
+    "ukoly_1on1":   {"nazev": "Splnění úkolů z 1:1",                     "vaha": 1, "plneni": 1.0},
+    "kpi_firma":    {"nazev": "Firemní KPI (profitabilita, kumulativní zisk)", "vaha": 1, "plneni": 1.0},
+    "kpi_pozice":   {"nazev": "Osobní KPI pozice",                       "vaha": 1, "plneni": 1.0}
+  },
+  "garance": "fix",
+
+  "pasma_nad_fix": {
+    "J": {"bonus": 0.10, "malus": 0.05, "plan": 0.5},
+    "L": {"bonus": 0.15, "malus": 0.075, "plan": 0.5},
+    "D": {"bonus": 0.0, "malus": 0.0, "plan": 0.0}
+  },
+
+  "malus_trest": {"_info": "Malus jen jako trest za skutečné pochybení (porada 29. 10.), ne za nesplnění; podíl z fixu, ukazuje se jen v minimu.", "J": 0.05, "L": 0.075, "D": 0.10},
+
+  "dva_kroky_tym": true,
+  "dva_kroky_exekutiva": false,
+  "krok1_min": 10,
+  "krok2_brana_mil": null,
+
+  "pravidlo_odstupu": "plan",
+
+  "zisk_adj_ebitda_mil": [5.0, 10.0],
+  "pool_sazba": 0.05,
+  "pool_prah_mil": 0.0,
+  "pool_rezim": "unlock",
+  "podil_vedeni": 0.20,
+  "pool_az_po_podilu_vedeni": false,
+
+  "scenare": {
+    "29-10-A": {"_popis": "Návrh na poradu 29. 10., varianta A: plné narovnání, bonus nad fix, exekutiva jen fix", "rezim_variabilni": "nad_fix", "narovnani": 1.0, "dva_kroky_exekutiva": false, "pravidlo_odstupu": "fix"},
+    "29-10-B": {"_popis": "Varianta B: dvě třetiny narovnání", "rezim_variabilni": "nad_fix", "narovnani": 0.6666667, "pravidlo_odstupu": "fix"},
+    "29-10-C": {"_popis": "Varianta C: třetina narovnání", "rezim_variabilni": "nad_fix", "narovnani": 0.3333333, "pravidlo_odstupu": "fix"},
+    "vystup-29-10": {"_popis": "Závěr porady 29. 10.: struktura ano, variabilní podíl 50 / 25 / 10 %, garance fixu, dva kroky pro všechny, druhý krok jen při Adj. EBITDA aspoň 8 mil.", "rezim_variabilni": "podil_z_celku", "garance": "fix", "dva_kroky_exekutiva": true, "krok2_brana_mil": 8.0},
+    "vystup-29-10-riziko": {"_popis": "Totéž, ale garance jen fix + plán (exekutiva nese riziko pod dnešek)", "rezim_variabilni": "podil_z_celku", "garance": "plan", "dva_kroky_exekutiva": true, "krok2_brana_mil": 8.0},
+    "jirka-bez-opex": {"_popis": "Jirkova námitka: bez příplatku za % OPEX a za lidi, exekutiva ve dvou krocích", "rezim_variabilni": "podil_z_celku", "garance": "plan", "exekutiva_za_cloveka": 0, "exekutiva_za_procento_opex": 0, "dva_kroky_exekutiva": true}
+  }
+}
