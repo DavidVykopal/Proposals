@@ -345,7 +345,7 @@ aside.notes { display: none; }
 <section class="slide" data-part="" data-who="david">
   <h2>Program</h2>
   <div class="agenda">
-    <div class="row"><span class="l">A</span><b>Proč a co: tři větve, pět titulů</b><span></span><span class="t">5 min</span></div>
+    <div class="row"><span class="l">A</span><b>Proč a co: monetizační mezera, tři větve, pět titulů</b><span></span><span class="t">7 min</span></div>
     <div class="row"><span class="l">B</span><b>Sdílený základ: City V2 a SharedGameBackend</b><span></span><span class="t">7 min</span></div>
     <div class="row"><span class="l">C</span><b>MF-branch: reskiny</b><span></span><span class="t">4 min</span></div>
     <div class="row"><span class="l">D</span><b>Hexapolis: ověřit, pak Hexapolis 2</b><span></span><span class="t">10 min</span></div>
@@ -380,6 +380,39 @@ aside.notes { display: none; }
   </div>
   <p class="sub" style="margin-top:80px">Všechny stojí na tom, co už máme. S AI a workflows je to zvládnutelné bez velkého neověřeného rizika.</p>
   <aside class="notes">Reskiny začnou vydělávat už během roku. Strategické tituly a Hex 2 nemusí přinést revenue hned v 2027, ale připraví nové koně, kteří vystřídají slábnoucí tituly. Produkce se posune o level výš iterativně, bez riskantního kroku.</aside>
+</section>
+
+<!-- 4b -->
+<section class="slide" data-part="A" data-who="david">
+  <h2>Dnes nemonetizujeme hráče, kteří chtějí vyhrát</h2>
+  <div class="duo">
+    <div><h3>Dnes</h3><ul>
+      <li>celé portfolio jsou <b>PvE hry</b></li>
+      <li><b>slabá sociální vrstva</b>, hráč soutěží jen se hrou</li>
+      <li>hráč, který chce předehnat ostatní, nemá proti komu utrácet</li>
+      <li>jeho útrata má <b>strop</b></li>
+    </ul></div>
+    <div><h3>S PvP a sociálnem</h3><ul>
+      <li><b>žebříčky, klany, armády, globální mapa</b></li>
+      <li>hráči se předhánějí v tom, <b>kdo víc utratí</b></li>
+      <li>útrata bez pevného stropu, model Rise of Kingdoms a Clash of Clans</li>
+      <li>nese to City V2 a SharedGameBackend ve všech hrách</li>
+    </ul></div>
+  </div>
+  <p class="sub" style="margin-top:60px">Proto má strategická větev PvP od prvního dne a gate pro Hex 2 měří, jestli hráči za PvP platí.</p>
+  <aside class="notes">Hlavní obchodní důvod pro PvP a sociální vrstvu. Dnes máme jen PvE a slabé sociálno, takže celý segment soutěživých hráčů s vysokou útratou vůbec neoslovujeme. V Hexu necháme rated PvP férové, soutěž v útratě poběží přes město, armády, klany a globální mapu. Ve strategické větvi to navrhujeme od začátku. Kde je hranice mezi pay to compete a férovým PvP, rozhodneme titul po titulu.</aside>
+</section>
+
+<!-- 4c -->
+<section class="slide" data-part="A" data-who="david">
+  <h2>Hráče a komunitu nejde levně zkopírovat</h2>
+  <div class="facts">
+    <div><b>PvE zlevňuje</b><p>Offline PvE hru si díky AI levně udělá čím dál víc lidí, konkurence i samotní hráči.</p></div>
+    <div><b>Lidé jsou obrana</b><p>Hromada hráčů, klany, komunita a živý globální svět se zkopírovat nedají. Soupeř má hodnotu jen tam, kde jsou ostatní.</p></div>
+    <div><b>Roste s každým titulem</b><p>Nox ID a klany přes SharedGameBackend propojí hráče napříč hrami. Každá nová hra posílí ty ostatní.</p></div>
+  </div>
+  <p class="sub" style="margin-top:70px">PvP a sociálno nejsou jen monetizace. Snižují riziko, že nás levná PvE konkurence nahradí.</p>
+  <aside class="notes">Druhá výhoda stejného směru. Čistě PvE titul bude čím dál snazší nahradit, vyrobit hru zlevňuje pro všechny. Naše přidaná hodnota nebude jen hra, ale lidé v ní: velká základna hráčů, komunita, klany. To roste s počtem titulů napojených na SharedGameBackend.</aside>
 </section>
 
 <!-- 5 -->
@@ -526,6 +559,18 @@ aside.notes { display: none; }
   </div>
   <p class="sub" style="margin-top:56px">Zápas na kola nebo vlny: pár rozhodnutí, itemy, pak sledovat výsledek. Jde snadno PvE i PvP. Pod tím MF meta, City V2 a SGB.</p>
   <aside class="notes">Tým to baví, na Game Jamu chce řada lidí dělat Mechabellum-style hry. PvP přirozeně, ne na sílu. V kombinaci s naší metou a dobře vybranou tematikou to může být hodně zajímavé. Koncept dokument a šablona jsou ve wiki. NoxHub: NOVE-10.</aside>
+</section>
+
+<!-- E2 -->
+<section class="slide" data-part="E" data-who="david">
+  <h2>Experiment: vlastní engine, aby agenti zvládli co nejvíc</h2>
+  <div class="facts">
+    <div><b>Rust</b><p>Kompilátor chytí většinu chyb před spuštěním. Agent dostane přesnou chybu a opraví ji sám. Jeden kód pro iOS, Android i web.</p></div>
+    <div><b>Obsah jako data</b><p>Jednotky, budovy, karty a balanc v JSON s hot reloadem. Reskin je jen jiná složka skinů se stejnou logikou.</p></div>
+    <div><b>Knihovny, ne psaní</b><p>Rendering, UI a editor z hotových knihoven. Píšeme jen obrazovky, data, MCP, editor a agenty.</p></div>
+  </div>
+  <p class="sub" style="margin-top:60px">Běží NoxEngine 0.1 a první prototyp Warcamp. Zatím jen macOS, největší riziko jsou reklamní SDK na mobilu.</p>
+  <aside class="notes">Rychlý YOLO experiment od 2. 11. Cíl je maximum schopností agentů a co nejrychlejší vývoj nových titulů ve strategické větvi. MF reskiny a Hexapolis zatím zůstávají v Unity. Je to pracovní směr, ne rozhodnutí: plné porovnání s Unity, Godotem a Defoldem ještě není napsané, go / no-go padne v CODE BACKLOG úkolu CE13. Hlavní neznámá není grafika, ale napojení MAX a Singularu na iOS a Androidu.</aside>
 </section>
 
 <!-- 14 -->
