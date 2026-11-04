@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1793828508181,
+  "projectRoot": "/Users/davidvykopal/Documents/Projects/_PROPOSALS/ProposalsPortal",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {
+      "build": "node scripts/build.mjs",
+      "cf:preview": "npm run build && wrangler dev",
+      "cf:deploy": "npm run build && wrangler deploy && npm run cf:index",
+      "cf:migrate": "wrangler d1 migrations apply noxgames-proposals --remote",
+      "cf:migrate:local": "wrangler d1 migrations apply noxgames-proposals --local",
+      "feedback": "node scripts/feedback.mjs",
+      "cf:index": "wrangler d1 execute noxgames-proposals --remote --file build/index.sql --yes",
+      "cf:index:local": "wrangler d1 execute noxgames-proposals --local --file build/index.sql --yes"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase",
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "scripts",
+      "src",
+      "static"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "build": {
+      "path": "build",
+      "purpose": "Build output",
+      "fileCount": 1,
+      "lastAccessed": 1793828508172,
+      "keyFiles": [
+        "index.sql"
+      ]
+    },
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 1,
+      "lastAccessed": 1793828508175,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 1,
+      "lastAccessed": 1793828508176,
+      "keyFiles": [
+        "PRUVODCE.md"
+      ]
+    },
+    "migrations": {
+      "path": "migrations",
+      "purpose": "Database migrations",
+      "fileCount": 2,
+      "lastAccessed": 1793828508176,
+      "keyFiles": [
+        "0001_init.sql",
+        "0002_rag_tokens.sql"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 2,
+      "lastAccessed": 1793828508177,
+      "keyFiles": [
+        "build.mjs",
+        "feedback.mjs"
+      ]
+    },
+    "slides": {
+      "path": "slides",
+      "purpose": null,
+      "fileCount": 11,
+      "lastAccessed": 1793828508177,
+      "keyFiles": [
+        "FORMAT.md",
+        "cile-2027.md",
+        "city-v2.md",
+        "cpi.md",
+        "delegace.md"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 4,
+      "lastAccessed": 1793828508177,
+      "keyFiles": [
+        "chat.ts",
+        "mcp.ts",
+        "tools.ts",
+        "worker.ts"
+      ]
+    },
+    "static": {
+      "path": "static",
+      "purpose": "Static files",
+      "fileCount": 3,
+      "lastAccessed": 1793828508177,
+      "keyFiles": [
+        "favicon.png",
+        "portal.css",
+        "portal.js"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}
