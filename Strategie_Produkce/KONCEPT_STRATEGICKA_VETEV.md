@@ -1,6 +1,6 @@
 # Koncept: strategická větev her
 
-> **Stav:** koncept, 1. 11. 2026. Zdroj: voice note Davida. Nadřazený dokument: `STRATEGIE_PRODUKCE.md`. NoxHub: NOVE-10.
+> **Stav:** koncept, 1. 11. 2026, doplněno 4. 11. 2026 (postupný náběh PvP). Zdroj: voice note Davida. Nadřazený dokument: `STRATEGIE_PRODUKCE.md`. NoxHub: NOVE-10.
 > **Pro AI agenty:** při návrhu konceptu drž pevné body (sekce 2) a měň jen gameplay (sekce 3). Nový koncept zapiš podle šablony v sekci 6.
 
 ## 1. Proč
@@ -21,7 +21,7 @@
 | Backend, Nox ID, klany, leaderboardy, promo kódy | SharedGameBackend |
 | Sociální vrstva | SGB + City V2 (návštěvy měst, armády, globální mapa) |
 
-PvP je **v designu od prvního dne**, i když první verze může být PvE.
+PvP je **v designu od prvního dne**, ale na launchi je fake (boti a ghost armády), viz sekce 3, PvP.
 
 ## 3. Volný prostor: gameplay
 
@@ -43,6 +43,13 @@ PvP je **v designu od prvního dne**, i když první verze může být PvE.
 
 **PvP:** přirozeně, ne na sílu. Kola s automatickým bojem jdou snadno async (souboj proti uložené armádě/městu jiného hráče) i live.
 
+**Postupný náběh PvP (best practices Voodoo):**
+- **Launch:** fake PvP. Soupeři jsou boti nebo uložené armády jiných hráčů (ghost zápasy), prezentovaní jako hráči. Bez fronty, s řízenou obtížností a win rate.
+- **Onboarding vždy fake,** i v produkční hře: prvních 3 až 5 zápasů *(návrh)* proti botům nastaveným tak, aby hráč pochopil hru a vyhrál.
+- **Reálné PvP až postupně:** podle velikosti hráčské základny a postupu hráče (vyšší ligy, dokončený onboarding). Když není soupeř včas, fallback na ghost armádu nebo bota.
+- Všechny prahy za remote config, ladí se A/B testy.
+- Pro auto-battler formát je to přirozené: ghost zápas proti uložené armádě vypadá stejně jako live zápas.
+
 ## 4. Cíl 2027
 
 - **Aspoň 2 unikátní tituly** (prototyp → greenlight → výroba).
@@ -63,7 +70,7 @@ Název:
 Reference (1 až 3 hry):
 Jedna věta o zápase:
 Co hráč rozhoduje v kole:
-Jak vypadá PvE / PvP:
+Jak vypadá PvE / PvP (fake PvP na launchi, kdy reálné):
 Napojení na City V2 (co město dává do zápasu, co zápas dává městu):
 Tematika (kandidáti do CPI):
 Riziko č. 1:

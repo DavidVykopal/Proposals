@@ -96,7 +96,7 @@ Podle voice note: **listopad začít, prosinec doručit, leden 2027 dostat mezi 
 | **1b. Import** | 12/2026 | napojení do původního Hexapolisu, Hex suroviny a jednotky | Hexapolis |
 | **Release a ověření** | 1/2027 | release hráčům, měření podle sekce 7, sběr feedbacku komunity | Hexapolis (případně MF) |
 | **2. Hloubka** | Q1/2027 *(návrh)* | personalizace, rasy podle tematiky, více budov, IAP sinky | podle výsledku ověření |
-| **3. Sociální a PvP** | od Q2/2027 *(návrh)* | globální mapa, návštěvy, armády a útoky, klany | závisí na SGB Stage D a F |
+| **3. Sociální a PvP** | od Q2/2027 *(návrh)* | globální mapa, návštěvy, armády a útoky, klany. Útoky nejdřív fake (bot města a uložená města hráčů), reálné útoky postupně, viz `STRATEGIE_PRODUKCE.md`, PvP postupně | závisí na SGB Stage D a F |
 
 Mimo MVP: globální mapa, útoky, klany, rasy, UGC.
 

@@ -1,6 +1,6 @@
 # Produkční strategie NOXGAMES 2027
 
-> **Stav:** pracovní verze 3, 2. 11. 2026 (doplněn monetizační důvod, snížení rizika a experiment NoxEngine). Zdroj: voice note Davida (`voice/Strategie.txt`, surový přepis Whisper) + Q4 OKR + exec porada 24. 9.
+> **Stav:** pracovní verze 4, 4. 11. 2026 (doplněn monetizační důvod, snížení rizika, experiment NoxEngine a postupný náběh PvP podle Voodoo). Zdroj: voice note Davida (`voice/Strategie.txt`, surový přepis Whisper) + Q4 OKR + exec porada 24. 9.
 > **Zdroj pravdy:** tento MD. Z něj vychází: tasky v NoxHubu, wiki (kategorie Strategie), prezentace pro vedení.
 > **Detailní dokumenty:** `DESIGN_CITY_V2.md`, `DESIGN_HEX_PVP.md`, `KONCEPT_STRATEGICKA_VETEV.md`.
 
@@ -27,6 +27,13 @@
 **Druhá výhoda, snížení rizika:** vyrobit offline PvE hru je díky AI čím dál levnější a jednodušší, pro konkurenci i pro samotné hráče. Čistě PvE titul se tak bude čím dál snáz kopírovat a nahrazovat. Co se levně zkopírovat nedá, je **velká základna hráčů, komunita, klany a živý globální svět**. Soupeř je pro hráče hodnota jen tam, kde jsou ostatní hráči. Tahle hodnota roste s každým titulem napojeným na SharedGameBackend (Nox ID, klany napříč hrami). PvP a sociálno jsou tedy kromě monetizace i naše obrana: přidanou hodnotou nebude jen hra, ale lidé v ní.
 
 **Kde soutěžní útrata žije:** v Hexu zůstává rated PvP férové (normalizované statistiky, `DESIGN_HEX_PVP.md`). Prostor pro soupeření v útratě je v City V2 (síla města a armády, globální mapa, klanové války, žebříčky moci) a ve strategické větvi, kde to navrhujeme od začátku. Kde je hranice mezi "pay to compete" a férovým PvP, se rozhoduje titul po titulu.
+
+**PvP postupně, podle best practices Voodoo:** s PvP počítáme ve všech nových hrách, ale reálné PvP nezapínáme hned. Platí pro strategickou větev, PvP v Hexu i útoky na města v City V2:
+1. **Launch a soft launch: fake PvP.** Hráč hraje proti botům nebo uloženým armádám a městům jiných hráčů (async "ghost" zápasy), prezentovaným jako soupeři. Nepotřebujeme velkou hráčskou základnu, nikdo nečeká ve frontě a obtížnost i win rate máme pod kontrolou.
+2. **I v produkční hře je onboarding fake.** Prvních několik zápasů (výchozí 3 až 5, ladí se přes remote config) jsou vždy boti nastavení tak, aby hráč pochopil hru a vyhrál. Do reálného soupeře se nedostane nový hráč, který ještě neumí hrát.
+3. **Reálné PvP až postupně.** Zapíná se podle velikosti hráčské základny a postupu hráče, typicky od vyšších lig nebo po dokončení onboardingu. Když na daném MMR není soupeř včas, párujeme dál s ghost armádami nebo boty.
+
+Důvod: reálné PvP na malé základně znamená čekání, nevyrovnané zápasy a prohry hned na začátku, což zabíjí retenci. Fake PvP dává pocit soupeření od prvního dne a reálné PvP přidáváme, až má z čeho párovat. Nastavení (počet fake zápasů, kdy se zapíná reálné PvP, podíl botů) je za remote config a ladí se A/B testy.
 
 ## Sdílený základ všech her
 
@@ -93,7 +100,7 @@ Detail: `KONCEPT_STRATEGICKA_VETEV.md` (NoxHub: NOVE-10).
 - Stojí na MF metě, City V2, SharedGameBackend a sociálních features.
 - Gameplay: víc idle než MF, ale s většími rozhodnutími. Zápasy na kola nebo vlny: hráč udělá několik rozhodnutí, použije itemy, pak sleduje výsledek.
 - **Obchodní důvod:** dnes máme jen PvE a slabé sociálno, takže nemonetizujeme hráče, kteří soutěží v tom, kdo víc utratí. PvP a sociální vrstva tuhle mezeru zavírají (viz sekce Proč PvP a silná sociální vrstva).
-- PvP tam, kde přirozeně sedí, ne na sílu. Reference: Mechabellum, Clash Royale, Voodoo base + minion battlery, Goblin Gold Miners.
+- PvP tam, kde přirozeně sedí, ne na sílu. Na launchi fake PvP (boti a ghost armády), reálné PvP až postupně (viz sekce Proč PvP, PvP postupně). Reference: Mechabellum, Clash Royale, Voodoo base + minion battlery, Goblin Gold Miners.
 - Jde snadno PvE i PvP, hodně prostoru pro experimenty a tweaky.
 - Tým to baví, na Game Jamu chce řada lidí dělat Mechabellum-style hry.
 - **První prototyp běží:** Warcamp na vlastním enginu NoxEngine 0.1 (YOLO experiment od 2. 11. 2026, viz sekce Vývojový přístup).
@@ -135,7 +142,7 @@ Roadmapa od února dál je orientační, upřesní se po vyhodnocení CPI a ledn
 - [x] Design dokumenty City V2, PvP v Hexu, koncept strategické větve
 - [x] Tasky v NoxHubu: NOVE-13 až NOVE-38, CPI-13 až CPI-16 (subtasky pod NOVE-1, 5, 7, 9, 10, 11, 12 a CPI-11, 12)
 - [x] Wiki: Strategie / Produkční strategie 2027 (4 stránky)
-- [x] Prezentace pro vedení: `strategie-2027-prezentace.html` (draft, 21 slidů)
+- [x] Prezentace pro vedení: `strategie-2027-prezentace.html` (draft, 22 slidů)
 - [ ] Porada vedení: rozhodnout vlastníky, kapacitu, 2 nebo 3 reskiny, čísla pro gate Hex 2 (NOVE-19)
 
 ## Wiki stránky
