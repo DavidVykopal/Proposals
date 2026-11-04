@@ -415,6 +415,18 @@ aside.notes { display: none; }
   <aside class="notes">Druhá výhoda stejného směru. Čistě PvE titul bude čím dál snazší nahradit, vyrobit hru zlevňuje pro všechny. Naše přidaná hodnota nebude jen hra, ale lidé v ní: velká základna hráčů, komunita, klany. To roste s počtem titulů napojených na SharedGameBackend.</aside>
 </section>
 
+<!-- 4d -->
+<section class="slide" data-part="A" data-who="david">
+  <h2>PvP zapínáme postupně, nejdřív fake</h2>
+  <div class="facts">
+    <div><b>Launch: fake PvP</b><p>Soupeři jsou boti a uložené armády jiných hráčů. Žádná fronta, obtížnost a win rate máme pod kontrolou.</p></div>
+    <div><b>Onboarding vždy fake</b><p>I v produkční hře je prvních 3 až 5 zápasů proti botům. Nový hráč pochopí hru a vyhraje.</p></div>
+    <div><b>Reálné PvP postupně</b><p>Podle velikosti základny a postupu hráče, nejdřív ve vyšších ligách. Když není soupeř, fallback na bota.</p></div>
+  </div>
+  <p class="sub" style="margin-top:70px">Best practice Voodoo. Platí pro strategickou větev, PvP v Hexu i útoky na města.</p>
+  <aside class="notes">S PvP počítáme všude, ale reálné PvP na malé základně znamená čekání ve frontě, nevyrovnané zápasy a prohry hned na začátku. To zabíjí retenci. Fake PvP dává pocit soupeření od prvního dne. Všechny prahy jsou za remote config a ladí se A/B testy. Hra s přáteli je vždy reálná. Telemetrie odlišuje boty, ghost zápasy a reálné hráče, jinak nejde vyhodnotit gate pro Hex 2.</aside>
+</section>
+
 <!-- 5 -->
 <section class="slide" data-part="A" data-who="david">
   <h2>Hexapolis je moc složitý, Mecha Fortress moc jednoduchý</h2>
@@ -538,14 +550,14 @@ aside.notes { display: none; }
 <section class="slide" data-part="D" data-who="david">
   <h2>PvP v Hexu: návrh pro leden</h2>
   <div class="facts">
-    <div><b>Async 1v1 jako první</b><p>Tah kdykoli, limit 24 h nebo 1 h. Funguje i s malou hráčskou základnou. Live blitz a FFA až podle dat.</p></div>
+    <div><b>Async 1v1, na startu fake</b><p>Na launchi a v onboardingu AI soupeř s hráčským profilem, reálné PvP postupně od vyšších lig. Live blitz až podle dat.</p></div>
     <div><b>Ligy a sezóny</b><p>Glicko-2, sezóna 4 týdny, ligy od bronzu po mistra. Fronta, tahy a žebříček na SharedGameBackendu.</p></div>
     <div><b>Férovost</b><p>V rated PvP normalizované staty, bez bojových boostů z města. Výhoda se v PvP koupit nedá.</p></div>
     <div><b>Anti-cheat</b><p>Tahy validuje server, replay ze seedu a akcí. Řeší rizika z 24. 9.: cheateři, OP jednotky, PowerProgress.</p></div>
     <div><b>Odměny do města</b><p>Za PvP suroviny do City V2 a kosmetika podle ligy. Obě featury se navzájem táhnou.</p></div>
     <div><b>Monetizace k ověření</b><p>Subscription nebo PvP pass jako hypotéza, ne jako paywall.</p></div>
   </div>
-  <aside class="notes">Shrnutí design dokumentu PvP (wiki). Všechno je návrh k potvrzení. Otevřené: async jako MVP ano/ne, plná normalizace statů nebo jen strop, kdo převezme květnový prototyp PvP, a posunout termín O5.2 (30. 11.) na leden.</aside>
+  <aside class="notes">Shrnutí design dokumentu PvP (wiki). Všechno je návrh k potvrzení. Na launchi a v prvních zápasech každého hráče je PvP fake, reálné zapínáme postupně. Otevřené: async jako MVP ano/ne, kolik fake zápasů a od které ligy reálné PvP, plná normalizace statů nebo jen strop, kdo převezme květnový prototyp PvP, a posunout termín O5.2 (30. 11.) na leden.</aside>
 </section>
 
 <!-- 13 -->

@@ -1,6 +1,6 @@
 # Design dokument: PvP v Hexapolisu (+ UGC)
 
-> **Stav:** návrh v1, 1. 11. 2026. Vychází z Davidova voice note ke strategii (`voice/Strategie.txt`) a z existujících podkladů v hubu. Věci označené *(návrh)* jsou můj návrh, ne rozhodnutí.
+> **Stav:** návrh v1, 1. 11. 2026, doplněno 4. 11. 2026 (fake PvP a postupný náběh, kap. 2). Vychází z Davidova voice note ke strategii (`voice/Strategie.txt`) a z existujících podkladů v hubu. Věci označené *(návrh)* jsou můj návrh, ne rozhodnutí.
 > **Patří k:** `STRATEGIE_PRODUKCE.md`, větev 2 (Hexapolis). Sesterský dokument: design City V2 (město / mapa V2).
 > **Pro AI agenty:** zdroj pravdy je tento soubor. Číselné hodnoty (časy tahů, ELO, limity) jsou výchozí návrhy, ladí se přes remote config. Tasky žijí v NoxHubu, projekt *Nové projekty* (NOVE-7 "Hexapolis 1, but with PvP", NOVE-9 UGC) a *Hex 2* (HEX-2-0249-72 "Multiplayer").
 
@@ -36,7 +36,23 @@ Princip: začít jedním módem, který jde postavit rychle a funguje na mobilu 
 
 **Pravidla pro PvP mapy:** malé mapy (1v1 cca 11x11 až 14x14 hexů *(návrh)*), symetrické nebo zrcadlené starty, omezený počet tahů (výchozí 30 *(návrh)*), vítězství dobytím hlavního města nebo body po limitu tahů. Mlha války zapnutá.
 
-**Fallback na boty:** když není soupeř do X sekund (live) nebo pro úplně nové hráče, nabídnout zápas proti AI označené jako bot. Nikdy nevydávat bota za člověka *(návrh)*.
+### Postupný náběh PvP (best practices Voodoo)
+
+Rozhodnutí Davida 4. 11. 2026: reálné PvP nezapínáme hned. Nahrazuje původní návrh "nikdy nevydávat bota za člověka".
+
+| Fáze | Soupeř | Proč |
+|---|---|---|
+| **Launch PvP (leden 2027)** | fake PvP: AI soupeř s hráčským profilem (jméno, liga, město), případně ghost zápas podle uložených tahů a armád reálných hráčů | malá base, žádné čekání, obtížnost a win rate pod kontrolou |
+| **Onboarding (vždy, i později)** | prvních 3 až 5 zápasů *(návrh)* proti botům nastaveným tak, aby hráč pochopil PvP pravidla a vyhrál | nový hráč nesmí hned narazit na zkušeného soupeře |
+| **Reálné PvP** | postupně podle velikosti base a postupu hráče, nejdřív ve vyšších ligách | párujeme lidi až tam, kde je z čeho párovat |
+| **Fallback** | když na daném MMR není soupeř včas, AI soupeř s hráčským profilem | žádná fronta |
+
+Pravidla:
+- Prahy (počet fake zápasů, od které ligy reálné PvP, max čekání před fallbackem) za remote config, ladí se A/B testy.
+- **Hra s přáteli (mód D) je vždy reálná,** hráč ví, proti komu hraje.
+- AI soupeř hraje "lidsky": občas chybuje, nehraje dokonale, tempo tahů podobné hráčům.
+- Výsledky proti botům se počítají do ligy a odměn stejně, ale do veřejného žebříčku top hráčů jen reálné zápasy *(návrh)*, aby žebříček zůstal důvěryhodný.
+- Telemetrie odlišuje fake a reálné zápasy (`pvp_match_completed` s parametrem `opponent_type`: `bot`, `ghost`, `human` *(návrh)*), jinak nejdou vyhodnotit metriky v kap. 10.
 
 ## 3. Matchmaking a žebříček
 
@@ -44,7 +60,7 @@ Princip: začít jedním módem, který jde postavit rychle a funguje na mobilu 
 - **Ligy:** Bronz, Stříbro, Zlato, Platina, Diamant, Mistr *(návrh)*. Sezóna 4 týdny, soft reset na konci, odměny podle ligy.
 - **Párování:** podle MMR, rozšiřování okna podle času čekání. U async módu stačí párovat z fronty bez nutnosti být online.
 - **Backend:** Shared Game Backend. Fronta, stav zápasu, tahy, MMR a sezónní leaderboard jako SGB služby, identita přes NOX ID. Leaderboard přes SGB (CODE-71) s anti-cheat limity.
-- **Placement:** prvních 5 zápasů s rychlejším posunem ratingu.
+- **Placement:** prvních 5 zápasů s rychlejším posunem ratingu. V onboardingu proti botům (kap. 2, Postupný náběh).
 
 ## 4. Fairness: meta progrese vs. PvP
 
@@ -163,7 +179,7 @@ Z voice note: **přidat suroviny do Hex mapy.** Napojení na City V2: suroviny v
 
 | Riziko | Dopad | Zmírnění |
 |---|---|---|
-| Malá hráčská base, dlouhé čekání na soupeře | špatný první dojem | async jako první mód, boti jako fallback, hra s přáteli |
+| Malá hráčská base, dlouhé čekání na soupeře | špatný první dojem | fake PvP na launchi a v onboardingu, reálné PvP postupně (kap. 2), async jako první mód, hra s přáteli |
 | Pay to win pocit | odchod komunity, recenze | normalizace v rated PvP, kap. 4 a 7 |
 | Cheateři | ztráta důvěry v žebříček | server validace, replay, bany přes SGB |
 | OP jednotky | jeden dominantní build | oddělené PvP hodnoty v RC, telemetrie win rate |
@@ -181,3 +197,4 @@ Z voice note: **přidat suroviny do Hex mapy.** Napojení na City V2: suroviny v
 6. **Vlastník** PvP featury (design, dev) a vztah k HEX-2-0249-72 a OKR O5.2 (termín 30. 11.): posunout na leden?
 7. **Monetizace:** testovat subscription hned při launchi PvP, nebo až po měsíci dat?
 8. **Cílové hodnoty metrik** v kap. 10: potvrdit, případně doplnit s Jirkou.
+9. **Fake PvP:** kolik zápasů v onboardingu a od jaké ligy nebo velikosti base zapnout reálné PvP?
