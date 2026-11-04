@@ -1,0 +1,23 @@
+{
+  "name": "noxgames-proposals",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "cf:preview": "npm run build && wrangler dev",
+    "cf:deploy": "npm run build && wrangler deploy && npm run cf:index",
+    "cf:migrate": "wrangler d1 migrations apply noxgames-proposals --remote",
+    "cf:migrate:local": "wrangler d1 migrations apply noxgames-proposals --local",
+    "feedback": "node scripts/feedback.mjs",
+    "cf:index": "wrangler d1 execute noxgames-proposals --remote --file build/index.sql --yes",
+    "cf:index:local": "wrangler d1 execute noxgames-proposals --local --file build/index.sql --yes"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261104.1",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "marked": "^15.0.12",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.157.0"
+  }
+}

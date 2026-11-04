@@ -525,39 +525,39 @@ aside.notes { display: none; }
     <div><h3>PvP</h3><p>Hráči chtějí hrát proti sobě. Tím nás dnes poráží Polytopia a tenhle náskok jde smazat rychle.</p></div>
     <div><h3>UGC</h3><p>Vlastní mapy, sdílení, live-ops nad nimi. Třešnička na dortu, až po City a PvP.</p></div>
   </div>
-  <div class="not"><span>Nechceme</span><span class="pill">MF meta nasazená na Hex gameplay</span><span class="pill">Hex jako pasivní idle hra</span></div>
-  <aside class="notes">Hexapolis je náš zatím nejúspěšnější projekt. Hex 2 jako evoluce dává smysl, ale jen vzít metu z MF a dát ji na gameplay Hexu je špatně. Hex má zůstat civilizace a konečně dostat to, o co si hráči vždycky říkali. Feature po feature do původního Hexu.</aside>
+  <div class="not"><span>Nechceme</span><span class="pill">MF meta naroubovaná na současný Hex bez ověření</span><span class="pill">Hex jako pasivní idle hra</span></div>
+  <aside class="notes">Hexapolis je náš zatím nejúspěšnější projekt. HexFort jako Hexapolis 2 rušíme, bez ověření je to moc velké riziko. Práce se vrací do původního Hexu: PvP, mapa (City V2) a UGC feature po feature. Když celek funguje, udělá se design hex gameplaye nasazeného na MF metu a podle něj nový Hexapolis 2.</aside>
 </section>
 
 <!-- 11 -->
 <section class="slide" data-part="D" data-who="david">
-  <h2>Nejdřív ověřit v původním Hexu, pak Hexapolis 2</h2>
+  <h2>HexFort rušíme: nejdřív ověřit v původním Hexu, pak nový Hexapolis 2</h2>
   <div class="gates">
-    <div class="gate go"><div class="dot">XI</div><h3>Vývoj</h3><p><b>City V2 + PvP</b>staging v MF a Hexfortu</p></div>
+    <div class="gate go"><div class="dot">XI</div><h3>Vývoj</h3><p><b>City V2 + PvP</b>v Hexu, backend na SGB</p></div>
     <div class="gate"><div class="dot">XII</div><h3>Dodání</h3><p><b>import do Hexu</b>interní test</p></div>
     <div class="gate"><div class="dot">I</div><h3>Release</h3><p><b>k hráčům</b>komunitní test, reaktivace</p></div>
-    <div class="gate"><div class="dot">II</div><h3>Data</h3><p><b>vyhodnocení</b>UGC podle výsledků</p></div>
-    <div class="gate end"><div class="dot">H2</div><h3>Rozhodnutí</h3><p><b>gate</b>do konce února</p></div>
+    <div class="gate"><div class="dot">II</div><h3>Data</h3><p><b>UGC k hráčům</b>první čtení dat</p></div>
+    <div class="gate end"><div class="dot">H2</div><h3>Rozhodnutí</h3><p><b>celek PvP, City, UGC</b>II až III 2027</p></div>
   </div>
   <div class="verdict">
-    <div class="g"><b>Hex 2 schválíme, když</b><ul><li>hráči stavějí město a vracejí se do něj</li><li>hrají PvP opakovaně</li><li>platí: IAP, případně subscription</li></ul></div>
-    <div><b style="color:var(--cyan)">Hexapolis 2 pak bude</b><ul><li>pořád plný civilization-like</li><li>upravená meta, nejspíš jiná tematika</li><li>od základu pro PvP a dlouhé hraní přes město</li></ul></div>
+    <div class="g"><b>Hex 2 schválíme, když</b><ul><li>hráči stavějí město a vracejí se do něj</li><li>hrají PvP opakovaně</li><li>tvoří a hrají vlastní mapy (UGC)</li><li>platí: IAP, případně subscription</li></ul></div>
+    <div><b style="color:var(--cyan)">Hexapolis 2 pak bude</b><ul><li>nový projekt: hex gameplay na MF metě</li><li>pořád plný civilization-like</li><li>upravená meta, nejspíš jiná tematika</li><li>od základu pro PvP a dlouhé hraní přes město</li></ul></div>
   </div>
-  <aside class="notes">Časování z voice note: listopad začít, prosinec dodat, leden k lidem. Nemusí se vyvíjet ve starém Hexu, důležitá je moderní technologie. PvP a mapa se dělají v Mecha Fortressu jako stagingu, pak import do původního Hexu. Čísla pro gate jsou ve wiki jako návrh (např. 25 % DAU zkusí PvP, 5+ zápasů týdně, D7/D30 PvP hráčů +20 %), potřebujeme je potvrdit.</aside>
+  <aside class="notes">Časování z voice note: listopad začít, prosinec dodat, leden k lidem. Testujeme jednoduše přímo v původním Hexu. Backend PvP a město staví na SharedGameBackendu se stagingem v Mecha Fortressu. HexFort se v současné podobě nedokončuje. Čísla pro gate jsou ve wiki jako návrh (např. 25 % DAU zkusí PvP, 5+ zápasů týdně, D7/D30 PvP hráčů +20 %), potřebujeme je potvrdit.</aside>
 </section>
 
 <!-- 12 -->
 <section class="slide" data-part="D" data-who="david">
-  <h2>PvP v Hexu: návrh pro leden</h2>
+  <h2>PvP v Hexu: dva segmenty, Quick game, žebříčky</h2>
   <div class="facts">
-    <div><b>Async 1v1, na startu fake</b><p>Na launchi a v onboardingu AI soupeř s hráčským profilem, reálné PvP postupně od vyšších lig. Live blitz až podle dat.</p></div>
-    <div><b>Ligy a sezóny</b><p>Glicko-2, sezóna 4 týdny, ligy od bronzu po mistra. Fronta, tahy a žebříček na SharedGameBackendu.</p></div>
-    <div><b>Férovost</b><p>V rated PvP normalizované staty, bez bojových boostů z města. Výhoda se v PvP koupit nedá.</p></div>
-    <div><b>Anti-cheat</b><p>Tahy validuje server, replay ze seedu a akcí. Řeší rizika z 24. 9.: cheateři, OP jednotky, PowerProgress.</p></div>
-    <div><b>Odměny do města</b><p>Za PvP suroviny do City V2 a kosmetika podle ligy. Obě featury se navzájem táhnou.</p></div>
-    <div><b>Monetizace k ověření</b><p>Subscription nebo PvP pass jako hypotéza, ne jako paywall.</p></div>
+    <div><b>Skill only</b><p>Všichni stejný setup, rozhoduje jen to, jak kdo hraje. Nejblíž Polytopii. Jediná volba: preset národa.</p></div>
+    <div><b>All-out-power</b><p>Rozhoduje i síla jednotek a talentů z mety. 5 lig od nováčků po late game, do vyšší ligy postupuje top 10 %.</p></div>
+    <div><b>Quick game</b><p>Oba hráči ve hře, sub-režimy Speed (méně času a tahů) a Normal. Long game jako online šachy později. Při čekání a v onboardingu bot.</p></div>
+    <div><b>Žebříčky a achievementy</b><p>Denní, týdenní, měsíční v obou segmentech na SGB. Skóre ze zápasů plus ELO. Achievementy za top 10, top 3, 2. místo, výhru a série.</p></div>
+    <div><b>Vazba na město</b><p>PvP dává suroviny do City V2, budovy ve městě zvyšují meta staty pro All-out-power. Skill only meta ignoruje.</p></div>
+    <div><b>Monetizace</b><p>V All-out-power meta síla (jednotky, talenty, město), ve Skill only jen kosmetika. Subscription a PvP pass jako hypotéza.</p></div>
   </div>
-  <aside class="notes">Shrnutí design dokumentu PvP (wiki). Všechno je návrh k potvrzení. Na launchi a v prvních zápasech každého hráče je PvP fake, reálné zapínáme postupně. Otevřené: async jako MVP ano/ne, kolik fake zápasů a od které ligy reálné PvP, plná normalizace statů nebo jen strop, kdo převezme květnový prototyp PvP, a posunout termín O5.2 (30. 11.) na leden.</aside>
+  <aside class="notes">Shrnutí design dokumentu PvP v2 (4. 11.). Otevřené: presety národů pro Skill only, ELO per segment nebo i per režim, vyhodnocení lig, obsah odměn, kdo převezme květnový prototyp PvP, posunout O5.2 (30. 11.) na leden.</aside>
 </section>
 
 <!-- 13 -->
@@ -581,7 +581,7 @@ aside.notes { display: none; }
     <div><b>Obsah jako data</b><p>Jednotky, budovy, karty a balanc v JSON s hot reloadem. Reskin je jen jiná složka skinů se stejnou logikou.</p></div>
     <div><b>Knihovny, ne psaní</b><p>Rendering, UI a editor z hotových knihoven. Píšeme jen obrazovky, data, MCP, editor a agenty.</p></div>
   </div>
-  <p class="sub" style="margin-top:60px">Běží NoxEngine 0.1 a první prototyp Warcamp. Zatím jen macOS, největší riziko jsou reklamní SDK na mobilu.</p>
+  <p class="sub" style="margin-top:60px">Běží NoxEngine 0.2 a prototyp Warcamp: web, Android APK, iOS simulátor, online PvP. Největší riziko jsou reklamní SDK na mobilu a nezměřená rychlost proti Unity.</p>
   <aside class="notes">Rychlý YOLO experiment od 2. 11. Cíl je maximum schopností agentů a co nejrychlejší vývoj nových titulů ve strategické větvi. MF reskiny a Hexapolis zatím zůstávají v Unity. Je to pracovní směr, ne rozhodnutí: plné porovnání s Unity, Godotem a Defoldem ještě není napsané, go / no-go padne v CODE BACKLOG úkolu CE13. Hlavní neznámá není grafika, ale napojení MAX a Singularu na iOS a Androidu.</aside>
 </section>
 

@@ -321,6 +321,12 @@
       "type": "file"
     },
     {
+      "path": "Strategie_Produkce/STRATEGIE_PRODUKCE.md",
+      "accessCount": 6,
+      "lastAccessed": 1793824120877,
+      "type": "file"
+    },
+    {
       "path": "Delegacni_Navrh/model_odmenovani_2027.py",
       "accessCount": 5,
       "lastAccessed": 1793205005657,
@@ -330,12 +336,6 @@
       "path": "Delegacni_Navrh/PRIPRAVA_2026-10-29_ODMENOVANI.md",
       "accessCount": 5,
       "lastAccessed": 1793205005999,
-      "type": "file"
-    },
-    {
-      "path": "Strategie_Produkce/STRATEGIE_PRODUKCE.md",
-      "accessCount": 5,
-      "lastAccessed": 1793627975871,
       "type": "file"
     },
     {
@@ -396,6 +396,54 @@
       "path": "Strategie_Produkce/strategie-2027-prezentace.html",
       "accessCount": 1,
       "lastAccessed": 1793621277443,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/PRODUCT.md",
+      "accessCount": 1,
+      "lastAccessed": 1793819561122,
+      "type": "file"
+    },
+    {
+      "path": "Externi_Designeri/VYHODNOCENI_EXTERNICH_DESIGNERU.md",
+      "accessCount": 1,
+      "lastAccessed": 1793822960603,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/slides/designeri.md",
+      "accessCount": 1,
+      "lastAccessed": 1793822969400,
+      "type": "file"
+    },
+    {
+      "path": "NoxEngine/SHRNUTI_NOXENGINE.md",
+      "accessCount": 1,
+      "lastAccessed": 1793823127181,
+      "type": "file"
+    },
+    {
+      "path": "CPI_Tests/CPI_PIPELINE.md",
+      "accessCount": 1,
+      "lastAccessed": 1793823144271,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/slides/noxengine.md",
+      "accessCount": 1,
+      "lastAccessed": 1793823169048,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/slides/strategie.md",
+      "accessCount": 1,
+      "lastAccessed": 1793824431326,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/CILE_2027.md",
+      "accessCount": 1,
+      "lastAccessed": 1793825082135,
       "type": "file"
     }
   ],

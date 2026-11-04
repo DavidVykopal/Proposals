@@ -1,133 +1,161 @@
-# City V2 meta: design dokument (pracovní verze)
+# City V2 meta: design dokument
 
-> **Stav:** návrh, založeno 1. 11. 2026 z voice note Davida (`voice/Strategie.txt`). Vše označené *návrh* je doplněné autorem dokumentu, ne Davidem. Zbytek je z voice note nebo z existujících podkladů.
-> **Názvy:** City V2 = Mapa V2 = Město V2. Jde o stejnou feature, názvy jsou zaměnitelné. V kódu a v backlogu používat `CityV2` (v CODE BACKLOG se dnes vede jako **Meta Village V2, CODE-9**, kontrola rozšiřitelnosti MF **CODE-65**).
-> **Navazuje na:** `STRATEGIE_PRODUKCE.md`, wiki *Hexafort (Hexapolis 2)* (sekce město, Rise of Kingdoms jako reference), wiki *Mecha Fortress × Shared Game Backend: Integration Roadmap*.
+> **Stav:** návrh v2, 4. 11. 2026. Přepracováno podle Davidova zadání: City V2 má být **co nejbližší klon Clash of Clans a Rise of Kingdoms**. První verze **bez výroby jednotek, globální mapy a bojů mezi hráči**, jde hlavně o vlastní stavění města, sběr surovin a upgrady; **budovy ovlivňují meta staty**. Verze v1 (1. 11.) je nahrazená. Věci označené *(návrh)* jsou návrh autora dokumentu.
+> **Názvy:** City V2 = Mapa V2 = Město V2, stejná feature. V kódu `CityV2`, v CODE BACKLOG jako **Meta Village V2, CODE-9**, rozšiřitelnost MF **CODE-65**.
+> **Patří k:** `KONCEPT_OBNOVA_HEXU.md` (obnova Hexapolisu přes PvP a City V2), `STRATEGIE_PRODUKCE.md`. Sesterský dokument: `DESIGN_HEX_PVP.md`.
+> **Pro AI agenty:** zdroj pravdy je tento soubor. Čísla (levely, časy, ceny, bonusy) jsou výchozí návrhy v configu per titul.
 
-## 1. Co to je a proč
+## 1. Shrnutí
 
-Meta vrstva mimo hlavní gameplay. Hráč z materiálů vydělaných ve hře staví a rozšiřuje vlastní město. Inspirace: **Rise of Kingdoms, Clash of Clans**. Hráč začíná v malé vesnici, staví produkční budovy, ty umožní stavět a levelovat další budovy, a ty odemykají jednotky, upgrady a vylepšení základní hry.
+- City V2 je **co nejvěrnější klon mechanik Clash of Clans a Rise of Kingdoms**: radnice, která odemyká levely ostatních budov, stavitelé, produkční budovy se sběrem, sklady, upgrady s časovači a zrychlením.
+- **Verze 1 = jen vlastní město:** stavění, sběr surovin, upgrady, dekorace. **Bez výroby jednotek, globální mapy a bojů mezi hráči**, ty přijdou později.
+- **Budovy zvyšují meta staty**, které platí ve hře (HP, útok, talenty, odměny). V PvP se projeví v segmentu **All-out-power**.
+- Modul je sdílený: vyvíjí se v **Mecha Fortress jako staging**, první hráči ho dostanou v **původním Hexapolisu** v lednu 2027.
+- Klonujeme **mechaniky a strukturu**, ne art, názvy ani UI: vlastní tematika a vizuál podle titulu.
 
-Proč sdílené napříč portfoliem:
+## 2. Proč klon CoC a RoK
 
-- **Jeden modul, všechny hry.** MF-branch reskiny, původní Hexapolis, Hexapolis 2 i nová větev strategických her. Vývoj se platí jednou, hodnota se násobí počtem titulů.
-- **Hloubka, kterou hry dnes nemají.** MF má všechny meta systémy lokální, bez sociální vrstvy (viz SGB roadmapa). Hexapolis hráči dlouhodobě chtějí stavění.
-- **Kreativita a exprese.** Hráč si město staví po svém, přizpůsobuje ho, má v něm i neprodukční věci. To dává důvod k porovnávání a návštěvám.
-- **Základ pro sociální vrstvu a PvP.** Armády, útoky na města, obrana, globální mapa. Všechno se dá postavit kolem města, a proto to funguje stejně v každé hře.
+- Obě hry mají **léty ověřenou city meta smyčku**, která drží hráče roky a monetizuje (stavitelé, zrychlení, balíčky surovin, VIP). Nemusíme ji vymýšlet, jen dobře přenést.
+- Hráči ji **znají**: nulové učení, okamžitě pochopí radnici, stavitele a sběr.
+- Hexapolis hráči dlouhodobě chtějí stavění. MF a další hry nemají žádnou hloubku mety mimo zápas.
+- **Jeden modul, všechny hry:** MF reskiny, původní Hexapolis, Hexapolis 2, strategická větev. Vývoj se platí jednou.
 
-## 2. Modul a kontrakt s hostitelskou hrou
+## 3. Verze 1: co v ní je
 
-City V2 je **samostatný vedlejší modul**. Se základní hrou komunikuje jen přes vstupy, výstupy a požadavky. Některé požadavky jsou navázané na základní hru, aby hráč musel hrát obojí.
+### 3.1 Mechaniky převzaté z CoC a RoK
 
-### 2.1 Vstupy (hra posílá do City)
-
-| Vstup | Příklad | Poznámka |
+| Mechanika | Jak funguje | Předloha |
 |---|---|---|
-| Suroviny / materiály | dřevo, kámen, železo z odměn za zápas | sada surovin je config per titul a tematiku *(návrh)* |
-| Měkká a tvrdá měna | gold, gems | existující Currency systém z meta-core |
-| Progres hráče | dosažený level / svět / počet výher | používá se pro gating budov |
-| Události ze hry | `match_completed`, `stage_cleared`, `pvp_won` | přes EventBus, City z nich počítá questy a produkci *(návrh)* |
+| **Radnice** (hlavní budova) | její level určuje max level všech ostatních budov a odemyká nové budovy | CoC Town Hall, RoK City Hall |
+| **Stavitelé** | počet souběžných staveb a upgradů; start 2 stavitelé, 3. a 4. za prémiovou měnu nebo nabídku | CoC Builder's Hut, RoK druhý stavitel |
+| **Produkční budovy** | průběžně vyrábí surovinu do vlastní kapacity, hráč ji **sbírá klepnutím** | CoC sběrače, RoK farmy a pily |
+| **Sklady** | kapacita surovin; upgradem roste | CoC Storage, RoK sklad |
+| **Upgrady s časovači** | každý level budovy stojí suroviny a čas, čas roste s levelem | obě |
+| **Zrychlení** | prémiová měna nebo předměty zrychlení; krátké stavby do 5 min zdarma *(návrh)* | RoK speedupy, CoC gemy |
+| **Volné umístění** na mřížce města, přesouvání budov | obě |
+| **Překážky** | stromy a kameny na mapě města, odstranění dává malou odměnu | CoC |
+| **Questy kapitol** | vedou hráče stavbou krok za krokem (onboarding) | RoK chapter quests |
+| **Dekorace a personalizace** | neprodukční budovy, vzhled, erb, jméno města | obě |
 
-### 2.2 Výstupy (City vrací hře)
+### 3.2 Budovy ve verzi 1 *(návrh, config per titul a tematiku)*
 
-| Výstup | Příklad | Poznámka |
+| Budova | Typ | Co dává |
 |---|---|---|
-| Odemčené jednotky | kasárna lvl 3 odemknou lučištníka | hra se ptá `IsUnlocked(unitId)` |
-| Permanentní upgrady | +5 % HP jednotek, +1 slot ve skill choice | modifikátory, které hra aplikuje na start zápasu |
-| Boosty | dočasný bonus k odměnám, rychlejší výroba | časově omezené |
-| Odměny | suroviny, měna, karty | přes jeden reward bridge (`IRewardGranter` / SGB reward JSON) |
-| Armáda | složení armády pro útok / obranu | až ve fázi 3 |
+| Radnice | hlavní | gating levelů a nových budov |
+| Farma, Pila, Lom, Zlatý důl | produkce | jídlo, dřevo, kámen, zlato |
+| Sklad | kapacita | limit surovin |
+| Chata stavitele | stavitelé | další souběžná stavba |
+| **Kasárna** | meta staty | **+HP jednotek** |
+| **Kovárna** | meta staty | **+útok jednotek** |
+| **Akademie** | meta staty | **+talentové body / sloty** |
+| **Svatyně** | meta staty | **+XP hrdinů / jednotek ze zápasu** |
+| **Tržiště** | meta staty | **+odměny ze zápasů** (suroviny, měna) |
+| Dekorace (2 až 3) | kosmetika | vzhled, IAP sink |
 
-### 2.3 Požadavky (gating)
+### 3.3 Budovy a meta staty
 
-- Budova X vyžaduje progres ve hře (např. "projdi svět 3"), nejen suroviny. Tím se hráč vrací do gameplaye.
-- Produkce surovin v městě je **doplněk**, ne náhrada zápasů. Hlavní příjem surovin jde ze hry *(návrh, balanc ladit na datech)*.
+Budovy, které ovlivňují hru, vrací hostitelské hře **modifikátory**. Hra je aplikuje na start zápasu.
 
-### 2.4 Technické zásady *(návrh, navazuje na principy SGB roadmapy)*
+| Budova | Stat ve hře | Příklad hodnot *(návrh)* | Kde platí |
+|---|---|---|---|
+| Kasárna | HP jednotek | +1 % za level, max +20 % | PvE, PvP All-out-power |
+| Kovárna | útok jednotek | +1 % za level, max +20 % | PvE, PvP All-out-power |
+| Akademie | talenty | +1 talentový bod každé 3 levely | PvE, PvP All-out-power |
+| Svatyně | XP z zápasu | +2 % za level | všude |
+| Tržiště | odměny ze zápasu | +2 % za level | všude |
 
-- Interface ve stylu meta-core DI (`ICityProvider`, `ICityRewardSink`, `ICityRequirementSource`), bez přímé závislosti na konkrétní hře.
-- Obsah (budovy, ceny, časy, odemčení) je **config-driven** per titul. Tematika (fantasy, sci-fi, zombie, římská) mění jen asety a texty, ne logiku.
-- Každá část za kill switchem (Firebase RC), dark launch a rollback bez buildu.
-- City nikdy neblokuje hru. Když je backend nedostupný, město funguje lokálně a synchronizuje se později.
+- **PvP Skill only meta staty ignoruje** (stejný setup pro všechny), viz `DESIGN_HEX_PVP.md`.
+- V **All-out-power** se projeví celé, férovost drží ligy.
+- Mapování statů na konkrétní hru je **config per titul** (v Hexu jednotky a talenty, v MF hradba a hrdinové).
 
-## 3. Core loop
+### 3.4 Suroviny a ekonomika
 
-1. Hráč odehraje zápas a dostane suroviny.
-2. V městě postaví nebo vylepší **produkční budovu** (pila, lom, důl, farma).
-3. Produkce a progres ve hře odemknou stavbu a levelování dalších budov.
-4. Další budovy odemykají **jednotky, upgrady a vylepšení základní hry**.
-5. Silnější armáda a vylepšení jdou zpátky do zápasu.
+- **Dva zdroje surovin:** zápasy ve hře (kampaň, PvP, odměny z žebříčků) a **pasivní produkce** v městě (klon CoC a RoK). Produkce je doplněk, hlavní příjem jde ze hraní *(návrh, ladit na datech)*.
+- Gating: některé levely radnice vyžadují **progres ve hře** (např. dobyté světy, PvP úspěch), aby se hráč vracel do gameplaye.
+- Sada surovin a jejich názvy podle tematiky titulu.
 
-Doplňky v základní verzi:
+### 3.5 Monetizace ve verzi 1
 
-- **Neprodukční budovy a dekorace:** volné umístění budov (Rise of Kingdoms, ne slotová mřížka, viz Hexafort dokument), kosmetika jako IAP sink.
-- **Personalizace:** vzhled města, erb, jméno.
-- **Rasa / frakce podle tematiky:** v tematikách, kde to dává smysl, si hráč vybírá rasu (např. lidé / orkové u Warcraft-like tematiky). Rasa mění vzhled a sadu jednotek.
+| Sink | Předloha |
+|---|---|
+| Zrychlení staveb a upgradů | RoK, CoC |
+| Další stavitelé | CoC, RoK |
+| Balíčky surovin | obě |
+| Dekorace a vzhled města | obě |
+| VIP / subscription (bonus produkce, auto-sběr, další stavitel) | RoK VIP |
 
-## 4. Pozdější vrstvy
+## 4. Co ve verzi 1 není (pozdější vrstvy)
 
-| Vrstva | Obsah | Závislost |
+| Vrstva | Obsah | Předloha | Závislost |
+|---|---|---|---|
+| Výroba jednotek | kasárna trénují armádu, nemocnice | CoC, RoK | design armád |
+| Výzkum | strom technologií v akademii | RoK | po ověření V1 |
+| Globální mapa | města ostatních hráčů, sběr na mapě | RoK | SGB profily a persistence |
+| Boje mezi hráči | útoky na města, obrana, štíty, hradby | CoC, RoK | PvP vrstva SGB; nejdřív fake útoky, reálné postupně |
+| Aliance a klany | společné cíle, pomoc se stavbou | RoK, CoC | SGB clans (F6) |
+| Návštěvy měst | prohlédnout si město jiného hráče | CoC | NOX ID |
+
+## 5. Modul a kontrakt s hostitelskou hrou
+
+City V2 je **samostatný modul**. S hrou komunikuje jen přes vstupy, výstupy a požadavky.
+
+| Směr | Co | Příklad |
 |---|---|---|
-| Globální mapa | hráč vidí města ostatních hráčů | SGB: hráčské profily, persistence |
-| Návštěvy | navštívit město jiného hráče, porovnat se, "závidět" | NOX ID, veřejná data města |
-| Armády a útoky | postavit armádu, zaútočit na jiné město, bránit svoje | PvP vrstva (SGB podporuje, admin UI CODE-73) |
-| Sociální vrstva | klany, společné cíle, žebříčky měst | SGB clans (F6), leaderboards (F4) |
+| Vstupy (hra → City) | suroviny, měna, progres, události | odměna za zápas, `match_completed`, `pvp_won` |
+| Výstupy (City → hra) | **meta staty**, odměny, boosty | +HP z kasáren, +odměny z tržiště |
+| Požadavky | progres ve hře pro levely radnice | "dobyj svět 3" |
 
-## 5. Závislost na SharedGameBackend
+Technické zásady:
+- Interface ve stylu meta-core DI (`ICityProvider`, `ICityModifierSource`, `ICityRewardSink`), bez závislosti na konkrétní hře.
+- Obsah (budovy, ceny, časy, bonusy) **config-driven per titul**; tematika mění jen assety a texty.
+- Kill switch přes Firebase RC, dark launch, rollback bez buildu.
+- City nikdy neblokuje hru: bez backendu funguje lokálně a synchronizuje později.
 
-| Co City potřebuje | SGB služba | Stav podle roadmapy (10/2026) |
+## 6. SharedGameBackend
+
+| Co City potřebuje | SGB | Ve V1? |
 |---|---|---|
-| Identita hráče napříč tituly | NOX ID | Stage D |
-| Perzistence města mimo zařízení | cloud save (SGB slot-based) | dnes MF používá UGS Cloud Save, přechod je Stage G a volitelný |
-| Žebříčky měst | leaderboards | Stage F4 |
-| Klany, přátelé | clans, friends API | Stage F2, F6 |
-| PvP útoky na města | PvP (fortress raids) | "later, only after a game-design decision" |
-| Odměny | reward bridge | Stage B5 |
+| Perzistence města (časovače, stav) | cloud save | ano (server čas proti podvádění s hodinami *(návrh)*) |
+| Identita napříč tituly | NOX ID | ano, pokud bude |
+| Odměny | reward bridge (B5) | ano |
+| Žebříčky měst, klany, návštěvy, útoky | leaderboards, clans, PvP | ne, pozdější vrstvy |
 
-Důsledek: **MVP (fáze 1) musí jít bez sociální vrstvy**, jen s lokálním stavem a stávajícím cloud save. Sociální a PvP vrstvy se zapínají podle postupu SGB roadmapy.
-
-## 6. Fáze a scope
-
-Podle voice note: **listopad začít, prosinec doručit, leden 2027 dostat mezi hráče.** Vyvíjí se v **Mecha Fortress jako staging projektu** (stejně jako SGB), potom se importuje do **původního Hexapolisu**. Nemusí se vyvíjet přímo ve starém Hexapolisu, důležité je mít to v moderní technologii (dotáhnout lze i v současném Hexfortu).
+## 7. Fáze
 
 | Fáze | Kdy | Obsah | Kde |
 |---|---|---|---|
-| **1. MVP** | 11 až 12/2026 | vesnice, 3 až 4 produkční budovy, 3 až 4 budovy s odemčením (jednotky, upgrady), volné umístění, 2 až 3 dekorace, kontrakt vstupů a výstupů, analytika, RC flag | MF staging |
-| **1b. Import** | 12/2026 | napojení do původního Hexapolisu, Hex suroviny a jednotky | Hexapolis |
-| **Release a ověření** | 1/2027 | release hráčům, měření podle sekce 7, sběr feedbacku komunity | Hexapolis (případně MF) |
-| **2. Hloubka** | Q1/2027 *(návrh)* | personalizace, rasy podle tematiky, více budov, IAP sinky | podle výsledku ověření |
-| **3. Sociální a PvP** | od Q2/2027 *(návrh)* | globální mapa, návštěvy, armády a útoky, klany. Útoky nejdřív fake (bot města a uložená města hráčů), reálné útoky postupně, viz `STRATEGIE_PRODUKCE.md`, PvP postupně | závisí na SGB Stage D a F |
+| **V1 vývoj** | 11 až 12/2026 | radnice, stavitelé, 4 produkční budovy, sklad, 5 budov s meta staty, dekorace, questy kapitol, zrychlení, kontrakt, analytika, RC flag | MF staging |
+| **Import do Hexu** | 12/2026 | napojení meta statů na jednotky a talenty Hexu, Hex suroviny | Hexapolis |
+| **Release a ověření** | 1/2027 | hráčům původního Hexapolisu, měření podle kap. 8 | Hexapolis |
+| **V2** | Q1/2027 *(návrh)* | výzkum, víc budov, VIP, výroba jednotek | podle ověření |
+| **V3** | od Q2/2027 *(návrh)* | globální mapa, útoky (nejdřív fake), aliance | podle SGB |
 
-Mimo MVP: globální mapa, útoky, klany, rasy, UGC.
-
-## 7. Ověření (co musí platit, aby šel City do Hexapolis 2 a dalších her)
+## 8. Ověření (vstup pro gate Hexapolis 2)
 
 | Otázka | Metrika | Laťka |
 |---|---|---|
-| Hrají lidé město? | % DAU, kteří otevřou City, počet staveb na hráče, návraty do City za den | TBD |
-| Zlepšuje retenci? | D1, D7, D30 hráčů s City proti bez (A/B přes Firebased) | D7 a D30 nahoru, D1 bez poklesu |
-| Prodlužuje session? | playtime / DAU, počet sessions za den | TBD |
-| Monetizuje? | IAP konverze na City sinky (zrychlení, dekorace, balíčky surovin), ARPDAU | TBD |
-| Zaplatí si subscription? | test subscription nabídky (např. VIP s bonusem produkce) | TBD |
-| Co chce komunita? | feedback z Discordu / průzkumu, reaktivace starých hráčů | kvalitativně |
+| Hrají lidé město? | % DAU v City, staveb na hráče, návraty do City za den | TBD |
+| Zlepšuje retenci? | D1, D7, D30 s City proti bez (A/B přes Firebased) | D7 a D30 nahoru, D1 bez poklesu |
+| Monetizuje? | konverze na zrychlení, stavitele, balíčky, ARPDAU | TBD |
+| Zaplatí si VIP? | test VIP / subscription nabídky | TBD |
+| Táhne PvP All-out-power? | útrata a aktivita hráčů s vyššími meta staty | sledovat |
 
-Referenční čísla MF (Hexafort dokument, okno 20. 5. až 13. 7. 2026): D1 26,5 %, D7 10,1 %, D30 4,2 %, podíl IAP asi 20 %.
+Referenční čísla MF (okno 20. 5. až 13. 7. 2026): D1 26,5 %, D7 10,1 %, D30 4,2 %, podíl IAP asi 20 %.
 
-## 8. Rizika
+## 9. Rizika
 
-- **Produkční laťka Rise of Kingdoms.** Volné umístění znamená víc artu, víc stavů a víc balancu než mřížka. MVP držet malé.
-- **Sdílenost nesmí zabít hloubku.** Generický modul bez vazby na hru je nuda. Kontrakt (sekce 2) musí mít vazby, které hráče vracejí do gameplaye.
-- **Ekonomika ve dvou hrách naráz.** Balanc pro MF a Hex se liší. Config per titul je podmínka, ne nice to have.
-- **Import do starého Hexapolisu.** Starší codebase, riziko integrace. Ověřit odhad při CODE-65 (rozšiřitelnost).
-- **Termín leden 2027.** Dva měsíce na vývoj, import a release při běžícím live ops Q4. Kapacita Unity a QA je úzké hrdlo (stejně jako u SGB).
-- **Sociální vrstva čeká na SGB.** Bez NOX ID a klanů není globální mapa ani útoky. Nepřislibovat je v MVP.
+- **Produkční laťka CoC a RoK.** Mají roky obsahu. V1 držet malou: méně budov, víc levelů.
+- **Klon mechanik, ne assetů.** Vlastní art, názvy a UI; žádné převzaté vizuály ani texty.
+- **Meta staty rozbijí balanc** PvE i PvP All-out-power. Hodnoty v RC, strop bonusů, telemetrie.
+- **Ekonomika ve dvou hrách naráz** (MF a Hex). Config per titul je podmínka.
+- **Import do starého Hexapolisu.** Ověřit při CODE-65.
+- **Termín leden 2027** při běžícím live ops Q4.
 
-## 9. Otevřené otázky pro Davida
+## 10. Otevřené otázky
 
 1. Kdo vlastní City V2 (design, vývoj) a kolik kapacity má v listopadu a prosinci?
-2. Release v lednu: jen v původním Hexapolisu, nebo i v MF? MF je staging, jde tam City i k hráčům?
-3. Zdroj surovin: jen ze zápasů, nebo i pasivní produkce (idle)? Kolik idle je v pořádku pro Hexapolis?
-4. Jsou CODE-9 (Meta Village V2) a CODE-65 totéž co City V2, nebo se má backlog přejmenovat a sloučit?
-5. Subscription: testovat už v lednovém releasu, nebo až ve fázi 2?
-6. Laťky v sekci 7: jaké minimum musí City splnit, aby se schválil Hexapolis 2?
-7. Rasy a frakce: patří do MVP pro některou tematiku, nebo až fáze 2?
+2. Release v lednu jen v Hexapolisu, nebo i v MF?
+3. Jaké meta staty v Hexu přesně (jednotky, talenty, hrdinové) a jaké stropy?
+4. Jsou CODE-9 a CODE-65 totéž co City V2, sloučit backlog?
+5. VIP / subscription už ve V1, nebo až ve V2?
+6. Laťky v kap. 8 pro gate Hexapolis 2.

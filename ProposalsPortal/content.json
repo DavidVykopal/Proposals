@@ -1,0 +1,296 @@
+{
+  "title": "Návrhy 2027",
+  "subtitle": "Podklady vedení NOXGAMES na konec roku 2026",
+  "viewers": [
+    {
+      "id": "jirka",
+      "name": "Jirka",
+      "role": "CEO",
+      "color": "#9a80ff"
+    },
+    {
+      "id": "dj",
+      "name": "DJ",
+      "role": "Operations",
+      "color": "#19b8a6"
+    },
+    {
+      "id": "kuba",
+      "name": "Kuba",
+      "role": "Marketing",
+      "color": "#ff7d3f"
+    },
+    {
+      "id": "mirek",
+      "name": "Mirek",
+      "role": "Spoluzakladatel",
+      "color": "#e3c04a"
+    },
+    {
+      "id": "peko",
+      "name": "Peko",
+      "role": "Spoluzakladatel",
+      "color": "#f06aa8"
+    },
+    {
+      "id": "david",
+      "name": "David",
+      "role": "Produkce",
+      "color": "#3d97ff"
+    }
+  ],
+  "sections": [
+    {
+      "id": "jak-to-funguje",
+      "num": "00",
+      "title": "Jak portál funguje",
+      "summary": "Co portál umí, jak psát poznámky, jak se ptát asistenta a jak připojit vlastního Clauda přes MCP.",
+      "docs": [
+        {
+          "src": "docs/PRUVODCE.md",
+          "title": "Průvodce portálem"
+        }
+      ]
+    },
+    {
+      "id": "delegace",
+      "title": "Delegační plán",
+      "summary": "Kdo za co odpovídá od 1. 1. 2027: segmenty, dekrety, pravomoci a odměňování.",
+      "docs": [
+        {
+          "src": "../Delegacni_Navrh/DELEGACNI_NAVRH.md",
+          "group": "Návrh"
+        },
+        {
+          "src": "../Delegacni_Navrh/PRIPRAVA_2026-11-19.md",
+          "group": "Návrh",
+          "title": "Příprava porady 19. 11."
+        },
+        {
+          "src": "../Delegacni_Navrh/PRIPRAVA_2026-10-29_ODMENOVANI.md",
+          "group": "Návrh",
+          "title": "Odměňování 2027"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/00_Delegace_rejstrik_dekretu.md",
+          "group": "Dekrety",
+          "title": "Rejstřík dekretů"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/01_Dekret_D01_Rytmus_a_zasady_transformace.md",
+          "group": "Dekrety",
+          "title": "D01 Rytmus a zásady"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/02_Dekret_D02_Struktura_firmy.md",
+          "group": "Dekrety",
+          "title": "D02 Struktura firmy"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/03_Dekret_D03_Budgety_personalni_pravomoci_reporting.md",
+          "group": "Dekrety",
+          "title": "D03 Budgety a pravomoci"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/04_Dekret_D04_Pravidla_delegace_a_prace_mezi_segmenty.md",
+          "group": "Dekrety",
+          "title": "D04 Pravidla delegace"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/05_Segment_Rizeni_EXEC.md",
+          "group": "Segmenty",
+          "title": "Řízení (EXEC)"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/06_Segment_Operations.md",
+          "group": "Segmenty",
+          "title": "Operations"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/07_Segment_Produkce.md",
+          "group": "Segmenty",
+          "title": "Produkce"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/08_Segment_Marketing.md",
+          "group": "Segmenty",
+          "title": "Marketing"
+        },
+        {
+          "src": "../Delegacni_Navrh/PORADA_2026-10-29_KOMPILAT.md",
+          "group": "Porady",
+          "title": "Zápis 29. 10."
+        },
+        {
+          "src": "../Delegacni_Navrh/PORADA_2026-10-22_KOMPILAT.md",
+          "group": "Porady",
+          "title": "Zápis 22. 10."
+        },
+        {
+          "src": "../Delegacni_Navrh/TEMATA_DALSICH_PORAD.md",
+          "group": "Porady",
+          "title": "Témata dalších porad"
+        }
+      ]
+    },
+    {
+      "id": "strategie",
+      "title": "Produkční strategie 2027",
+      "summary": "Tři větve a až pět nových titulů v 2027: reskiny MF, obnova Hexu a nový Hexapolis 2 po ověření, strategická větev.",
+      "docs": [
+        {
+          "src": "../Strategie_Produkce/strategie-2027-prezentace.html",
+          "title": "Prezentace",
+          "assets": [
+            "assets"
+          ]
+        },
+        {
+          "src": "../Strategie_Produkce/STRATEGIE_PRODUKCE.md",
+          "title": "Strategie produkce 2027"
+        },
+        {
+          "src": "../Strategie_Produkce/KONCEPT_STRATEGICKA_VETEV.md",
+          "title": "Nová strategická větev"
+        }
+      ]
+    },
+    {
+      "id": "pvp",
+      "title": "Obnova Hexu a PvP",
+      "summary": "HexFort rušíme, v původním Hexu ověříme PvP, City V2 a UGC jako celek. PvP má segmenty Skill only a All-out-power.",
+      "docs": [
+        {
+          "src": "../Strategie_Produkce/KONCEPT_OBNOVA_HEXU.md",
+          "title": "Koncept obnovy Hexu"
+        },
+        {
+          "src": "../Strategie_Produkce/DESIGN_HEX_PVP.md",
+          "title": "Design dokument PvP"
+        }
+      ]
+    },
+    {
+      "id": "city-v2",
+      "title": "City V2 / Map V2",
+      "summary": "Co nejbližší klon Clash of Clans a Rise of Kingdoms. První verze: stavění, suroviny a upgrady, budovy zvyšují meta staty.",
+      "docs": [
+        {
+          "src": "../Strategie_Produkce/DESIGN_CITY_V2.md",
+          "title": "Design dokument City V2"
+        }
+      ]
+    },
+    {
+      "id": "noxengine",
+      "title": "NoxEngine + Warcamp",
+      "summary": "Proof of concept vlastního enginu a úplně jiného workflow podle Czodeho. Warcamp ukazuje, jak rychle jde udělat strategii s PvP a naší metou.",
+      "docs": [
+        {
+          "src": "../NoxEngine/SHRNUTI_NOXENGINE.md",
+          "title": "Shrnutí pro vedení",
+          "group": "Shrnutí"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/guides/NOXENGINE_GUIDE.md",
+          "title": "Průvodce enginem (0.2)",
+          "group": "Průvodci"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/guides/WARCAMP_GUIDE.md",
+          "title": "Průvodce Warcampem (0.2)",
+          "group": "Průvodci"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/RESEARCH.md",
+          "title": "Rešerše a kritéria go / no-go",
+          "group": "Detaily"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/GAUNTLET_LOOP.md",
+          "title": "Gauntlet Loop",
+          "group": "Detaily"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/ARCHITECTURE.md",
+          "title": "Architektura",
+          "group": "Detaily"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/ROADMAP.md",
+          "title": "Roadmapa",
+          "group": "Detaily"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/STATUS_2026-11-02.md",
+          "title": "Stav k 2. 11. (0.1)",
+          "group": "Detaily"
+        },
+        {
+          "src": "../../Experiments/NoxEngine/docs/GDD_WARCAMP.md",
+          "title": "GDD Warcamp (0.1)",
+          "group": "Detaily"
+        }
+      ]
+    },
+    {
+      "id": "designeri",
+      "title": "Externí designéři",
+      "summary": "Externisté pomohli udělat akci, ale nové know-how téměř nepřinesli. Návrh: externí design jen jako občasná konzultace.",
+      "docs": [
+        {
+          "src": "../Externi_Designeri/VYHODNOCENI_EXTERNICH_DESIGNERU.md",
+          "title": "Vyhodnocení spolupráce"
+        },
+        {
+          "src": "../Vanecek_DesignReview/public/index.html",
+          "title": "Tryout Jana Vaněčka (puppet hry)",
+          "assets": [
+            "prototype.html",
+            "vanecek-analysis.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cpi",
+      "title": "Tématiky a CPI testy",
+      "summary": "Pipeline aspoň jednoho CPI testu měsíčně. Dva cíle: témata pro reskiny MF a nový vizuál pro Hexapolis 2.",
+      "docs": [
+        {
+          "src": "../CPI_Tests/CPI_PIPELINE.md",
+          "title": "CPI pipeline a cíle"
+        },
+        {
+          "src": "../CPI_Tests/mecha-fortress-cpi-proposal.html",
+          "title": "CPI návrh Mecha Fortress (květen 2026)",
+          "assets": [
+            "assets"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platy-2027",
+      "title": "Platy 2027: scénáře",
+      "summary": "Nápočty scénářů narovnání platů, co je v nich dobré a špatné, žádost leada o fix 110 a přechod ve třech krocích.",
+      "docs": [
+        {
+          "src": "../Delegacni_Navrh/SCENARE_PLATU_2027.md",
+          "title": "Nápočty scénářů"
+        }
+      ]
+    },
+    {
+      "id": "cile-2027",
+      "title": "Cíle 2027",
+      "summary": "Finanční cíl složený z výplaty majitelům, rezervy, investic do platů a zisku na bonusy. Scénáře A, B, C a brány přechodu.",
+      "docs": [
+        {
+          "src": "../Delegacni_Navrh/CILE_2027.md",
+          "title": "Cíle 2027 a scénáře"
+        }
+      ]
+    }
+  ]
+}
