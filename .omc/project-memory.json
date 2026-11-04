@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1793631402986,
-  "projectRoot": "/Users/davidvykopal/orca/workspaces/_PROPOSALS/strategie-produkce",
+  "lastScanned": 1793818340192,
+  "projectRoot": "/Users/davidvykopal/Documents/Projects/_PROPOSALS",
   "techStack": {
     "languages": [],
     "frameworks": [],
@@ -36,7 +36,7 @@
       "path": "CPI_Tests",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1793631402976,
+      "lastAccessed": 1793818340186,
       "keyFiles": [
         "mecha-fortress-cpi-proposal-embedded.html",
         "mecha-fortress-cpi-proposal.html"
@@ -46,7 +46,7 @@
       "path": "Delegacni_Navrh",
       "purpose": null,
       "fileCount": 45,
-      "lastAccessed": 1793631402977,
+      "lastAccessed": 1793818340186,
       "keyFiles": [
         "DELEGACNI_NAVRH.md",
         "ODMENOVANI_2027_MODEL_JMENOVITE.md",
@@ -59,7 +59,7 @@
       "path": "HexaFort_Development",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1793631402977,
+      "lastAccessed": 1793818340186,
       "keyFiles": [
         "budget-plan.csv",
         "hexafort-development-proposal.html",
@@ -70,7 +70,7 @@
       "path": "Hexapolis_India",
       "purpose": null,
       "fileCount": 10,
-      "lastAccessed": 1793631402977,
+      "lastAccessed": 1793818340187,
       "keyFiles": [
         "EMAIL_phases_budget_timeline.md",
         "PRELIMINARY_AGREEMENT.md",
@@ -83,7 +83,7 @@
       "path": "LEGO_BlockDefense",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1793631402978,
+      "lastAccessed": 1793818340187,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -93,7 +93,7 @@
       "path": "Odmenovani_David",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1793631402978,
+      "lastAccessed": 1793818340187,
       "keyFiles": [
         "NOXGAMES-Model-odmenovani-David-Vykopal.pdf",
         "navrh-odmenovani.html"
@@ -103,7 +103,7 @@
       "path": "PixelFederation_DiggyTD",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1793631402978,
+      "lastAccessed": 1793818340187,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -113,7 +113,7 @@
       "path": "PostQ4Plan",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1793631402979,
+      "lastAccessed": 1793818340187,
       "keyFiles": [
         "Q4_OKR_2026.md",
         "ZAZNAM_2026-09-24_EXEC_PORADA.md",
@@ -126,7 +126,7 @@
       "path": "PuppetSports_Revival",
       "purpose": null,
       "fileCount": 8,
-      "lastAccessed": 1793631402979,
+      "lastAccessed": 1793818340187,
       "keyFiles": [
         "CONTACTS.csv",
         "EMAIL_TEMPLATES.md",
@@ -139,7 +139,7 @@
       "path": "Q4Plan",
       "purpose": null,
       "fileCount": 23,
-      "lastAccessed": 1793631402979,
+      "lastAccessed": 1793818340188,
       "keyFiles": [
         "PORADA_2026-09-24_Q4_PLAN.md",
         "PORADA_2026-10-01_DELEGACE_4.md",
@@ -152,7 +152,7 @@
       "path": "Rozpocet_2027_Odmenovani",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1793631402980,
+      "lastAccessed": 1793818340188,
       "keyFiles": [
         "NOXGAMES-Vydaje-odmenovani-rozpocet-2027.pdf",
         "rozpocet-2027.html"
@@ -162,7 +162,7 @@
       "path": "Strategie_Produkce",
       "purpose": null,
       "fileCount": 5,
-      "lastAccessed": 1793631402980,
+      "lastAccessed": 1793818340188,
       "keyFiles": [
         "DESIGN_CITY_V2.md",
         "DESIGN_HEX_PVP.md",
@@ -175,7 +175,7 @@
       "path": "Vanecek_DesignReview",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1793631402980,
+      "lastAccessed": 1793818340188,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -185,7 +185,7 @@
       "path": "Warhorse_KCD_Dominion",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1793631402980,
+      "lastAccessed": 1793818340189,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -195,7 +195,7 @@
       "path": "Warhorse_KCD_TowerDefense",
       "purpose": null,
       "fileCount": 2,
-      "lastAccessed": 1793631402981,
+      "lastAccessed": 1793818340189,
       "keyFiles": [
         "package.json",
         "wrangler.jsonc"
@@ -205,7 +205,7 @@
       "path": "CPI_Tests/assets",
       "purpose": "Static assets",
       "fileCount": 5,
-      "lastAccessed": 1793631402981,
+      "lastAccessed": 1793818340189,
       "keyFiles": [
         "README.md",
         "T1-CPI.png",
@@ -216,25 +216,16 @@
       "path": "HexaFort_Development/assets",
       "purpose": "Static assets",
       "fileCount": 1,
-      "lastAccessed": 1793631402982,
+      "lastAccessed": 1793818340189,
       "keyFiles": [
         "noxgames-logo.png"
-      ]
-    },
-    "Hexapolis_India/public": {
-      "path": "Hexapolis_India/public",
-      "purpose": "Public files",
-      "fileCount": 1,
-      "lastAccessed": 1793631402982,
-      "keyFiles": [
-        "index.html"
       ]
     },
     "LEGO_BlockDefense/public": {
       "path": "LEGO_BlockDefense/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1793631402982,
+      "lastAccessed": 1793818340190,
       "keyFiles": [
         "index.html"
       ]
@@ -243,7 +234,7 @@
       "path": "PixelFederation_DiggyTD/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1793631402983,
+      "lastAccessed": 1793818340191,
       "keyFiles": [
         "index.html"
       ]
@@ -252,7 +243,7 @@
       "path": "PostQ4Plan/assets",
       "purpose": "Static assets",
       "fileCount": 1,
-      "lastAccessed": 1793631402983,
+      "lastAccessed": 1793818340191,
       "keyFiles": [
         "noxgames-logo.png"
       ]
@@ -261,27 +252,18 @@
       "path": "PuppetSports_Revival/public",
       "purpose": "Public files",
       "fileCount": 9,
-      "lastAccessed": 1793631402983,
+      "lastAccessed": 1793818340191,
       "keyFiles": [
         "PuppetSports-Partnership-CS.pdf",
         "PuppetSports-Partnership-EN.pdf",
         "emails.html"
       ]
     },
-    "PuppetSports_Revival/src": {
-      "path": "PuppetSports_Revival/src",
-      "purpose": "Source code",
-      "fileCount": 1,
-      "lastAccessed": 1793631402984,
-      "keyFiles": [
-        "index.js"
-      ]
-    },
     "Q4Plan/assets": {
       "path": "Q4Plan/assets",
       "purpose": "Static assets",
       "fileCount": 1,
-      "lastAccessed": 1793631402984,
+      "lastAccessed": 1793818340191,
       "keyFiles": [
         "noxgames-logo.png"
       ]
@@ -290,7 +272,7 @@
       "path": "Strategie_Produkce/assets",
       "purpose": "Static assets",
       "fileCount": 1,
-      "lastAccessed": 1793631402985,
+      "lastAccessed": 1793818340192,
       "keyFiles": [
         "noxgames-logo.png"
       ]
@@ -299,7 +281,7 @@
       "path": "Vanecek_DesignReview/public",
       "purpose": "Public files",
       "fileCount": 3,
-      "lastAccessed": 1793631402985,
+      "lastAccessed": 1793818340192,
       "keyFiles": [
         "index.html",
         "prototype.html",
@@ -310,7 +292,7 @@
       "path": "Warhorse_KCD_Dominion/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1793631402985,
+      "lastAccessed": 1793818340192,
       "keyFiles": [
         "index.html"
       ]
@@ -319,7 +301,7 @@
       "path": "Warhorse_KCD_TowerDefense/public",
       "purpose": "Public files",
       "fileCount": 1,
-      "lastAccessed": 1793631402986,
+      "lastAccessed": 1793818340192,
       "keyFiles": [
         "index.html"
       ]
