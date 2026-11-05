@@ -26,7 +26,7 @@ export const TOOLS: ToolDef[] = [
   {
     name: 'list_documents',
     title: 'Seznam podkladů',
-    description: 'Lists all sections and documents of the NOXGAMES "Návrhy 2027" portal (delegation plan, production strategy 2027, PvP, City V2, NoxEngine, external designers, CPI tests) with ids, titles, links and open comment counts. Each section also has a "prehled-<section>" quick-overview slide deck.',
+    description: 'Lists all sections and documents of the NOXGAMES "Návrhy 2027" portal (delegation plan, production strategy 2027, PvP, City V2, NoxEngine, external designers, CPI tests) with ids, titles, links and open comment counts. Each section also has a "prehled-<section>" quick-overview slide deck and a "hodnoceni-<section>" text summary with pros, cons, risks and expected outcome.',
     inputSchema: obj({}),
   },
   {
@@ -113,7 +113,7 @@ export async function runTool(env: Env, name: string, args: Record<string, unkno
           sec = d.section;
           out.push(`\n## ${d.section_title} (section: ${d.section})\n${d.summary || ''}`);
         }
-        const kind = d.kind === 'slides' ? 'quick-overview slides' : d.kind === 'html' ? 'presentation/page' : 'document';
+        const kind = d.kind === 'slides' ? 'quick-overview slides' : d.kind === 'overview' ? 'section summary and evaluation' : d.kind === 'html' ? 'presentation/page' : 'document';
         out.push(`- ${d.title} | id: ${d.id} | ${kind} | updated ${String(d.modified).slice(0, 10)} | open comments: ${openBy[d.id] || 0} | ${link(ctx, d.route)}`);
       }
       return out.join('\n').trim();
@@ -184,7 +184,7 @@ export async function runTool(env: Env, name: string, args: Record<string, unkno
       const body = String(a.body || '').trim();
       if (!body || body.length > 4000) throw new Error('Body must be 1 to 4000 characters.');
       const d = await env.DB.prepare('SELECT id, title, route, kind FROM docs WHERE id = ?1').bind(doc).first<Record<string, string>>();
-      if (!d || d.kind === 'slides') throw new Error(`Unknown or non-commentable doc "${doc}". Comment on the underlying document instead.`);
+      if (!d || d.kind === 'slides' || d.kind === 'overview') throw new Error(`Unknown or non-commentable doc "${doc}". Comment on the underlying document instead.`);
       let anchor = a.anchor ? String(a.anchor) : '';
       let quote = '';
       if (anchor && anchor !== '_doc') {

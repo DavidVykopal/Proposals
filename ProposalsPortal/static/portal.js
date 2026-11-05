@@ -805,11 +805,23 @@
       if (v !== 'full') history.replaceState(null, '', `#s${at + 1}`);
     });
     view.addEventListener('keydown', (e) => {
-      if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(at + 1); }
-      if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(at - 1); }
+      if (['PageDown', ' '].includes(e.key)) { e.preventDefault(); show(at + 1); }
+      if (e.key === 'PageUp') { e.preventDefault(); show(at - 1); }
       if (e.key === 'Home') show(0);
       if (e.key === 'End') show(slides.length - 1);
     });
+    // Arrows move slides anywhere on the page, except while typing.
+    if (q === $('.quick')) {
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+        const t = e.target;
+        if (t.closest?.('input, textarea, select, [contenteditable]:not([contenteditable="false"])')) return;
+        e.preventDefault();
+        show(at + (e.key === 'ArrowRight' ? 1 : -1));
+        history.replaceState(null, '', `#s${at + 1}`);
+      });
+    }
     view.addEventListener('click', (e) => {
       if (e.target.closest('a')) return;
       if (document.fullscreenElement === view) show(at + 1);

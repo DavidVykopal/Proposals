@@ -5,7 +5,7 @@
 
 ## 1. Shrnutí
 
-- **Do konce roku chceme dvě věci hotové:** SharedGameBackend (SGB) integrovaný **aspoň v jedné hře** a v Hexu **hotové a implementované featury PvP, City V2 a UGC** (za RC flagy, k hráčům od ledna).
+- **Do konce roku chceme dvě věci hotové:** SharedGameBackend (SGB) integrovaný v **Mecha Fortress** a v Hexu **hotové a implementované featury PvP, City V2 a UGC** (za RC flagy, k hráčům od ledna).
 - **Exekutiva** má nejpozději **1. 12.** první schůzku k vyhodnocení roku 2026 a ke strategii 2027.
 - **Poslední pracovní týden 14. až 18. 12. se nic nevydává.** Je to uvolněný týden ve znamení **GameJamu** s tématy pro projekty 2027 a společným **AI workshopem** na celý vývojový cyklus.
 - **18. 12.** si hry projdeme a vyhodnotíme, večer **firemní párty**. Od 21. 12. volno.
@@ -49,12 +49,13 @@ Davidův návrh pro Aldyho platí: po Red Command jeden týdenní sprint na doho
 
 | Cíl | Co znamená hotovo | Termín |
 |---|---|---|
-| **SGB aspoň v jedné hře** | hra posílá data do SGB a používá aspoň jednu službu (Nox ID, žebříčky, PvP backend) v produkčním buildu | release nejpozději 11. 12. |
+| **SGB v Mecha Fortress** | MF posílá data do SGB a používá aspoň jednu službu (Nox ID, žebříčky, klany) v produkčním buildu | release nejpozději 11. 12. |
 | **PvP v Hexu** | Skill only a All-out-power, Quick game Speed a Normal, žebříčky přes SGB, za RC flagem | implementováno do 11. 12., hráči v lednu |
 | **City V2 v Hexu** | verze 1 (stavění, suroviny, upgrady, budovy s meta staty) importovaná z MF stagingu, za RC flagem | implementováno do 11. 12., hráči v lednu |
 | **UGC v Hexu** | editor map ve hře, sdílení kódem, komunitní mapy v rotaci, za RC flagem | implementováno do 11. 12., hráči v únoru |
 
-- **Kterou hrou začít se SGB** *(návrh)*: přirozeně **Hexapolis**, protože PvP žebříčky na SGB stejně stojí. Menší a rychlejší varianta je **leaderboard v Sector Defense**, o kterém mluví Aldy s Karlem: mohl by jít ven ještě před freeze a ověřit SGB na živé hře.
+- **SGB začíná v Mecha Fortress** (rozhodnuto 5. 11.). MF je staging projekt pro SGB i City V2, takže integrace navazuje na práci, která už běží. Ostatní hry přebírají SGB z MF, PvP žebříčky v Hexu na něm staví.
+- Integrace musí být v plánu sprintu MF vedle Welcome back a vánočního board game, ven jde nejpozději s posledním releasem 11. 12.
 - **UGC se tím posouvá dopředu:** v konceptu obnovy Hexu šlo UGC až po lednu. Teď má být implementované do konce roku a k hráčům jde v únoru.
 - Všechno za vlastními RC flagy, takže implementace v prosinci neznamená release v týdnu jamu.
 
@@ -122,7 +123,7 @@ Nejlepší nápady můžou jít do **CPI pipeline** v lednu *(návrh)*, viz `CPI
 |---|---|---|---|
 | K1 | Termín schůzky exekutivy (nejpozději 1. 12.) | Jirka, David | 19. 11. |
 | K2 | Release freeze od 14. 12., poslední release 11. 12. | exekutiva | 19. 11. |
-| K3 | Ve které hře je SGB první: Hexapolis, nebo leaderboard v Sector Defense | David, Aldy, Karel | plán sprintu po 11. 11. |
+| K3 | Které služby SGB jdou v Mecha Fortress ven do 11. 12. (Nox ID, žebříčky, klany) a kdo je kóduje | David, Aldy | plán sprintu po 11. 11. |
 | K4 | UGC implementované do konce roku: kapacita kodérů | David, Mirek | plán sprintu po 11. 11. |
 | K5 | Budget jamu: Claude účty, Higgsfield, asset packy | Jirka, DJ | 1. 12. |
 | K6 | Pohotovost na live ops přes svátky | Martin V., Aldy | 11. 12. |

@@ -40,7 +40,7 @@ Pravidla:
 - Měnit dokumenty ani psát poznámky neumíš; na to má každý ikonu poznámky u odstavce nebo vlastní MCP token v Nastavení.
 
 Dokumenty v portálu (id | název | oddíl):
-${docs.map((d) => `${d.id} | ${d.title} | ${d.section_title}${d.kind === 'slides' ? ' (rychlý přehled)' : ''}`).join('\n')}${focus}`;
+${docs.map((d) => `${d.id} | ${d.title} | ${d.section_title}${d.kind === 'slides' ? ' (rychlý přehled)' : d.kind === 'overview' ? ' (shrnutí a hodnocení)' : ''}`).join('\n')}${focus}`;
 
   const messages: Msg[] = [{ role: 'system', content: system }, ...history];
   const tools = READ_ONLY_TOOLS.map((t) => ({ type: 'function', function: { name: t.name, description: t.description, parameters: t.inputSchema } }));

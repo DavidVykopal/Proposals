@@ -235,6 +235,36 @@ function renderSlides(section) {
   });
 }
 
+// ---------- text overview (overview/<section>.md, see overview/FORMAT.md) ----------
+function renderOverview(section) {
+  const file = path.join(ROOT, 'overview', `${section.id}.md`);
+  if (!fs.existsSync(file)) return null;
+  const om = new Marked({ gfm: true });
+  const blocks = [];
+  let heading = 'Shrnutí';
+  om.use({
+    renderer: {
+      codespan({ text }) {
+        const t = /\.(md|html?)$/i.test(text) && docs.find((d) => path.basename(d.abs) === path.basename(text));
+        return t ? `<a href="${t.route}">${esc(t.title)}</a>` : `<code>${text}</code>`;
+      },
+      table(token) {
+        return `<div class="tablewrap">${Renderer.prototype.table.call(this, token)}</div>`;
+      },
+    },
+    walkTokens(t) {
+      if (t.type === 'heading') heading = t.text;
+      if (['paragraph', 'list_item', 'heading'].includes(t.type) || t.type === 'table') {
+        const text = t.type === 'table' ? [t.header, ...t.rows].map((r) => r.map((c) => c.text).join(' | ')).join('\n') : t.text;
+        if (t.type !== 'list_item' || !t.tokens?.some((x) => x.type === 'list')) blocks.push({ anchor: `o${blocks.length + 1}`, heading, text: text.replace(/[*`]/g, '') });
+      }
+    },
+  });
+  const src = fs.readFileSync(file, 'utf8').replace(/\n(→)/g, '\n\n$1');
+  const html = om.parse(src).replace(/<p>→\s*/g, '<p class="src"><span aria-hidden="true">→</span> ');
+  return { html, blocks };
+}
+
 function deckHtml(slides) {
   return `<section class="quick" aria-label="Rychlý přehled">
   <div class="quickhead"><h2>Rychlý přehled</h2><span class="qcount" aria-live="polite">1 / ${slides.length}</span>
@@ -412,8 +442,11 @@ for (const s of sections) {
     : `<p class="planned-note">Připravuje se. Podklady sem přibudou před poradou.</p>`;
   const slides = renderSlides(s);
   s.slides = slides;
-  const docsHead = slides ? '<h2 class="grouph docsh">Podklady</h2>' : '';
-  const body = `<main class="sheet divider" id="main"><div class="divhead"><span class="bignum" aria-hidden="true">${s.num}</span><div><h1>${esc(s.title)}</h1><p class="lede">${esc(s.summary)}</p></div></div>${slides ? deckHtml(slides) : ''}${docsHead}${list}</main>`;
+  const ov = renderOverview(s);
+  s.overview = ov;
+  const docsHead = slides || ov ? '<h2 class="grouph docsh">Podklady</h2>' : '';
+  const ovHtml = ov ? `<section class="overview prose" aria-labelledby="ov-${s.id}"><h2 class="ovh" id="ov-${s.id}">Shrnutí a hodnocení</h2>${ov.html}</section>` : '';
+  const body = `<main class="sheet divider" id="main"><div class="divhead"><span class="bignum" aria-hidden="true">${s.num}</span><div><h1>${esc(s.title)}</h1><p class="lede">${esc(s.summary)}</p></div></div>${slides ? deckHtml(slides) : ''}${ovHtml}${docsHead}${list}</main>`;
   write(s.route, page({ title: s.title, body, bodyClass: 'section', section: s.id, data: { sectionId: s.id } }));
 }
 
@@ -526,6 +559,13 @@ for (const s of sections) {
   const text = s.slides.map((sl) => `[s${sl.i}] ${sl.text}`).join('\n');
   sql.push(`INSERT INTO docs (id, title, section, section_title, route, kind, modified, summary, text) VALUES (${[id, `Rychlý přehled: ${s.title}`, s.id, s.title, s.route, 'slides', new Date().toISOString(), s.summary, text].map(sq).join(', ')});`);
   for (const sl of s.slides) sql.push(`INSERT INTO chunks (doc, anchor, heading, text) VALUES (${[id, `s${sl.i}`, sl.title, sl.text].map(sq).join(', ')});`);
+}
+for (const s of sections) {
+  if (!s.overview) continue;
+  const id = `hodnoceni-${s.id}`;
+  const text = s.overview.blocks.map((b) => `[${b.anchor}] ${b.text}`).join('\n');
+  sql.push(`INSERT INTO docs (id, title, section, section_title, route, kind, modified, summary, text) VALUES (${[id, `Shrnutí a hodnocení: ${s.title}`, s.id, s.title, s.route, 'overview', new Date().toISOString(), s.summary, text].map(sq).join(', ')});`);
+  for (const b of s.overview.blocks) sql.push(`INSERT INTO chunks (doc, anchor, heading, text) VALUES (${[id, b.anchor, b.heading, b.text].map(sq).join(', ')});`);
 }
 fs.mkdirSync(path.join(ROOT, 'build'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'build', 'index.sql'), sql.join('\n') + '\n');

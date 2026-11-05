@@ -1,5 +1,5 @@
 # Konec roku 2026 a GameJam
-Do Vánoc dotáhneme SGB a featury Hexu, poslední týden nic nevydáváme a děláme GameJam pro projekty 2027.
+Do Vánoc dotáhneme SGB v Mecha Fortress a featury Hexu, poslední týden nic nevydáváme a děláme GameJam pro projekty 2027.
 !! 1. 12. | nejpozději schůzka exekutivy
 !! 11. 12. | poslední release roku
 !! 14. až 18. 12. | GameJam a AI workshop
@@ -23,8 +23,8 @@ Podle Aldyho jde hlavně o grafiku, plán sedí.
 - Volné kodéry dáváme do **SGB a featur Hexu**
 → `KONEC_ROKU_A_GAMEJAM.md`
 ---
-## Do Vánoc hotové SGB a tři featury Hexu
-- **SGB aspoň v jedné hře:** Hexapolis, nebo leaderboard Sector Defense
+## Do Vánoc SGB v MF a tři featury Hexu
+- **SGB v Mecha Fortress:** rozhodnuto, MF je staging pro SGB, release do 11. 12.
 - **PvP v Hexu:** implementováno za RC flagem, hráči v lednu
 - **City V2 v Hexu:** import z MF stagingu, hráči v lednu
 - **UGC v Hexu:** implementováno do konce roku, hráči v únoru
@@ -48,6 +48,6 @@ Pondělí AI workshop na celý vývojový cyklus, pak týmy po 1 až 3 lidech.
 ## Co je potřeba rozhodnout
 - **Termín schůzky exekutivy** do 1. 12.: Jirka, David
 - **Release freeze** od 14. 12.: exekutiva 19. 11.
-- **SGB první v Hexu, nebo v Sector Defense:** David, Aldy, Karel
+- **Které služby SGB jdou v MF ven** do 11. 12.: David, Aldy
 - **Budget jamu** a **pohotovost** přes svátky: Jirka, DJ, Martin V.
 → `KONEC_ROKU_A_GAMEJAM.md`

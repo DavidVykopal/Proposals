@@ -540,3 +540,9 @@ button.textbtn { border: 0; background: none; cursor: pointer; font: inherit; fo
 @media (max-width: 900px) { .chathead .textbtn { display: inline-flex; } }
 .prose img { display: block; max-width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--line); margin: 0.4em 0; }
 .prose img { max-height: 70vh; width: auto; }
+
+/* section text overview */
+.overview { margin: 44px 0 8px; max-width: 76ch; }
+.overview .ovh { font: 700 1.2rem/1.2 Montserrat, sans-serif; margin: 0 0 18px; letter-spacing: 0; }
+.overview h2:not(.ovh) { font: 700 1.05rem/1.3 Montserrat, sans-serif; letter-spacing: 0; margin: 1.8em 0 0.5em; color: var(--ink); }
+.overview .src { color: var(--muted); font-size: 0.95rem; }

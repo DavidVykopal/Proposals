@@ -167,6 +167,10 @@
         {
           "src": "../Strategie_Produkce/DESIGN_HEX_PVP.md",
           "title": "Design dokument PvP"
+        },
+        {
+          "src": "../Strategie_Produkce/BALANC_HEX_PVP.md",
+          "title": "PvP v Hexu: první nahození čísel"
         }
       ]
     },
@@ -178,6 +182,10 @@
         {
           "src": "../Strategie_Produkce/DESIGN_CITY_V2.md",
           "title": "Design dokument City V2"
+        },
+        {
+          "src": "../Strategie_Produkce/BALANC_CITY_V2.md",
+          "title": "City V2: první nahození čísel"
         }
       ]
     },
@@ -295,7 +303,7 @@
     {
       "id": "konec-roku",
       "title": "Konec roku a GameJam",
-      "summary": "Do Vánoc SGB v jedné hře a PvP, City V2 a UGC v Hexu. Exekutiva do 1. 12., poslední týden bez releasů s GameJamem, 18. 12. vyhodnocení a párty.",
+      "summary": "Do Vánoc SGB v Mecha Fortress a PvP, City V2 a UGC v Hexu. Exekutiva do 1. 12., poslední týden bez releasů s GameJamem, 18. 12. vyhodnocení a párty.",
       "docs": [
         {
           "src": "../Konec_Roku_2026/KONEC_ROKU_A_GAMEJAM.md",
