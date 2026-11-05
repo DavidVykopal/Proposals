@@ -247,5 +247,5 @@ Rizika provedení jsou v kap. 14. Tady jsou námitky proti tomu, jestli je samot
 3. **Ligy:** zařazovat nové hráče podle PowerProgress? (Postup a sestup na konci měsíce s ELO podmínkou: Rozhodnuto 6. 11.)
 4. **Odměny:** konkrétní obsah truhel a kosmetiky podle ekonomiky Hexapolisu.
 5. **Prototyp z května** (Codex 5.5): navazujeme na něj? Kde leží a kdo ho převezme?
-6. **Vlastník** PvP featury v týmu Mirek, Kubík (Jakub H.), David (tým Rozhodnuto 6. 11.) a vztah k HEX-2-0249-72 a OKR O5.2 (termín 30. 11., posunout podle plánu obnovy).
+6. **Vlastník** PvP featury: **rozhodnuto 6. 11., Mirek** (City V2 Kubík, UGC David). Zbývá vztah k HEX-2-0249-72 a OKR O5.2 (termín 30. 11., posunout podle plánu obnovy).
 7. **Cílové hodnoty metrik** v kap. 12 potvrdit s Jirkou (likvidita a podíl DAU přepočítané na 7 tis. aktivních).

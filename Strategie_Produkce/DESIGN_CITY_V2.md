@@ -14,7 +14,7 @@
 - **Budovy zvyšují meta staty**, které platí ve hře (HP, útok, talenty, odměny). V PvP se projeví v segmentu **All-out-power**.
 - Modul je sdílený: vyvíjí se v **Mecha Fortress jako staging**, do Hexapolisu se implementuje do 11. 12. 2026 za RC flagem a první hráči ho dostanou v **původním Hexapolisu** v lednu 2027.
 - Klonujeme **mechaniky a strukturu**, ne art, názvy ani UI: vlastní tematika a vizuál podle titulu.
-- **V MF City V2 nahradí dnešní mapu budov** (Rozhodnuto 6. 11.), žádné dvě paralelní mety. Hráči dostanou refund: *(návrh)* 100 % utracené `HardCurrency` zpět jako gemy a startovní Radnici podle nejvyšší dnešní budovy (max Radnice 5).
+- **V MF City V2 nahradí dnešní mapu budov** (Rozhodnuto 6. 11.), žádné dvě paralelní mety. Termín: **začátek roku 2027** (David, 6. 11.). Hráči dostanou refund: *(návrh)* 100 % utracené `HardCurrency` zpět jako gemy a startovní Radnici podle nejvyšší dnešní budovy (max Radnice 5).
 - **Gem sinky:** zrychlení, stavitelé, **startovní bundle surovin** (60 gemů *(návrh)*) a **City VIP** (450 gemů na 30 dní *(návrh)*: −15 % času staveb, +1 stavitelská fronta, denní zrychlení 30 min, +20 % produkce).
 
 ## 2. Proč klon CoC a RoK
@@ -132,7 +132,7 @@ Technické zásady:
 | **V1 vývoj** | 11/2026 až 11. 12. 2026 | radnice, stavitelé, 4 produkční budovy, sklad, 5 budov s meta staty, dekorace, questy kapitol, zrychlení, kontrakt, analytika, RC flag | MF staging |
 | **Import do Hexu** | do 11. 12. 2026, za RC flagem | napojení meta statů na jednotky a talenty Hexu, Hex suroviny | Hexapolis |
 | **Release a ověření** | 1/2027 | hráčům původního Hexapolisu, měření podle kap. 8 | Hexapolis |
-| **Náhrada mapy MF** | termín neurčený | City V2 místo `MapBuilding` budov, refund investic (BALANC kap. 11) | Mecha Fortress |
+| **Náhrada mapy MF** | začátek roku 2027 | City V2 místo `MapBuilding` budov, refund investic (BALANC kap. 11) | Mecha Fortress |
 | **V2** | Q1/2027 *(návrh)* | výzkum, víc budov (Radnice 11+), VIP úrovně, výroba jednotek | podle ověření |
 | **V3** | od Q2/2027 *(návrh)* | globální mapa, útoky (nejdřív fake), aliance | podle SGB |
 
@@ -182,7 +182,7 @@ Rizika provedení jsou v kap. 9. Tady jsou námitky proti tomu, jestli je samotn
 ## 11. Otevřené otázky
 
 1. Kdo vlastní City V2 (design, vývoj)? Tým pro Hex featury je rozhodnutý 6. 11. (Mirek, Kubík (Jakub H.), David), zbývá rozdělit featury.
-2. Release v lednu jen v Hexapolisu, nebo i v MF? (V MF City V2 nahradí mapu, termín neurčený.)
+2. Release v lednu jen v Hexapolisu, nebo i v MF? (V MF City V2 nahradí mapu na začátku roku 2027, přesný release určí plán sprintů.)
 3. Jaké meta staty v Hexu přesně (jednotky, talenty, hrdinové) a jaké stropy?
 4. Jsou CODE-9 a CODE-65 totéž co City V2, sloučit backlog?
 5. City VIP je rozhodnuté jako gem sink (6. 11.). Zbývá: zapnout ho už ve V1 *(návrh: ano, za RC flagem)*, nebo až ve V2?

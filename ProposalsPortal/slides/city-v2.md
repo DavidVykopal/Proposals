@@ -44,7 +44,7 @@ Co nejbližší klon Clash of Clans a Rise of Kingdoms. První verze: stavění,
 ---
 ## Co je potřeba rozhodnout
 - Kdo z Mirka, Kubíka a Davida vlastní City V2
-- Kdy City V2 nahradí mapu v MF, potvrdit pravidlo refundu
+- City V2 nahradí mapu v MF na začátku roku 2027; potvrdit pravidlo refundu a přesný release
 - Které meta staty v Hexu a jaké stropy bonusů
 - Ceny bundle a City VIP, VIP už ve V1 *(návrh: ano)*
 → `DESIGN_CITY_V2.md`

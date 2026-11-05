@@ -57,7 +57,7 @@ HexFort rušíme a práci vracíme do původního Hexapolisu. Tam ověříme PvP
 ## Rozhodnuto 6. 11. a co zbývá
 - **Rozhodnuto:** ELO podmínka postupu, sestup rostoucí s ligou, jedna fronta pro Speed a Normal, generované profily botů
 - **Rozhodnuto:** Hex featury a SGB dělí Mirek, Kubík a David; Play Pass se do revenue nepočítá
-- Zbývá: rozdělit featury mezi Mirka, Kubíka a Davida, fallback když SGB v lednu nenaběhne
+- Vlastníci: PvP Mirek, City V2 Kubík, UGC David; zbývá fallback, když SGB v lednu nenaběhne
 - Presety národů pro Skill only
 - Navázat na **prototyp PvP z května**, nebo začít znovu
 - Cílové hodnoty gate potvrdit s Jirkou

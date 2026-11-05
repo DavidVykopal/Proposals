@@ -8,7 +8,7 @@ Modul vyvíjíme jednou v Mecha Fortress jako staging a pak ho importujeme do da
 - **Hráči ji znají,** radnici, stavitele a sběr pochopí bez učení.
 - **Jeden modul pro všechny hry:** MF reskiny, Hexapolis, Hexapolis 2 i strategická větev, vývoj se platí jednou.
 - **Nové monetizační sinky:** zrychlení, další stavitelé, startovní bundle surovin, dekorace a City VIP (návrh 450 gemů na 30 dní: o 15 % rychlejší stavby, stavitelská fronta navíc, denní zrychlení zdarma).
-- **Jedna stavební meta v MF:** město nahradí dnešní mapu, žádné dvě paralelní mety.
+- **Jedna stavební meta v MF:** město nahradí dnešní mapu na začátku roku 2027, žádné dvě paralelní mety.
 - **Dává hloubku mety mimo zápas,** kterou MF ani Hex dnes nemají, a krmí PvP All-out-power.
 
 ## Nevýhody

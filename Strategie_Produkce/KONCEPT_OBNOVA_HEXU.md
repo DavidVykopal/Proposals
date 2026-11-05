@@ -106,7 +106,7 @@ Když celek ukáže zájem a ochotu platit, připravit **design hex gameplaye na
 
 ## 8. Co je potřeba rozhodnout
 
-1. **Vlastníci** PvP a City V2: tým je rozhodnutý 6. 11. (Mirek, Kubík (Jakub H.), David; Milan a Čoud drží live hry), zbývá rozdělit featury mezi ně.
+1. ~~**Vlastníci** PvP a City V2~~ **Rozhodnuto 6. 11.:** PvP Mirek, City V2 Kubík (Jakub H.), UGC David; základ SGB David, integrace SGB do her všichni. Milan a Čoud drží live hry.
 2. **Rozsah lednového releasu** je rozhodnutý (PvP a City V2 v lednu, UGC může dřív než v únoru). Zbývá: zapnout PvP a City V2 ve stejný den, nebo s odstupem pár dní *(návrh: naráz, kampaň stojí na obou)*.
 3. **Prototyp PvP z května** (Codex 5.5): navázat, nebo začít znovu.
 4. **Cílové hodnoty gate** potvrdit s Jirkou.

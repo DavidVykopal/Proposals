@@ -58,7 +58,6 @@ Celé portfolio jsou dnes PvE hry se slabou sociální vrstvou.
 Porada vedení, NoxHub NOVE-19.
 - **Vlastníci:** City V2, PvP v Hexu, strategická větev, CPI program
 - **Plán 5 titulů:** definice titulu, rozpočet na outsourcing grafiky, pořadí škrtů
-- **Rise of a Nation:** počítá se do 5 titulů, a z čí kapacity?
 - **Reskinová linka:** vlastník do 15. 1., třetí reskin založit v NoxHubu
 - **Gate Hex 2:** jaká čísla stačí (PvP, City, UGC, ARPDAU, D30)
 → `STRATEGIE_PRODUKCE.md`

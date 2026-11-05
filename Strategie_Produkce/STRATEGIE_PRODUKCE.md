@@ -168,7 +168,7 @@ Roadmapa od února dál je orientační, upřesní se po CPI testech a datech z 
 | Hexapolis 2 | ano, jen po gate | kapacitu na něj plán nemá; když gate projde, bere slot titulu #5, nebo jde nad plán jen s externí kapacitou |
 | Reskin #4 nebo skin strategického titulu #1 | ano, záloha | náhrada titulu #5, když nestihne |
 | Obnova Hexu (PvP, City V2, UGC) | ne | update existující hry |
-| Rise of a Nation (B2B, `Hexapolis_India/`) | ne, pokud vedení nerozhodne jinak | hra pro klienta. **K rozhodnutí:** jestli se počítá. Když se podepíše, bere kapacitu stejných lidí a plán se musí přepočítat |
+| Rise of a Nation (B2B, `Hexapolis_India/`) | ne, je navíc nad 5 titulů | hra pro klienta. Rozhodnuto 6. 11.: když se podepíše, bere jen část grafické kapacity; podle Davida jde stihnout 5 titulů i RON zároveň. Grafickou část hlídat v kapacitě artu (outsourcing) |
 | Red Command, eventy, playables | ne | live ops a B2B |
 
 ### Slate: 3 reskiny a 2 nové tituly
@@ -248,7 +248,7 @@ Soft launche se schválně nepřekrývají ve stejném měsíci, protože QA, pu
 
 | Do kdy | Co | Kdo |
 |---|---|---|
-| 1. 12. 2026 | exekutiva schválí cíl "aspoň 5 titulů v soft launchi" a definici titulu, rozhodne, jestli se počítá Rise of a Nation | Jirka, David V. |
+| 1. 12. 2026 | exekutiva schválí cíl "aspoň 5 titulů v soft launchi" a definici titulu | Jirka, David V. |
 | 15. 12. 2026 | téma reskinu #1 z CPI testu A | Kuba B., Richard |
 | 15. 1. 2027 | vlastník reskinové linky určený; kód MF-branch připravený jako šablona pro výměnu tématu | David V., Milan |
 | 31. 1. 2027 | partner pro outsourcing grafiky vybraný a rozpočet schválený; AI art pipeline nasazená na reskinu #1 | Jirka, Peko |
@@ -286,7 +286,7 @@ Pořadí, od prvního škrtu:
 | Námitka | Proč může platit | Odpověď nebo co s tím |
 |---|---|---|
 | 16 lidí neutáhne paralelní větve | Od dubna 2027 běží souběžně dva reskiny, strategický titul #1, příprava titulu #5, City V2 V2 a V3, CPI 1 až 2 testy měsíčně, live ops stávajících her a případně Hexapolis 2. Kód má na konci roku volněji, grafika je vytížená, a reskiny i nové tituly jsou hlavně grafická práce. | Kapacita po rolích, rozložená výroba ve dvou linkách a pořadí škrtů jsou v kapitole Jak vydat aspoň 5 titulů v 2027. Zbývá riziko: čísla jsou odhady *(předpoklad)* a úzkým místem zůstává grafika (zhruba 10 ČM navíc přes outsourcing). Kontrolní bod je konec března na skutečných číslech reskinu #1. |
-| "Aspoň 5 nových titulů v 2027" je na hraně kapacity | Původní roadmapa realisticky dávala 3 až 4 tituly: strategický titul #2 byl jen prototyp, Hexapolis 2 závisí na gate. | Vyřešeno v kapitole Jak vydat aspoň 5 titulů v 2027: titul = soft launch v 2027, slate 3 reskiny + titul #1 + titul #5, Hexapolis 2 jen místo titulu #5 nebo nad plán, záloha reskin #4. **Co zůstává rizikové:** titul #5 má nejkratší okno (výroba IX až XI), úspory z AI (40 % art, 30 % kód) jsou neověřené, outsourcing grafiky ještě nemá partnera ani rozpočet a Rise of a Nation by při podpisu bral stejné lidi. Cíl pořád chce doplnit o revenue, které mají nové tituly nahradit. |
+| "Aspoň 5 nových titulů v 2027" je na hraně kapacity | Původní roadmapa realisticky dávala 3 až 4 tituly: strategický titul #2 byl jen prototyp, Hexapolis 2 závisí na gate. | Vyřešeno v kapitole Jak vydat aspoň 5 titulů v 2027: titul = soft launch v 2027, slate 3 reskiny + titul #1 + titul #5, Hexapolis 2 jen místo titulu #5 nebo nad plán, záloha reskin #4. **Co zůstává rizikové:** titul #5 má nejkratší okno (výroba IX až XI), úspory z AI (40 % art, 30 % kód) jsou neověřené, outsourcing grafiky ještě nemá partnera ani rozpočet a Rise of a Nation by při podpisu bral část grafické kapacity (rozhodnuto 6. 11.: jde stihnout vedle 5 titulů, art pokrýt outsourcingem). Cíl pořád chce doplnit o revenue, které mají nové tituly nahradit. |
 | Monetizační teze PvP nemá vlastní data | Celé portfolio je PvE. Útrata "bez stropu" je model RoK a CoC s obří základnou a klanovými válkami. Náš první test běží v Hexu s cca $15k měsíčně, který je navíc v Google Play Passu, kde předplatitelé gemy nekupují. | Gate musí měřit útratu zvlášť pro iOS, Android mimo Play Pass a Play Pass (`BALANC_HEX_PVP.md`, kap. 10). Výsledek z malé hry brát jako signál směru, ne jako potvrzení modelu RoK. |
 | Obrana "lidé ve hře" v 2027 ještě neexistuje | Na launchi je PvP fake (boti a ghosti), City V2 V1 nemá sociální vrstvu, klany, globální mapa a útoky přijdou až ve V3 od Q2 2027. Síťový efekt potřebuje velkou živou základnu, kterou žádný titul zatím nemá. | Otevřeně říct, že 2027 staví infrastrukturu (SGB, Nox ID, klany). Jako předstihový ukazatel sledovat počet hráčů s Nox ID ve více titulech a podíl reálných PvP zápasů. |
 | SGB je jediný bod selhání | Na SGB stojí PvP Hexu (fronta, ELO, součtové žebříčky, propadání tahů; chybějící kusy v `BALANC_HEX_PVP.md`, kap. 12), perzistence a odměny City V2 i release v MF do 11. 12. Integrace SGB klienta do Hexapolisu není v plánu nikde rozepsaná. | Určit vlastníka SGB, práci z kap. 12 BALANC dát do sprintu s termínem a mít záložní rozsah (lednový release PvP bez součtového žebříčku nebo s menším počtem front). |
@@ -296,16 +296,15 @@ Pořadí, od prvního škrtu:
 
 **Potřebuje odpověď:**
 - Schválit plán 5 titulů: definici titulu (soft launch v 2027), pořadí škrtů a rozpočet na outsourcing grafiky (kapitola Jak vydat aspoň 5 titulů v 2027).
-- Počítá se Rise of a Nation (B2B) do 5 titulů, a když se podepíše, odkud vezme kapacitu?
 - Kolik měsíčního revenue mají nové tituly nahradit?
 - Jaký podíl revenue Hexapolisu jde přes Play Pass a jak se k předplatitelům Play Passu bude chovat monetizace City V2 a All-out-power?
 - Smí City V2 do produkčního buildu MF už v prosinci a lednu, nebo jen interní staging, dokud se neověří v Hexu?
-- Kdo vlastní SGB a jaký je plán B pro lednový release PvP v Hexu, když SGB v MF sklouzne za 11. 12.?
+- Plán B pro lednový release PvP v Hexu, když SGB nenaběhne včas (SGB: základ David, integrace všichni, rozhodnuto 6. 11.)?
 - Kill kritérium: při jakých číslech obnovu Hexu i Hexapolis 2 zastavíme?
 
 ## Otevřené otázky (neblokují start)
 
-1. **Vlastníci:** kdo vede City V2, PvP v Hexu, strategickou větev a CPI program? Voice note jména neuvádí.
+1. **Vlastníci:** rozhodnuto 6. 11.: City V2 Kubík, PvP v Hexu Mirek, UGC David, základ SGB David (integrace do her všichni), CPI program Marketing (Kuba). Zbývá vlastník strategické větve.
 2. **Reskiny:** plán 5 titulů počítá se 3 (soft launch III, VI, X). V NoxHubu jsou zatím 2 (NOVE-11, NOVE-12), třetí založit. Kdo vlastní reskinovou linku (do 15. 1.)?
 3. **Kapacita:** do 11. 12. rozhodnuto 6. 11.: live hry vedou Milan a Čoud, SGB, PvP, City V2 a UGC si dělí Mirek, Kubík a David. Kapacita na 2027 je v kapitole Jak vydat aspoň 5 titulů v 2027.
 4. **Gate pro Hex 2:** jaká čísla (podíl hráčů v PvP, D30, ARPDAU, konverze na subscription) stačí na schválení?

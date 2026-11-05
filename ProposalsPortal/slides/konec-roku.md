@@ -20,7 +20,7 @@ Podle Aldyho jde hlavně o grafiku, plán sedí.
 - **MF:** Welcome back balíček, vánoční reskin board game eventu
 - **Sector Defense:** A/B test obtížnosti, tutorial, možná leaderboard
 - **Zimní eventy** obou her od 7. 12.
-- Live hry vedou **Milan a Čoud**, SGB a featury Hexu dělají **Mirek, Kubík a David**
+- Live hry vedou **Milan a Čoud**, SGB a featury Hexu: **City V2 Kubík, PvP Mirek, UGC David**, integrace SGB všichni
 → `KONEC_ROKU_A_GAMEJAM.md`
 ---
 ## Do Vánoc SGB v MF a tři featury Hexu

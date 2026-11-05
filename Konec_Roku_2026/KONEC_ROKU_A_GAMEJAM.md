@@ -7,7 +7,7 @@
 
 - **Do konce roku chceme dvě věci hotové:** SharedGameBackend (SGB) vyvinutý a otestovaný na **interním buildu Mecha Fortress** a v Hexu **PvP, City V2 a UGC v testu a připravené do 11. 12.** (za RC flagy, PvP a City V2 k hráčům v lednu, UGC může jít k hráčům dřív než v únoru).
 - **SGB není součástí releasu 11. 12.** K hráčům jde až po svátcích, vypnutý za flagem, a zapíná se postupně (rozhodnuto 6. 11.).
-- **Kapacita (rozhodnuto 6. 11.):** vývoj hlavních live her vedou veteráni **Milan a Čoud**. SGB, PvP, City V2, UGC a nové věci si dělí **Mirek, Kubík a David**.
+- **Kapacita (rozhodnuto 6. 11.):** vývoj hlavních live her vedou veteráni **Milan a Čoud**. SGB, PvP, City V2, UGC a nové věci si dělí **Mirek, Kubík a David**: **City V2 Kubík, PvP Mirek, UGC David**, základ SGB udělal David, konkrétní integrace SGB do her jsou rozdělené mezi všechny.
 - **NoxEngine je letos jen experiment** (David a Čoud), kvůli němu nic z plánu nevypadává. Rozšiřovat a testovat ho jde i během GameJamu.
 - **Exekutiva** má nejpozději **1. 12.** první schůzku k vyhodnocení roku 2026 a ke strategii 2027.
 - **Poslední pracovní týden 14. až 18. 12. se nic nevydává.** Je to uvolněný týden ve znamení **GameJamu** s tématy pro projekty 2027 a společným **AI workshopem** na celý vývojový cyklus.
@@ -63,7 +63,7 @@ Davidův návrh pro Aldyho platí: po Red Command jeden týdenní sprint na doho
 - **SGB jde do interního buildu, ne do releasu 11. 12.** (rozhodnuto 6. 11.). Vánoční release MF tak nenese riziko nové backend integrace. K hráčům jde SGB po svátcích, vypnuté za flagem, a zapíná se postupně.
 - **UGC se tím posouvá dopředu:** v konceptu obnovy Hexu šlo UGC až po lednu. Je z velké části hotové, v testu má být do 11. 12. a k hráčům může jít dřív než v únoru. Je to spíš bonus navíc k PvP a City V2.
 - Všechno za vlastními RC flagy, takže implementace v prosinci neznamená release v týdnu jamu.
-- Na SGB a featurách Hexu dělají Mirek, Kubík a David, live hry drží Milan a Čoud (rozhodnuto 6. 11.).
+- Na SGB a featurách Hexu dělají Mirek, Kubík a David (City V2 Kubík, PvP Mirek, UGC David, základ SGB David, integrace SGB do her všichni), live hry drží Milan a Čoud (rozhodnuto 6. 11.).
 
 ## 5. Schůzka exekutivy do 1. 12.
 
