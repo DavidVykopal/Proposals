@@ -8,7 +8,7 @@
 - Každý test je **kombinace tří věcí: struktura / gameplay, vizuální styl a téma**, a vždy má **cíl, na který odpovídá**.
 - Výsledky skládáme do **vlastní knihovny nápadů**: co jsme testovali, za kolik, s jakým výsledkem. Časem z ní vybíráme témata bez nových testů.
 - Teď běží **dva cíle**: (A) témata a styly pro **2 až 3 reskiny Mecha Fortress / Sector Defense**, (B) téma a styl, které **nahradí vizuál Hexapolisu** pro Hexapolis 2 nebo další strategické idle hry.
-- Pro každý cíl je připravená **sada 4 variant** do prvního testu: co už máme v NoxHubu a v květnovém návrhu, doplněné o nejlepší odhady.
+- Pro každý cíl je připravená **sada variant** do prvního testu (cíl A 4, cíl B 5): co už máme v NoxHubu a v květnovém návrhu, doplněné o nejlepší odhady.
 
 ## Z čeho se skládá každý test
 
@@ -25,7 +25,7 @@ Pravidlo: v jednom testu se mezi variantami **mění jen to, co testujeme**. Kdy
 
 | Krok | Co se děje | Délka |
 |---|---|---|
-| 1. Brief | cíl, 4 varianty (struktura + styl + téma), baseline, geo, rozpočet | 1 až 2 dny |
+| 1. Brief | cíl, 4 až 5 variant (struktura + styl + téma), baseline, geo, rozpočet | 1 až 2 dny |
 | 2. Kreativy | statiky, video, případně landing page nebo playable pro každou variantu | asi 1 týden |
 | 3. Běh testu | kampaně v geo US, DE, KR, SE, JP; po 72 h kontrola a vypnutí jasných propadáků | asi 14 dní |
 | 4. Vyhodnocení | CPI, CTR, IPM po variantách a geo, verdikt k cíli | 1 až 2 dny |
@@ -59,7 +59,7 @@ Warcraft styl je v obou cílech schválně stejný (A1 a B2): jedna sada assetů
 
 **Otázka:** které téma a styl přitáhnou nejlevněji hráče **civilization-like hexové strategie**, pro Hexapolis 2 a strategické idle hry? NoxHub: CPI-12 (assety CPI-15, test CPI-16).
 
-Struktura je u všech čtyř stejná: **hexová mapa, růst města, expanze a souboj o území**. Test běží ve dvou settingách (MF a Hex), jak říká strategie, aby šlo téma použít i ve strategické větvi.
+Struktura je u všech pěti stejná: **hexová mapa, růst města, expanze a souboj o území**. Test běží ve dvou settingách (MF a Hex), jak říká strategie, aby šlo téma použít i ve strategické větvi.
 
 | # | Téma | Vizuální styl | Proč to testujeme | Odkud |
 |---|---|---|---|---|
@@ -67,6 +67,9 @@ Struktura je u všech čtyř stejná: **hexová mapa, růst města, expanze a so
 | B2 | **Warcraft fantasy: lidé, orkové, elfové** | Warcraft styl: robustní proporce, přehnaná zbroj, ručně malované textury, sytě barvy | sdílí estetiku a assety s A1, frakce přirozeně nesou PvP | CPI-24 |
 | B3 | **Vikingové** (fjordy, nájezdy, klany) | malovaný stylizovaný sever, chladné barvy a oheň | klany a nájezdy sedí na PvP a sociální vrstvu, silný mužský segment | nejlepší odhad, CPI-25 |
 | B4 | **Kolonie na cizí planetě** (sci-fi osídlování hexů) | čistý sci-fi, světlé biomy | odliší nás od historických 4X; navazuje na projekt Space Hex | nejlepší odhad, CPI-26 |
+| B5 | **Mýtická antika: bohové a kouzla** (inspirace Age of Mythology: Řecko, Egypt, sever; božské síly jako blesk a meteor, mýtické jednotky jako minotaur a kyklop) | malovaný stylizovaný antický svět, mramor a zlato, výrazné efekty božských sil | božská síla je efektní 3sekundový moment do kreativy; bohové a kouzla nesou meta a monetizaci (síly, talenty, mýtické jednotky), panteony nesou PvP frakce | Davidův input 5. 11., CPI-27 |
+
+B1 a B5 jsou schválně pár: stejná antika, test ukáže, jestli táhne víc **historická, nebo mýtická** verze. Část assetů (architektura, krajina, jednotky) se dá sdílet.
 
 **Rozhodne:** téma a styl pro nový Hexapolis 2 (hex gameplay na MF metě, rozhodnutí II až III 2027) a zásobník témat pro strategickou větev.
 
@@ -78,7 +81,7 @@ Každý test sem přidá řádky. Výsledky doplní UA po vyhodnocení.
 |---|---|---|---|---|---|---|---|
 | Star Marines v1 až v3 (CPI-1 až CPI-3) | starší test | sci-fi mariňáci | doplnit | doplnit | doplnit | doplnit | doplnit |
 | CPI-14 | A | A1 až A4 | US, DE, KR, SE, JP | | | | čeká |
-| CPI-16 | B | B1 až B4 | US, DE, KR, SE, JP | | | | čeká |
+| CPI-16 | B | B1 až B5 | US, DE, KR, SE, JP | | | | čeká |
 
 ### Zásobník dalších nápadů (pro další kola)
 
@@ -105,5 +108,5 @@ Každý test sem přidá řádky. Výsledky doplní UA po vyhodnocení.
 
 - **Vlastník CPI programu** (brief, kreativy, vyhodnocení, knihovna).
 - **Rozpočet na test** a práh vítěze proti baseline (UA podle MF benchmarku).
-- **Potvrdit sady A1 až A4 a B1 až B4**, případně prohodit variantu ze zásobníku.
+- **Potvrdit sady A1 až A4 a B1 až B5**, případně prohodit variantu ze zásobníku.
 - Kdo dělá **kreativy**: marketing (Ondra, Ruda), nebo i DEV grafika pro sadu assetů cíle B.

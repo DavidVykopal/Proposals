@@ -147,6 +147,13 @@
       ]
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "slides/konec-roku.md",
+      "accessCount": 1,
+      "lastAccessed": 1793899297830,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }
