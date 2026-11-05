@@ -2,6 +2,7 @@
 
 > **Stav:** první nahození, 5. 11. 2026. Všechna čísla jsou k ladění na stagingu Mecha Fortress (MF), pak se přenesou do Hexapolisu. Design a rozsah: `DESIGN_CITY_V2.md`.
 > **Pro AI agenty:** tento soubor je číselný doprovod k `DESIGN_CITY_V2.md`. Pravidla a rozsah určuje design dokument; když se liší, platí design. Čísla tady jsou vygenerovaná ze vzorců v kapitole 10, při změně parametrů se přepočítají všechny tabulky (žádné ruční úpravy jednotlivých buněk). Věci označené *(předpoklad)* nejsou ověřené na datech.
+> **Rozhodnuto 6. 11. 2026 (David):** City V2 **nahradí dnešní budovy na mapě MF** (Gold Mine, Gem Mine a další) a hráči dostanou **refund** toho, co do nich investovali (pravidlo v kap. 11, *návrh*). Za gemy si hráč koupí **startovní bundle surovin** a **City VIP** (zrychlení stavby a další výhody), čísla v kap. 8.1 a 8.2 (*návrh*). Příjmy z Play Passu se do revenue Hexu nepočítají. Kap. 10 (vzorce) se nemění; tabulka dopadu VIP na tempo je spočítaná skriptem z tabulky 6.1 (vzorec u tabulky).
 
 ## 1. Shrnutí
 
@@ -10,7 +11,9 @@
 - **Rytmus session:** sběr produkce 2 až 3× denně (kapacita budovy 10 h produkce), stavitelé se od Radnice 6 přenastavují 1 až 2× denně, první den časovače do 45 min.
 - **Ekonomika:** pasivní produkce kryje **asi 1/3** útraty (31 až 38 % od Radnice 4), zbytek jde ze zápasů, odměn a questů. Odpovídá zásadě z designu: hlavní příjem je ze hraní.
 - **Síla z města:** na maximu verze 1 dává město +20 % HP a +20 % útok, tedy **×1,44 efektivní síly** (HP × útok), plus 6 talentových bodů, 2 sloty, +20 % XP a +20 % odměn. Cíl: město tvoří **15 až 25 % celkové síly** hráče na D30 *(předpoklad, ověřit telemetrií)*.
-- **Monetizace:** zrychlení za gemy (prvních 5 min zdarma), stavitel #3 za 300 gemů, #4 za 600 gemů, balíčky surovin. Zrychlit celou verzi 1 stojí asi **15 100 gemů** (cca 250 USD při našem ceníku 60 gemů za 1 USD).
+- **Monetizace:** zrychlení za gemy (prvních 5 min zdarma), stavitel #3 za 300 gemů, #4 za 600 gemů, balíčky surovin, **startovní bundle surovin za 60 gemů** a **City VIP za 450 gemů na 30 dní** *(návrh, kap. 8.1 a 8.2)*. Zrychlit celou verzi 1 stojí asi **15 100 gemů** (cca 250 USD při našem ceníku 60 gemů za 1 USD).
+- **City VIP nerozbije tempo:** průměrnému hráči (6 zápasů denně) zkrátí cestu na Radnici 10 jen z 50 na 47 dní, protože brzdí suroviny. Strop je hráč se stavitelem #3, VIP a dokupováním surovin: Radnice 10 kolem 21. dne, vše na maximu kolem 29. dne (kap. 8.2).
+- **Náhrada mapy MF (Rozhodnuto 6. 11.):** City V2 nahradí `MapBuilding` budovy v MF. Refund *(návrh)*: 100 % utracené `HardCurrency` zpět jako gemy a startovní Radnice podle nejvyšší dnešní budovy (max Radnice 5), kap. 11.
 - **Celkový objem verze 1:** 2 461 hodin práce stavitelů a asi 12,1 milionu surovin.
 
 ## 2. Pilíře ekonomiky
@@ -396,7 +399,8 @@ Aby tempo z kapitoly 6 sedělo, musí zápasy, odměny a questy dodávat zbytek 
 | Balíček surovin podle tieru | 1 den příjmu ze zápasů (kapitola 7): 1,99 USD (Radnice 4 až 6), 4,99 USD (7 až 8), 9,99 USD (9 až 10) | nabídka při "chybí suroviny" a při plném stavitelském slotu |
 | Předměty zrychlení | v nabídkách a battle passu | MF už má `SkipItsCurrency` |
 | Prémiové dekorace | 150 gemů a víc | čistá kosmetika |
-| VIP / subscription | až podle otázky 5 v designu | návrh: +20 % produkce, auto-sběr, stavitel navíc po dobu předplatného |
+| Startovní bundle surovin | 60 gemů, jednorázově | kap. 8.1 *(návrh)* |
+| City VIP | 120 gemů / 7 dní, 450 gemů / 30 dní | kap. 8.2 *(návrh)*: −15 % času staveb, +1 stavitelská fronta, denní zrychlení 30 min zdarma, +20 % produkce |
 
 Ceny zrychlení:
 
@@ -421,6 +425,54 @@ Ceny zrychlení:
 | 190 000 | 114 |
 
 Přepočet gemů na peníze: **60 gemů = 1 USD** (náš ceník, potvrzeno 5. 11.). Gemové ceny jsou proti CoC (asi 100 gemů za 1 USD) vynásobené 0,6, takže v dolarech stojí totéž. Zrychlení Radnice 10 stojí 344 gemů, zrychlení celé verze 1 asi 15 100 gemů (asi 250 USD). Koeficient 12 ve vzorci odpovídá právě 60 gemům za 1 USD.
+
+### 8.1 Startovní bundle surovin *(návrh)*
+
+Rozhodnuto 6. 11.: gemy kupují bundle surovin do začátku. Čísla jsou návrh.
+
+| Parametr | Hodnota |
+|---|---|
+| Obsah | 10 000 jídla, 15 000 dřeva, 10 000 kamene, 7 000 zlata, 3× zrychlení 1 h |
+| Cena | **60 gemů** (1 USD), jednorázově na účet |
+| Kdy se nabízí | od Radnice 3 do dokončení Radnice 5 |
+| Hodnota podle ceníku | suroviny 62 gemů (vzorec dokoupení surovin), zrychlení 36 gemů, celkem cca 98 gemů, tedy sleva cca 40 % |
+
+- Obsah odpovídá ceně celého tieru 4 (41 970 surovin), tedy asi 2,5 dne příjmu ze zápasů na tieru 4 (kap. 7).
+- **Tempo:** tier 4 je se 2 staviteli časově omezený (1,7 dne), takže bundle zkrátí cestu jen o čekání na suroviny, odhadem pod 1 den. Hlavní účel je první nákup za gemy, ne zrychlení.
+- Hráči MF s refundem (kap. 11) mají gemy hned, bundle je pro ně přirozený první nákup.
+
+### 8.2 City VIP *(návrh)*
+
+Rozhodnuto 6. 11.: City VIP je gem sink se zrychlením stavby. Konkrétní hodnoty jsou návrh, ladí se přes RC.
+
+| Parametr | Hodnota |
+|---|---|
+| Cena | **120 gemů na 7 dní** (2 USD), **450 gemů na 30 dní** (7,50 USD) |
+| Čas staveb a upgradů | −15 % |
+| Stavitelská fronta | +1 po dobu VIP (sčítá se se staviteli #3 a #4) |
+| Denní zrychlení zdarma | 1× 30 min (hodnota 8 gemů denně, 240 gemů za 30 dní) |
+| Pasivní produkce | +20 % |
+| Auto-sběr | ne: sběr drží návraty do města (KPI 3+ návraty denně) |
+| Platnost | vyprší bez obnovy; rozestavěné stavby ve frontě VIP doběhnou, novou už do ní hráč nezadá |
+
+- Proč 450, ne 300 gemů: stavitel #3 stojí trvale 300 gemů, takže VIP za 300 na měsíc by ho kanibalizovalo. Pořadí nákupů: bundle (60), stavitel #3 (300), pak VIP jako opakovaný nákup.
+- VIP se hodí i jako prémiová odměna (PvP žebříčky, battle pass) v 7denní variantě.
+
+**Dopad na tempo** (dny do dosažení, model z kap. 6.1: čas tieru = práce stavitelů × 0,85 / (fronty × 0,75 × 24 h + 0,5 h zdarma denně); dny podle surovin = dny základu / (1 + 0,2 × podíl produkce tieru); platí delší z obou):
+
+| Hráč | Radnice 6 | Radnice 8 | Radnice 10 | Vše na max V1 |
+|---|---|---|---|---|
+| Základ: 2 stavitelé, 6 zápasů denně, bez VIP | 5,3 | 21,1 | 49,8 | 68,4 |
+| VIP, 6 zápasů denně (brzdí suroviny) | 5,0 | 19,7 | 46,6 | 64,0 |
+| Stavitel #3 bez VIP, o 30 % víc příjmu (cca 8 zápasů denně) | 4,1 | 16,2 | 38,3 | 52,6 |
+| VIP, o 30 % víc příjmu | 3,9 | 15,4 | 36,4 | 50,0 |
+| VIP, suroviny nebrzdí (dokupuje) | 3,0 | 11,8 | 28,0 | 38,4 |
+| Stavitel #3 + VIP, suroviny nebrzdí | 2,2 | 8,9 | 21,0 | 28,9 |
+
+Čtení:
+- **Průměrný hráč s VIP je rychlejší jen o 6 %**, protože příjem surovin je spočítaný na 2 stavitele (kap. 2). VIP tempo nerozbije a nepřeskočí gating stage indexem.
+- **Aktivní a platící hráč** se zkrátí výrazně, to je záměr (stejná logika jako stavitel #3).
+- **Strop:** stavitel #3 + VIP + dokupování surovin = vše na max V1 kolem 29. dne. Při lednovém releasu je to polovina února, před V2 (Radnice 11+, Q1 2027). Když V2 nebude do března, hlídat podíl hráčů na maximu a případně snížit −15 % na −10 % přes RC.
 
 ## 9. KPI pro ladění na stagingu MF
 
@@ -477,25 +529,43 @@ Váhy a recepty:
 
 Kalibrace: τ je nastavené tak, aby aktivní hráč došel na Radnici 10 kolem 50. dne; C tak, aby pasivní produkce kryla asi 35 % útraty tieru (tier 7 má C zvýšené kvůli třetím kusům produkce, které jinak podíl produkce vychýlí nahoru).
 
-## 11. Vazba na dnešní mapu MF
+## 11. Vazba na dnešní mapu MF: náhrada a refund
 
-V MF už existuje systém budov na mapě (`NoxFort/Assets/_Project/Entities/MapBuilding`): Gold Mine, Gem Mine, Stone Mine, Energy Generator, Jeweler, Wall (s talenty), Bestiary, Challenges. Moduly `ConstructionModule`, `UpgradingModule`, `CurrencyGeneratorModule`, `TalentModule` a `Modifiers` jsou dobrý základ pro City V2. Dnešní Gold Mine má 10 levelů, upgrady stojí 240 až 1 080 `HardCurrency` a trvají 2 h až 2 d 8 h, odemyká se podle stage indexu. City V2 platí upgrady surovinami (klon CoC a RoK), gemy jen za zrychlení a stavitele; jak to sladit s dnešní mapou, je otevřená otázka.
+V MF už existuje systém budov na mapě (`NoxFort/Assets/_Project/Entities/MapBuilding`): Gold Mine, Gem Mine, Stone Mine, Energy Generator, Jeweler, Wall (s talenty), Bestiary, Challenges. Moduly `ConstructionModule`, `UpgradingModule`, `CurrencyGeneratorModule`, `TalentModule` a `Modifiers` jsou dobrý základ pro City V2. Dnešní Gold Mine má 10 levelů, upgrady stojí 240 až 1 080 `HardCurrency` a trvají 2 h až 2 d 8 h, odemyká se podle stage indexu.
+
+**Rozhodnuto 6. 11.:** City V2 **nahradí** dnešní budovy na mapě MF a hráči dostanou refund investic. Dvě paralelní stavební mety nebudou.
+
+**Pravidlo refundu *(návrh, jednoduché)*:**
+
+| Co | Jak |
+|---|---|
+| Gemy | **100 % `HardCurrency` utracené za stavbu, upgrady a zrychlení nahrazených budov** se vrátí jako gemy (v MF `HardCurrency` = gemy) |
+| Startovní Radnice | podle nejvyšší úrovně dnešní budovy na mapě: Radnice = nejvyšší level / 2, zaokrouhleno nahoru, **min. 1, max. 5** (Gold Mine 10 = Radnice 5, Gold Mine 5 = Radnice 3) |
+| Budovy na startu | produkční budovy, Sklad a Kasárna na maximu pro startovní Radnici, ostatní od nuly; questy kapitol do startovní Radnice se označí jako splněné bez odměn |
+| Komunikace | jedno okno "Mapa se mění na město" se souhrnem refundu, žádná volba hráče |
+
+- Hráč na Radnici 5 přeskočí asi 5 dní tempa (kumulativní den 5,3 v kap. 6.1), zbytek je stejný jako u nového hráče. Gemy z refundu může dát do bundle, stavitelů, VIP nebo zrychlení.
+- **Riziko pro tempo:** maxovaný hráč může mít refund v tisících gemů (u Gold Mine 240 až 1 080 za level). Celá verze 1 se dá zrychlit za cca 15 100 gemů. Je to vrácení vlastní investice, ale před releasem vytáhnout z dat rozložení utracené `HardCurrency` na mapě a podle něj potvrdit 100 %.
+- **Ztráta produkce měn:** Gold Mine a Gem Mine dnes vyrábí měny. City V2 gemy nevyrábí (jen překážky, questy, achievementy), takže se změní přírůstek gemů hráčům MF. Spočítat z dat, kolik gemů Gem Mine denně dává, a dorovnat přes questy nebo denní odměnu *(návrh)*.
+- **Gem sink:** upgrady mapy za `HardCurrency` zmizí; nahrazují je stavitelé, zrychlení, bundle a City VIP (kap. 8).
+- Otevřené: co s talenty z Wall (návrh: převést na talentové body Akademie) a jestli Bestiary a Challenges zůstanou ve městě jako vstupy do featur bez upgradů.
 
 ## 12. Později (mimo verzi 1, podle designu kap. 4)
 
 - Radnice 11 a výš, víc kusů budov, nové budovy (V2).
 - Výroba jednotek a nemocnice, výzkum v Akademii.
 - HP budov, obrana, hradby a štíty (až s útoky na města; ve verzi 1 nejsou, proto tu HP chybí).
-- VIP, pokud se nerozhodne pro verzi 1.
+- VIP úrovně a další výhody (City VIP ve verzi 1 je jedna nabídka, kap. 8.2).
 - Síla města jako číslo pro žebříčky, aliance a pomoc se stavbou, návštěvy měst.
 
 ## 13. Otevřené otázky
 
 1. **Ceník gemů:** vyřešeno, 60 gemů = 1 USD (5. 11.). Zbývá ověřit, že `HardCurrency` v MF a gemy v Hexu mají stejný ceník.
 2. **Mapování surovin:** MF má soft měnu, `HardCurrency`, kameny a další měny; Hex má vlastní. Které z nich jsou jídlo, dřevo, kámen a zlato, nebo zavádíme 4 nové suroviny jen pro město?
-3. **Dnešní mapa MF:** nahradí City V2 současné `MapBuilding` budovy, nebo je rozšíří (Gold Mine a Stone Mine jako produkce, Wall jako Kasárna)?
+3. **Dnešní mapa MF: Rozhodnuto 6. 11., City V2 ji nahradí s refundem.** Zbývá potvrdit pravidlo refundu z kap. 11 (100 % gemů, startovní Radnice max 5), dorovnání produkce Gem Mine a talenty z Wall.
 4. **Meta staty v MF a Hexu:** HP a útok čeho přesně (hradba, hrdinové, jednotky Hexu)? Co znamená talentový bod a slot v MF a v Hexu? Na čem se počítá XP ze Svatyně?
 5. **Stropy 20 %:** sedí vůči ostatním zdrojům síly? Potřebujeme křivku síly hráče MF a Hexu na D1, D7, D30 (telemetrie), pak doladit procenta za level.
 6. **Odměny ze zápasů:** dodá hostitelská hra příjem z kapitoly 7 (škálovaný podle Radnice), a kolik zápasů denně hraje medián aktivního hráče (model počítá 6)?
 7. **Gating Radnice v Hexu:** jaké milníky (světy, PvP výhry) odpovídají MF stage 5 až 27?
-8. **Stavitel #3 a #4:** cena 300 a 600 gemů, nebo jen přes nabídky, a jestli VIP dává stavitele.
+8. **Stavitel #3 a #4:** cena 300 a 600 gemů, nebo jen přes nabídky. VIP dává stavitelskou frontu navíc jen po dobu VIP *(návrh, kap. 8.2)*.
+9. **City VIP a bundle** *(návrh, kap. 8.1 a 8.2)*: potvrdit ceny 60 / 120 / 450 gemů a efekty, a jestli VIP zapnout už ve verzi 1 (návrh: ano, za RC flagem, nahrazuje gem sink mapy MF).

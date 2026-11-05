@@ -42,6 +42,21 @@ Externisté pomohli udělat akci, ale extra knowledge moc nepřinesli. Spoluprá
 
 Samostatný případ ze srpna 2026: kandidát na game designera dostal testovací úkol na puppet hry. Verdikt byl **no-go na nábor**, z tryoutu si bereme nápady pro hry (Looping Events Schedule, Block and Penetration, core ve stylu Smashing Four), ne člověka do týmu. Detail je v podkladu `index.html` této kapitoly (Design review). Závěr je stejný jako u externistů: hodnota je v podnětech a druhém názoru, ne v dlouhodobé kapacitě.
 
+## Slabá místa a otevřené otázky
+
+| Námitka | Proč může platit | Odpověď nebo co s tím |
+|---|---|---|
+| **Dvě spolupráce jsou malý vzorek** | Závěr o externím designu obecně stojí na dvou lidech s velmi rozdílným profilem. | Závěr číst jako "takto zadaná spolupráce", ne jako verdikt nad externím designem. |
+| **Část slabého výstupu jde na náš vrub** | Sami píšeme, že chyběla dokumentace a podklad vznikal narychlo. | Další konzultaci zadat až s onboarding balíčkem a jednou konkrétní otázkou. |
+| **Verdikt je předčasný** | Jediný měřitelný výstup, test hard currency, ještě nemá výsledek. | Doporučení potvrdit po vyhodnocení testu. |
+| **"Dražší než vlastní tým" nemá čísla** | Chybí náklad spolupráce i srovnání s časem Aldyho a Karla. | Doplnit náklad, jinak argument v rozpočtu 2027 nepoužívat. |
+
+**Potřebuje odpověď:**
+
+- Kolik obě spolupráce stály a kolik času na ně padlo z týmu?
+- Kdy bude vyhodnocený test hard currency?
+- Kdo vlastní onboarding balíček projektu a do kdy je hotový pro Red Command?
+
 ## Co je potřeba rozhodnout
 
 - **Rozpočet 2027 na externí design:** zachovat jen jako konzultační položku (občasná konzultace, druhý názor), ne jako kapacitu. Výši zatím nikdo nenavrhl.

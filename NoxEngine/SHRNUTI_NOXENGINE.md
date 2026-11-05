@@ -1,6 +1,6 @@
 # NoxEngine + Warcamp: shrnutí pro vedení
 
-**Stav:** 4. 11. 2026. Zdroje: repo `Experiments/NoxEngine` (README 0.2, git log 2. až 3. 11., build reporty `docs/reports/*.md`, průvodci 0.2), `STATUS_2026-11-02.md`, `RESEARCH.md`, `GDD_WARCAMP.md`, `ROADMAP.md`. Živý web s buildy, dokumentací a videi: [noxengine.studio-0b0.workers.dev](https://noxengine.studio-0b0.workers.dev). Kde se zdroje liší, platí novější důkaz (git log, reporty 0.2) a u každého čísla rozlišujeme, co je ověřené a co je jen tvrzení.
+**Stav:** 4. 11. 2026, rámec upravený podle rozhodnutí 6. 11. 2026 (letos experiment). Zdroje: repo `Experiments/NoxEngine` (README 0.2, git log 2. až 3. 11., build reporty `docs/reports/*.md`, průvodci 0.2), `STATUS_2026-11-02.md`, `RESEARCH.md`, `GDD_WARCAMP.md`, `ROADMAP.md`. Živý web s buildy, dokumentací a videi: [noxengine.studio-0b0.workers.dev](https://noxengine.studio-0b0.workers.dev). Kde se zdroje liší, platí novější důkaz (git log, reporty 0.2) a u každého čísla rozlišujeme, co je ověřené a co je jen tvrzení.
 
 ## Shrnutí
 
@@ -8,7 +8,7 @@
 - **Hlavní hodnota je jiné workflow, s nápadem přišel Czode (Jan Š., senior Unity developer).** Engine je postavený tak, aby ho celý ovládali AI agenti: 174 příkazů, které agent volá stejně jako člověk tlačítka v editoru. Obsah je v datech, kvalitu hlídá oddělený kritik.
 - **Warcamp ukazuje, jak rychle jde udělat strategickou hru s PvP a naší metou.** Trofeje, truhly, levely jednotek, obchod, City V2, žebříček a 4 skiny včetně mecha. Celé repo má 71 commitů mezi 2. a 3. 11. 2026.
 - **Neověřené zůstává to podstatné pro byznys:** výkon na reálném telefonu, skutečné SDK (AppLovin MAX, Firebase), iOS na zařízení a hlavně srovnání rychlosti s Unity. Žádná ze sedmi kill gates zatím formálně neprošla.
-- **Návrh:** schválit časově omezenou sázku podle `RESEARCH.md` (2 inženýři + agenti, gates po sprintu 2, 3 a 4), Mecha Fortress a Unity týmy nechat beze změny.
+- **Rozhodnuto 6. 11.:** NoxEngine je letos **čistě experiment**. Dělají na něm **David a Čoud**, kvůli němu nic z plánu nevypadává. Rozšiřovat a testovat ho jde i během GameJamu 14. až 18. 12. O případné větší investici se rozhodne později a kill gates z `RESEARCH.md` slouží jako kritéria pro to rozhodnutí. Mecha Fortress a Unity týmy zůstávají beze změny.
 
 ## 1. Proof of concept enginu: vlastní engine je proveditelný
 
@@ -23,7 +23,7 @@ Co v repu existuje a je ověřené (zdroj: README 0.2, reporty v `docs/reports/`
 | Determinismus | stejný vstup dá na všech platformách bitově stejný zápas | golden test prošel na macOS a wasm32, Linux a Windows jen v CI (zatím nespuštěno) |
 | Masové scény | 50 000 jednotek při 219 fps na Apple M5, v Chrome stabilních 60 fps | report massive, měřeno na vytíženém stroji |
 
-Engine nestaví vše od nuly: rendering, UI a audio jsou hotové open-source knihovny (wgpu, egui, kira). Vlastní je to, co z něj dělá náš engine: příkazy pro agenty, obrazovky a okna z NoxE, data, skiny, PvP a editor. Licence vychází na 0 USD, pro srovnání Unity Pro by při 33 místech stálo zhruba 76 tisíc USD ročně. Samotná úspora licencí ale podle `RESEARCH.md` sázku neospravedlňuje.
+Engine nestaví vše od nuly: rendering, UI a audio jsou hotové open-source knihovny (wgpu, egui, kira). Vlastní je to, co z něj dělá náš engine: příkazy pro agenty, obrazovky a okna z NoxE, data, skiny, PvP a editor. Licence vychází na 0 USD. `RESEARCH.md` pro srovnání počítá Unity Pro při 33 místech (33 × 2 310 USD, zhruba 76 tisíc USD ročně); při dnešních 16 lidech je strop zhruba 37 tisíc USD a reálně méně, protože licenci potřebují jen ti, kdo pracují v Unity. Samotná úspora licencí ale podle `RESEARCH.md` sázku neospravedlňuje.
 
 Detail: `STATUS_2026-11-02.md` (stav 0.1), `ARCHITECTURE.md`, `NOXENGINE_GUIDE.md`.
 
@@ -82,7 +82,7 @@ Hlavní rizika podle `RESEARCH.md`:
 - **Bus factor:** dnes je za vším git historie jednoho člověka s agenty. Do konce sprintu 3 mají buildy zvládnout aspoň 2 lidé.
 - **Rozsah editoru:** verze 0.2 přidala hodně editoru dřív, než prošla gate K4, což K7 hlídá.
 
-Kill gates (sprint = 2 týdny, **dva kill hlasy = stop**):
+Kill gates podle `RESEARCH.md` (sprint = 2 týdny, **dva kill hlasy = stop**). Od 6. 11. nejsou harmonogramem letošní práce, ale **kritérii pro pozdější rozhodnutí o větší investici**:
 
 | Gate | Termín | Podmínka | Stav k 4. 11. |
 |---|---|---|---|
@@ -92,16 +92,38 @@ Kill gates (sprint = 2 týdny, **dva kill hlasy = stop**):
 | K4 SDK | konec sprintu 3 | MAX interstitial a rewarded, Firebase událost a RemoteConfig z Rustu na Androidu | jen stub a mock |
 | K5 Velikost | konec sprintu 3 | prázdné AAB do 15 MB, hra do 25 MB | APK 5,9 MB bez SDK, AAB neměřeno |
 | K6 iOS | konec sprintu 4 | hra na iPhone 12 přes TestFlight s MAX testovací reklamou | jen simulátor |
-| K7 Rozsah | kdykoli | editor nad 35 % času před průchodem K4 | neměřeno, riziko |
+| K7 Rozsah | kdykoli | editor nad 35 % času před průchodem K4; důsledek je zmrazení práce na editoru, ne kill hlas | neměřeno, riziko |
 
 Stav gates je naše čtení důkazů v repu, formální měření zatím neproběhlo. Při stopu se Warcamp (data a design) přesune do Godot 4.7 nebo Unity 6.3 LTS a NoxEngine zůstane jen interní nástroj (headless simulace, generátor playables).
 
-## 6. Co rozhodnout
+## 6. Slabá místa a otevřené otázky
 
-1. **Pokračovat jako časově omezená sázka, ne migrace?** `RESEARCH.md` navrhuje 2 inženýry a agenty na zhruba 6 sprintů do první soft-launchovatelné hry, potom zhruba 1 FTE na údržbu.
-2. **Kdo ji vlastní?** Podle `RESEARCH.md` 1 senior na jádro enginu a FFI, 1 inženýr na mobilní shelly, CI a SDK. Otázka pro vedení: má roli vlastníka převzít Czode, od kterého workflow pochází?
-3. **Uvolnit Unity vývojáře na kontrolní srovnání (K3) ve sprintu 1.** Bez něj nejde říct, jestli je workflow rychlejší.
+Rizika a gates jsou v kapitole 5. Tady jde o to, jestli je projekt vůbec správně nastavený. Od 6. 11. je letos jen experiment, část námitek tím odpadá.
+
+| Námitka | Proč může platit | Odpověď nebo co s tím |
+|---|---|---|
+| **Bereme 2 inženýry právě ve chvíli, kdy každý kodér chybí** | Do 11. 12. máme SGB v Mecha Fortress a PvP, City V2 a UGC v Hexu, v lednu a únoru jejich náběh k hráčům. Kodérů je ve firmě jen pár (Mirek, Czode, Milan, z části Jakub H.), takže 2 inženýři na NoxEngine jsou zhruba polovina kódové kapacity. Věta "Mecha Fortress a Unity týmy nechat beze změny" s tím nejde dohromady. | **Rozhodnuto 6. 11.:** letos jen experiment, na kterém dělají David a Čoud. Z plánu kvůli němu nic nevypadává, rozšiřovat a testovat ho jde během GameJamu 14. až 18. 12. |
+| **Bus factor je jeden remote člověk** | 71 commitů za dva dny je práce jednoho člověka s agenty. Rust a vlastní editor znamenají, že bez něj engine neudrží nikdo z týmu ani z trhu. | Na experimentu jsou od 6. 11. dva lidé (David a Čoud). Pojistka z kapitoly 5 (2 lidé postaví build) má být splněná dřív, než se bude rozhodovat o větší investici. Bez ní nepouštět Warcamp dál než do K1 až K3. |
+| **Proč ne agent-first nad Unity nebo Godotem** | Obsah v datech, simulátor bitev, reskin jako složka a kritik jdou postavit i nad Unity MCP nebo Godotem. Unikátní zůstává jen 100% pokrytí příkazy a determinismus. | K3 to musí rozhodnout číslem. Volitelný Godot slice (ER8 v `RESEARCH.md`) zvážit hned, pokud K1 nebo K4 začnou vypadat špatně. |
+| **Rychlost prototypu neříká nic o rychlosti hry** | Prototyp bez SDK, store, analytiky, IAP a live ops je ta snadnější část. Drahé jsou K4 až K6 a údržba, a tam zatím nic neběželo. | Rychlost měřit šablonou K2 a K3, ne počtem commitů. Go po sprintu 2 brát jen jako Go do K4, ne jako Go na celou hru. |
+| **Gates hodnotí ten, kdo engine staví** | Stav gates je "naše čtení důkazů" a vlastník, autor workflow i hodnotitel je dnes stejný člověk. Agent kritik hodnotí výstup, ne byznysové rozhodnutí. | Měření K1 až K3 a návrh Go, Pivot, nebo Stop dělá někdo mimo projekt (Unity vývojář z K3), David a Čoud prezentují. David je od 6. 11. sám součástí experimentu, hodnotitele mimo projekt je proto potřeba určit. |
+| **Go znamená trvalý závazek, ne experiment** | Po úspěchu zůstává zhruba 1 FTE údržby natrvalo a každý nový vývojář se učí Rust a náš editor místo Unity. Pro 16 lidí je to velká fixní položka. | **Rozhodnuto 6. 11.:** letos jen experiment, o větší investici se rozhodne později. Pokud k ní dojde, Go omezit na strategickou větev a po soft launchi Warcampu dát novou gate: buď engine nese další hru, nebo zůstane jen interní nástroj. |
+| **Úspora licencí je menší, než se zdá** | 76 tisíc USD počítá 33 míst, nás je 16. | Číslo upravené v kapitole 1. Licence jako argument nepoužívat, `RESEARCH.md` to říká taky. |
+
+**Potřebuje odpověď:**
+
+- ~~Kdo jsou ti 2 inženýři jménem a co jim odpadne z plánu?~~ **Rozhodnuto 6. 11.:** David a Čoud, z plánu nic neodpadá.
+- ~~Kdy začíná sprint 1?~~ **Rozhodnuto 6. 11.:** letos se nepočítá jako sázka se sprinty, jen experiment, rozšiřovaný i během GameJamu. Termíny gates se určí při rozhodnutí o větší investici.
+- Kdo udělá Unity kontrolní skupinu pro K3 a kdy, když Unity vývojáři dělají SGB a featury Hexu?
+- Kdo má u gates kill hlas a kdo vyhlásí Stop, až se bude rozhodovat o větší investici?
+- Kdy padne rozhodnutí o větší investici a je NoxEngine v rozpočtu a plánu kapacit 2027 jako experiment s pevným stropem, nebo jako produkce?
+
+## 7. Co rozhodnout
+
+1. ~~Pokračovat jako časově omezená sázka, ne migrace?~~ **Rozhodnuto 6. 11.:** letos čistě experiment, nic z plánu kvůli němu nevypadává, rozšiřovat a testovat ho jde během GameJamu 14. až 18. 12. Větší investici (podle `RESEARCH.md` 2 inženýři a agenti na zhruba 6 sprintů do první soft-launchovatelné hry, potom zhruba 1 FTE na údržbu) rozhodneme později.
+2. ~~Kdo na něm dělá?~~ **Rozhodnuto 6. 11.:** David a Čoud. Vlastník pro případnou větší investici se určí s ní.
+3. **Před rozhodnutím o větší investici uvolnit Unity vývojáře na kontrolní srovnání (K3).** Bez něj nejde říct, jestli je workflow rychlejší.
 4. **Potvrdit hranice:** lidi z Mecha Fortress nepřesouvat, NoxFort, MF reskiny a Hexapolis zůstávají v Unity.
-5. **Další gate:** konec sprintu 2 (K1 až K3) na reálném Android zařízení a s Unity srovnáním, pak rozhodnutí Go, Pivot, nebo Stop. Nejbližší praktické kroky z reportů: reálný telefon, Apple tým pro TestFlight, skutečné MAX a Firebase přes Gradle.
+5. **Kritéria pro pozdější rozhodnutí:** K1 až K3 na reálném Android zařízení a s Unity srovnáním, pak rozhodnutí Go, Pivot, nebo Stop. Nejbližší praktické kroky z reportů: reálný telefon, Apple tým pro TestFlight, skutečné MAX a Firebase přes Gradle.
 
 Detail plánu: `ROADMAP.md` a `RESEARCH.md` (kapitoly 5 a 11).

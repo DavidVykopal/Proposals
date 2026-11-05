@@ -8,7 +8,7 @@ Pomohli udělat akci, ale nové know-how téměř nepřinesli. Externí design s
 - Nápady byly už v Sectoru, nebo jsme je s Karlem probírali
 - Externí hlas rozhodl, že je **opravdu zkusíme**
 - Hlavní nový bod: navýšit **hodnotu odměn v offerech**
-- Michal navrhl úpravy **hard currency**, test zatím vypadá dobře
+- Michal navrhl úpravy **hard currency**, test zatím nevypadá špatně
 → `VYHODNOCENI_EXTERNICH_DESIGNERU.md`
 ---
 ## Každý jinak: střídmý specialista a komunikativní nováček

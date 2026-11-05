@@ -1,14 +1,15 @@
 # CPI testy: pipeline, cíle a knihovna nápadů
 
-**Stav:** návrh 4. 11. 2026. Zdroje: `STRATEGIE_PRODUKCE.md` (kapitola CPI testy), květnový CPI návrh Mecha Fortress (podklad této kapitoly), NoxHub projekt CPI tests (CPI-9 až CPI-16). **Pro AI agenty:** zdrojem pravdy je tento soubor. Věci označené *(návrh)* jsou Davidův návrh, ne rozhodnutí. Úkoly žijí v NoxHubu, projekt CPI tests.
+**Stav:** návrh 4. 11. 2026, vlastník rozhodnut 6. 11. 2026. Zdroje: `STRATEGIE_PRODUKCE.md` (kapitola CPI testy), květnový CPI návrh Mecha Fortress (podklad této kapitoly), NoxHub projekt CPI tests (CPI-9 až CPI-16). **Pro AI agenty:** zdrojem pravdy je tento soubor. Věci označené *(návrh)* jsou Davidův návrh, ne rozhodnutí. Úkoly žijí v NoxHubu, projekt CPI tests.
 
 ## Shrnutí
 
-- CPI testy běží **jako stálá pipeline: minimálně 1 test měsíčně, podle potřeby 2**. Jeden test trvá zhruba **14 dní**.
+- CPI testy běží **jako stálá pipeline: minimálně 1 test měsíčně, podle potřeby 2**. Běh jednoho testu trvá zhruba **14 dní**, celý cyklus od briefu po zápis do knihovny zhruba měsíc.
 - Každý test je **kombinace tří věcí: struktura / gameplay, vizuální styl a téma**, a vždy má **cíl, na který odpovídá**.
 - Výsledky skládáme do **vlastní knihovny nápadů**: co jsme testovali, za kolik, s jakým výsledkem. Časem z ní vybíráme témata bez nových testů.
 - Teď běží **dva cíle**: (A) témata a styly pro **2 až 3 reskiny Mecha Fortress / Sector Defense**, (B) téma a styl, které **nahradí vizuál Hexapolisu** pro Hexapolis 2 nebo další strategické idle hry.
 - Pro každý cíl je připravená **sada variant** do prvního testu (cíl A 4, cíl B 5): co už máme v NoxHubu a v květnovém návrhu, doplněné o nejlepší odhady.
+- **Program vlastní marketing, tedy Kuba B.** (rozhodnuto 6. 11.). Produkce zadává, co se chce dozvědět, a dává podněty.
 
 ## Z čeho se skládá každý test
 
@@ -35,7 +36,7 @@ Pravidlo: v jednom testu se mezi variantami **mění jen to, co testujeme**. Kdy
 - **Kreativy:** pro každé téma tři typy, jak navrhl květnový podklad: landing page only (čistý appeal tématu), playable only (přenáší gameplay install intent?), kombinace (kandidát na scaling).
 - **Baseline:** cíl A měří proti aktuálnímu Mecha Fortress, cíl B proti aktuálnímu Hexapolisu.
 - **Vítěz** *(návrh)*: varianta s nejnižším CPI, která je zároveň levnější než baseline a drží CTR. Konkrétní práh nastaví UA podle MF benchmarku.
-- **Vlastník programu:** zatím neurčený (otevřená otázka ze strategie, CPI-20).
+- **Vlastník programu:** marketing, tedy **Kuba B.** (rozhodnuto 6. 11., CPI-20). Produkce zadává, co se chce dozvědět, a dává podněty k variantám.
 - **Úkoly pipeline v NoxHubu** (pod CPI-13): šablona briefu CPI-17, kadence CPI-18, knihovna CPI-19, vlastník a rozpočet CPI-20.
 
 ## Cíl A: témata pro 2 až 3 reskiny Mecha Fortress / Sector Defense
@@ -71,7 +72,7 @@ Struktura je u všech pěti stejná: **hexová mapa, růst města, expanze a sou
 
 B1 a B5 jsou schválně pár: stejná antika, test ukáže, jestli táhne víc **historická, nebo mýtická** verze. Část assetů (architektura, krajina, jednotky) se dá sdílet.
 
-**Rozhodne:** téma a styl pro nový Hexapolis 2 (hex gameplay na MF metě, rozhodnutí II až III 2027) a zásobník témat pro strategickou větev.
+**Rozhodne:** téma a styl pro nový Hexapolis 2 (hex gameplay na MF metě, vznikne jen po gate, rozhodnutí II až III 2027) a zásobník témat pro strategickou větev.
 
 ## Knihovna nápadů a výsledků
 
@@ -104,9 +105,30 @@ Každý test sem přidá řádky. Výsledky doplní UA po vyhodnocení.
 | do 15. 1. 2027 | test cíle B v MF a Hex settingu (CPI-16) |
 | od I 2027 | 1 až 2 testy měsíčně ze zásobníku podle potřeb větví |
 
+## Slabá místa a otevřené otázky
+
+| Námitka | Proč může platit | Odpověď nebo co s tím |
+|---|---|---|
+| **Bez rozpočtu nevíme, jestli test vůbec něco řekne** | Cíl A má 4 varianty × 3 typy kreativ × 5 geo = 60 buněk, cíl B 5 variant × 2 settingy × 3 typy × 5 geo = 150 buněk. Rozpočet rozdělený takhle jemně dá na buňku málo instalací a rozdíly v CPI budou šum. | UA předem určí minimální počet instalací na variantu a rozpočet dopočítá z něj, ne naopak. Pro verdikt zúžit buňky: méně geo a tři typy kreativ jen u finalistů. |
+| **Kvalita kreativy přebije téma** | A3 a B5 mají dražší art, Warcraft styl má silnou referenci, plastoví vojáčci jsou schválně levní. Vyhrát může nejlepší video, ne nejlepší téma. Jedna sada základních assetů (CPI-15) je naplánovaná jen pro cíl B. | Pro cíl A stejné pravidlo: jeden storyboard, stejný hook, délka a CTA, kreativy od stejného autora. Před spuštěním slepé porovnání kvality, nevyrovnanou variantu dorovnat nebo vyřadit. |
+| **Baseline není férová** | MF a Hexapolis mají kreativy vyladěné dlouhým během, nové varianty jsou první verze. Porovnání s historickým CPI hry zvýhodní baseline. | Baseline točit ve stejném testu: vizuál MF a Hexapolisu převedený stejnou šablonou, stejný rozpočet a stejné období. |
+| **Síť rozdělí rozpočet sama** | Když varianty běží v jedné kampani, algoritmus pošle peníze variantě, která vede první dny, a ostatní nedostanou šanci. | Každá varianta vlastní kampaň nebo ad set s pevným rozpočtem. Vypínání po 72 h jen podle předem daného prahu, ne od oka. |
+| **Termíny kolidují s koncem roku** | Verdikt testu A do 15. 12. padá do týdne GameJamu. Test B by běžel přes Vánoce a Nový rok, kdy jsou aukce dražší a tým má volno. Assety B má dělat DEV grafika souběžně s vánočním board game a zimními eventy. | Test B spustit až v lednu a verdikt posunout na konec ledna; rozhodnutí o Hexapolis 2 je až II až III 2027, nic se tím nezdrží. |
+| **Průměr přes geo schová, kde téma funguje** | US, DE a SE se chovají jinak než KR a JP; římská nebo vikinská témata můžou vyhrát na Západě a propadnout v Asii. | Verdikt psát po regionech (Západ, Asie) a předem určit, který region je pro rozhodnutí rozhodující. |
+| **Bez vlastníka pipeline nepoběží** | Pět kroků přes UA, marketing a DEV grafiku, nikdo za celek neodpovídá (CPI-20). Měsíční kadence bez vlastníka spadne po prvním testu. | **Rozhodnuto 6. 11.:** program vlastní marketing, tedy Kuba B. Produkce zadává, co se chce dozvědět, a dává podněty. |
+
+**Potřebuje odpověď:**
+
+- Kolik je rozpočet na jeden test a na jednu variantu, a kdo ho schvaluje?
+- ~~Kdo je vlastník programu?~~ **Rozhodnuto 6. 11.:** marketing, Kuba B. Zbývá: kdo napíše brief testu A ještě v listopadu?
+- Měří se baseline MF a Hexapolisu ve stejném testu, nebo z historických dat?
+- Spustit test B přes svátky, nebo až v lednu?
+- Které geo je pro verdikt rozhodující, a zůstávají KR a JP v prvních testech?
+- Kdo dělá kreativy cíle A v listopadu, když DEV grafika dělá vánoční board game a zimní eventy?
+
 ## Co je potřeba rozhodnout
 
-- **Vlastník CPI programu** (brief, kreativy, vyhodnocení, knihovna).
+- ~~**Vlastník CPI programu**~~ **Rozhodnuto 6. 11.:** marketing, tedy Kuba B. (brief, kreativy, vyhodnocení, knihovna). Produkce zadává, co se chce dozvědět, a dává podněty.
 - **Rozpočet na test** a práh vítěze proti baseline (UA podle MF benchmarku).
 - **Potvrdit sady A1 až A4 a B1 až B5**, případně prohodit variantu ze zásobníku.
 - Kdo dělá **kreativy**: marketing (Ondra, Ruda), nebo i DEV grafika pro sadu assetů cíle B.

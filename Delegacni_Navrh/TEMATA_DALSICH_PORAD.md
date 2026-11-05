@@ -6,6 +6,7 @@
 > **Aktualizováno 22. 8. 2026 po poradě 20. 8.** Přibylo samostatné téma budžetování,
 > původní meet 2 (EXEC vs. CEO) se posouvá a meet 3 se slučuje s optimalizací činností.
 >
+> **Pozor, plán schůzek níže je stav k 22. 8.** Skutečné porady proběhly jinak (mimo jiné 22. 10. a 29. 10.), další je 19. 11. (`PRIPRAVA_2026-11-19.md`).
 > Stav jednotlivých témat, rozhodnutí a úkolů se trackuje v `TRACKER_TEMAT.md`.
 > Kompiláty: `PORADA_2026-08-06_KOMPILAT.md`, `PORADA_2026-08-20_KOMPILAT.md`.
 

@@ -2,7 +2,7 @@
 Od 1. 1. 2027 řídí firmu tři segmenty s jedním vlastníkem, vlastním rozpočtem a pravomocemi, odměna je fix plus variabilní složka.
 !! 3 | segmenty pod Řízením a Majiteli
 !! 1. 1. 2027 | ostrý start, Q4 2026 nanečisto
-!! 4 | dekrety D01 až D04
+!! 6 | dekretů D01 až D06
 !! 19. 11. | 7. porada: bonusy, platy, rozpočet
 ---
 ## Každý segment má jednoho vlastníka z exekutivy
@@ -35,7 +35,7 @@ Od 1. 1. 2027 řídí firmu tři segmenty s jedním vlastníkem, vlastním rozpo
 Struktura platí od 29. 10., čísla se přepracovávají.
 - Fix podle role, úrovně, let ve firmě a příplatků, **během roku se nemění**
 - Variabilní ze 4 částí **1 : 1 : 1 : 1**: mentor, úkoly z 1:1, firemní KPI, KPI pozice
-- Narovnání fixů **ve dvou krocích**, druhý jen po splnění brány zisku
+- Narovnání fixů **ve dvou krocích**, druhý jen po splnění brány zisku (návrh 19. 11.: tři kroky)
 - Malus jen jako trest za pochybení, přesčasy se neproplácejí
 - Foundeři a CEO mimo systém, odměnu nastaví rada tří
 → `PORADA_2026-10-29_KOMPILAT.md`
@@ -52,6 +52,6 @@ Tři rozhodnutí 19. 11., bez nich nejde oznámit odměny do 15. 12. ani postavi
 - **A bonusy 2026:** ze kterého zisku, klíč, minimum a termíny výplaty
 - **B fixní platy:** variabilní „up from here“ (0 %), nebo plnění 50 % v základu
 - **B brána a exekutiva:** metrika druhého kroku, příplatky, kdo schvaluje základ
-- **C rozpočet 2027:** cíl Adj. EBITDA, podíl vedení, strop spendu, rámec segmentů
+- **C rozpočet 2027:** cíl zisku podle čísel DJ (návrh B 7,5 mil.), podíl vedení, strop spendu (návrh UA nejvýš 60 % tržeb), rámec segmentů
 - Pak: rozpočty segmentů 19. 12., OKR a budgety schválené do 15. 1. 2027
 → `PRIPRAVA_2026-11-19.md`

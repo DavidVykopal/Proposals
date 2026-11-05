@@ -2,6 +2,7 @@
 
 > **Stav:** první nahození, 5. 11. 2026. Všechno se ladí v Remote Config, nic tu není finální. Design a pravidla: `DESIGN_HEX_PVP.md`. Navazuje na `KONCEPT_OBNOVA_HEXU.md` a `DESIGN_CITY_V2.md`.
 > **Pro AI agenty:** tohle je číselný doprovod k `DESIGN_HEX_PVP.md`. Když se liší pravidla, platí design dokument; tady jsou jen hodnoty. **Každá hodnota je RC parametr** (prefix `hex_pvp_`), výchozí hodnota je ta v tabulce. Měny a obsah truhel jsou předpoklady, ověřit proti ekonomice Hexapolisu. Simulace v kap. 11 je orientační model, ne predikce.
+> **Doplněno 6. 11. 2026 (David):** Hexapolis má **cca 7 tis. aktivních hráčů** (bráno jako DAU). Příjmy z Google Play Passu se do revenue ani do monetizačních baselines a gate **nepočítají**. Návrhy z tohoto dokumentu jsou **přijaté (Rozhodnuto 6. 11.)**: ELO podmínka postupu, sestup rostoucí s ligou, jedna fronta pro Speed a Normal do PvP DAU cca 5 000, generované profily botů. Likvidita přepočítaná na 7 tis. aktivních v kap. 6, cíle KPI v kap. 13.
 
 ## 1. Shrnutí: klíčová čísla
 
@@ -15,14 +16,17 @@
 | ELO | start 1 200, podlaha 800, K 48 (zařazování) / 32 / 24 / 16 (od 1 800) |
 | Onboarding | 3 zápasy proti botovi (až 5, když hráč prohrává), bez vlivu na ELO |
 | Fallback na bota | po 20 s ve frontě, okno ELO roste ze ±100 na ±300 |
-| Ligy (All-out-power) | 5 lig, sezóna = kalendářní měsíc, postup top 10 % (min. 15 reálných zápasů a ELO nad mediánem ligy), sestup 10 / 12 / 15 / 20 % |
+| Ligy (All-out-power) | 5 lig, sezóna = kalendářní měsíc, postup top 10 % (min. 15 reálných zápasů a ELO aspoň medián ligy), sestup 10 / 12 / 15 / 20 % (**Rozhodnuto 6. 11.**); při launchi žebříčky Diamant a Mistr sloučené se Zlatem *(návrh)* |
+| Fronty při launchi | 2 (jedna na segment), Speed a Normal v jedné frontě, ligy sloučené v párování (**Rozhodnuto 6. 11.**, při 7 tis. aktivních platí celý rok 2027) |
+| Likvidita při 7 tis. aktivních | při 25 % DAU v PvP (cca 1 750 PvP DAU) a 2 frontách 68 % zápasů s reálným soupeřem (fallback 20 s), 80 % s fallbackem 30 s; 60 % potřebuje aspoň cca 1 350 PvP DAU (19 % DAU) |
 | Rozložení lig po 6 měsících (simulace) | Bronz 40 %, Stříbro 32 %, Zlato 18 %, Diamant 7 %, Mistr 2 % |
 | Odpojení | 30 s na návrat, pak tah propadá; 2 propadlé tahy po sobě nebo 3 celkem = prohra |
 | Monetizace (hypotézy) | PvP úkoly do stávajícího battle passu, předplatné 4,99 USD / měsíc, kosmetika 0,99 až 4,99 USD |
 
 **Dvě zjištění ze simulace, která mění design:**
-1. **Kumulativní skóre řadí podle aktivity, ne podle síly.** Párování podle ELO srovná win rate všech hráčů k 50 %, takže měsíční skóre je hlavně počet zápasů (korelace liga a aktivita 0,79, liga a skill 0,07). Proto návrh: do postupu jen hráči s **ELO nad mediánem své ligy** a aspoň 15 reálnými zápasy. Korelace se skillem pak vyskočí na 0,33, se silou na 0,49.
-2. **Postup top 10 % a stejný sestup 10 % ve všech ligách dělá ligy stejně velké.** Mistr by dlouhodobě rostl k 20 %. Proto sestup roste s ligou (10 / 12 / 15 / 20 %), Mistr pak drží 2 až 3 %.
+1. **Kumulativní skóre řadí podle aktivity, ne podle síly.** Párování podle ELO srovná win rate všech hráčů k 50 %, takže měsíční skóre je hlavně počet zápasů (korelace liga a aktivita 0,79, liga a skill 0,07). Proto do postupu jen hráči s **ELO aspoň na mediánu své ligy** a aspoň 15 reálnými zápasy (**Rozhodnuto 6. 11.**). Korelace se skillem pak vyskočí na 0,33, se silou na 0,49.
+2. **Postup top 10 % a stejný sestup 10 % ve všech ligách dělá ligy stejně velké.** Mistr by dlouhodobě rostl k 20 %. Proto sestup roste s ligou (10 / 12 / 15 / 20 %, **Rozhodnuto 6. 11.**), Mistr pak drží 2 až 3 %.
+3. **Base je menší, než počítala první verze** (6. 11.): cca 7 tis. aktivních hráčů místo 10 000 hráčů jen v All-out-power. Podíl reálných zápasů proto drží jen 2 fronty a delší fallback na bota, cíle KPI jsou snížené (kap. 6 a 13).
 
 ## 2. Skóre v zápase
 
@@ -123,7 +127,7 @@ Průměrný aktivní hráč (50 % výher, 60 % Speed) udělá kolem **110 až 13
 |---|---|---|
 | `elo_start` | 1 200 | sedí na `DEFAULT_ELO` v SGB |
 | `elo_floor` | 800 | pod podlahu nikdo nespadne |
-| `elo_scope` | 1 ELO na segment | Speed a Normal sdílí ELO (malá base); interně logovat i stínové ELO per sub-režim |
+| `elo_scope` | 1 ELO na segment | Speed a Normal sdílí ELO i frontu (Rozhodnuto 6. 11.); interně logovat i stínové ELO per sub-režim |
 | `onboarding_bot_matches` | 3, až 5 | 4. a 5. zápas s botem jen když hráč 2 z prvních 3 prohraje |
 | `placement_matches` | 10 | prvních 10 reálných zápasů, v profilu "Zařazování 4/10", ELO se ukáže až potom |
 | K: zařazování (zápas 1 až 10) | 48 | rychle najít správnou úroveň |
@@ -176,10 +180,12 @@ Vzorec: očekávání `E = 1 / (1 + 10^((ELO_soupeře − ELO_hráče) / 400))`,
 
 - **Sezóna = kalendářní měsíc** (UTC), stejně jako měsíční perioda v SGB (`YYYY-MM`). Když launch přijde po 15. lednu, první vyhodnocení až na konci února.
 - **Zařazení nových hráčů** podle percentilu PowerProgress mezi aktivními hráči All-out-power (při launchi snapshot všech aktivních hráčů Hexapolisu). Bez zařazení by v simulaci zůstalo 59 % hráčů v Bronzu i po roce a nováčci by naráželi na vylevelované hráče.
-- **Postup:** top 10 % aktivních hráčů ligy (aspoň 1 reálný zápas) podle měsíčního skóre. Podmínky: **aspoň 15 reálných zápasů za měsíc** (`promo_min_matches`) a **ELO aspoň medián ligy** (`promo_elo_gate`). Nevyužité místo zůstává prázdné.
-- **Sestup:** spodní procento aktivních hráčů ligy podle tabulky. Neaktivní hráč (0 zápasů) sestupuje po 2 měsících o jednu ligu (design kap. 6).
+- **Postup (Rozhodnuto 6. 11.):** top 10 % aktivních hráčů ligy (aspoň 1 reálný zápas) podle měsíčního skóre. Podmínky: **aspoň 15 reálných zápasů za měsíc** (`promo_min_matches`) a **ELO aspoň medián ligy** (`promo_elo_gate`). Nevyužité místo zůstává prázdné.
+- **Sestup (Rozhodnuto 6. 11.):** spodní procento aktivních hráčů ligy podle tabulky, roste s ligou. Neaktivní hráč (0 zápasů) sestupuje po 2 měsících o jednu ligu (design kap. 6).
 - **Reset na konci sezóny:** měsíční skóre na 0 (dělá SGB perioda), liga ±1, ELO soft reset jen hráčům, kteří změnili ligu. Postup i sestup max o 1 ligu za sezónu.
 - **Slučování malých lig:** když má liga méně než 200 aktivních hráčů za týden (`league_merge_min_weekly`), párování se slučuje se sousední ligou (nejdřív Diamant a Mistr). Žebříčky a odměny zůstávají per liga.
+- **Velikost lig při 7 tis. aktivních** (předpoklad: týdně aktivních PvP hráčů cca 2x PvP DAU, tedy cca 3 500 při 25 % DAU v PvP, polovina v All-out-power, rozložení podle 1. měsíce simulace): Bronz cca 830, Stříbro cca 550, Zlato cca 270, Diamant cca 100, Mistr cca 10 týdně aktivních. Párování proto při launchi poběží přes všechny ligy najednou (okno síly z kap. 6) a v Mistru by top 10 byla skoro celá liga.
+- **Launch *(návrh)*:** 5 lig zůstává v pravidlech postupu a sestupu, ale **žebříčky a odměny Diamant a Mistr se při launchi zobrazují společně se Zlatem** (3 žebříčky All-out-power místo 5). Diamant a Mistr se oddělí RC flagem, jakmile každá liga má 200+ týdně aktivních hráčů.
 
 **Ligové odměny na konci sezóny** (k odměnám z žebříčků v kap. 7):
 
@@ -203,18 +209,38 @@ Gemy v odměnách se nenásobí, násobí se jen soft měna a suroviny.
 | po 20 s | bot nebo ghost s hráčským profilem | |
 
 - Okno roste o 10 ELO za sekundu, to je přesně současný vzorec v SGB (`ELO_BASE_WINDOW` 100, `ELO_EXPAND_PER_SEC` 10). Stačí přidat strop 300 a fallback na bota ve 20 s (`bot_fallback_sec`) místo současného vypadnutí z fronty po 120 s.
-- **Bot nebo ghost** dostane ELO hráče − 50 a sílu (v All-out-power) hráče − 5 %, aby hráč vyhrával zhruba 60 % bot zápasů. Profil (jméno, avatar, rámeček) z poolu neaktivních reálných profilů nebo generovaný.
+- **Bot nebo ghost** dostane ELO hráče − 50 a sílu (v All-out-power) hráče − 5 %, aby hráč vyhrával zhruba 60 % bot zápasů. Profil (jméno, avatar, rámeček) je **generovaný** (**Rozhodnuto 6. 11.**), žádné profily reálných neaktivních hráčů. Ghost hraje uložené tahy reálného hráče, ale pod generovaným profilem.
 - **Onboarding boti:** 1. zápas cílený na výhru hráče (cca 90 %), 2. a 3. zápas cca 70 %, 4. a 5. zápas cca 60 %. Mapa Speed, Skill only preset.
 - **Vzdálenost od posledního soupeře:** stejného soupeře znovu až po 2 jiných zápasech, pokud fronta dovolí.
-- **Kolik front unese base?** Výpočet: 3 zápasy na PvP hráče denně, 10 % denního provozu ve špičkové hodině, polovina fronty v okně ELO, fallback ve 20 s. Podíl zápasů s reálným soupeřem:
+- **Kolik front unese base?** Model: 3 zápasy na PvP hráče denně, 10 % denního provozu ve špičkové hodině, polovina fronty v okně ELO, fallback ve 20 s. Hráč, který přijde do prázdné fronty, čeká; když do 20 s přijde druhý, hrají spolu, jinak nastoupí bot. Číslo v tabulce = podíl zápasů z pohledu hráče, které odehraje proti reálnému soupeři. Přepočet 6. 11. na **cca 7 tis. aktivních hráčů (DAU)** podle podílu DAU, který hraje PvP:
 
-| PvP DAU | 12 front (2 sub-režimy x Skill + 5 lig) | 6 front (sub-režimy sloučené) | 4 fronty (+ ligy sloučené do 3) | 2 fronty (jen segmenty) |
-|---|---|---|---|---|
-| 1 000 | 13 % | 23 % | 32 % | 51 % |
-| 3 000 | 32 % | 51 % | 63 % | 83 % |
-| 10 000 | 67 % | 86 % | 93 % | 99 % |
+| Podíl DAU v PvP | PvP DAU | 12 front | 6 front | 4 fronty | **2 fronty (zvoleno)** | 1 fronta (jen 1 segment) |
+|---|---|---|---|---|---|---|
+| 10 % | 700 | 9 % | 17 % | 24 % | 40 % | 61 % |
+| 15 % | 1 050 | 13 % | 24 % | 33 % | 52 % | 74 % |
+| 25 % (cíl gate) | 1 750 | 21 % | 35 % | 47 % | **68 %** | 87 % |
+| 40 % | 2 800 | 30 % | 49 % | 61 % | 82 % | 95 % |
+| 50 % | 3 500 | 35 % | 56 % | 68 % | 87 % | 97 % |
 
-  Závěr: při launchi **párovat Speed a Normal přes jednu frontu ve dvou krocích** (nejdřív stejný sub-režim, po 10 s i druhý, hráč dostane režim toho, kdo čekal déle) a slučovat ligy, dokud PvP DAU nepřeleze cca 5 000. Design to už jako možnost má (kap. 14).
+  12 front = 2 segmenty x 2 sub-režimy x Skill only + 5 lig; 6 front = sub-režimy sloučené; 4 fronty = sub-režimy sloučené a ligy sloučené do 3; 2 fronty = jen segmenty. Model sedí na původní tabulku (1 000 / 3 000 / 10 000 PvP DAU), skript v pracovním adresáři, ne v repu.
+
+  **Delší fallback na bota (2 fronty):**
+
+| Podíl DAU v PvP | Fallback 20 s | 30 s | 45 s | 60 s | Průměrné čekání při 30 s |
+|---|---|---|---|---|---|
+| 10 % | 40 % | 52 % | 65 % | 74 % | cca 18 s |
+| 15 % | 52 % | 65 % | 77 % | 84 % | cca 15 s |
+| 25 % | 68 % | 80 % | 89 % | 94 % | cca 11 s |
+| 40 % | 82 % | 90 % | 96 % | 98 % | cca 8 s |
+
+  **Postupné zapínání v lednu** (25 % hráčů s přístupem jde do PvP, 2 fronty): při RC 25 % je reálných 29 % zápasů (fallback 20 s) nebo 39 % (30 s), při RC 50 % 47 % nebo 59 %, při RC 90 % 65 % nebo 77 %.
+
+  **Prahy:** 60 % reálných zápasů při 2 frontách a fallbacku 20 s potřebuje cca 1 350 PvP DAU (19 % z 7 tis.), 80 % cca 2 650 PvP DAU (38 %). Rozdělit Speed a Normal (4 fronty) dává 60 % až od cca 2 700 PvP DAU a 80 % od cca 5 300 PvP DAU.
+
+  **Závěr (Rozhodnuto 6. 11.):** **Speed a Normal přes jednu frontu** ve dvou krocích (nejdřív stejný sub-režim, po 10 s i druhý, hráč dostane režim toho, kdo čekal déle), ligy sloučené v párování, dokud PvP DAU nepřeleze cca 5 000. Při 7 tis. aktivních hráčů by to znamenalo 70 % DAU v PvP, takže **v praxi platí jedna fronta na segment po celý launch i rok 2027**. K tomu *(návrh)*:
+  - `bot_fallback_sec` při launchi **30 s**, zpět na 20 s až při podílu reálných zápasů nad 80 %.
+  - PvP v lednu zapínat po RC procentech rychle (do 2 týdnů na 90 %+); holdout bez PvP max 10 % hráčů, jinak likvidita padá pod 50 %.
+  - Pokud v lednu pustíme jen jeden segment, likvidita je při stejné base o 15 až 20 p. b. vyšší (sloupec 1 fronta).
 
 ## 7. Odměny, truhly, achievementy, žebříčky
 
@@ -244,7 +270,7 @@ Bot zápasy se počítají do odměn i úkolů (design kap. 4).
 
 ### 7.3 Žebříčky
 
-- **Žebříčky:** Skill only 1, All-out-power 5 (per liga), každý denní, týdenní a měsíční. Celkem 18 period žebříčků na SGB. V UI top 100 (SGB vrací max 100 na dotaz) plus "kolem mě" a přátelé.
+- **Žebříčky:** Skill only 1, All-out-power 5 (per liga), každý denní, týdenní a měsíční. Celkem 18 period žebříčků na SGB (při launchi 4 žebříčky a 12 period, Diamant a Mistr sloučené se Zlatem, kap. 5). V UI top 100 (SGB vrací max 100 na dotaz) plus "kolem mě" a přátelé.
 - **Způsobilost na top 10** (pozice 1 až 10 jen z reálných zápasů, design kap. 4): v období aspoň 3 (denní), 10 (týdenní), 25 (měsíční) reálných zápasů a reálné zápasy tvoří aspoň 50 % odehraných. Nezpůsobilý hráč se v top 10 přeskočí a dostane odměnu za top 10 %.
 
 | Pořadí | Denní | Týdenní | Měsíční |
@@ -283,6 +309,7 @@ Achievement se vyplácí jednou (první dosažení stupně), pak už jen odznak 
 ## 8. Napojení na City V2
 
 - PvP je druhý zdroj surovin vedle kampaně. Aktivní PvP hráč (cca 22 zápasů měsíčně) dostane ze zápasů, úkolů a žebříčků kolem **1 500 až 2 500 surovin měsíčně**. Dorovnat s rychlostí upgradu budov v `DESIGN_CITY_V2.md`: cíl je, aby PvP pokrylo zhruba 30 až 40 % surovin aktivního hráče.
+- **Nesedí měřítko:** `BALANC_CITY_V2.md` (kap. 7) čeká ze zápasů a odměn 17 000 až 210 000 surovin denně podle tieru Radnice. Suroviny v truhlách a odměnách tady jsou o dva až tři řády menší, takže je potřeba je škálovat podle tieru Radnice hráče (vzorec v BALANC City kap. 7). Pro ekonomiku města platí čísla City.
 - Meta staty z města (kasárna, kovárna max +20 %) se projeví jen v All-out-power. Při +20 % HP i útoku je rozdíl mezi novým a maxovaným městem velký, proto okno síly v párování (kap. 6) a ligy.
 
 ## 9. Tresty: odpojení, AFK, vzdání
@@ -311,7 +338,7 @@ Hra s přáteli trest nemá. Zákaz se ukáže s odpočtem a vysvětlením.
 
 | Nabídka | Cena (hypotéza) | Segment | Pozn. |
 |---|---|---|---|
-| PvP úkoly ve **stávajícím battle passu** | v ceně passu | oba | první krok, nefragmentovat; vlastní PvP pass až při podílu DAU v PvP nad 25 % |
+| PvP úkoly ve **stávajícím battle passu** | v ceně passu | oba | první krok, nefragmentovat; vlastní PvP pass až při podílu DAU v PvP nad 25 % (cca 1 750 PvP DAU) |
 | Vlastní PvP pass (měsíční sezóna, 30 úrovní) | 4,99 USD, premium+ 9,99 USD | oba | body pasu: výhra 10, prohra 4, denní úkol 20 |
 | Předplatné (statistiky, replay, bez reklam, 1 kosmetika měsíčně) | 4,99 USD / měsíc | oba | Davidův ověřovací signál |
 | Skin jednotky | 1,99 až 4,99 USD (120 až 300 gemů) | oba | bez vlivu na výsledek |
@@ -320,12 +347,12 @@ Hra s přáteli trest nemá. Zákaz se ukáže s odpočtem a vysvětlením.
 | Nabídka po postupu do ligy | 4,99 USD, 24 h | All-out-power | fragmenty + zrychlení města |
 | Rewarded reklama: zdvojení první denní truhly | max 3x denně | oba | jen mimo zápas |
 
-- **Google Play Pass:** Hexapolis je v Play Passu na Androidu. Reklamy tam nahrazují tickety a předplatitelé mají passy a nabídky zdarma, gemy si nekoupí. Monetizaci PvP proto měřit zvlášť pro iOS, Android mimo Play Pass a Play Pass.
-- **Realita čísel:** při 10 000 PvP MAU a 2% konverzi na pass za 4,99 USD je to cca 1 000 USD měsíčně hrubého. Hlavní finanční efekt PvP čekáme přes retenci a útratu v All-out-power (jednotky, talenty, City V2), ne přes pass samotný. Hexapolis dnes dělá cca 15 000 USD měsíčně.
+- **Google Play Pass (Rozhodnuto 6. 11.):** příjmy z Play Passu se do revenue, baselines ani gate **nepočítají**. Hexapolis v Play Passu na Androidu zůstává: předplatitelé mají passy a nabídky zdarma a gemy si nekoupí, ale hrají PvP a počítají se do likvidity front. Monetizaci PvP měřit jen na iOS a Androidu mimo Play Pass.
+- **Realita čísel:** při 25 % z cca 7 tis. aktivních v PvP (1 750 PvP DAU) a PvP MAU 2x až 3x DAU (předpoklad, 3 500 až 5 000) dá 2% konverze na pass za 4,99 USD cca 350 až 500 USD měsíčně hrubého, před odečtením Play Pass hráčů. Hlavní finanční efekt PvP čekáme přes retenci a útratu v All-out-power (jednotky, talenty, City V2), ne přes pass samotný. Baseline revenue Hexapolisu je cca 15 000 USD měsíčně; ověřit, že je bez Play Passu, jinak ho o Play Pass snížit.
 
 ## 11. Simulace (sanity check)
 
-**Model** (Python, numpy, skript v pracovním adresáři, ne v repu): 10 000 hráčů All-out-power při launchi, +1 500 nových hráčů měsíčně, odchod 40 / 20 / 8 % měsíčně podle aktivity. Každý hráč má skill a meta sílu (síla roste o 0,08 sd měsíčně, platící 4 % hráčů rychleji), aktivitu lognormálně s mediánem 18 zápasů měsíčně. Párování uvnitř ligy podle ELO, výsledek podle rozdílu skutečné síly. Skóre, K schéma, bot fallback, postup a sestup přesně podle tohoto dokumentu. 6 a 12 až 24 měsíců.
+**Model** (Python, numpy, skript v pracovním adresáři, ne v repu): 10 000 hráčů All-out-power při launchi (víc, než má Hexapolis: podle 6. 11. je aktivních cca 7 tis. hráčů celkem, v All-out-power čekáme cca 1 000 až 2 000 týdně aktivních; tvar rozložení lig platí, viz řádek "Malá base"), +1 500 nových hráčů měsíčně, odchod 40 / 20 / 8 % měsíčně podle aktivity. Každý hráč má skill a meta sílu (síla roste o 0,08 sd měsíčně, platící 4 % hráčů rychleji), aktivitu lognormálně s mediánem 18 zápasů měsíčně. Párování uvnitř ligy podle ELO, výsledek podle rozdílu skutečné síly. Skóre, K schéma, bot fallback, postup a sestup přesně podle tohoto dokumentu. 6 a 12 až 24 měsíců.
 
 **Rozložení lig po měsících (zvolené nastavení: zařazení podle síly, postup top 10 % s ELO podmínkou, sestup 10 / 12 / 15 / 20 %):**
 
@@ -352,13 +379,15 @@ Hra s přáteli trest nemá. Zákaz se ukáže s odpočtem a vysvětlením.
 **Skill only (jeden žebříček, 6 měsíců):** ELO hráčů s 10+ zápasy p1 830, p10 980, p25 1 090, medián 1 200, p75 1 310, p90 1 410, p99 1 615. Korelace ELO a skutečného skillu u hráčů s 30+ zápasy 0,96: K schéma ELO konverguje dobře.
 
 **Co z toho plyne:**
-- Mistr 2 až 3 % a Diamant kolem 7 % je zdravá špička. Rozložení se stabilizuje po 4 až 6 měsících, malá base na tvar nemá vliv.
+- Mistr 2 až 3 % a Diamant kolem 7 % je zdravá špička. Rozložení se stabilizuje po 4 až 6 měsících, malá base na tvar nemá vliv. V absolutních číslech je ale Diamant a Mistr při 7 tis. aktivních malý (kap. 5), proto sloučené žebříčky při launchi.
 - Aktivita bude vždycky hlavní složka měsíčního skóre (to je u kumulativních žebříčků normální a pro retenci žádoucí). ELO podmínka zajistí, že nahoru nejdou slabí grindeři.
 - Simulace nemodeluje souběžnost hráčů ve frontě. Podíl bot zápasů řeší výpočet v kap. 6, ne tahle tabulka.
 
 ## 12. Co potřebuje SharedGameBackend
 
 Kontrola proti současnému kódu SGB (`src/services/pvp`, `src/services/leaderboards`):
+
+**Termín (6. 11.):** SGB se do konce roku vyvine a otestuje na interním buildu MF, živě jde až po svátcích, vypnuté a s postupným zapínáním. Žebříčky PvP (a podle `DESIGN_HEX_PVP.md` kap. 11 i fronta a ELO) stojí na SGB, takže **lednový release PvP v Hexu předpokládá, že SGB v lednu postupně naběhne**. Fallback *(návrh)*: PvP pustit nejdřív bez žebříčků a lig (Quick game, ELO, odměny za zápasy) a žebříčky zapnout RC flagem po náběhu SGB.
 
 | Potřeba | Stav v SGB | Co doplnit |
 |---|---|---|
@@ -375,8 +404,8 @@ Kontrola proti současnému kódu SGB (`src/services/pvp`, `src/services/leaderb
 
 | KPI | Cíl | Když ne, ladit |
 |---|---|---|
-| Podíl zápasů s reálným soupeřem | 60 %+ do konce ledna, 80 %+ v únoru | slučování front a lig, `bot_fallback_sec` |
-| Medián čekání ve frontě | do 15 s | okno ELO |
+| Podíl zápasů s reálným soupeřem | **50 %+ během lednového náběhu, 65 %+ v únoru** *(návrh, sníženo 6. 11. z 60 % / 80 % kvůli base cca 7 tis. aktivních)*; 80 % až při cca 2 650 PvP DAU | `bot_fallback_sec` (30 s při launchi), rychlejší RC náběh, menší holdout |
+| Medián čekání ve frontě | do 15 s (při fallbacku 30 s a 25 % DAU v PvP cca 11 s) | okno ELO, `bot_fallback_sec` |
 | Délka zápasu | Speed 5 až 8 min, Normal 15 až 25 min | `time_bank_sec`, velikost mapy |
 | Podíl zápasů rozhodnutých po limitu tahů | 30 až 60 % | nad 70 %: víc tahů nebo menší mapa; pod 20 %: méně tahů |
 | Win rate hráče, který táhne první | 47 až 53 % | startovní pozice, tiebreak |
@@ -386,17 +415,24 @@ Kontrola proti současnému kódu SGB (`src/services/pvp`, `src/services/leaderb
 | Rozložení lig po 3 měsících | Mistr 1 až 3 %, Diamant 5 až 8 %, Bronz do 50 % | sestupová procenta |
 | Rozptyl ELO (p10 až p90) | cca 1 000 až 1 400 | K schéma |
 | Zápasů na PvP hráče týdně | 5+ | odměny za zápasy, úkoly |
-| Podíl DAU v PvP | 25 %+ | design kap. 12 |
+| Podíl DAU v PvP | 25 %+ (cca 1 750 z 7 tis. aktivních); pod 19 % (1 350) klesá podíl reálných zápasů pod 60 % | design kap. 12 |
 | Gemy z PvP na aktivního hráče měsíčně | 60 až 100 | `reward_*` |
+| Revenue a konverze z PvP | měřit jen iOS a Android mimo Play Pass (Rozhodnuto 6. 11.) | |
 
 ## 14. Otevřené otázky
 
+**Rozhodnuto 6. 11. (David):**
+- **ELO podmínka postupu** (ELO aspoň medián ligy + 15 reálných zápasů): přijato.
+- **Sestup rostoucí s ligou** (10 / 12 / 15 / 20 %): přijato. Text designu "Mistr bez sestupu pod top 50 %" platí při 20% sestupu automaticky.
+- **Jedna fronta pro Speed a Normal**, dokud PvP DAU nebude kolem 5 000: přijato. Při cca 7 tis. aktivních to znamená jednu frontu na segment při launchi i dál.
+- **Profily botů jen generované**, žádné reálné neaktivní profily (GDPR odpadá).
+- **Base a revenue:** cca 7 tis. aktivních hráčů, Play Pass se do revenue nepočítá.
+- **Kapacita na SGB práci z kap. 12:** Hex featury a SGB dělí Mirek, Kubík (Jakub H.) a David; Milan a Čoud drží hlavní live hry. Kdo konkrétně udělá součtový režim, K schéma a propadání tahů, zbývá rozdělit.
+
+**Zbývá:**
 1. **Měny a hodnota gemu:** potvrdit názvy měn v původním Hexapolisu a obsah truhel. Kotva ceny je vyřešená: 60 gemů = 1 USD (5. 11.).
 2. **Banka času:** souhlasí David s řešením 30 s na tah + banka 4 min (Speed), aby platilo "do 8 min"? Alternativa: 15 tahů celkem, ne na hráče.
-3. **ELO podmínka postupu:** je to odchylka od "top 10 % postupuje" z designu. Přijmout, nebo nechat čisté skóre a smířit se s ligami podle aktivity?
-4. **Sestup rostoucí s ligou** (10 / 12 / 15 / 20 %) místo 10 % všude. Text designu "Mistr bez sestupu pod top 50 %" chápeme jako ochranu horní poloviny Mistra; při 20% sestupu to platí automaticky.
-5. **Sloučení Speed a Normal do jedné fronty při launchi:** ano, dokud PvP DAU nebude kolem 5 000?
-6. **Normal x2:** držet, nebo dát Normal vyšší váhu, aby se nevyplácelo grindovat Speed?
-7. **Odměny ze Skill only:** smí dávat suroviny do City V2, které pak posílí hráče v All-out-power? (Výhoda není koupená, ale přelévá se mezi segmenty.)
-8. **SGB práce z kap. 12:** kdo udělá součtový režim žebříčku, K schéma a propadání tahů do 11. 12.
-9. **Pool profilů pro boty:** generované, nebo neaktivní reálné profily (GDPR, souhlas)?
+3. **Normal x2:** držet, nebo dát Normal vyšší váhu, aby se nevyplácelo grindovat Speed?
+4. **Odměny ze Skill only:** smí dávat suroviny do City V2, které pak posílí hráče v All-out-power? (Výhoda není koupená, ale přelévá se mezi segmenty.)
+5. **Launch nastavení z kap. 5 a 6** *(návrh)*: fallback 30 s, sloučené žebříčky Diamant a Mistr se Zlatem, holdout max 10 %, nové cíle KPI 50 % / 65 % reálných zápasů.
+6. **SGB fallback:** když SGB v lednu nenaběhne včas, pustit PvP bez žebříčků, nebo release posunout?

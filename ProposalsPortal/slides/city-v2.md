@@ -19,6 +19,13 @@ Co nejbližší klon Clash of Clans a Rise of Kingdoms. První verze: stavění,
 - Questy kapitol vedou hráče stavbou
 → `DESIGN_CITY_V2.md`
 ---
+## V MF město nahradí dnešní mapu, s refundem
+- **Rozhodnuto 6. 11.:** City V2 nahradí Gold Mine, Gem Mine a další budovy na mapě MF
+- Refund *(návrh)*: utracená HardCurrency zpět jako gemy, startovní radnice podle nejvyšší budovy (max 5)
+- Za gemy: **startovní bundle surovin** (60 gemů) a **City VIP** (450 gemů na 30 dní)
+- VIP průměrnému hráči zkrátí cestu na radnici 10 jen z 50 na 47 dní, tempo nerozbije
+→ `BALANC_CITY_V2.md`
+---
 ## Budovy zvyšují meta staty ve hře
 | Budova | Stat |
 |---|---|
@@ -30,14 +37,14 @@ Co nejbližší klon Clash of Clans a Rise of Kingdoms. První verze: stavění,
 ---
 ## Jednotky, mapa a boje přijdou později
 - **Ve V1 není:** výroba jednotek, globální mapa, boje mezi hráči
-- V2: výzkum v akademii, víc budov, VIP
+- V2: výzkum v akademii, víc budov (radnice 11+), VIP úrovně
 - V3: globální mapa, útoky na města (nejdřív fake), aliance
 - Vše za RC flagem, sociální vrstvy podle SharedGameBackendu
 → `DESIGN_CITY_V2.md`
 ---
 ## Co je potřeba rozhodnout
-- Kdo vlastní City V2 a kapacita na listopad a prosinec
-- Release v lednu jen v Hexu, nebo i v MF
+- Kdo z Mirka, Kubíka a Davida vlastní City V2
+- Kdy City V2 nahradí mapu v MF, potvrdit pravidlo refundu
 - Které meta staty v Hexu a jaké stropy bonusů
-- VIP a subscription už ve V1, nebo až ve V2
+- Ceny bundle a City VIP, VIP už ve V1 *(návrh: ano)*
 → `DESIGN_CITY_V2.md`

@@ -1,6 +1,8 @@
 # Design dokument: PvP v Hexapolisu
 
 > **Stav:** návrh v2, 4. 11. 2026. Přepracováno podle Davidova zadání z 4. 11. večer: dva segmenty (Skill only a All-out-power), Quick game se sub-režimy Speed a Normal, žebříčky denní, týdenní a měsíční, achievementy, skóre a ELO, 5 lig. Verze v1 (1. 11.) navrhovala async 1v1 jako MVP; to je nahrazené. Věci označené *(návrh)* jsou návrh autora dokumentu, ne Davidovo rozhodnutí.
+> **Doplněno 5. 11. 2026:** PvP, City V2 i UGC implementované do 11. 12. 2026 za RC flagy, hráči PvP a City V2 v lednu 2027, UGC v únoru 2027. Release freeze 14. až 18. 12. (GameJam). Čísla a RC parametry: `BALANC_HEX_PVP.md`.
+> **Rozhodnuto 6. 11. 2026 (David):** Hexapolis má cca 7 tis. aktivních hráčů, Play Pass se do revenue nepočítá. Přijaté návrhy z BALANC: ELO podmínka postupu, sestup rostoucí s ligou, jedna fronta pro Speed a Normal do PvP DAU cca 5 000 (při 7 tis. aktivních tedy jedna fronta na segment při launchi), generované profily botů. PvP, City V2 i UGC v testu a připravené do 11. 12.; PvP a City V2 k hráčům v lednu, UGC (bonus, z velké části hotové) může k hráčům dřív než v únoru. Žebříčky stojí na SGB, které jde živě až po svátcích (kap. 11). Hex featury a SGB dělí Mirek, Kubík (Jakub H.) a David, Milan a Čoud drží hlavní live hry.
 > **Patří k:** `KONCEPT_OBNOVA_HEXU.md` (obnova původního Hexapolisu přes PvP a City V2), `STRATEGIE_PRODUKCE.md` větev 2. Sesterský dokument: `DESIGN_CITY_V2.md`.
 > **Pro AI agenty:** zdroj pravdy je tento soubor. Číselné hodnoty (časy tahů, počty tahů, skóre, prahy lig) jsou výchozí návrhy a ladí se přes remote config. Tasky žijí v NoxHubu, projekt *Nové projekty* (NOVE-7 "Hexapolis 1, but with PvP") a *Hex 2* (HEX-2-0249-72 "Multiplayer").
 
@@ -11,7 +13,8 @@
 - Na začátku v obou segmentech jen **Quick game**: oba hráči jsou ve hře a čekají na své tahy. Sub-režimy **Speed** (méně času na tah a méně tahů) a **Normal**. Později **Long game** ve stylu online šachů.
 - **Žebříčky denní, týdenní a měsíční** v obou segmentech, postavené na SharedGameBackendu. Odměny podle pořadí, **achievementy** za top 10, top 3, 2. místo a výhru, **série** za opakované umístění.
 - Každý zápas dává **skóre** (výhra, prohra a celkový výkon), které se počítá do aktuálního denního, týdenního a měsíčního žebříčku. Vedle toho má každý hráč **ELO**.
-- All-out-power má **5 lig** (nováčci, mid game, late game). Hráč se umisťuje jen ve své lize, **do další ligy postupuje top 10 % ligy**.
+- All-out-power má **5 lig** (nováčci, mid game, late game). Hráč se umisťuje jen ve své lize, **do další ligy postupuje top 10 % ligy** s ELO aspoň na mediánu ligy (Rozhodnuto 6. 11.).
+- Base je **cca 7 tis. aktivních hráčů**: Speed a Normal sdílí jednu frontu a ligy se v párování slučují, takže při launchi běží **2 fronty (jedna na segment)**. Při 25 % DAU v PvP to dává cca 68 až 80 % zápasů s reálným soupeřem (`BALANC_HEX_PVP.md`, kap. 6).
 
 ## 2. Proč PvP
 
@@ -26,8 +29,8 @@
 |---|---|---|
 | Funkční prototyp Hexapolis PvP (postavený agentem, Codex 5.5) | Davidova poznámka, porada 11. 5. 2026 | prototyp, neověřený na hráčích |
 | Task "Multiplayer" | Hex 2, HEX-2-0249-72 | Open, termín 21. 8. prošel; HexFort se ruší, task patří k PvP v Hexu |
-| OKR O5.2: test multiplayeru na původním Hexapolisu | Q4 OKR | termín 30. 11. 2026 |
-| SGB: leaderboardy s anti-cheat limity (CODE-71), PvP admin UI (CODE-73) | wiki, SGB roadmap, Stage F | backlog |
+| OKR O5.2: test multiplayeru na původním Hexapolisu | Q4 OKR | termín 30. 11. 2026; podle plánu obnovy posunout (v testu a připravené do 11. 12. za RC flagem, hráči v lednu) |
+| SGB: leaderboardy s anti-cheat limity (CODE-71), PvP admin UI (CODE-73) | wiki, SGB roadmap, Stage F | backlog; SGB do konce roku na interním buildu MF, živě po svátcích (6. 11.) |
 | Custom mapy a nástroj, který přenese stav hry do editoru | Hexapolis, interní testování | existuje, základ pro replay |
 
 ## 3. Dva segmenty
@@ -66,9 +69,10 @@
 
 **Pravidla PvP map:** symetrické nebo zrcadlené starty, mlha války zapnutá, vítězství dobytím hlavního města, jinak **body po limitu tahů** (města, území, jednotky).
 
-**Postupný náběh (rozhodnutí 4. 11. 2026, best practices Voodoo).** Quick game potřebuje oba hráče naráz, takže při malé base hrozí čekání. Proto:
+**Postupný náběh (rozhodnutí 4. 11. 2026, best practices Voodoo).** Quick game potřebuje oba hráče naráz a Hex má cca 7 tis. aktivních hráčů, takže hrozí čekání. Proto:
+- **Jedna fronta pro Speed a Normal** (Rozhodnuto 6. 11.): nejdřív se hledá soupeř ve stejném sub-režimu, po 10 s i v druhém. Rozdělení až od PvP DAU cca 5 000.
 - **Onboarding:** prvních 3 až 5 zápasů *(návrh)* proti botovi s hráčským profilem, nastaveným tak, aby hráč pochopil pravidla.
-- **Fallback:** když se do 20 s *(návrh)* nenajde soupeř se stejným ELO a ligou, nastoupí AI soupeř s hráčským profilem nebo ghost zápas podle uložených tahů reálného hráče.
+- **Fallback:** když se do 20 s nenajde soupeř se stejným ELO a ligou, nastoupí AI soupeř s hráčským profilem nebo ghost zápas podle uložených tahů reálného hráče. Při launchi 30 s *(návrh, BALANC kap. 6)*. **Profily botů jsou generované** (Rozhodnuto 6. 11.), ne reálných neaktivních hráčů.
 - **Hra s přáteli je vždy reálná.**
 - Zápasy proti botům se počítají do skóre a odměn, ale **pozice v top 10 a achievementy jen z reálných zápasů** *(návrh)*, aby žebříček zůstal důvěryhodný.
 - Telemetrie odlišuje soupeře (`pvp_match_completed` s `opponent_type`: `bot`, `ghost`, `human`).
@@ -81,7 +85,7 @@ Dvě oddělená čísla s různým účelem:
 |---|---|---|
 | Účel | pořadí v denním, týdenním a měsíčním žebříčku | síla hráče, párování |
 | Jak vzniká | z výsledku a celkového výkonu v zápase | klasický ELO výpočet z výhry a prohry proti síle soupeře |
-| Reset | s koncem dne, týdne a měsíce | nikdy, jen soft reset při změně ligy *(otevřená otázka)* |
+| Reset | s koncem dne, týdne a měsíce | nikdy, jen soft reset při změně ligy *(návrh v BALANC kap. 3)* |
 | Kde je vidět | v žebříčcích | v profilu hráče |
 
 **Výpočet skóre za zápas** *(návrh)*:
@@ -90,19 +94,22 @@ Dvě oddělená čísla s různým účelem:
 |---|---|
 | Výhra | +100 |
 | Prohra | +20 (odměna za odehrání) |
-| Celkový výkon | +0 až 50: dobytá města, území, zničené jednotky, rychlost výhry |
+| Celkový výkon | +0 až 50 ve výhře, +0 až 25 v prohře: dobytá města, území, zničené jednotky, rychlost výhry |
 | Síla soupeře | výhra nad soupeřem s vyšším ELO x1,2 až 1,5 |
 | Vzdání nebo AFK | 0 |
 
 Jedno skóre zápasu se připíše **zároveň do denního, týdenního i měsíčního žebříčku** segmentu (u All-out-power ligy).
+
+Další násobiče (Normal x2, bot a ghost x0,5, série výher, denní strop zápasů) a strop skóre za zápas: `BALANC_HEX_PVP.md`, kap. 2.3.
 
 ## 6. Ligy v All-out-power
 
 - **5 lig** *(názvy návrh)*: Bronz, Stříbro, Zlato, Diamant, Mistr. Oddělují **nováčky, mid game a late game** hráče.
 - Nový hráč začíná v **Bronzu**, případně ho podle meta síly (PowerProgress) zařadíme výš *(návrh, aby vylevelovaný hráč nedrtil nováčky)*.
 - Hráč se **umisťuje jen ve své lize**: žebříčky a odměny jsou per liga.
-- **Postup: top 10 % ligy** v měsíčním žebříčku postupuje do vyšší ligy *(návrh: vyhodnocení na konci měsíce)*.
-- **Sestup** *(návrh)*: spodních 10 % aktivních hráčů ligy sestupuje, neaktivní hráči sestupují po 2 měsících bez zápasu. Mistr bez sestupu pod top 50 %.
+- **Postup: top 10 % ligy** v měsíčním žebříčku postupuje do vyšší ligy, vyhodnocení na konci měsíce. Podmínka (**Rozhodnuto 6. 11.**): ELO aspoň medián ligy a aspoň 15 reálných zápasů za měsíc. Bez ní by ligy řadily podle aktivity, ne podle síly (simulace v `BALANC_HEX_PVP.md`, kap. 1).
+- **Sestup (Rozhodnuto 6. 11.):** roste s ligou, spodních 10 / 12 / 15 / 20 % aktivních hráčů ve Stříbru, Zlatu, Diamantu a Mistru; Bronz bez sestupu. Neaktivní hráči sestupují po 2 měsících bez zápasu. Mistr pak drží 2 až 3 % hráčů a horní polovina Mistra nesestupuje.
+- **Launch *(návrh)*:** při cca 7 tis. aktivních bude mít Diamant kolem 100 a Mistr kolem 10 týdně aktivních hráčů, proto se jejich žebříčky a odměny při launchi zobrazí společně se Zlatem a oddělí se, až každá liga má 200+ týdně aktivních (`BALANC_HEX_PVP.md`, kap. 5). Párování jde přes všechny ligy s oknem síly.
 - Skill only ligy nemá, všichni hrají na stejných podmínkách.
 
 ## 7. Žebříčky, odměny a achievementy
@@ -148,7 +155,7 @@ Achievementy mají stupně podle období (denní, týdenní, měsíční) a segm
 
 - **Replay:** každý zápas uložený jako seed + seznam akcí (kontrola podezřelých výsledků, sdílení).
 - **Podezřelé chování:** nemožné výsledky, extrémní série, statistiky mimo rozsah. Flag, ruční kontrola, ban přes SGB.
-- **Quick game, odpojení:** 30 s na návrat *(návrh)*, pak tah propadá, dva propadlé tahy = prohra.
+- **Quick game, odpojení:** 30 s na návrat *(návrh)*, pak tah propadá; 2 propadlé tahy po sobě nebo 3 celkem = prohra (`BALANC_HEX_PVP.md`, kap. 9).
 - **Vzdání** kdykoli, počítá se jako prohra se skóre 0. Opakované opouštění zápasů = krátký zákaz rankovaných zápasů.
 
 ## 10. Monetizace (hypotézy k ověření)
@@ -170,47 +177,75 @@ Pravidlo: **ve Skill only se výhoda koupit nedá.**
 | Období | Co |
 |---|---|
 | listopad 2026 | design dotáhnout, presety národů, SGB služby (fronta, zápas, ELO, skóre, žebříčky), Quick game Speed a Normal interně hratelné |
-| prosinec 2026 | interní testy, validace tahů na serveru, žebříčky a odměny, achievementy, za RC flagem v Hexapolisu |
-| leden 2027 | k hráčům: Skill only a All-out-power v Quick game, postupné zapínání (RC procenta), komunitní test, reaktivační kampaň |
-| únor 2027 | UGC mapy (třetí díl ověření), hra s přáteli |
+| prosinec 2026 | do 11. 12.: PvP, City V2 i UGC v testu a připravené, validace tahů na serveru, žebříčky a odměny, achievementy, vše za RC flagem v Hexapolisu; 14. až 18. 12. release freeze; SGB do konce roku vyvinuté a otestované na interním buildu MF |
+| leden 2027 | SGB živě po svátcích, vypnuté a postupně zapínané; k hráčům: Skill only a All-out-power v Quick game, postupné zapínání (RC procenta, do 2 týdnů na 90 %+ *(návrh)*), komunitní test, reaktivační kampaň |
+| únor 2027 nebo dřív | UGC mapy k hráčům (bonus, z velké části hotové, může dřív než v únoru), hra s přáteli |
 | později | Long game, ligový postup a sestup na datech |
 
 RC flagy *(návrh)*: `hex_pvp_enabled`, `hex_pvp_skill_enabled`, `hex_pvp_power_enabled`, `hex_pvp_speed_enabled`.
+
+**Závislost na SGB (6. 11.):** žebříčky, a podle této kapitoly i fronta, ELO a skóre, stojí na SharedGameBackendu. SGB jde živě až po svátcích, vypnuté a s postupným zapínáním, takže **lednový release PvP předpokládá, že SGB v lednu postupně naběhne**. Fallback *(návrh)*: PvP pustit nejdřív bez žebříčků a lig (Quick game, ELO, odměny za zápasy) a žebříčky zapnout RC flagem po náběhu SGB.
+
+**Kapacita (6. 11.):** Hex featury, SGB a nové věci dělí Mirek, Kubík (Jakub H.) a David. Milan a Čoud drží hlavní live hry.
 
 ## 12. Metriky (vstup pro gate Hexapolis 2)
 
 | Metrika | Co říká | Cíl *(návrh)* |
 |---|---|---|
-| Podíl DAU, který zkusí PvP | zájem | 25 %+ |
+| Podíl DAU, který zkusí PvP | zájem | 25 %+ (cca 1 750 z 7 tis. aktivních) |
+| Podíl zápasů s reálným soupeřem | likvidita | 50 %+ během lednového náběhu, 65 %+ v únoru *(návrh, sníženo 6. 11. z 60 % / 80 %)* |
 | Poměr hráčů Skill only a All-out-power | kterou motivaci hráči mají | sledovat |
 | Zápasů na PvP hráče týdně | opakované hraní | 5+ |
 | D7 / D30 retence PvP hráčů vs. ostatní | přidaná hodnota | +20 % relativně |
 | Návrat bývalých hráčů po kampani | síla značky + featury | sledovat |
 | Útrata v All-out-power vs. ostatní | ochota platit za sílu | růst |
-| ARPDAU Hexapolisu před a po | dopad na revenue (dnes cca $15k / měsíc) | růst |
+| ARPDAU Hexapolisu před a po | dopad na revenue (cca $15k / měsíc, **bez Play Passu**, Rozhodnuto 6. 11.; měřit iOS a Android mimo Play Pass) | růst |
 | Win rate presetů a jednotek | balanc | pod 55 % |
 | Čekání na soupeře, podíl bot zápasů | zdraví matchmakingu | klesá v čase |
 
-## 13. UGC (třetí díl ověření, únor 2027)
+## 13. UGC (třetí díl ověření, únor 2027 nebo dřív)
 
-Hned po PvP a City V2, součást ověření celku: editor map postavený na interním nástroji, sdílení kódem, "mapa týdne", komunitní mapy jen do casual rotace, ne do žebříčků. Úložiště přes SGB (CODE-8).
+V testu a připravené do 11. 12. 2026 za RC flagem. UGC je bonus, ale z velké části hotové, takže **může k hráčům dřív než v únoru 2027** (Rozhodnuto 6. 11.). Je součást ověření celku: editor map postavený na interním nástroji, sdílení kódem, "mapa týdne", komunitní mapy jen do casual rotace, ne do žebříčků. Úložiště přes SGB (CODE-8).
 
 ## 14. Rizika
 
 | Riziko | Zmírnění |
 |---|---|
-| Malá base, Quick game potřebuje oba hráče naráz | bot fallback a onboarding (kap. 4), dva sub-režimy místo mnoha módů, hra s přáteli |
+| Malá base (cca 7 tis. aktivních), Quick game potřebuje oba hráče naráz | jedna fronta na segment (Rozhodnuto 6. 11.), fallback 30 s při launchi, rychlý RC náběh, malý holdout, bot onboarding (kap. 4), hra s přáteli |
 | Pay to win pocit | Skill only jako férová alternativa, ligy v All-out-power |
-| Rozdrobení base mezi 2 segmenty, 2 sub-režimy a 5 lig | v launchi párovat napříč sub-režimy, pokud fronta čeká *(návrh)*; ligy sloučit, dokud nemají dost hráčů |
+| Rozdrobení base mezi 2 segmenty, 2 sub-režimy a 5 lig | Speed a Normal v jedné frontě a ligy sloučené v párování (Rozhodnuto 6. 11.); žebříčky Diamant a Mistr při launchi se Zlatem *(návrh)* |
+| SGB jde živě až po svátcích | lednový release žebříčků stojí na postupném náběhu SGB; fallback PvP bez žebříčků *(návrh)*, kap. 11 |
 | Cheateři v žebříčcích | server validace, replay, top 10 a achievementy jen z reálných zápasů |
-| Kapacita v Q4 (live ops) | backend a logika přes agenty, lidský čas dávkovat |
+| Kapacita v Q4 (live ops) | Milan a Čoud drží live hry, Hex featury a SGB dělí Mirek, Kubík a David (6. 11.); backend a logika přes agenty |
 
-## 15. Otevřené otázky
+## 15. Slabá místa a otevřené otázky
+
+Rizika provedení jsou v kap. 14. Tady jsou námitky proti tomu, jestli je samotný návrh správně.
+
+| Námitka | Proč může platit | Odpověď nebo co s tím |
+|---|---|---|
+| Návrh má víc front, než Hex unese | 2 segmenty × 2 sub-režimy × 5 lig = 12 front. Při cca 7 tis. aktivních a 25 % DAU v PvP (1 750 PvP DAU) dává 12 front jen 21 % reálných zápasů, 2 fronty 68 % (`BALANC_HEX_PVP.md`, kap. 6). Práh PvP DAU 5 000 pro rozdělení front je 70 % DAU, takže se v roce 2027 nejspíš nedosáhne. | **Rozhodnuto 6. 11.:** launch se 2 frontami (segmenty), Speed a Normal v jedné frontě, ligy sloučené v párování. Ligy slouží jako žebříčky a odměny. Hráči to otevřeně říct: Speed a Normal jsou volba preference, ne oddělené fronty. |
+| Ligy a párování vyrovnávají sílu, takže útrata nekupuje výhry | All-out-power řadí hráče podle síly (ligy, zařazení podle PowerProgress, okno síly v párování). Platící hráč hraje proti stejně silným a win rate se mu srovná k 50 %. Teze "útrata bez stropu" ze strategie tak v tomto segmentu neplatí. | Říct otevřeně, co platící hráč kupuje: rychlejší postup do vyšší ligy, prestiž a ligové odměny (Mistr x2,5), ne výhry. Měřit, jestli to na útratu stačí (metrika "útrata v All-out-power" v kap. 12). |
+| Kumulativní skóre odměňuje grind, ne dovednost | Simulace v BALANC: korelace ligy s dovedností 0,07, s aktivitou 0,79. Top 10 denních a týdenních žebříčků obsadí nejaktivnější hráči, ne nejlepší, což jde proti slibu férového souboje. | **Rozhodnuto 6. 11.:** ELO podmínka postupu a sestup rostoucí s ligou (korelace ligy s dovedností 0,34). Denní a týdenní top 10 zůstávají podle skóre; sledovat, jestli je neobsadí jen grindeři. |
+| Fake PvP podkope důvěru právě té komunity, která PvP chce | Boti vystupují s hráčským profilem. Hráči Polytopie, kvůli kterým Skill only děláme, chtějí skutečné soupeře; odhalení na Discordu poškodí obnovu. Při 7 tis. aktivních bude bot zápasů v lednu 20 až 50 %. | **Rozhodnuto 6. 11.:** jen generované profily, ne reálné. Zbývá: po onboardingu bota ve Skill only přiznat (např. "trénink, než se najde soupeř")? |
+| Suroviny z PvP jsou o řády menší, než město potřebuje | BALANC PvP (kap. 8) dává aktivnímu hráči 1 500 až 2 500 surovin měsíčně a chce krýt 30 až 40 % příjmu. `BALANC_CITY_V2.md` (kap. 7) čeká ze zápasů 17 000 až 210 000 surovin denně. Smyčka "PvP krmí město" tak v číslech nefunguje. | Přeškálovat suroviny v PvP odměnách podle tieru Radnice (vzorec z BALANC City kap. 7) a teprve pak ladit podíl PvP. |
+| Skill only není izolovaný | Odměny ze Skill only dávají suroviny do City V2, které posílí hráče v All-out-power (BALANC otázka 7). Výhoda není koupená, ale segmenty se míchají. | Buď Skill only odměňovat jen kosmetikou a měnou mimo město, nebo míchání přijmout jako záměr a napsat to do designu. |
+| Metrika "25 % DAU zkusí PvP" měří zvědavost | Onboarding proti botům, reaktivační kampaň a store update dostanou do PvP hodně hráčů na jeden zápas. O hodnotě featury to neříká nic. | Do gate dát podíl DAU s 5+ **reálnými** zápasy týdně a retenci PvP hráčů proti holdoutu bez PvP. Holdout max 10 % hráčů, větší sníží likviditu front (BALANC kap. 6). |
+| Lednový release stojí na SGB | Žebříčky (a fronta a ELO) běží na SGB, které jde živě až po svátcích, vypnuté a postupně. Zpoždění SGB posune PvP. | Fallback *(návrh)*: PvP bez žebříčků a lig, žebříčky dozapnout RC flagem (kap. 11). |
+
+**Potřebuje odpověď:**
+- Pouštíme v lednu oba segmenty, nebo jen jeden (a který)?
+- Přiznáme bota ve Skill only po onboardingu?
+- Pokud SGB v lednu nenaběhne včas: PvP bez žebříčků, nebo posunout?
+- Co přesně má platící hráč v All-out-power kupovat, když párování srovnává sílu?
+- Smí Skill only dávat suroviny do City V2?
+
+## 16. Otevřené otázky
 
 1. **Presety národů ve Skill only:** kolik a jaké národy na start?
-2. **ELO:** jedno ELO per segment, nebo i per sub-režim (Speed a Normal zvlášť)?
-3. **Ligy:** vyhodnocení postupu na konci měsíce, nebo průběžně? Zařazovat nové hráče podle PowerProgress?
+2. **ELO:** jedno ELO per segment, nebo i per sub-režim? Návrh v BALANC: jedno ELO per segment, sedí na jednu frontu pro Speed a Normal (Rozhodnuto 6. 11.).
+3. **Ligy:** zařazovat nové hráče podle PowerProgress? (Postup a sestup na konci měsíce s ELO podmínkou: Rozhodnuto 6. 11.)
 4. **Odměny:** konkrétní obsah truhel a kosmetiky podle ekonomiky Hexapolisu.
 5. **Prototyp z května** (Codex 5.5): navazujeme na něj? Kde leží a kdo ho převezme?
-6. **Vlastník** PvP featury a vztah k HEX-2-0249-72 a OKR O5.2 (termín 30. 11.).
-7. **Cílové hodnoty metrik** v kap. 12 potvrdit s Jirkou.
+6. **Vlastník** PvP featury v týmu Mirek, Kubík (Jakub H.), David (tým Rozhodnuto 6. 11.) a vztah k HEX-2-0249-72 a OKR O5.2 (termín 30. 11., posunout podle plánu obnovy).
+7. **Cílové hodnoty metrik** v kap. 12 potvrdit s Jirkou (likvidita a podíl DAU přepočítané na 7 tis. aktivních).

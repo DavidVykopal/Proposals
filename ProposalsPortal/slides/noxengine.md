@@ -1,5 +1,5 @@
 # NoxEngine + Warcamp
-Proof of concept vlastního enginu a jiného workflow podle Czodeho. Warcamp ukazuje rychlou strategii s PvP a naší metou.
+Proof of concept vlastního enginu a jiného workflow podle Czodeho. Letos čistě experiment (David a Čoud), z plánu kvůli němu nic nevypadává.
 !! 174 | příkazů, kterými agent ovládá engine
 !! 71 | commitů mezi 2. a 3. 11. 2026
 !! 4 | skiny z jednoho kódu, včetně mecha
@@ -39,7 +39,7 @@ Engine je postavený pro AI agenty jako hlavní uživatele, ne jako doplněk k e
 | Most na SDK se stubem | Skutečné MAX a Firebase |
 → `SHRNUTI_NOXENGINE.md`
 ---
-## Dva kill hlasy znamenají stop, zatím nic neprošlo
+## Gates jsou kritéria pro pozdější rozhodnutí, zatím nic neprošlo
 | Gate | Termín | Stav k 4. 11. |
 |---|---|---|
 | K1 150 jednotek, 60 fps na Androidu | sprint 2 | neměřeno |
@@ -49,10 +49,10 @@ Engine je postavený pro AI agenty jako hlavní uživatele, ne jako doplněk k e
 | K5, K6 velikost a iPhone 12 | sprint 3 a 4 | APK 5,9 MB, simulátor |
 → `RESEARCH.md`
 ---
-## Co je potřeba rozhodnout
-- Schválit **časově omezenou sázku**: 2 inženýři a agenti, zhruba 6 sprintů
-- Určit vlastníka, otázka: převezme ho **Czode**, autor workflow?
-- Uvolnit **Unity vývojáře** na srovnání s Unity (K3) ve sprintu 1
+## Rozhodnuto 6. 11. a co zbývá
+- **Letos experiment:** dělají David a Čoud, z plánu nic nevypadává
+- Rozšiřovat a testovat ho jde během **GameJamu 14. až 18. 12.**
+- O **větší investici** rozhodneme později, kritéria jsou gates K1 až K6
+- Před tím uvolnit **Unity vývojáře** na srovnání s Unity (K3)
 - Mecha Fortress, NoxFort a Hexapolis **zůstávají v Unity**
-- Po sprintu 2 (K1 až K3) rozhodnout: **Go, Pivot, nebo Stop**
 → `RESEARCH.md`

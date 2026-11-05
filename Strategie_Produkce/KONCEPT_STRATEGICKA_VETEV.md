@@ -60,7 +60,7 @@ PvP je **v designu od prvního dne**, ale na launchi je fake (boti a ghost armá
 1. **Sběr konceptů:** Game Jam, R&D, trh (AppMagic trendy). Každý koncept podle šablony níže.
 2. **CPI test tematiky:** stejné základní assety převedené do více tematik.
 3. **Prototyp:** nejvýš 2 sprinty na koncept (pravidlo V10), pak rozhodnutí pokračovat / stop.
-   Prototypy zkoušíme i na vlastním enginu **NoxEngine 0.1** (Rust, obsah v JSON s hot reloadem, maximum práce dělají agenti). První je **Warcamp**, NoxHub CODE-217. Pracovní směr, rozhodnutí go / no-go padne v CE13.
+   Prototypy zkoušíme i na vlastním enginu **NoxEngine 0.2** (Rust, obsah v JSON s hot reloadem, maximum práce dělají agenti). První je **Warcamp**, NoxHub CODE-217. Pracovní směr, rozhodnutí go / no-go padne v CE13.
 4. **Greenlight** na poradě vedení podle metrik z prototypu a CPI.
 
 ## 6. Šablona konceptu (1 strana)

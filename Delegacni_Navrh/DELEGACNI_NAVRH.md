@@ -2,6 +2,7 @@
 
 > Pracovní dokument. Návrh delegační struktury a úpravy organizační struktury v NOXGAMES (16 lidí).
 > Stav: **iterace 05** - podíly z iniciativ a dealů se počítají ze zisku za prvních 12 měsíců a vyplácejí se měsíčně.
+> **Historická iterace.** Aktuální stav: dekrety ve Wiki v hubu, odměňování v `SCENARE_PLATU_2027.md`, cíle v `CILE_2027.md`, porada 19. 11. v `PRIPRAVA_2026-11-19.md`.
 
 ---
 

@@ -1,7 +1,7 @@
 ## Shrnutí
 Navrhuji princip **up from here**: fix odpovídá hodnotě role a variabilní složka se počítá od dnešního stavu nahoru, takže platí jen novou hodnotu. Nikdo nejde fixem pod dnešek. Dnes stojí platy 13 lidí (bez founderů a CEO) 11,11 mil. Kč ročně, plné fixy podle up from here 12,13 mil.
 
-Přechod proběhne ve třech krocích: 1. 1. 2027, 1. 7. 2027 po pololetní bráně a 1. 1. 2028 po roční bráně. Brány jsou cíle 2027. Žádost project leada o fix 110 tis. bez podmínek řešíme cestou 85, 97,5 a 110 tis. přes tytéž brány. Rozhoduje se na poradě 19. 11.
+Přechod proběhne ve třech krocích: 1. 1. 2027, 1. 7. 2027 po pololetní bráně a 1. 1. 2028 po roční bráně. Brány jsou cíle 2027 (návrh: scénář B 7,5 mil. podle čísel DJ). Žádost project leada o fix 110 tis. bez podmínek řešíme cestou 85, 97,5 a 110 tis. přes tytéž brány. Rozhoduje se na poradě 19. 11.
 
 ## Výhody
 - **Nikdo pod dnešek**: žádné srážky, na rozdíl od střídmějšího scénáře, kde jde fixem dolů 7 lidí.
@@ -21,8 +21,8 @@ Přechod proběhne ve třech krocích: 1. 1. 2027, 1. 7. 2027 po pololetní brá
 | Riziko | Pravděpodobnost | Dopad | Jak ho snížíme |
 |---|---|---|---|
 | Lidé variabilní nevěří a berou ji jako „nic“ | vysoká | střední | KPI podepsané před 1. 1., plnění viditelné průběžně v hubu, první výplata po Q1 |
-| Fix 110 se stane precedentem pro všechny 4 leady | střední | vysoká | cesta k 110 jen přes brány; precedens bez podmínek by stál +2,2 mil. ročně i s exekutivou |
-| Lead na 110 přeskočí exekutivu a poruší odstup | střední | střední | exekutiva se zvedá ve stejném kroku jako lead, nejnižší fix aspoň 110, náklad od 2028 +0,58 mil. |
+| Fix 110 se stane precedentem pro všechny 4 leady | střední | vysoká | cesta k 110 jen přes brány; precedens bez podmínek by stál cca +2,2 mil. ročně i s exekutivou |
+| Lead na 110 přeskočí exekutivu a poruší odstup | střední | střední | exekutiva se zvedá ve stejném kroku jako lead, fixy exekutivy aspoň 110, náklad od 2028 +0,58 mil. |
 | Firma nesplní pololetní nebo roční bránu | střední | střední | předchozí krok zůstává, posun se přesune na další bránu, nic se nevrací dolů |
 | Spory o měkčí cíle variabilní | střední | střední | výchozí bod = skutečnost 2026, cíle se během roku nemění, osobní části pod kontrolou člověka |
 

@@ -1,5 +1,5 @@
 ## Shrnutí
-Navrhujeme CPI testy jako stálou pipeline: minimálně jeden test měsíčně, podle potřeby dva, každý běží zhruba 14 dní. Každý test kombinuje strukturu, vizuální styl a téma a vždy odpovídá na jednu otázku. Mezi variantami se mění jen to, co testujeme. Výsledky zapisujeme do vlastní knihovny nápadů, ze které časem vybíráme témata bez nových testů.
+Navrhujeme CPI testy jako stálou pipeline: minimálně jeden test měsíčně, podle potřeby dva, každý běží zhruba 14 dní a celý cyklus od briefu po vyhodnocení trvá zhruba měsíc. Každý test kombinuje strukturu, vizuální styl a téma a vždy odpovídá na jednu otázku. Mezi variantami se mění jen to, co testujeme. Výsledky zapisujeme do vlastní knihovny nápadů, ze které časem vybíráme témata bez nových testů. Program vlastní marketing, tedy Kuba B. (rozhodnuto 6. 11.), produkce zadává, co se chce dozvědět, a dává podněty.
 
 Teď běží dva cíle. Cíl A hledá témata pro 2 až 3 reskiny Mecha Fortress / Sector Defense (A1 až A4, test do 15. 12. 2026). Cíl B hledá nový vizuál pro Hexapolis 2 a strategické idle hry (B1 až B5, test do 15. 1. 2027). B5 mýtická antika ve stylu Age of Mythology tvoří pár s B1 římskou říší.
 
@@ -19,7 +19,7 @@ Teď běží dva cíle. Cíl A hledá témata pro 2 až 3 reskiny Mecha Fortress
 ## Rizika
 | Riziko | Pravděpodobnost | Dopad | Jak ho snížíme |
 |---|---|---|---|
-| Program nemá vlastníka (CPI-20), testy se zpozdí nebo nedokončí | vysoká | vysoká | určit vlastníka a rozpočet jako první rozhodnutí |
+| Testy se zpozdí nebo nedokončí | střední | vysoká | vlastník rozhodnut 6. 11. (marketing, Kuba B.), rozpočet určit jako první krok (CPI-20) |
 | Kreativy dalšího testu se nestihnou během běhu předchozího, kadence spadne pod 1 měsíčně | střední | střední | brief a kreativy dalšího testu dělat během běhu předchozího |
 | Varianty se liší i v kvalitě kreativy, ne jen v tématu, a výsledek zkreslí | střední | vysoká | jedna sada základních assetů převedená do variant (CPI-15), stejná struktura, délka a CTA |
 | Nízké CPI neznamená dobrou hru, vítězné téma pak nedrží retenci | střední | střední | brát CPI jako vstupní filtr, výběr potvrdit v soft launchi reskinu |
