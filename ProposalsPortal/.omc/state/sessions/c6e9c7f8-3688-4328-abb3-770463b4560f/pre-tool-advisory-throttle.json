@@ -2,13 +2,29 @@
   "version": 1,
   "entries": {
     "79a93d4a2f8f50b95f852280616242fee1855dc99a3c75211917f55e72e95fae": {
-      "last_emitted_at_ms": 1793899860000,
+      "last_emitted_at_ms": 1793921331527,
       "message": "Use parallel execution for independent tasks. Use run_in_background for long operations (npm install, builds, tests)."
     },
-    "445ed27a3872b681d98190bae61ccb84954e1bc4e140df5370be958dee776b3a": {
-      "last_emitted_at_ms": 1793899277352,
-      "message": "Verify changes work after editing. Test functionality before marking complete."
+    "466399dafa2d20f60587180bad0a07358eb7f2bce724df0ff682f038ad33f5ad": {
+      "last_emitted_at_ms": 1793918106619,
+      "message": "Read multiple files in parallel when possible for faster analysis."
+    },
+    "098771f0b0c8baf58f8ec21baa9b7c0213a7d49bc17b6ad5e3b3d845d130511f": {
+      "last_emitted_at_ms": 1793918104181,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Wiki: delegation decrees sync | Active agents: 3"
+    },
+    "f91d6d3a60cf5d5f9c2c47dc42c1c3723d3921d25c7c86c031f96f64f2c179ec": {
+      "last_emitted_at_ms": 1793918095373,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Wiki: NoxEngine, CPI, Konec roku | Active agents: 2"
+    },
+    "387ed2c1f86c357bd2903c8bf4253f08c28858ed31e1984982906474819a2fa0": {
+      "last_emitted_at_ms": 1793918085816,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Wiki: City/PvP numbers docs | Active agents: 1"
+    },
+    "075d9de6f88f4ed0831b3a0a4c8177166db7b4a152946736694ea2c8482e2217": {
+      "last_emitted_at_ms": 1793918078172,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Wiki: strategy docs update"
     }
   },
-  "updated_at": "2026-11-05T17:31:00.000Z"
+  "updated_at": "2026-11-05T23:28:51.527Z"
 }

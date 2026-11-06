@@ -375,15 +375,15 @@
       "type": "file"
     },
     {
-      "path": "Delegacni_Navrh/kalkulacka/LOGIKA.md",
-      "accessCount": 6,
-      "lastAccessed": 1793351568313,
+      "path": "Strategie_Produkce/STRATEGIE_PRODUKCE.md",
+      "accessCount": 8,
+      "lastAccessed": 1793921004864,
       "type": "file"
     },
     {
-      "path": "Strategie_Produkce/STRATEGIE_PRODUKCE.md",
+      "path": "Delegacni_Navrh/kalkulacka/LOGIKA.md",
       "accessCount": 6,
-      "lastAccessed": 1793824120877,
+      "lastAccessed": 1793351568313,
       "type": "file"
     },
     {
@@ -411,9 +411,21 @@
       "type": "file"
     },
     {
+      "path": "ProposalsPortal/content.json",
+      "accessCount": 4,
+      "lastAccessed": 1793917379550,
+      "type": "file"
+    },
+    {
       "path": "Delegacni_Navrh/PRIPRAVA_2026-10-22_DAVID.md",
       "accessCount": 3,
       "lastAccessed": 1793189739644,
+      "type": "file"
+    },
+    {
+      "path": "Strategie_Produkce/BALANC_HEX_PVP.md",
+      "accessCount": 3,
+      "lastAccessed": 1793920761294,
       "type": "file"
     },
     {
@@ -438,6 +450,60 @@
       "path": "Strategie_Produkce/KONCEPT_STRATEGICKA_VETEV.md",
       "accessCount": 2,
       "lastAccessed": 1793623159080,
+      "type": "file"
+    },
+    {
+      "path": "Delegacni_Navrh/CILE_2027.md",
+      "accessCount": 2,
+      "lastAccessed": 1793918887342,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/konec-roku.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920746556,
+      "type": "file"
+    },
+    {
+      "path": "Strategie_Produkce/DESIGN_HEX_PVP.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920764805,
+      "type": "file"
+    },
+    {
+      "path": "Strategie_Produkce/DESIGN_CITY_V2.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920768538,
+      "type": "file"
+    },
+    {
+      "path": "NoxEngine/SHRNUTI_NOXENGINE.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920815309,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/slides/noxengine.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920815790,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/noxengine.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920816252,
+      "type": "file"
+    },
+    {
+      "path": "CPI_Tests/CPI_PIPELINE.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920873353,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/cpi.md",
+      "accessCount": 2,
+      "lastAccessed": 1793920874417,
       "type": "file"
     },
     {
@@ -477,33 +543,81 @@
       "type": "file"
     },
     {
-      "path": "NoxEngine/SHRNUTI_NOXENGINE.md",
-      "accessCount": 1,
-      "lastAccessed": 1793823127181,
-      "type": "file"
-    },
-    {
-      "path": "CPI_Tests/CPI_PIPELINE.md",
-      "accessCount": 1,
-      "lastAccessed": 1793823144271,
-      "type": "file"
-    },
-    {
-      "path": "ProposalsPortal/slides/noxengine.md",
-      "accessCount": 1,
-      "lastAccessed": 1793823169048,
-      "type": "file"
-    },
-    {
       "path": "ProposalsPortal/slides/strategie.md",
       "accessCount": 1,
       "lastAccessed": 1793824431326,
       "type": "file"
     },
     {
-      "path": "Delegacni_Navrh/CILE_2027.md",
+      "path": "ProposalsPortal/overview/strategie.md",
       "accessCount": 1,
-      "lastAccessed": 1793825082135,
+      "lastAccessed": 1793916801135,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/designeri.md",
+      "accessCount": 1,
+      "lastAccessed": 1793916809081,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/platy-2027.md",
+      "accessCount": 1,
+      "lastAccessed": 1793916813217,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/pvp.md",
+      "accessCount": 1,
+      "lastAccessed": 1793916814582,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/city-v2.md",
+      "accessCount": 1,
+      "lastAccessed": 1793916826912,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/delegace.md",
+      "accessCount": 1,
+      "lastAccessed": 1793916830140,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/overview/cile-2027.md",
+      "accessCount": 1,
+      "lastAccessed": 1793916830530,
+      "type": "file"
+    },
+    {
+      "path": "Konec_Roku_2026/KONEC_ROKU_A_GAMEJAM.md",
+      "accessCount": 1,
+      "lastAccessed": 1793920745119,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/slides/konec-roku.md",
+      "accessCount": 1,
+      "lastAccessed": 1793920746494,
+      "type": "file"
+    },
+    {
+      "path": "Strategie_Produkce/KONCEPT_OBNOVA_HEXU.md",
+      "accessCount": 1,
+      "lastAccessed": 1793920765373,
+      "type": "file"
+    },
+    {
+      "path": "Strategie_Produkce/BALANC_CITY_V2.md",
+      "accessCount": 1,
+      "lastAccessed": 1793920769283,
+      "type": "file"
+    },
+    {
+      "path": "ProposalsPortal/slides/cpi.md",
+      "accessCount": 1,
+      "lastAccessed": 1793920873876,
       "type": "file"
     }
   ],

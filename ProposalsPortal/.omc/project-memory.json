@@ -149,9 +149,21 @@
   },
   "hotPaths": [
     {
+      "path": "static/portal.js",
+      "accessCount": 2,
+      "lastAccessed": 1793915793810,
+      "type": "file"
+    },
+    {
       "path": "slides/konec-roku.md",
       "accessCount": 1,
       "lastAccessed": 1793899297830,
+      "type": "file"
+    },
+    {
+      "path": "overview/FORMAT.md",
+      "accessCount": 1,
+      "lastAccessed": 1793916737778,
       "type": "file"
     }
   ],

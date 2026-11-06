@@ -1,14 +1,46 @@
 {
   "version": 1,
   "entries": {
+    "79a93d4a2f8f50b95f852280616242fee1855dc99a3c75211917f55e72e95fae": {
+      "last_emitted_at_ms": 1793918177703,
+      "message": "Use parallel execution for independent tasks. Use run_in_background for long operations (npm install, builds, tests)."
+    },
+    "466399dafa2d20f60587180bad0a07358eb7f2bce724df0ff682f038ad33f5ad": {
+      "last_emitted_at_ms": 1793917340634,
+      "message": "Read multiple files in parallel when possible for faster analysis."
+    },
     "445ed27a3872b681d98190bae61ccb84954e1bc4e140df5370be958dee776b3a": {
-      "last_emitted_at_ms": 1793824431207,
+      "last_emitted_at_ms": 1793917315683,
       "message": "Verify changes work after editing. Test functionality before marking complete."
     },
-    "79a93d4a2f8f50b95f852280616242fee1855dc99a3c75211917f55e72e95fae": {
-      "last_emitted_at_ms": 1793824185483,
-      "message": "Use parallel execution for independent tasks. Use run_in_background for long operations (npm install, builds, tests)."
+    "686b805520a25b546de1bfcb4db7460995ee4e70959afc275a527d98a4517ff0": {
+      "last_emitted_at_ms": 1793916810593,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Hex PvP balance numbers doc | Active agents: 6"
+    },
+    "25bd2d748769b824fd74933de748183cfa3efe08c40d798d0134076fa83895c4": {
+      "last_emitted_at_ms": 1793916796831,
+      "message": "Spawning agent: general-purpose (inherit) | Task: City V2 balance numbers doc | Active agents: 5"
+    },
+    "b395ec8c3a6aa6d436219a6a03be7524fe1f90465c36ca84c05d8e50e5e0a29b": {
+      "last_emitted_at_ms": 1793916780235,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Overview: platy, cile | Active agents: 4"
+    },
+    "bac9b7e69e90466b0d9cef0f70a2b97b8aa05185a1eba4f696c6cb2811f411ba": {
+      "last_emitted_at_ms": 1793916774858,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Overview: cpi, konec-roku | Active agents: 3"
+    },
+    "c0b2dd6f5bd98b0fe401eac07263a8cfcdcc18e01b30f207c79e577c7f14c650": {
+      "last_emitted_at_ms": 1793916770336,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Overview: noxengine, designeri | Active agents: 2"
+    },
+    "8de8038fe5c3c86eb9df5cc88d8792281c7bce8ca21a02d3616e047c3fb6240f": {
+      "last_emitted_at_ms": 1793916764903,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Overview: strategie, pvp, city | Active agents: 1"
+    },
+    "c717632f03b9ccb1d9955edfe59186073e94e7aea95cacacfe0b206372d4971a": {
+      "last_emitted_at_ms": 1793916757948,
+      "message": "Spawning agent: general-purpose (inherit) | Task: Overview: delegace"
     }
   },
-  "updated_at": "2026-11-04T20:33:51.207Z"
+  "updated_at": "2026-11-05T22:36:17.703Z"
 }
