@@ -97,6 +97,16 @@
           "title": "D04 Pravidla delegace"
         },
         {
+          "src": "../Delegacni_Navrh/wiki/04a_Dekret_D05_Odmenovani_a_proces_budgetu.md",
+          "group": "Dekrety",
+          "title": "D05 Odměňování a budgety"
+        },
+        {
+          "src": "../Delegacni_Navrh/wiki/04b_Dekret_D06_Role_a_cinnosti_segmentu.md",
+          "group": "Dekrety",
+          "title": "D06 Role a činnosti segmentů"
+        },
+        {
           "src": "../Delegacni_Navrh/wiki/05_Segment_Rizeni_EXEC.md",
           "group": "Segmenty",
           "title": "Řízení (EXEC)"
@@ -281,7 +291,7 @@
     {
       "id": "platy-2027",
       "title": "Platy 2027: scénáře",
-      "summary": "Nápočty scénářů narovnání platů, co je v nich dobré a špatné, žádost leada o fix 110 a přechod ve třech krocích.",
+      "summary": "Proč narovnáváme platy, závazek s nejzazším termínem, brány v půlce a na konci roku, testovací Q1 a nápočty scénářů včetně žádosti leada o fix 110.",
       "docs": [
         {
           "src": "../Delegacni_Navrh/SCENARE_PLATU_2027.md",

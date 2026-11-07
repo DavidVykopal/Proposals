@@ -3,6 +3,20 @@
 > **Stav:** 4. 11. 2026, podklad k bloku B porady 19. 11. Čísla spočítaná hubovou platovou kalkulačkou (stejný model `comp2027/model.ts`, karty rolí a výplatní karty 2026 k 4. 11.). Roční náklad 2027 v mil. Kč pro 13 lidí bez founderů a CEO; měsíční částky v tis. Kč. „Dnes“ = 11,11 mil. (starší verze přípravy 19. 11. uváděla 11,13, mezitím přibyly výplatní karty; příprava je už srovnaná).
 > **Plnění variabilní:** sloupce 0 / 50 / 100 % plnění. „Plán“ = 50 %.
 > **Pro AI agenty:** jmenovitá čísla nejsou součástí tohoto souboru. Project lead A je popsaný jen tím, co je potřeba k rozhodnutí. Navazuje na `PRIPRAVA_2026-11-19.md` a `CILE_2027.md`.
+> **Aktualizace 7. 11.:** doplněno, proč systém zavádíme (kap. 0), závazek narovnání a brány (kap. 5) a testovací režim v Q1 (kap. 5.3). Návrh Davida.
+
+## 0. Proč to děláme
+
+Fixní platy nejsou jen způsob, jak dostat náklady pod kontrolu. Stejným krokem řešíme čtyři věci najednou:
+
+| Co řešíme | Jak to vypadá dnes | Co s tím udělá nový systém |
+|---|---|---|
+| **Slábnoucí pozice na trhu práce** | Hodnota role (role, úroveň, roky, příplatky, srovnání s trhem) je nad tím, co lidé dnes berou: tým průměrně 63,6 proti 69,1 tis., leadi 63,6 proti 79,8 tis. měsíčně (kap. 2). | Fix = férová cena role, kterou umíme obhájit proti nabídce zvenku. |
+| **Nerovné podmínky** | Odměna dnes závisí na sazbě, kterou si kdo vyjednal, a na počtu vykázaných hodin, ne na roli a výsledku (D05). | Stejná role, stejná pravidla, stejný výpočet pro všechny. |
+| **Odliv expertů** | Lidé, kteří nesou projekty, si říkají o víc, protože systému nevěří (project lead A, kap. 4). Náhrada leada stojí víc než narovnání a trvá měsíce. | Písemný závazek s termíny a jasná cesta nahoru místo individuálního vyjednávání. |
+| **Kontrola nákladů** | Hodiny se špatně budgetují a výplaty můžou nepředvídatelně vyskočit (D05). | Jistý náklad jsou jen fixy, variabilní se platí z nové hodnoty. |
+
+**Je to investice jako každá jiná a firma si na ni musí vydělat.** Proto se plná hodnota role neuvolní najednou, ale ve třech krocích přes brány navázané na cíle 2027. **Závazek narovnání je ale pevný:** každý dostane písemně svůj cílový fix a nejzazší termín. Brány rozhodují, jak rychle se k němu dojde, ne jestli se k němu dojde (kap. 5).
 
 ## 1. Shrnutí
 
@@ -11,7 +25,9 @@
 - Project lead A si řekl o **fix 110 tis.**, protože nevěří nastavení variabilní. V up from here by při plném plnění měl **113 tis.** Fix 110 tedy znamená **zaplatit plné plnění předem**, bez ohledu na výkon.
 - **Lead na 110 tlačí nahoru i exekutivu.** Exekutiva musí zůstat poměrově výš; nejnižší fix v exekutivě je dnes 83 tis. Zvednout fixy exekutivy pod 110 aspoň na 110 stojí dalších **+0,58 mil. ročně**, poměrově (stejný poměr jako dnes) **+1,14 mil.** a exekutiva by přesáhla pravidlo 140 až 180 tis. Fix 110 bez podmínek tedy reálně stojí **+0,9 mil. ročně**, jako precedens pro všechny leady cca **+2,2 mil.** (6b: 14,31 proti 12,13)
 - Navrhuji **cestu k 110 přes brány**: fix 85 od ledna, 97,5 od července při splnění pololetních cílů, 110 od ledna 2028 při splnění ročních cílů. Člověk dostane jistotu fixu, ale za doložený výsledek.
-- Přechod pro všechny **ve třech krocích** (leden, brána v půlce roku, brána na konci roku) snižuje riziko firmy a dává lidem jasný akční plán.
+- Přechod pro všechny **ve třech krocích** (leden, brána v půlce roku, brána na konci roku) snižuje riziko firmy a dává lidem jasný akční plán. Cíl je mít platy **plně narovnané na konci roku 2027**, tedy od první výplaty 2028.
+- **Narovnání je závazné** *(návrh 7. 11.)*: každý dostane v prosinci písemně cílový fix, kroky a podmínky bran, podepsané CEO. Plná hodnota role platí nejpozději od 1. 7. 2028, i když brány nevyjdou (kap. 5.1).
+- **Q1 v testovacím režimu** *(návrh 7. 11.)*: systém běží ostře od 1. 1., ale v lednu až březnu se při tvorbě faktury spočítají oba systémy (dnešní hodiny a nový fix s variabilní) a vyplatí se ten, který vyjde pro člověka lépe (kap. 5.3).
 
 ## 2. Přehled scénářů
 
@@ -131,17 +147,41 @@ Stejné cílové fixy jako scénář 1, ale přechod v krocích s branami (kap. 
 - Kontrola pravidla 3×: variabilní při 100 % = cca 0,34 mil. Kč ročně (cca 16k USD). Samotný obrat Sector Defense z −13,5k na +50k USD je cca 63k USD, tedy přes 3× náklad.
 - **Brány pro variantu d):** pololetí = Sector Defense v plusu za H1 a reskin #1 v plánu → fix 97,5 od 1. 7.; rok = cíle výše splněné → fix 110 od 1. 1. 2028, variabilní se znovu nastaví od nového stavu nahoru. Ve stejném kroku (stejná roční brána) se **zvedá fix exekutivy** tak, aby zůstala nad leadem (fixy exekutivy aspoň 110, náklad od 2028 +0,58 mil.).
 
-## 5. Přechod ve třech krocích
+## 5. Přechod: závazek, brány a testovací režim
 
-| Krok | Kdy | Co se narovná | Podmínka |
-|---|---|---|---|
-| 1 | **1. 1. 2027** | malé rozdíly (do 10 tis.) hned celé, větší o třetinu (aspoň 10 tis.) | žádná, rozhodnutí 19. 11. |
-| 2 | **1. 7. 2027** | větší rozdíly na dvě třetiny | **pololetní brána**: zisk H1 aspoň polovina ročního cíle 2027 (`CILE_2027.md` kap. 5; metrika podle čísel DJ, rozhodnuto 6. 11.) |
-| 3 | **1. 1. 2028** | plná hodnota role | **roční brána**: cíl zisku 2027 splněný |
+### 5.1 Závazek narovnání *(návrh 7. 11.)*
 
-- Variabilní up from here běží celý rok od ledna, nezávisle na krocích.
-- Když brána nevyjde, zůstává předchozí krok a posun se přesune na další bránu. Nic se nevrací dolů.
-- Náklad fixů 2027: 11,90 (bez pololetní brány) až 11,98 (s ní), plný fix od 2028: 12,28. Proti dvěma krokům (12,13) šetří 0,15 mil. a hlavně posouvá velké skoky leadů za doložený výsledek.
+- **Písemně a předem.** Na individuálním rozhovoru 1. až 15. 12. dostane každý list podepsaný CEO: hodnota role a cílový fix, kroky s termíny, podmínky bran a nejzazší termín. List je přílohou smlouvy, ne slib z porady.
+- **Cíl: plně narovnáno na konci roku 2027.** Když vyjdou obě brány, platí plná hodnota role od 1. 1. 2028.
+- **Pojistka:** když roční brána nevyjde, plná hodnota role platí **nejpozději od 1. 7. 2028**, bez dalších podmínek. Brány posouvají jen tempo.
+- **Nic se nevrací dolů.** Splněný krok zůstává, i když se firmě další pololetí nedaří.
+- **Výsledek bran se zveřejní s čísly** (zisk podle čísel DJ proti cíli) do 15. 7. a do 31. 1., každý v hubu vidí, kde firma je.
+
+### 5.2 Brány
+
+| Úroveň | Kdy | Co se uvolní | Podmínka | Když nevyjde |
+|---|---|---|---|---|
+| **Start** | **1. 1. 2027** | malé rozdíly (do 10 tis.) hned celé, větší o třetinu (aspoň +10 tis.); variabilní up from here od ledna, pool (prasátko) se začne plnit; Q1 v testovacím režimu (5.3) | žádná, rozhodnutí 19. 11. | |
+| **Brána 1: revize v půlce roku** | rozhodnutí v červnu nad čísly H1, platí **1. 7. 2027** | větší rozdíly na dvě třetiny; prasátko se může rozbít už v pololetí | zisk H1 aspoň polovina ročního cíle (scénář B: 3,75 mil. Kč, `CILE_2027.md` kap. 4.1 a 5; metrika podle čísel DJ, rozhodnuto 6. 11.) | krok 2 se přesune na roční revizi a jde spolu s krokem 3 |
+| **Brána 2: revize na konci roku** | rozhodnutí v prosinci nad forecastem DJ, potvrzení v lednu, platí **1. 1. 2028** | **plná hodnota role pro všechny**; variabilní se znovu nastaví od nového stavu nahoru; project lead A fix 110 a exekutiva ve stejném kroku (kap. 4) | roční cíl zisku 2027 splněný (scénář B: 7,5 mil. Kč) | plná hodnota role nejpozději **1. 7. 2028** (pojistka 5.1) |
+| **Stretch** | 1. 1. 2028 | vyšší stupeň poolu za rok 2027 | stretch cíl splněný (scénář C: 10,2 mil. Kč) | bez stretch stupně, nic dalšího se neposouvá |
+
+- Variabilní up from here běží celý rok od ledna, nezávisle na branách. Platí se za novou hodnotu, kterou člověk vytvoří, tu brána nebrzdí.
+- Soft-launch UA nových titulů jde podle návrhu z investičního rozpočtu mimo bránu (`CILE_2027.md` kap. 4.1), nové tituly tak kroky nezablokují.
+- Náklad fixů 2027: 11,90 (bez pololetní brány) až 11,98 (s ní), plný fix od 2028: 12,28. Proti dvěma krokům (12,13) šetří 0,15 mil. a hlavně posouvá velké skoky leadů za doložený výsledek. Pojistka 5.1 nic nepřidává k plnému nákladu, jen určuje nejzazší termín.
+
+### 5.3 Q1 v testovacím režimu *(návrh 7. 11.)*
+
+Systém startuje ostře **1. 1. 2027**: fixy, KPI, mentoři a prasátko běží. První kvartál je ale **testovací**, aby nikdo neprodělal na tom, že se nový systém teprve zabíhá.
+
+- **Při tvorbě faktury se spočítají oba systémy:** dnešní (sazba × vykázané hodiny, dnešní příplatky) a nový (fix podle kroku 1).
+- **Vyplatí se ten, který vyjde pro člověka lépe.** Měsíčně se fakturuje vyšší z obou částek.
+- **Po Q1 se porovná celé čtvrtletí:** dnešní systém (součet hodin) proti novému (3× fix plus variabilní za Q1). Když vyjde lépe nový, rozdíl se doplatí s dubnovou fakturou. Nic se nevrací.
+- **Od 1. 4. platí jen nový systém.** Hodiny se dál vykazují k úkolům v hubu jako podklad pro plánování a pro KPI, ne pro výplatu.
+- **Vyhodnocení testu do 30. 4.:** u koho a proč vyšel dnešní systém lépe (přesčasy, špatně oceněná role, chybějící příplatek). Oprava modelu jde do kroku 2, ne zpětným snižováním.
+- **Co tím získáme:** lidé si nový systém vyzkouší bez rizika, máme tři měsíce reálných dat pro obě strany a nedůvěra k variabilní (kap. 4) dostane odpověď v číslech, ne slibem.
+- **Náklad:** nový fix je u všech aspoň dnešek, takže dnešní systém vyjde lépe jen tam, kde někdo vykáže výrazně víc hodin. DJ ho odhadne z výplatních karet Q1 až Q3 2026 před 19. 11. *(zatím nespočítané)*.
+- Podmínka: kalkulačka v hubu umí spočítat obě varianty na faktuře; jinak to DJ za Q1 počítá ručně z výkazů.
 
 ## 6. Slabá místa a otevřené otázky
 
@@ -153,6 +193,8 @@ Stejné cílové fixy jako scénář 1, ale přechod v krocích s branami (kap. 
 | **Brány na zisk firmy dělají z fixu variabilní** | Krok 2 a 3 fixu závisí na zisku firmy, na který tým (6 lidí, průměr 63,6 tis.) nemá vliv. Narovnání týmu na hodnotu role (69,1 tis.) se tak může posunout až za rok 2028. Metrika brány je od 6. 11. sjednocená: zdrojem jsou čísla DJ (Operations), definici dodá DJ. | Malé rozdíly (do 10 tis.) jdou hned celé, to pokrývá většinu týmu. Soft-launch UA nových titulů jde podle návrhu z investičního rozpočtu mimo bránu (`CILE_2027.md` kap. 4.1), nové tituly tak kroky nezablokují. |
 | **Riziko odchodu project leada A** | Vede dva projekty včetně Mecha Fortress (marketingový zisk 2026 YTD +355k USD). Odmítnutí fixu 110 může znamenat odchod. Rozdíl b) proti a) je jen +0,30 mil. ročně, náhrada leada stojí víc a trvá měsíce. | Cestu přes brány dát písemně s konkrétními podmínkami (kap. 4). Na 1:1 zjistit, jestli je 110 podmínka setrvání, a mít připravenou záložní variantu. |
 | **Dnešek se mezi poradami posunul** | 29. 10. byl dnešní náklad 10,40 mil., 1. 11. 11,13, 4. 11. 11,11. Rozdíl +0,7 mil. (opravy vstupů, definice dneška, nové výplatní karty) není nikde rozepsaný. Jirka se zeptá jako první. | Doplnit jednu větu s rozpadem rozdílu 10,40 → 11,11 od DJ a Davida. |
+| **Testovací Q1 platí hodiny, které 29. 10. padly** | Přesčasy se podle rozhodnutí z 29. 10. neproplácejí. V Q1 se ale dnešní systém počítá z vykázaných hodin, takže kdo vykáže hodně, vydělá si. Může to svádět k nadsazeným výkazům. | Je to přechodné a jen na tři měsíce. Hodiny musí být u úkolů v hubu a schvaluje je vlastník segmentu jako dnes. Porovnat s průměrem 2026: výkyv nad průměr vysvětlit na 1:1. |
+| **Pojistka 1. 7. 2028 platí i ve ztrátě** | Závazek bez podmínky znamená, že plný fix (12,28 mil. ročně) přijde i v roce, kdy se firmě nedaří. | Proto je to závazek jen na hodnotu role, ne na variabilní ani pool, ty dál platí jen z výsledku. Plný fix je od 2028 jistý náklad, se kterým počítá rozpočet 2028. Když hrozí ztráta, škrtá se nejdřív nábor a UA (blok C porady). Rozhodnout výslovně 19. 11. |
 | **Preset neumí doporučený scénář** | Kalkulačka v hubu umí jen 2 kroky, scénář 7 je počítaný mimo ni. Preset „Schváleno 19. 11.“ tak nebude odpovídat schválenému. | Doplnit třetí krok do kalkulačky před 19. 11., nebo schválit 2krokový preset a třetí krok zapsat ručně do zápisu. |
 
 **Potřebuje odpověď:**
@@ -162,13 +204,17 @@ Stejné cílové fixy jako scénář 1, ale přechod v krocích s branami (kap. 
 - Kdo schvaluje cíle, KPI a strop exekutivy, když autor návrhu je sám v pásmu (Jirka, foundeři).
 - Proč se dnešek posunul z 10,40 na 11,11 mil. (DJ, David).
 - Variabilní po Q1: záloha s doúčtováním po roce, nebo definitivní kvartální výplata (DJ).
+- Kolik bude stát testovací Q1 (rozdíl, kde hodiny vyjdou lépe než fix) a zvládne ho kalkulačka na faktuře (DJ).
+- Platí pojistka 1. 7. 2028 bez výjimky, i když firma za 2027 skončí ve ztrátě (Jirka, foundeři).
 
 ## 7. K rozhodnutí 19. 11.
 
 | # | Otázka | Návrh |
 |---|---|---|
 | S1 | Princip variabilní | up from here (základ 0 %) |
-| S2 | Přechod | 3 kroky: leden, brána 1. 7., brána 1. 1. 2028 |
+| S2 | Přechod | 3 kroky: start 1. 1., revize v půlce roku (brána H1), revize na konci roku (roční brána); cíl plně narovnáno od 1. 1. 2028 (kap. 5.2) |
+| S2b | Závazek | písemný list ke smlouvě s cílovým fixem a termíny, pojistka: plná hodnota role nejpozději 1. 7. 2028 (kap. 5.1) |
+| S2c | Q1 testovací režim | leden až březen se na faktuře počítají oba systémy a platí lepší pro člověka, od 1. 4. jen nový (kap. 5.3) |
 | S3 | Project lead A | varianta d): fix 85, cesta k 110 přes brány a cíle v kap. 4; ne fix 110 bez podmínek |
 | S3b | Odstup exekutivy | když lead dosáhne 110, exekutiva ve stejném kroku aspoň na 110 (poměrově výš), v rámci 140 až 180 tis. při plném plnění |
 | S4 | Transparentnost variabilní | KPI podepsané před 1. 1., plnění viditelné v hubu, první výplata po Q1 |
