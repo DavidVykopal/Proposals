@@ -9,6 +9,7 @@ Modul vyvíjíme jednou v Mecha Fortress jako staging a pak ho importujeme do da
 - **Jeden modul pro všechny hry:** MF reskiny, Hexapolis, Hexapolis 2 i strategická větev, vývoj se platí jednou.
 - **Nové monetizační sinky:** zrychlení, další stavitelé, startovní bundle surovin, dekorace a City VIP (návrh 450 gemů na 30 dní: o 15 % rychlejší stavby, stavitelská fronta navíc, denní zrychlení zdarma).
 - **Jedna stavební meta v MF:** město nahradí dnešní mapu na začátku roku 2027, žádné dvě paralelní mety.
+- **Hloubka monetizace bez stropu pro velryby:** plné město za gemy cca 20 tis. USD na Radnici 20 a 58 tis. na Radnici 25 *(návrh 9. 11.)*, průměrný platící hráč cca 36 USD za 90 dní.
 - **Dává hloubku mety mimo zápas,** kterou MF ani Hex dnes nemají, a krmí PvP All-out-power.
 
 ## Nevýhody
@@ -17,7 +18,7 @@ Modul vyvíjíme jednou v Mecha Fortress jako staging a pak ho importujeme do da
 - Ekonomika se ladí ve dvou hrách naráz (MF a Hex) a vyžaduje config per titul.
 - Sociální část (globální mapa, útoky, aliance), která nese soutěžní útratu, přijde až ve V3 od Q2 2027.
 - Náhrada mapy v MF znamená refund investic a ztrátu produkce dnešního Gem Mine, obojí je potřeba spočítat z dat.
-- Tým pro Hex featury je určený (Mirek, Kubík, David), rozdělení featur mezi ně zbývá.
+- Verze 1 má hloubku jen cca 440 USD; cíl 10 až 100 tis. USD vyžaduje další verze (Radnice 11 až 25, výzkum, věže, hradby), tedy další vývoj v roce 2027.
 
 ## Rizika
 | Riziko | Pravděpodobnost | Dopad | Jak ho snížíme |
@@ -28,6 +29,7 @@ Modul vyvíjíme jednou v Mecha Fortress jako staging a pak ho importujeme do da
 | V1 bez sociální vrstvy nezlepší retenci ani monetizaci | střední | střední | A/B test s City a bez přes Firebased, rychlá V2 podle dat |
 | Klon působí jako převzatý obsah | nízká | střední | vlastní art, názvy a UI, klonujeme jen mechaniky |
 | Refund z mapy MF rozhodí tempo nebo příjem gemů | střední | střední | návrh: 100 % utracené HardCurrency zpět jako gemy, startovní Radnice max 5; před releasem ověřit z dat |
+| Velryby dojdou na strop verze 1 dřív, než přijde Radnice 11+ | střední | střední | Radnice 11 až 15 co nejdřív po lednu; strop V1 při plném nákupu cca 29. den |
 | City VIP zkrátí obsah | nízká | střední | průměrnému hráči VIP zkrátí cestu na Radnici 10 jen z 50 na 47 dní, strop kolem 29. dne pro platící hráče, efekty v RC |
 
 ## Co nám to přinese
@@ -35,6 +37,7 @@ Modul vyvíjíme jednou v Mecha Fortress jako staging a pak ho importujeme do da
 - Data pro gate Hexapolis 2: podíl DAU v City, D7 a D30 s City proti bez, konverze na zrychlení a stavitele.
 - Hotový modul pro reskiny MF od února 2027, náhradu mapy v MF a pro strategickou větev.
 - Srovnání s referencí MF (D1 26,5 %, D7 10,1 %, D30 4,2 %), cíl D7 a D30 nahoru bez poklesu D1.
+- Výnos v Hexu odhadem 1,3 až 9,5 tis. USD měsíčně (základ 2,8 tis., +34 % IAP), v MF čistě 0,9 až 6,8 tis. USD měsíčně *(odhad, `BALANC_CITY_V2.md` kap. 8.3)*.
 - Základ pro V2 (výzkum, Radnice 11+, výroba jednotek) a V3 (globální mapa, útoky, aliance) v roce 2027.
 
 → `DESIGN_CITY_V2.md`

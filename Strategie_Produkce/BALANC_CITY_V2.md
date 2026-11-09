@@ -12,6 +12,7 @@
 - **Ekonomika:** pasivní produkce kryje **asi 1/3** útraty (31 až 38 % od Radnice 4), zbytek jde ze zápasů, odměn a questů. Odpovídá zásadě z designu: hlavní příjem je ze hraní.
 - **Síla z města:** na maximu verze 1 dává město +20 % HP a +20 % útok, tedy **×1,44 efektivní síly** (HP × útok), plus 6 talentových bodů, 2 sloty, +20 % XP a +20 % odměn. Cíl: město tvoří **15 až 25 % celkové síly** hráče na D30 *(předpoklad, ověřit telemetrií)*.
 - **Monetizace:** zrychlení za gemy (prvních 5 min zdarma), stavitel #3 za 300 gemů, #4 za 600 gemů, balíčky surovin, **startovní bundle surovin za 60 gemů** a **City VIP za 450 gemů na 30 dní** *(návrh, kap. 8.1 a 8.2)*. Zrychlit celou verzi 1 stojí asi **15 100 gemů** (cca 250 USD při našem ceníku 60 gemů za 1 USD).
+- **Hloubka monetizace (9. 11., kap. 8.3):** cíl je, aby plné město stálo za gemy **10 až 100 tis. USD** a průměrný platící hráč nechal **aspoň desítky USD**. Verze 1 má hloubku jen cca **440 USD** (zrychlení 250 + dokoupení surovin 185). Hloubku dají až další verze: Radnice 15 cca 5 tis., Radnice 20 cca 20 tis., **Radnice 25 cca 58 tis. USD** s novými vrstvami (výzkum, obranné věže, hradby, nemocnice). Vzorce cen se nemění, roste obsah. Odhad výnosu v Hexu: **1,3 až 9,5 tis. USD měsíčně, základ 2,8 tis.**
 - **City VIP nerozbije tempo:** průměrnému hráči (6 zápasů denně) zkrátí cestu na Radnici 10 jen z 50 na 47 dní, protože brzdí suroviny. Strop je hráč se stavitelem #3, VIP a dokupováním surovin: Radnice 10 kolem 21. dne, vše na maximu kolem 29. dne (kap. 8.2).
 - **Náhrada mapy MF (Rozhodnuto 6. 11.):** City V2 nahradí `MapBuilding` budovy v MF. Refund *(návrh)*: 100 % utracené `HardCurrency` zpět jako gemy a startovní Radnice podle nejvyšší dnešní budovy (max Radnice 5), kap. 11.
 - **Celkový objem verze 1:** 2 461 hodin práce stavitelů a asi 12,1 milionu surovin.
@@ -474,6 +475,69 @@ Rozhodnuto 6. 11.: City VIP je gem sink se zrychlením stavby. Konkrétní hodno
 - **Aktivní a platící hráč** se zkrátí výrazně, to je záměr (stejná logika jako stavitel #3).
 - **Strop:** stavitel #3 + VIP + dokupování surovin = vše na max V1 kolem 29. dne. Při lednovém releasu je to polovina února, před V2 (Radnice 11+, Q1 2027). Když V2 nebude do března, hlídat podíl hráčů na maximu a případně snížit −15 % na −10 % přes RC.
 
+### 8.3 Hloubka monetizace a kolik to přinese *(návrh 9. 11.)*
+
+**Cíl (David, 9. 11.):** plné město v řádu **10 až 100 tis. USD** za gemy, aby velryby měly kam růst, a průměrný platící hráč nechá **aspoň desítky USD**.
+
+**Kde jsme dnes:** verze 1 (Radnice 1 až 10) se dá celá koupit za cca **26 100 gemů, tedy cca 440 USD**: zrychlení všech staveb 15 100 gemů (250 USD) a dokoupení všech surovin 11 100 gemů (185 USD), plus stavitelé #3 a #4 (900 gemů, 15 USD). Na cíl to nestačí ani o dva řády. Vzorce cen (kap. 8 a 10) jsou konkávní, zdražují pomaleji než roste objem, takže hloubku musí dát **obsah**, ne vyšší ceny.
+
+**Jak hloubku postavit:** roadmapa Radnice 11 až 25 a nové vrstvy z kap. 12 a designu kap. 4. Vzorce z kap. 10 platí beze změny, tabulky τ a C se prodlouží:
+
+| Tier | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| τ (h) | 42 | 50 | 60 | 70 | 80 | 92 | 104 | 116 | 130 | 144 | 160 | 176 | 192 | 210 | 228 |
+| C (mil.) | 0,6 | 0,9 | 1,3 | 1,8 | 2,5 | 3,4 | 4,5 | 6 | 8 | 10,5 | 13,5 | 17 | 21 | 26 | 32 |
+
+| Nová vrstva | Od Radnice | Kusů (Radnice 11 / 16 / 21) | Váhy w / k | Proč je to sink |
+|---|---|---|---|---|
+| Výzkum (linie v Akademii, vlastní fronta laboratoře) | 6 | 8 od Radnice 6, pak 14 / 20 | 1,2 / 1,0 | dlouhé časovače mimo stavitele, RoK |
+| Obranné věže (s útoky na města, V3) | 11 | 6 / 10 / 14 | 1,0 / 0,8 | hodně kusů na každý level, CoC |
+| Hradby (segmenty, bez časovače) | 11 | 100 / 175 / 250 | 0 / 0,06 | čistý surovinový sink, v CoC největší útrata velryb |
+| Nemocnice | 11 | 1 | 1,2 / 1,0 | |
+| Produkce: 4. a 5. kus | 11 a 16 | | jako dnes | |
+
+**Hloubka podle verzí** (gemy na zrychlení všeho a dokoupení všech surovin, 60 gemů = 1 USD; skript nad vzorci kap. 10):
+
+| Obsah | Kdy *(návrh)* | Plné město za gemy | z toho zrychlení / suroviny | F2P hráč se 4 staviteli |
+|---|---|---|---|---|
+| Verze 1: Radnice 10 | leden 2027 | **cca 440 USD** | 250 / 185 | 34 dní (68 se 2 staviteli) |
+| Radnice 15 + výzkum, věže, hradby | Q2 2027 | **cca 5 000 USD** | 1 700 / 3 300 | cca 190 dní |
+| Radnice 20 | Q4 2027 | **cca 20 500 USD** | 4 700 / 15 800 | cca 550 dní |
+| Radnice 25 | 2028 | **cca 58 000 USD** | 8 800 / 49 100 | cca 1 200 dní |
+
+- Největší sinky na Radnici 25: hradby cca 17,9 tis. USD, výzkum 14,4 tis., věže 7,9 tis., produkce celkem 9,5 tis. Hradby a výzkum jsou pro velryby, běžný hráč je dělá postupně.
+- **Cíl 10 až 100 tis. USD splní Radnice 20 a víc.** V roce 2027 tedy realisticky 5 až 20 tis. USD podle toho, kolik verzí stihneme. To stačí: velryba tolik neutratí za měsíc, hloubka je hlavně důvod pokračovat.
+- Výzkum má vlastní frontu laboratoře, aby neblokoval stavitele. Při jedné laboratoři by výzkum na Radnici 25 trval přes 7 let, proto 2 laboratoře (druhá jako prémiový nákup, stejně jako stavitel #3).
+- **VIP úrovně** *(návrh)*: City VIP z kap. 8.2 doplnit o úrovně 1 až 10 podle celkové útraty gemů, s trvalými bonusy (RoK VIP). Hloubku v gemech nemění, ale dává velrybám viditelný cíl a status.
+
+**Průměrný platící hráč** (žebříček nákupů, prvních 90 dní, ceny z kap. 8):
+
+| Nákup | Cena |
+|---|---|
+| Startovní bundle surovin | 1 USD |
+| Stavitel #3 (nabídka) | 4,99 USD |
+| City VIP 30 dní, 2× | 15 USD |
+| 2 balíčky surovin na Radnici 7 až 8 | 10 USD |
+| Zrychlení (cca 300 gemů) | 5 USD |
+| **Celkem za 90 dní** | **cca 36 USD** |
+
+- Za rok s 6 měsíci VIP a stavitelem #4 je to cca **90 až 110 USD**. Cíl „desítky USD“ tedy platí pro **průměrného platícího hráče** města.
+- **Na všechny hráče města to neplatí:** platí jen 1 až 3 % z nich měsíčně *(předpoklad)*, takže průměr na všechny hráče města je 0,1 až 0,9 USD měsíčně, v základu cca 0,3 USD. Desítky USD na každého hráče žádná F2P hra nemá, proto je potřeba cíl formulovat přes platící hráče a ARPDAU.
+
+**Kolik to přinese** *(odhad, ověřit A/B testem)*:
+
+Předpoklady: Hexapolis cca 7 tis. DAU, MAU 2,5× DAU, město hraje 60 % (cca 10 500 hráčů měsíčně). Dnešní IAP Hexu cca **8,2 tis. USD měsíčně**, MF cca **11,8 tis. USD měsíčně** (cashflow srpen až říjen 2026).
+
+| Scénář | Platí měsíčně | ARPPU měsíčně | Hex: City za měsíc | Hex: rok 2027 (11 měsíců) | MF: čistý přírůstek za měsíc |
+|---|---|---|---|---|---|
+| Nízký | 1 % | 12 USD | 1,3 tis. USD | 14 tis. USD | 0,9 tis. USD |
+| **Základ** | **1,5 %** | **18 USD** | **2,8 tis. USD** | **31 tis. USD** | **2 tis. USD** |
+| Vysoký | 3 % | 30 USD | 9,5 tis. USD | 104 tis. USD | 6,8 tis. USD |
+
+- MF: přepočet podle poměru IAP MF a Hexu (1,44×) a polovina odečtená za kanibalizaci dnešní mapy, která už gemy prodává (kap. 11).
+- **Vysoký scénář táhnou velryby:** jeden hráč, který dojde zrychlením na Radnici 15, udělá 5 tis. USD. Proto musí obsah (Radnice 11 až 15) přijít dřív, než první velryby dojdou na strop verze 1 (při stavitelích, VIP a dokupování cca 29. den, kap. 8.2).
+- Základ znamená cca +34 % IAP Hexu. Měřit jako ARPDAU před a po jen na iOS a Androidu mimo Play Pass (KONCEPT_OBNOVA_HEXU kap. 6).
+
 ## 9. KPI pro ladění na stagingu MF
 
 | KPI | Cíl | Když je pod cílem | Když je nad cílem |
@@ -552,7 +616,7 @@ V MF už existuje systém budov na mapě (`NoxFort/Assets/_Project/Entities/MapB
 
 ## 12. Později (mimo verzi 1, podle designu kap. 4)
 
-- Radnice 11 a výš, víc kusů budov, nové budovy (V2).
+- Radnice 11 a výš, víc kusů budov, nové budovy (V2); parametry a hloubka monetizace v kap. 8.3.
 - Výroba jednotek a nemocnice, výzkum v Akademii.
 - HP budov, obrana, hradby a štíty (až s útoky na města; ve verzi 1 nejsou, proto tu HP chybí).
 - VIP úrovně a další výhody (City VIP ve verzi 1 je jedna nabídka, kap. 8.2).
@@ -569,3 +633,4 @@ V MF už existuje systém budov na mapě (`NoxFort/Assets/_Project/Entities/MapB
 7. **Gating Radnice v Hexu:** jaké milníky (světy, PvP výhry) odpovídají MF stage 5 až 27?
 8. **Stavitel #3 a #4:** cena 300 a 600 gemů, nebo jen přes nabídky. VIP dává stavitelskou frontu navíc jen po dobu VIP *(návrh, kap. 8.2)*.
 9. **City VIP a bundle** *(návrh, kap. 8.1 a 8.2)*: potvrdit ceny 60 / 120 / 450 gemů a efekty, a jestli VIP zapnout už ve verzi 1 (návrh: ano, za RC flagem, nahrazuje gem sink mapy MF).
+10. **Hloubka monetizace** (kap. 8.3): potvrdit roadmapu Radnice 11 až 25 a nové vrstvy (výzkum, věže, hradby). Kdy přijde Radnice 11 až 15, aby velryby nenarazily na strop verze 1?

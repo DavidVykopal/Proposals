@@ -21,7 +21,7 @@
 | Likvidita při 7 tis. aktivních | při 25 % DAU v PvP (cca 1 750 PvP DAU) a 2 frontách 68 % zápasů s reálným soupeřem (fallback 20 s), 80 % s fallbackem 30 s; 60 % potřebuje aspoň cca 1 350 PvP DAU (19 % DAU) |
 | Rozložení lig po 6 měsících (simulace) | Bronz 40 %, Stříbro 32 %, Zlato 18 %, Diamant 7 %, Mistr 2 % |
 | Odpojení | 30 s na návrat, pak tah propadá; 2 propadlé tahy po sobě nebo 3 celkem = prohra |
-| Monetizace (hypotézy) | PvP úkoly do stávajícího battle passu, předplatné 4,99 USD / měsíc, kosmetika 0,99 až 4,99 USD |
+| Monetizace (návrh 9. 11., kap. 10) | **PvP předplatné** 4,99 USD / měsíc (ranked, ligy, turnaje, Normal), Premium 9,99 USD; **skiny jednotek** 120 až 600 gemů; free tier zůstává kvůli likviditě. Hloubka sběratele cca 1 tis. USD za rok, výnos v Hexu **0,7 až 3,3 tis. USD měsíčně, základ 1,8 tis.** |
 
 **Dvě zjištění ze simulace, která mění design:**
 1. **Kumulativní skóre řadí podle aktivity, ne podle síly.** Párování podle ELO srovná win rate všech hráčů k 50 %, takže měsíční skóre je hlavně počet zápasů (korelace liga a aktivita 0,79, liga a skill 0,07). Proto do postupu jen hráči s **ELO aspoň na mediánu své ligy** a aspoň 15 reálnými zápasy (**Rozhodnuto 6. 11.**). Korelace se skillem pak vyskočí na 0,33, se silou na 0,49.
@@ -334,21 +334,66 @@ Achievement se vyplácí jednou (první dosažení stupně), pak už jen odznak 
 
 Hra s přáteli trest nemá. Zákaz se ukáže s odpočtem a vysvětlením.
 
-## 10. Monetizace (hypotézy)
+## 10. Monetizace *(návrh 9. 11.)*
 
-| Nabídka | Cena (hypotéza) | Segment | Pozn. |
+**Směr (David, 9. 11.):** prodávat **skiny** a **samotné PvP placené jako předplatné**.
+
+### 10.1 Předplatné: placený ranked, ne placený vstup
+
+Celé PvP za předplatné by zabilo párování. Při cca 1 750 PvP DAU a konverzi na předplatné 2 až 6 % by placenou frontu hrálo 35 až 105 lidí denně, takže skoro každý zápas by byl proti botovi (kap. 6: 60 % reálných zápasů potřebuje aspoň cca 1 350 PvP DAU). Neplatící hráči jsou soupeři, za které předplatitel platí.
+
+| | Zdarma | **PvP předplatné** 4,99 USD / měsíc | **Premium** 9,99 USD / měsíc |
 |---|---|---|---|
-| PvP úkoly ve **stávajícím battle passu** | v ceně passu | oba | první krok, nefragmentovat; vlastní PvP pass až při podílu DAU v PvP nad 25 % (cca 1 750 PvP DAU) |
-| Vlastní PvP pass (měsíční sezóna, 30 úrovní) | 4,99 USD, premium+ 9,99 USD | oba | body pasu: výhra 10, prohra 4, denní úkol 20 |
-| Předplatné (statistiky, replay, bez reklam, 1 kosmetika měsíčně) | 4,99 USD / měsíc | oba | Davidův ověřovací signál |
-| Skin jednotky | 1,99 až 4,99 USD (120 až 300 gemů) | oba | bez vlivu na výsledek |
-| Rámeček, emote balík | 0,99 až 2,99 USD | oba | |
-| Starter PvP balík po onboardingu | 1,99 USD jednorázově | All-out-power | fragmenty jednotek + suroviny |
-| Nabídka po postupu do ligy | 4,99 USD, 24 h | All-out-power | fragmenty + zrychlení města |
-| Rewarded reklama: zdvojení první denní truhly | max 3x denně | oba | jen mimo zápas |
+| Quick game Speed | ano | ano | ano |
+| Ranked zápasy do žebříčků | 3 denně | bez limitu | bez limitu |
+| Normal a pozdější Long game | casual | ranked | ranked |
+| Ligy All-out-power, postup a ligové odměny | jen Bronz a Stříbro | všechny ligy | všechny ligy |
+| Měsíční turnaj s odměnou v gemech | ne | ano | ano |
+| Statistiky, replay, bez reklam | ne | ano | ano |
+| Skin měsíce | ne | 1 běžný | 1 epický + exkluzivní rámeček |
+| Suroviny z PvP do City V2 | základ | +25 % | +50 % |
 
-- **Google Play Pass (Rozhodnuto 6. 11.):** příjmy z Play Passu se do revenue, baselines ani gate **nepočítají**. Hexapolis v Play Passu na Androidu zůstává: předplatitelé mají passy a nabídky zdarma a gemy si nekoupí, ale hrají PvP a počítají se do likvidity front. Monetizaci PvP měřit jen na iOS a Androidu mimo Play Pass.
-- **Realita čísel:** při 25 % z cca 7 tis. aktivních v PvP (1 750 PvP DAU) a PvP MAU 2x až 3x DAU (předpoklad, 3 500 až 5 000) dá 2% konverze na pass za 4,99 USD cca 350 až 500 USD měsíčně hrubého, před odečtením Play Pass hráčů. Hlavní finanční efekt PvP čekáme přes retenci a útratu v All-out-power (jednotky, talenty, City V2), ne přes pass samotný. Baseline revenue Hexapolisu je cca 15 000 USD měsíčně; ověřit, že je bez Play Passu, jinak ho o Play Pass snížit.
+- Limit 3 ranked zápasy denně drží neplatící v žebříčcích (top 10 vyžaduje 3 reálné zápasy denně, kap. 7.3), takže žebříčky zůstávají plné. Předplatné prodává **víc zápasů, vyšší ligy, turnaje a pohodlí**, ne výhry.
+- Skill only zůstává bez placené výhody (design kap. 10): předplatné tam dává jen počet ranked zápasů a statistiky.
+- Bonus surovin do City je hlavní spojka s hlubokou monetizací města (`BALANC_CITY_V2.md` kap. 8.3).
+- **Play Pass:** předplatitelé Play Passu nejspíš dostanou předplatné PvP zdarma (ověřit podmínky Play Passu pro předplatné ve hře). Do revenue se nepočítají, ale hrají a drží likviditu.
+- Měsíční předplatné nahrazuje dřívější vlastní PvP pass. PvP úkoly ve stávajícím battle passu zůstávají.
+
+### 10.2 Skiny a kosmetika
+
+| Položka | Cena | Poznámka |
+|---|---|---|
+| Běžný skin jednotky | 120 gemů (2 USD) | |
+| Epický skin jednotky | 300 gemů (5 USD) | vlastní efekty útoku |
+| Legendární skin (animovaný, vlastní zvuk) | 600 gemů (10 USD) | |
+| Sezónní limitovaný skin | 600 gemů | 1 za měsíc, jen v sezóně, pak už nikdy |
+| Rámeček, emote, titul | 60 až 180 gemů | |
+| Skin hlavního města na mapě zápasu | 300 až 600 gemů | |
+
+- Při cca 30 typech jednotek a 3 skinech na jednotku stojí kompletní sbírka cca 30 600 gemů, tedy **cca 510 USD**, k tomu sezónní skiny cca 120 USD ročně a kosmetika cca 100 USD. **Hloubka sběratele s předplatným Premium je kolem 1 tis. USD za první rok.**
+- Skiny nemění staty v žádném segmentu. Ukazují se soupeři v zápase a v žebříčku, tam je jejich hodnota.
+
+### 10.3 Ostatní
+
+| Nabídka | Cena | Segment |
+|---|---|---|
+| Starter PvP balík po onboardingu | 1,99 USD jednorázově | All-out-power |
+| Nabídka po postupu do ligy | 4,99 USD, 24 h | All-out-power |
+| Rewarded reklama: zdvojení první denní truhly | max 3× denně, jen mimo zápas | oba |
+
+### 10.4 Kolik to přinese *(odhad, ověřit)*
+
+Předpoklady: 25 % ze 7 tis. DAU v PvP (1 750 PvP DAU), PvP MAU 3 500 až 5 000, revenue jen iOS a Android mimo Play Pass, hrubé tržby před poplatkem obchodu.
+
+| Scénář | Předplatné (konverze PvP MAU) | Předplatné USD / měsíc | Skiny (kupující, útrata) | Skiny USD / měsíc | **Celkem / měsíc** | Rok 2027 (11 měsíců) |
+|---|---|---|---|---|---|---|
+| Nízký | 2 % z 3 500 = 70 | 0,4 tis. | 2 %, 5 USD | 0,35 tis. | **0,75 tis.** | 8 tis. |
+| **Základ** | 4 % ze 4 250 = 170 | 0,9 tis. | 3 %, 7 USD | 0,9 tis. | **1,8 tis.** | **20 tis.** |
+| Vysoký | 6 % z 5 000 = 300 | 1,7 tis. | 4 %, 8 USD | 1,6 tis. | **3,3 tis.** | 36 tis. |
+
+- Předplatné počítá s průměrnou cenou 5,50 USD (většina 4,99, část Premium).
+- **PvP přímo vydělá málo**, základ je cca +22 % dnešního IAP Hexu (8,2 tis. USD měsíčně). Hlavní efekt čekáme nepřímo: retence a útrata za sílu v All-out-power a City V2 (kap. 8).
+- Pro Hexapolis 2 a MF se to škáluje s velikostí base: předplatné a skiny rostou lineárně s PvP MAU, likvidita nad cca 5 000 PvP DAU (kap. 6) dovolí víc front a placené turnaje.
 
 ## 11. Simulace (sanity check)
 

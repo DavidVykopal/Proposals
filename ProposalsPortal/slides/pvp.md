@@ -47,6 +47,17 @@ HexFort rušíme a práci vracíme do původního Hexapolisu. Tam ověříme PvP
 - Top 10 a achievementy jen z reálných zápasů
 → `DESIGN_HEX_PVP.md`
 ---
+## PvP předplatné a skiny
+| | Zdarma | Předplatné 4,99 USD | Premium 9,99 USD |
+|---|---|---|---|
+| Ranked zápasy | 3 denně | bez limitu | bez limitu |
+| Ligy a turnaje | Bronz, Stříbro | vše | vše |
+| Skin měsíce, suroviny do City | ne, základ | běžný, +25 % | epický, +50 % |
+- Celé PvP za paywallem by nechalo placenou frontu na 35 až 105 lidech denně, proto free tier
+- **Skiny** 120 až 600 gemů, kompletní sbírka cca 510 USD
+- Odhad: **0,75 / 1,8 / 3,3 tis. USD měsíčně**, s City v základu **+4,6 tis. USD (+56 % IAP Hexu)**
+→ `BALANC_HEX_PVP.md`
+---
 ## PvP a město se navzájem krmí
 - PvP a žebříčky dávají **suroviny do města**
 - Budovy ve městě zvyšují **meta staty** pro All-out-power

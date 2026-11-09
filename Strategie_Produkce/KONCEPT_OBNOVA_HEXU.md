@@ -13,6 +13,7 @@
 - V Hexu ověříme tři featury jako celek: **PvP, City V2 (mapa) a UGC**. Všechny tři budou v testu a připravené do 11. 12. 2026 za RC flagy. PvP a City V2 jdou k hráčům v lednu 2027, UGC může dřív než v únoru 2027. Testujeme **jednoduše, přímo v původní hře**, na base cca 7 tis. aktivních hráčů.
 - **PvP** má dva segmenty: **Skill only** (stejný setup pro všechny, nejblíž Polytopii) a **All-out-power** (rozhoduje i meta síla, 5 lig). Na start Quick game ve variantách Speed a Normal, žebříčky denní, týdenní a měsíční s odměnami a achievementy.
 - **City V2** je co nejbližší klon Clash of Clans a Rise of Kingdoms: v první verzi stavění, sběr surovin a upgrady. **Budovy zvyšují meta staty.**
+- **Kolik to přinese (odhad 9. 11.):** City V2 v Hexu 1,3 až 9,5 tis. USD měsíčně (základ 2,8 tis.), plné město za gemy 10 až 100 tis. USD od Radnice 20. PvP předplatné a skiny 0,75 až 3,3 tis. USD měsíčně (základ 1,8 tis.). Základ obou je cca **+4,6 tis. USD měsíčně, +56 % dnešního IAP Hexu** (8,2 tis.), rok 2027 cca 50 tis. USD (`BALANC_CITY_V2.md` kap. 8.3, `BALANC_HEX_PVP.md` kap. 10).
 - Featury do sebe zapadají: **PvP dává suroviny do města, město dává sílu do All-out-power PvP.** Skill only zůstává čistý souboj.
 - Cíl: **oživit Hexapolis** (komunita, návrat hráčů, revenue) a z dat rozhodnout o **novém Hexapolis 2**: když celek funguje, udělá se **design hex gameplaye nasazeného na MF metu** a podle něj nový projekt.
 
@@ -78,7 +79,7 @@ Rozhoduje **celek**: PvP, City V2 a UGC *(cílové hodnoty návrh, potvrdit s Ji
 | Funguje párování? | podíl zápasů s reálným soupeřem | 50 %+ v lednu, 65 %+ v únoru *(návrh, sníženo 6. 11. z 60 % / 80 %)* |
 | Staví město? | % DAU v City, návraty do City za den | TBD |
 | Drží je to? | D7 a D30 hráčů s PvP a City proti ostatním | +20 % relativně |
-| Platí? | ARPDAU Hexu před a po (iOS a Android mimo Play Pass), konverze na zrychlení a City VIP | růst |
+| Platí? | ARPDAU Hexu před a po (iOS a Android mimo Play Pass), konverze na zrychlení, City VIP a PvP předplatné | IAP +4,6 tis. USD měsíčně (+56 %) v základu, minimum +2 tis. *(návrh 9. 11.)* |
 | Vrací se staří hráči? | reaktivace po kampani | sledovat |
 | Tvoří a hrají mapy? | podíl hráčů, kteří vytvoří nebo zahrají komunitní mapu | sledovat |
 | Kterou motivaci mají? | poměr Skill only a All-out-power | sledovat, určí směr Hexapolis 2 |

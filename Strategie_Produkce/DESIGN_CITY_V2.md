@@ -15,6 +15,7 @@
 - Modul je sdílený: vyvíjí se v **Mecha Fortress jako staging**, do Hexapolisu se implementuje do 11. 12. 2026 za RC flagem a první hráči ho dostanou v **původním Hexapolisu** v lednu 2027.
 - Klonujeme **mechaniky a strukturu**, ne art, názvy ani UI: vlastní tematika a vizuál podle titulu.
 - **V MF City V2 nahradí dnešní mapu budov** (Rozhodnuto 6. 11.), žádné dvě paralelní mety. Termín: **začátek roku 2027** (David, 6. 11.). Hráči dostanou refund: *(návrh)* 100 % utracené `HardCurrency` zpět jako gemy a startovní Radnici podle nejvyšší dnešní budovy (max Radnice 5).
+- **Hloubka monetizace (návrh 9. 11.):** plné město má stát za gemy **10 až 100 tis. USD** (Radnice 20 cca 20 tis., Radnice 25 cca 58 tis.), průměrný platící hráč nechá cca **36 USD za prvních 90 dní**. Verze 1 má hloubku jen cca 440 USD, zbytek dají další vrstvy (výzkum, věže, hradby). Výnos v Hexu odhadem 1,3 až 9,5 tis. USD měsíčně, základ 2,8 tis. (`BALANC_CITY_V2.md` kap. 8.3).
 - **Gem sinky:** zrychlení, stavitelé, **startovní bundle surovin** (60 gemů *(návrh)*) a **City VIP** (450 gemů na 30 dní *(návrh)*: −15 % času staveb, +1 stavitelská fronta, denní zrychlení 30 min, +20 % produkce).
 
 ## 2. Proč klon CoC a RoK
@@ -89,6 +90,21 @@ Budovy, které ovlivňují hru, vrací hostitelské hře **modifikátory**. Hra 
 | Startovní bundle surovin za gemy (Rozhodnuto 6. 11., cena *návrh*) | obě |
 | **City VIP** za gemy (Rozhodnuto 6. 11.): zrychlení stavby, stavitelská fronta navíc, denní zrychlení zdarma, bonus produkce; bez auto-sběru *(návrh, BALANC kap. 8.2)* | RoK VIP, CoC Gold Pass |
 
+### 3.6 Hloubka monetizace *(návrh 9. 11.)*
+
+Cíl: **plné město za 10 až 100 tis. USD** a **průměrný platící hráč aspoň desítky USD**. Ceny se nemění, hloubku dává obsah:
+
+| Obsah | Kdy *(návrh)* | Plné město za gemy |
+|---|---|---|
+| Verze 1: Radnice 10 | leden 2027 | cca 440 USD |
+| Radnice 15 + výzkum, obranné věže, hradby, nemocnice | Q2 2027 | cca 5 tis. USD |
+| Radnice 20 | Q4 2027 | cca 20 tis. USD |
+| Radnice 25 | 2028 | cca 58 tis. USD |
+
+- Průměrný platící hráč: bundle, stavitel #3, 2 měsíce VIP, balíčky surovin a zrychlení = cca 36 USD za 90 dní, cca 100 USD za rok. Na všechny hráče města (platí 1 až 3 %) je to 0,1 až 0,9 USD měsíčně.
+- Velryby nesmí narazit na strop verze 1 (cca 29. den při plném nákupu), proto Radnice 11 až 15 co nejdřív po lednu.
+- Výnos: Hex 1,3 / 2,8 / 9,5 tis. USD měsíčně (nízký / základ / vysoký), MF čistý přírůstek 0,9 / 2 / 6,8 tis. Výpočet v `BALANC_CITY_V2.md` kap. 8.3.
+
 ## 4. Co ve verzi 1 není (pozdější vrstvy)
 
 | Vrstva | Obsah | Předloha | Závislost |
@@ -142,7 +158,7 @@ Technické zásady:
 |---|---|---|
 | Hrají lidé město? | % DAU v City, staveb na hráče, návraty do City za den | TBD |
 | Zlepšuje retenci? | D1, D7, D30 s City proti bez (A/B přes Firebased) | D7 a D30 nahoru, D1 bez poklesu |
-| Monetizuje? | konverze na zrychlení, stavitele, balíčky, ARPDAU | TBD |
+| Monetizuje? | konverze na zrychlení, stavitele, balíčky, ARPDAU | platí 1,5 %+ hráčů města měsíčně, ARPPU 18 USD+, cca +2,8 tis. USD měsíčně v Hexu *(návrh 9. 11.)* |
 | Zaplatí si VIP? | konverze na City VIP a bundle (jen iOS a Android mimo Play Pass) | TBD |
 | Táhne PvP All-out-power? | útrata a aktivita hráčů s vyššími meta staty | sledovat |
 

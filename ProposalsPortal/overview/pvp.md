@@ -8,6 +8,7 @@ PvP má dva segmenty: Skill only se stejným setupem pro všechny (nejblíž Pol
 - **Plní nejčastější přání komunity** a bere Polytopii hlavní výhodu, kterou nás dnes přetahuje.
 - **Dva segmenty, dvě motivace:** Skill only pro férový souboj, All-out-power pro hráče, kteří investovali do jednotek a talentů.
 - **Smyčka s městem:** PvP dává suroviny do City V2, město dává sílu do All-out-power.
+- **Monetizace PvP:** předplatné 4,99 a 9,99 USD (ranked bez limitu, ligy, turnaje, suroviny do City) a skiny jednotek, free tier drží likviditu *(návrh 9. 11.)*.
 - **Bezpečné nasazení:** každá featura za vlastním RC flagem, zapínání po procentech, rollback bez buildu.
 
 ## Nevýhody
@@ -26,12 +27,14 @@ PvP má dva segmenty: Skill only se stejným setupem pro všechny (nejblíž Pol
 | Pocit pay to win v All-out-power | střední | střední | Skill only jako férová alternativa bez koupitelné výhody, ligy podle síly |
 | Cheateři v žebříčcích | střední | střední | validace akcí na serveru, replay, top 10 a achievementy jen z reálných zápasů |
 | Nebalancované presety národů nebo jednotky | střední | nízká | hodnoty v remote configu odděleně od PvE, alarm nad 55 % win rate |
+| Předplatné odrazí neplatící a vyprázdní fronty | střední | vysoká | zdarma Quick game a 3 ranked zápasy denně, ligy Bronz a Stříbro zdarma, placené jsou jen limity a turnaje |
 | Gate nemá potvrzené cílové hodnoty | střední | střední | potvrdit s Jirkou před prvním čtením na konci února |
 
 ## Co nám to přinese
 - PvP (Skill only i All-out-power) a City V2 u hráčů v lednu 2027 s reaktivační kampaní "PvP a nové město".
 - UGC nejpozději v únoru 2027, klidně dřív: editor map, sdílení kódem, mapa týdne, komunitní mapy v casual rotaci.
 - První čtení gate na konci února 2027, cíle *(návrh)*: 25 %+ DAU v PvP (cca 1 750 hráčů), 5+ zápasů týdně, 50 %+ zápasů s reálným soupeřem v lednu a 65 %+ v únoru, D7 a D30 o 20 % relativně výš.
+- Výnos PvP odhadem 0,75 až 3,3 tis. USD měsíčně (základ 1,8 tis.), s City V2 v základu cca +4,6 tis. USD měsíčně, tedy +56 % dnešního IAP Hexu *(odhad, `BALANC_HEX_PVP.md` kap. 10)*.
 - Data o tom, jestli hráči platí za sílu (ARPDAU bez Play Passu, útrata v All-out-power) a kterou motivaci mají.
 - Rozhodnutí o novém Hexapolis 2 v únoru až březnu 2027 podle výsledku celku.
 

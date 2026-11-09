@@ -14,6 +14,7 @@
 - **Žebříčky denní, týdenní a měsíční** v obou segmentech, postavené na SharedGameBackendu. Odměny podle pořadí, **achievementy** za top 10, top 3, 2. místo a výhru, **série** za opakované umístění.
 - Každý zápas dává **skóre** (výhra, prohra a celkový výkon), které se počítá do aktuálního denního, týdenního a měsíčního žebříčku. Vedle toho má každý hráč **ELO**.
 - All-out-power má **5 lig** (nováčci, mid game, late game). Hráč se umisťuje jen ve své lize, **do další ligy postupuje top 10 % ligy** s ELO aspoň na mediánu ligy (Rozhodnuto 6. 11.).
+- **Monetizace (návrh 9. 11.):** **PvP předplatné** 4,99 USD měsíčně (ranked bez limitu, všechny ligy, turnaje, Normal ranked, bonus surovin do City), Premium 9,99 USD, a **skiny jednotek** 120 až 600 gemů. Free tier zůstává (3 ranked zápasy denně), jinak by párování zůstalo bez soupeřů. Odhad 0,75 až 3,3 tis. USD měsíčně v Hexu, základ 1,8 tis. (`BALANC_HEX_PVP.md` kap. 10).
 - Base je **cca 7 tis. aktivních hráčů**: Speed a Normal sdílí jednu frontu a ligy se v párování slučují, takže při launchi běží **2 fronty (jedna na segment)**. Při 25 % DAU v PvP to dává cca 68 až 80 % zápasů s reálným soupeřem (`BALANC_HEX_PVP.md`, kap. 6).
 
 ## 2. Proč PvP
@@ -158,15 +159,19 @@ Achievementy mají stupně podle období (denní, týdenní, měsíční) a segm
 - **Quick game, odpojení:** 30 s na návrat *(návrh)*, pak tah propadá; 2 propadlé tahy po sobě nebo 3 celkem = prohra (`BALANC_HEX_PVP.md`, kap. 9).
 - **Vzdání** kdykoli, počítá se jako prohra se skóre 0. Opakované opouštění zápasů = krátký zákaz rankovaných zápasů.
 
-## 10. Monetizace (hypotézy k ověření)
+## 10. Monetizace *(návrh 9. 11., čísla v `BALANC_HEX_PVP.md` kap. 10)*
 
-| Hypotéza | Segment | Pozn. |
+| Zdroj | Segment | Pozn. |
 |---|---|---|
-| Jednotky, talenty, City V2 zrychlení | All-out-power | meta síla se v této lize projeví, ligy drží férovost mezi podobně silnými |
-| PvP battle pass se sezónními úkoly | oba | Hexapolis už battle pass má |
-| Subscription (víc statistik, replay, PvP kosmetika, bez reklam) | oba | David zmínil subscription jako ověřovací signál |
-| Kosmetika (skiny jednotek, rámečky, tituly) | oba | bez vlivu na výsledek |
+| **PvP předplatné** 4,99 USD / měsíc: ranked bez limitu, všechny ligy, měsíční turnaj, Normal ranked, statistiky, replay, bez reklam, skin měsíce, +25 % surovin do City | oba | směr Davida 9. 11.: PvP placené jako předplatné |
+| **Premium** 9,99 USD / měsíc: navíc epický skin měsíce, rámeček, +50 % surovin | oba | |
+| **Zdarma**: Quick game, 3 ranked zápasy denně, ligy Bronz a Stříbro | oba | neplatící jsou soupeři předplatitelů; celé PvP za paywallem by při 1 750 PvP DAU nechalo placenou frontu na 35 až 105 lidech denně |
+| **Skiny jednotek** 120 / 300 / 600 gemů, sezónní limitované, skiny hlavního města, rámečky a emoty | oba | bez vlivu na staty; kompletní sbírka cca 510 USD, sběratel s Premium cca 1 tis. USD za rok |
+| Jednotky, talenty, City V2 | All-out-power | hlavní hloubka je ve městě (`BALANC_CITY_V2.md` kap. 8.3) |
+| PvP úkoly ve stávajícím battle passu | oba | zůstávají |
 | Rewarded reklamy jen mimo zápas | oba | v zápase nikdy |
+
+Odhad v Hexu: **0,75 / 1,8 / 3,3 tis. USD měsíčně** (nízký / základ / vysoký), rok 2027 v základu cca 20 tis. USD. PvP samo vydělá málo, hlavní efekt je retence a útrata v City a All-out-power.
 
 Pravidlo: **ve Skill only se výhoda koupit nedá.**
 
