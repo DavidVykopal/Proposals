@@ -1,0 +1,569 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>City V2 meta: design dokument</title><style>
+@page { size: A4; margin: 16mm 14mm; }
+body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 10.5pt; line-height: 1.5; color: #1a1d21; max-width: 900px; margin: 0 auto; padding: 24px; }
+h1 { font-size: 22pt; margin: 0 0 12px; border-bottom: 3px solid #e8a33d; padding-bottom: 8px; }
+h2 { font-size: 15pt; margin-top: 26px; color: #12304d; break-after: avoid; }
+h3, h4 { margin-top: 18px; color: #12304d; break-after: avoid; }
+blockquote { margin: 8px 0; padding: 6px 12px; background: #f5f2ea; border-left: 3px solid #e8a33d; color: #3b3f45; }
+blockquote p { margin: 4px 0; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 9.5pt; break-inside: auto; }
+tr { break-inside: avoid; }
+th, td { border: 1px solid #d5d8dc; padding: 4px 7px; text-align: left; vertical-align: top; }
+th { background: #12304d; color: #fff; }
+tr:nth-child(even) td { background: #f7f8f9; }
+code { background: #eef0f2; padding: 1px 4px; border-radius: 3px; font-size: 9pt; }
+pre { background: #eef0f2; padding: 8px; overflow-x: auto; font-size: 9pt; }
+.foot { margin-top: 30px; font-size: 8.5pt; color: #777; border-top: 1px solid #ddd; padding-top: 6px; }
+</style></head><body><h1>City V2 meta: design dokument</h1>
+<blockquote>
+<p><strong>Stav:</strong> návrh v2, 4. 11. 2026. Přepracováno podle Davidova zadání: City V2 má být <strong>co nejbližší klon Clash of Clans a Rise of Kingdoms</strong>. První verze <strong>bez výroby jednotek, globální mapy a bojů mezi hráči</strong>, jde hlavně o vlastní stavění města, sběr surovin a upgrady; <strong>budovy ovlivňují meta staty</strong>. Verze v1 (1. 11.) je nahrazená. Věci označené <em>(návrh)</em> jsou návrh autora dokumentu.
+<strong>Doplněno 5. 11. 2026:</strong> v Hexapolisu implementované do 11. 12. 2026 za RC flagem, hráči v lednu 2027. Release freeze 14. až 18. 12. (GameJam). Čísla: <code>BALANC_CITY_V2.md</code> (ceník 60 gemů = 1 USD).
+<strong>Rozhodnuto 6. 11. 2026 (David):</strong> City V2 <strong>nahradí dnešní budovy na mapě MF</strong> (Gold Mine, Gem Mine a další), hráči dostanou <strong>refund</strong> investic (pravidlo je <em>návrh</em>, <code>BALANC_CITY_V2.md</code> kap. 11). Gemy kupují <strong>startovní bundle surovin</strong> a <strong>City VIP</strong> (zrychlení stavby a další výhody, čísla <em>návrh</em> v BALANC kap. 8.1 a 8.2). V Hexu v testu a připravené do 11. 12., hráči v lednu. Příjmy z Play Passu se do revenue Hexu nepočítají. Hex featury a SGB dělí Mirek, Kubík (Jakub H.) a David.
+<strong>Názvy:</strong> City V2 = Mapa V2 = Město V2, stejná feature. V kódu <code>CityV2</code>, v CODE BACKLOG jako <strong>Meta Village V2, CODE-9</strong>, rozšiřitelnost MF <strong>CODE-65</strong>.
+<strong>Patří k:</strong> <code>KONCEPT_OBNOVA_HEXU.md</code> (obnova Hexapolisu přes PvP a City V2), <code>STRATEGIE_PRODUKCE.md</code>. Sesterský dokument: <code>DESIGN_HEX_PVP.md</code>.</p>
+</blockquote>
+<h2>1. Shrnutí</h2>
+<ul>
+<li>City V2 je <strong>co nejvěrnější klon mechanik Clash of Clans a Rise of Kingdoms</strong>: radnice, která odemyká levely ostatních budov, stavitelé, produkční budovy se sběrem, sklady, upgrady s časovači a zrychlením.</li>
+<li><strong>Verze 1 = jen vlastní město:</strong> stavění, sběr surovin, upgrady, dekorace. <strong>Bez výroby jednotek, globální mapy a bojů mezi hráči</strong>, ty přijdou později.</li>
+<li><strong>Budovy zvyšují meta staty</strong>, které platí ve hře (HP, útok, talenty, odměny). V PvP se projeví v segmentu <strong>All-out-power</strong>.</li>
+<li>Modul je sdílený: vyvíjí se v <strong>Mecha Fortress jako staging</strong>, do Hexapolisu se implementuje do 11. 12. 2026 za RC flagem a první hráči ho dostanou v <strong>původním Hexapolisu</strong> v lednu 2027.</li>
+<li>Klonujeme <strong>mechaniky a strukturu</strong>, ne art, názvy ani UI: vlastní tematika a vizuál podle titulu.</li>
+<li><strong>V MF City V2 nahradí dnešní mapu budov</strong> (Rozhodnuto 6. 11.), žádné dvě paralelní mety. Termín: <strong>začátek roku 2027</strong> (David, 6. 11.). Hráči dostanou refund: <em>(návrh)</em> 100 % utracené <code>HardCurrency</code> zpět jako gemy a startovní Radnici podle nejvyšší dnešní budovy (max Radnice 5).</li>
+<li><strong>Hloubka monetizace (návrh 9. 11.):</strong> plné město má stát za gemy <strong>10 až 100 tis. USD</strong> (Radnice 20 cca 20 tis., Radnice 25 cca 58 tis.), průměrný platící hráč nechá cca <strong>36 USD za prvních 90 dní</strong>. Verze 1 má hloubku jen cca 440 USD, zbytek dají další vrstvy (výzkum, věže, hradby). Výnos v Hexu odhadem 1,3 až 9,5 tis. USD měsíčně, základ 2,8 tis. (<code>BALANC_CITY_V2.md</code> kap. 8.3).</li>
+<li><strong>Gem sinky:</strong> zrychlení, stavitelé, <strong>startovní bundle surovin</strong> (60 gemů <em>(návrh)</em>) a <strong>City VIP</strong> (450 gemů na 30 dní <em>(návrh)</em>: −15 % času staveb, +1 stavitelská fronta, denní zrychlení 30 min, +20 % produkce).</li>
+</ul>
+<h2>2. Proč klon CoC a RoK</h2>
+<ul>
+<li>Obě hry mají <strong>léty ověřenou city meta smyčku</strong>, která drží hráče roky a monetizuje (stavitelé, zrychlení, balíčky surovin, VIP). Nemusíme ji vymýšlet, jen dobře přenést.</li>
+<li>Hráči ji <strong>znají</strong>: nulové učení, okamžitě pochopí radnici, stavitele a sběr.</li>
+<li>Hexapolis hráči dlouhodobě chtějí stavění. MF a další hry nemají žádnou hloubku mety mimo zápas.</li>
+<li><strong>Jeden modul, všechny hry:</strong> MF reskiny, původní Hexapolis, Hexapolis 2, strategická větev. Vývoj se platí jednou.</li>
+</ul>
+<h2>3. Verze 1: co v ní je</h2>
+<h3>3.1 Mechaniky převzaté z CoC a RoK</h3>
+<table>
+<thead>
+<tr>
+<th>Mechanika</th>
+<th>Jak funguje</th>
+<th>Předloha</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Radnice</strong> (hlavní budova)</td>
+<td>její level určuje max level všech ostatních budov a odemyká nové budovy</td>
+<td>CoC Town Hall, RoK City Hall</td>
+</tr>
+<tr>
+<td><strong>Stavitelé</strong></td>
+<td>počet souběžných staveb a upgradů; start 2 stavitelé, 3. a 4. za prémiovou měnu nebo nabídku</td>
+<td>CoC Builder's Hut, RoK druhý stavitel</td>
+</tr>
+<tr>
+<td><strong>Produkční budovy</strong></td>
+<td>průběžně vyrábí surovinu do vlastní kapacity, hráč ji <strong>sbírá klepnutím</strong></td>
+<td>CoC sběrače, RoK farmy a pily</td>
+</tr>
+<tr>
+<td><strong>Sklady</strong></td>
+<td>kapacita surovin; upgradem roste</td>
+<td>CoC Storage, RoK sklad</td>
+</tr>
+<tr>
+<td><strong>Upgrady s časovači</strong></td>
+<td>každý level budovy stojí suroviny a čas, čas roste s levelem</td>
+<td>obě</td>
+</tr>
+<tr>
+<td><strong>Zrychlení</strong></td>
+<td>prémiová měna nebo předměty zrychlení; krátké stavby do 5 min zdarma <em>(návrh)</em></td>
+<td>RoK speedupy, CoC gemy</td>
+</tr>
+<tr>
+<td><strong>Volné umístění</strong> na mřížce města, přesouvání budov</td>
+<td>obě</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Překážky</strong></td>
+<td>stromy a kameny na mapě města, odstranění dává malou odměnu</td>
+<td>CoC</td>
+</tr>
+<tr>
+<td><strong>Questy kapitol</strong></td>
+<td>vedou hráče stavbou krok za krokem (onboarding)</td>
+<td>RoK chapter quests</td>
+</tr>
+<tr>
+<td><strong>Dekorace a personalizace</strong></td>
+<td>neprodukční budovy, vzhled, erb, jméno města</td>
+<td>obě</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 Budovy ve verzi 1 <em>(návrh, config per titul a tematiku)</em></h3>
+<table>
+<thead>
+<tr>
+<th>Budova</th>
+<th>Typ</th>
+<th>Co dává</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Radnice</td>
+<td>hlavní</td>
+<td>gating levelů a nových budov</td>
+</tr>
+<tr>
+<td>Farma, Pila, Lom, Zlatý důl</td>
+<td>produkce</td>
+<td>jídlo, dřevo, kámen, zlato</td>
+</tr>
+<tr>
+<td>Sklad</td>
+<td>kapacita</td>
+<td>limit surovin</td>
+</tr>
+<tr>
+<td>Chata stavitele</td>
+<td>stavitelé</td>
+<td>další souběžná stavba</td>
+</tr>
+<tr>
+<td><strong>Kasárna</strong></td>
+<td>meta staty</td>
+<td><strong>+HP jednotek</strong></td>
+</tr>
+<tr>
+<td><strong>Kovárna</strong></td>
+<td>meta staty</td>
+<td><strong>+útok jednotek</strong></td>
+</tr>
+<tr>
+<td><strong>Akademie</strong></td>
+<td>meta staty</td>
+<td><strong>+talentové body / sloty</strong></td>
+</tr>
+<tr>
+<td><strong>Svatyně</strong></td>
+<td>meta staty</td>
+<td><strong>+XP hrdinů / jednotek ze zápasu</strong></td>
+</tr>
+<tr>
+<td><strong>Tržiště</strong></td>
+<td>meta staty</td>
+<td><strong>+odměny ze zápasů</strong> (suroviny, měna)</td>
+</tr>
+<tr>
+<td>Dekorace (2 až 3)</td>
+<td>kosmetika</td>
+<td>vzhled, IAP sink</td>
+</tr>
+</tbody>
+</table>
+<h3>3.3 Budovy a meta staty</h3>
+<p>Budovy, které ovlivňují hru, vrací hostitelské hře <strong>modifikátory</strong>. Hra je aplikuje na start zápasu.</p>
+<table>
+<thead>
+<tr>
+<th>Budova</th>
+<th>Stat ve hře</th>
+<th>Příklad hodnot <em>(návrh)</em></th>
+<th>Kde platí</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kasárna</td>
+<td>HP jednotek</td>
+<td>+1 % za level, max +20 %</td>
+<td>PvE, PvP All-out-power</td>
+</tr>
+<tr>
+<td>Kovárna</td>
+<td>útok jednotek</td>
+<td>+1 % za level, max +20 %</td>
+<td>PvE, PvP All-out-power</td>
+</tr>
+<tr>
+<td>Akademie</td>
+<td>talenty</td>
+<td>+1 talentový bod každé 3 levely</td>
+<td>PvE, PvP All-out-power</td>
+</tr>
+<tr>
+<td>Svatyně</td>
+<td>XP z zápasu</td>
+<td>+2 % za level</td>
+<td>všude</td>
+</tr>
+<tr>
+<td>Tržiště</td>
+<td>odměny ze zápasu</td>
+<td>+2 % za level</td>
+<td>všude</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>PvP Skill only meta staty ignoruje</strong> (stejný setup pro všechny), viz <code>DESIGN_HEX_PVP.md</code>.</li>
+<li>V <strong>All-out-power</strong> se projeví celé, férovost drží ligy.</li>
+<li>Mapování statů na konkrétní hru je <strong>config per titul</strong> (v Hexu jednotky a talenty, v MF hradba a hrdinové).</li>
+</ul>
+<h3>3.4 Suroviny a ekonomika</h3>
+<ul>
+<li><strong>Dva zdroje surovin:</strong> zápasy ve hře (kampaň, PvP, odměny z žebříčků) a <strong>pasivní produkce</strong> v městě (klon CoC a RoK). Produkce je doplněk, hlavní příjem jde ze hraní <em>(návrh, ladit na datech)</em>.</li>
+<li>Gating: některé levely radnice vyžadují <strong>progres ve hře</strong> (např. dobyté světy, PvP úspěch), aby se hráč vracel do gameplaye.</li>
+<li>Sada surovin a jejich názvy podle tematiky titulu.</li>
+</ul>
+<h3>3.5 Monetizace ve verzi 1</h3>
+<table>
+<thead>
+<tr>
+<th>Sink</th>
+<th>Předloha</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zrychlení staveb a upgradů</td>
+<td>RoK, CoC</td>
+</tr>
+<tr>
+<td>Další stavitelé</td>
+<td>CoC, RoK</td>
+</tr>
+<tr>
+<td>Balíčky surovin</td>
+<td>obě</td>
+</tr>
+<tr>
+<td>Dekorace a vzhled města</td>
+<td>obě</td>
+</tr>
+<tr>
+<td>Startovní bundle surovin za gemy (Rozhodnuto 6. 11., cena <em>návrh</em>)</td>
+<td>obě</td>
+</tr>
+<tr>
+<td><strong>City VIP</strong> za gemy (Rozhodnuto 6. 11.): zrychlení stavby, stavitelská fronta navíc, denní zrychlení zdarma, bonus produkce; bez auto-sběru <em>(návrh, BALANC kap. 8.2)</em></td>
+<td>RoK VIP, CoC Gold Pass</td>
+</tr>
+</tbody>
+</table>
+<h3>3.6 Hloubka monetizace <em>(návrh 9. 11.)</em></h3>
+<p>Cíl: <strong>plné město za 10 až 100 tis. USD</strong> a <strong>průměrný platící hráč aspoň desítky USD</strong>. Ceny se nemění, hloubku dává obsah:</p>
+<table>
+<thead>
+<tr>
+<th>Obsah</th>
+<th>Kdy <em>(návrh)</em></th>
+<th>Plné město za gemy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verze 1: Radnice 10</td>
+<td>leden 2027</td>
+<td>cca 440 USD</td>
+</tr>
+<tr>
+<td>Radnice 15 + výzkum, obranné věže, hradby, nemocnice</td>
+<td>Q2 2027</td>
+<td>cca 5 tis. USD</td>
+</tr>
+<tr>
+<td>Radnice 20</td>
+<td>Q4 2027</td>
+<td>cca 20 tis. USD</td>
+</tr>
+<tr>
+<td>Radnice 25</td>
+<td>2028</td>
+<td>cca 58 tis. USD</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Průměrný platící hráč: bundle, stavitel #3, 2 měsíce VIP, balíčky surovin a zrychlení = cca 36 USD za 90 dní, cca 100 USD za rok. Na všechny hráče města (platí 1 až 3 %) je to 0,1 až 0,9 USD měsíčně.</li>
+<li>Velryby nesmí narazit na strop verze 1 (cca 29. den při plném nákupu), proto Radnice 11 až 15 co nejdřív po lednu.</li>
+<li>Výnos: Hex 1,3 / 2,8 / 9,5 tis. USD měsíčně (nízký / základ / vysoký), MF čistý přírůstek 0,9 / 2 / 6,8 tis. Výpočet v <code>BALANC_CITY_V2.md</code> kap. 8.3.</li>
+</ul>
+<h2>4. Co ve verzi 1 není (pozdější vrstvy)</h2>
+<table>
+<thead>
+<tr>
+<th>Vrstva</th>
+<th>Obsah</th>
+<th>Předloha</th>
+<th>Závislost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Výroba jednotek</td>
+<td>kasárna trénují armádu, nemocnice</td>
+<td>CoC, RoK</td>
+<td>design armád</td>
+</tr>
+<tr>
+<td>Výzkum</td>
+<td>strom technologií v akademii</td>
+<td>RoK</td>
+<td>po ověření V1</td>
+</tr>
+<tr>
+<td>Globální mapa</td>
+<td>města ostatních hráčů, sběr na mapě</td>
+<td>RoK</td>
+<td>SGB profily a persistence</td>
+</tr>
+<tr>
+<td>Boje mezi hráči</td>
+<td>útoky na města, obrana, štíty, hradby</td>
+<td>CoC, RoK</td>
+<td>PvP vrstva SGB; nejdřív fake útoky, reálné postupně</td>
+</tr>
+<tr>
+<td>Aliance a klany</td>
+<td>společné cíle, pomoc se stavbou</td>
+<td>RoK, CoC</td>
+<td>SGB clans (F6)</td>
+</tr>
+<tr>
+<td>Návštěvy měst</td>
+<td>prohlédnout si město jiného hráče</td>
+<td>CoC</td>
+<td>NOX ID</td>
+</tr>
+</tbody>
+</table>
+<h2>5. Modul a kontrakt s hostitelskou hrou</h2>
+<p>City V2 je <strong>samostatný modul</strong>. S hrou komunikuje jen přes vstupy, výstupy a požadavky.</p>
+<table>
+<thead>
+<tr>
+<th>Směr</th>
+<th>Co</th>
+<th>Příklad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vstupy (hra → City)</td>
+<td>suroviny, měna, progres, události</td>
+<td>odměna za zápas, <code>match_completed</code>, <code>pvp_won</code></td>
+</tr>
+<tr>
+<td>Výstupy (City → hra)</td>
+<td><strong>meta staty</strong>, odměny, boosty</td>
+<td>+HP z kasáren, +odměny z tržiště</td>
+</tr>
+<tr>
+<td>Požadavky</td>
+<td>progres ve hře pro levely radnice</td>
+<td>"dobyj svět 3"</td>
+</tr>
+</tbody>
+</table>
+<p>Technické zásady:</p>
+<ul>
+<li>Interface ve stylu meta-core DI (<code>ICityProvider</code>, <code>ICityModifierSource</code>, <code>ICityRewardSink</code>), bez závislosti na konkrétní hře.</li>
+<li>Obsah (budovy, ceny, časy, bonusy) <strong>config-driven per titul</strong>; tematika mění jen assety a texty.</li>
+<li>Kill switch přes Firebase RC, dark launch, rollback bez buildu.</li>
+<li>City nikdy neblokuje hru: bez backendu funguje lokálně a synchronizuje později.</li>
+</ul>
+<h2>6. SharedGameBackend</h2>
+<table>
+<thead>
+<tr>
+<th>Co City potřebuje</th>
+<th>SGB</th>
+<th>Ve V1?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perzistence města (časovače, stav)</td>
+<td>cloud save</td>
+<td>ano (server čas proti podvádění s hodinami <em>(návrh)</em>)</td>
+</tr>
+<tr>
+<td>Identita napříč tituly</td>
+<td>NOX ID</td>
+<td>ano, pokud bude</td>
+</tr>
+<tr>
+<td>Odměny</td>
+<td>reward bridge (B5)</td>
+<td>ano</td>
+</tr>
+<tr>
+<td>Žebříčky měst, klany, návštěvy, útoky</td>
+<td>leaderboards, clans, PvP</td>
+<td>ne, pozdější vrstvy</td>
+</tr>
+</tbody>
+</table>
+<h2>7. Fáze</h2>
+<table>
+<thead>
+<tr>
+<th>Fáze</th>
+<th>Kdy</th>
+<th>Obsah</th>
+<th>Kde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>V1 vývoj</strong></td>
+<td>11/2026 až 11. 12. 2026</td>
+<td>radnice, stavitelé, 4 produkční budovy, sklad, 5 budov s meta staty, dekorace, questy kapitol, zrychlení, kontrakt, analytika, RC flag</td>
+<td>MF staging</td>
+</tr>
+<tr>
+<td><strong>Import do Hexu</strong></td>
+<td>do 11. 12. 2026, za RC flagem</td>
+<td>napojení meta statů na jednotky a talenty Hexu, Hex suroviny</td>
+<td>Hexapolis</td>
+</tr>
+<tr>
+<td><strong>Release a ověření</strong></td>
+<td>1/2027</td>
+<td>hráčům původního Hexapolisu, měření podle kap. 8</td>
+<td>Hexapolis</td>
+</tr>
+<tr>
+<td><strong>Náhrada mapy MF</strong></td>
+<td>začátek roku 2027</td>
+<td>City V2 místo <code>MapBuilding</code> budov, refund investic (BALANC kap. 11)</td>
+<td>Mecha Fortress</td>
+</tr>
+<tr>
+<td><strong>V2</strong></td>
+<td>Q1/2027 <em>(návrh)</em></td>
+<td>výzkum, víc budov (Radnice 11+), VIP úrovně, výroba jednotek</td>
+<td>podle ověření</td>
+</tr>
+<tr>
+<td><strong>V3</strong></td>
+<td>od Q2/2027 <em>(návrh)</em></td>
+<td>globální mapa, útoky (nejdřív fake), aliance</td>
+<td>podle SGB</td>
+</tr>
+</tbody>
+</table>
+<h2>8. Ověření (vstup pro gate Hexapolis 2)</h2>
+<table>
+<thead>
+<tr>
+<th>Otázka</th>
+<th>Metrika</th>
+<th>Laťka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hrají lidé město?</td>
+<td>% DAU v City, staveb na hráče, návraty do City za den</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Zlepšuje retenci?</td>
+<td>D1, D7, D30 s City proti bez (A/B přes Firebased)</td>
+<td>D7 a D30 nahoru, D1 bez poklesu</td>
+</tr>
+<tr>
+<td>Monetizuje?</td>
+<td>konverze na zrychlení, stavitele, balíčky, ARPDAU</td>
+<td>platí 1,5 %+ hráčů města měsíčně, ARPPU 18 USD+, cca +2,8 tis. USD měsíčně v Hexu <em>(návrh 9. 11.)</em></td>
+</tr>
+<tr>
+<td>Zaplatí si VIP?</td>
+<td>konverze na City VIP a bundle (jen iOS a Android mimo Play Pass)</td>
+<td>TBD</td>
+</tr>
+<tr>
+<td>Táhne PvP All-out-power?</td>
+<td>útrata a aktivita hráčů s vyššími meta staty</td>
+<td>sledovat</td>
+</tr>
+</tbody>
+</table>
+<p>Referenční čísla MF (okno 20. 5. až 13. 7. 2026): D1 26,5 %, D7 10,1 %, D30 4,2 %, podíl IAP asi 20 %.</p>
+<h2>9. Rizika</h2>
+<ul>
+<li><strong>Produkční laťka CoC a RoK.</strong> Mají roky obsahu. V1 držet malou: méně budov, víc levelů.</li>
+<li><strong>Klon mechanik, ne assetů.</strong> Vlastní art, názvy a UI; žádné převzaté vizuály ani texty.</li>
+<li><strong>Meta staty rozbijí balanc</strong> PvE i PvP All-out-power. Hodnoty v RC, strop bonusů, telemetrie.</li>
+<li><strong>Ekonomika ve dvou hrách naráz</strong> (MF a Hex). Config per titul je podmínka.</li>
+<li><strong>Náhrada mapy MF:</strong> refund a ztráta produkce Gem Mine mění přírůstek gemů hráčů MF; před releasem v MF spočítat z dat (BALANC kap. 11).</li>
+<li><strong>Import do starého Hexapolisu.</strong> Ověřit při CODE-65.</li>
+<li><strong>Termín leden 2027</strong> při běžícím live ops Q4.</li>
+</ul>
+<h2>10. Slabá místa a otevřené otázky</h2>
+<p>Rizika provedení jsou v kap. 9. Tady jsou námitky proti tomu, jestli je samotný návrh správně.</p>
+<table>
+<thead>
+<tr>
+<th>Námitka</th>
+<th>Proč může platit</th>
+<th>Odpověď nebo co s tím</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tempo města je spočítané na MF, ne na Hex</td>
+<td><code>BALANC_CITY_V2.md</code> počítá s 6 zápasy denně a gatingem podle MF stage indexu. Zápas v Hexu trvá desítky minut (PvP Normal 15 až 25 min), takže příjem ze zápasů (17&nbsp;000 až 210&nbsp;000 surovin denně podle tieru) v Hexu nedorazí a město se zasekne, nebo tlačí jen do nákupu. Ekvivalent gatingu pro Hex chybí.</td>
+<td>Před importem přepočítat model pro Hex s mediánem zápasů denně z telemetrie (BALANC otázky 6 a 7). Pro Hex nastavit vlastní tabulku časů a cen přes RC.</td>
+</tr>
+<tr>
+<td>Druhá stavební meta vedle dnešní mapy MF</td>
+<td>MF má systém budov na mapě (<code>MapBuilding</code>: Gold Mine, Wall s talenty a další) s upgrady za <code>HardCurrency</code> 240 až 1&nbsp;080. City V2 platí upgrady surovinami a gemy bere jen za zrychlení. V MF (cca 39 % revenue portfolia) hrozila buď dvě paralelní mety, nebo ztráta gem sinku i investic hráčů.</td>
+<td><strong>Rozhodnuto 6. 11.:</strong> City V2 dnešní mapu nahradí, hráči dostanou refund. Pravidlo <em>(návrh)</em>: 100 % <code>HardCurrency</code> zpět jako gemy + startovní Radnice podle nejvyšší budovy (max 5). Gem sink nahrazují stavitelé, zrychlení, bundle surovin a City VIP (BALANC kap. 8 a 11). Zbývá: dorovnat produkci Gem Mine a ověřit z dat výši refundů.</td>
+</tr>
+<tr>
+<td>V1 bez sociální vrstvy netestuje smyčku CoC a RoK</td>
+<td>CoC a RoK drží hráče hlavně útoky, obranou, klany a mapou. V1 je město s časovači a bonusy, blíž idle základně. Slabý výsledek V1 nic neřekne o plné smyčce a dobrý výsledek ji nepotvrdí.</td>
+<td>V gate hodnotit V1 jako test "chtějí hráči Hexu stavět", ne jako test celé CoC smyčky. Útoky a globální mapa (V3) potřebují vlastní ověření.</td>
+</tr>
+<tr>
+<td>Monetizaci města v Hexu skoro nejde změřit</td>
+<td>Zrychlit celou verzi 1 stojí asi 15&nbsp;100 gemů (cca 250 USD). Hexapolis má cca 7 tis. aktivních hráčů a je v Play Passu, kde předplatitelé gemy nekupují. Konverze na stavitele #3 (2 až 4 %) je předpoklad.</td>
+<td><strong>Rozhodnuto 6. 11.:</strong> Play Pass se do revenue nepočítá, monetizaci měřit jen na iOS a Androidu mimo Play Pass. Vzorek bude malý, takže monetizaci (bundle, stavitelé, City VIP) ověřit hlavně v MF po náhradě mapy.</td>
+</tr>
+<tr>
+<td>Bonusy z města zasahují do hotové kampaně</td>
+<td>Na maximu verze 1 dává město ×1,44 efektivní síly a platí i v PvE. Kampaně MF i Hexu jsou vybalancované bez něj; zlehčení zkrátí obsah a sníží hodnotu dnešních nákupů síly.</td>
+<td>Rozhodnout, jestli bonusy platí v PvE, nebo jen v PvP All-out-power. Když v PvE, nižší strop přes RC a hlídat win rate kampaně (BALANC kap. 9).</td>
+</tr>
+<tr>
+<td>"Co nejbližší klon" CoC a RoK</td>
+<td>Mechaniky chránit nejdou, ale struktura obrazovek, ikonografie a pojmenování (Chata stavitele, questy kapitol) snadno sklouznou k podobnosti, kterou si všimne store review, komunita i Supercell. Hráči Hexu chtějí civilizaci, ne CoC v jiném obalu.</td>
+<td>Art a UI review proti CoC a RoK před releasem. Ve store a kampani slovo "klon" ani odkazy na CoC nepoužívat. Město tematicky navázat na národ v Hexu.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Potřebuje odpověď:</strong></p>
+<ul>
+<li>Kdy jde City V2 k hráčům MF jako náhrada mapy? (Nahradit s refundem: Rozhodnuto 6. 11.)</li>
+<li>Potvrdit pravidlo refundu a ceny bundle a City VIP (BALANC kap. 8.1, 8.2, 11).</li>
+<li>Kolik zápasů denně hraje medián aktivního hráče Hexu (model počítá 6)?</li>
+<li>Platí bonusy z města i v PvE kampani?</li>
+<li>Kdo udělá art budov v tématu Hexu, když je grafika vytížená?</li>
+<li>Stačí V1 bez sociální vrstvy na rozhodnutí o Hexapolis 2 a o City V2 v reskinech, nebo se čeká na data z V3?</li>
+</ul>
+<h2>11. Otevřené otázky</h2>
+<ol>
+<li>Kdo vlastní City V2 (design, vývoj)? Tým pro Hex featury je rozhodnutý 6. 11. (Mirek, Kubík (Jakub H.), David), zbývá rozdělit featury.</li>
+<li>Release v lednu jen v Hexapolisu, nebo i v MF? (V MF City V2 nahradí mapu na začátku roku 2027, přesný release určí plán sprintů.)</li>
+<li>Jaké meta staty v Hexu přesně (jednotky, talenty, hrdinové) a jaké stropy?</li>
+<li>Jsou CODE-9 a CODE-65 totéž co City V2, sloučit backlog?</li>
+<li>City VIP je rozhodnuté jako gem sink (6. 11.). Zbývá: zapnout ho už ve V1 <em>(návrh: ano, za RC flagem)</em>, nebo až ve V2?</li>
+<li>Laťky v kap. 8 pro gate Hexapolis 2.</li>
+</ol><div class="foot">NOXGAMES · interní podklad, důvěrné · City V2 / Mapa V2 · stav 21. 11. 2026</div></body></html>

@@ -1,0 +1,2732 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>City V2: první nahození čísel (verze 1)</title><style>
+@page { size: A4; margin: 16mm 14mm; }
+body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 10.5pt; line-height: 1.5; color: #1a1d21; max-width: 900px; margin: 0 auto; padding: 24px; }
+h1 { font-size: 22pt; margin: 0 0 12px; border-bottom: 3px solid #e8a33d; padding-bottom: 8px; }
+h2 { font-size: 15pt; margin-top: 26px; color: #12304d; break-after: avoid; }
+h3, h4 { margin-top: 18px; color: #12304d; break-after: avoid; }
+blockquote { margin: 8px 0; padding: 6px 12px; background: #f5f2ea; border-left: 3px solid #e8a33d; color: #3b3f45; }
+blockquote p { margin: 4px 0; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 9.5pt; break-inside: auto; }
+tr { break-inside: avoid; }
+th, td { border: 1px solid #d5d8dc; padding: 4px 7px; text-align: left; vertical-align: top; }
+th { background: #12304d; color: #fff; }
+tr:nth-child(even) td { background: #f7f8f9; }
+code { background: #eef0f2; padding: 1px 4px; border-radius: 3px; font-size: 9pt; }
+pre { background: #eef0f2; padding: 8px; overflow-x: auto; font-size: 9pt; }
+.foot { margin-top: 30px; font-size: 8.5pt; color: #777; border-top: 1px solid #ddd; padding-top: 6px; }
+</style></head><body><h1>City V2: první nahození čísel (verze 1)</h1>
+<blockquote>
+<p><strong>Stav:</strong> první nahození, 5. 11. 2026. Všechna čísla jsou k ladění na stagingu Mecha Fortress (MF), pak se přenesou do Hexapolisu. Design a rozsah: <code>DESIGN_CITY_V2.md</code>.
+<strong>Rozhodnuto 6. 11. 2026 (David):</strong> City V2 <strong>nahradí dnešní budovy na mapě MF</strong> (Gold Mine, Gem Mine a další) a hráči dostanou <strong>refund</strong> toho, co do nich investovali (pravidlo v kap. 11, <em>návrh</em>). Za gemy si hráč koupí <strong>startovní bundle surovin</strong> a <strong>City VIP</strong> (zrychlení stavby a další výhody), čísla v kap. 8.1 a 8.2 (<em>návrh</em>). Příjmy z Play Passu se do revenue Hexu nepočítají. Kap. 10 (vzorce) se nemění; tabulka dopadu VIP na tempo je spočítaná skriptem z tabulky 6.1 (vzorec u tabulky).</p>
+</blockquote>
+<h2>1. Shrnutí</h2>
+<ul>
+<li><strong>Radnice 1 až 10</strong> ve verzi 1. Ostatní budovy mají max level podle Radnice: produkce, Sklad, Tržiště a Svatyně = level Radnice (max 10), Kasárna, Kovárna a Akademie = 2× level Radnice (max 20).</li>
+<li><strong>Tempo aktivního hráče</strong> (6 zápasů denně, 2 stavitelé, 3 a více návštěv města denně): Radnice 4 první den, Radnice 6 do konce prvního týdne, Radnice 8 kolem 21. dne, <strong>Radnice 10 kolem 50. dne</strong>, <strong>vše na maximu verze 1 kolem 68. dne</strong>. To kryje leden a únor 2027, než přijde V2 (Radnice 11 a víc).</li>
+<li><strong>Rytmus session:</strong> sběr produkce 2 až 3× denně (kapacita budovy 10 h produkce), stavitelé se od Radnice 6 přenastavují 1 až 2× denně, první den časovače do 45 min.</li>
+<li><strong>Ekonomika:</strong> pasivní produkce kryje <strong>asi 1/3</strong> útraty (31 až 38 % od Radnice 4), zbytek jde ze zápasů, odměn a questů. Odpovídá zásadě z designu: hlavní příjem je ze hraní.</li>
+<li><strong>Síla z města:</strong> na maximu verze 1 dává město +20 % HP a +20 % útok, tedy <strong>×1,44 efektivní síly</strong> (HP × útok), plus 6 talentových bodů, 2 sloty, +20 % XP a +20 % odměn. Cíl: město tvoří <strong>15 až 25 % celkové síly</strong> hráče na D30 <em>(předpoklad, ověřit telemetrií)</em>.</li>
+<li><strong>Monetizace:</strong> zrychlení za gemy (prvních 5 min zdarma), stavitel #3 za 300 gemů, #4 za 600 gemů, balíčky surovin, <strong>startovní bundle surovin za 60 gemů</strong> a <strong>City VIP za 450 gemů na 30 dní</strong> <em>(návrh, kap. 8.1 a 8.2)</em>. Zrychlit celou verzi 1 stojí asi <strong>15&nbsp;100 gemů</strong> (cca 250 USD při našem ceníku 60 gemů za 1 USD).</li>
+<li><strong>Hloubka monetizace (9. 11., kap. 8.3):</strong> cíl je, aby plné město stálo za gemy <strong>10 až 100 tis. USD</strong> a průměrný platící hráč nechal <strong>aspoň desítky USD</strong>. Verze 1 má hloubku jen cca <strong>440 USD</strong> (zrychlení 250 + dokoupení surovin 185). Hloubku dají až další verze: Radnice 15 cca 5 tis., Radnice 20 cca 20 tis., <strong>Radnice 25 cca 58 tis. USD</strong> s novými vrstvami (výzkum, obranné věže, hradby, nemocnice). Vzorce cen se nemění, roste obsah. Odhad výnosu v Hexu: <strong>1,3 až 9,5 tis. USD měsíčně, základ 2,8 tis.</strong></li>
+<li><strong>City VIP nerozbije tempo:</strong> průměrnému hráči (6 zápasů denně) zkrátí cestu na Radnici 10 jen z 50 na 47 dní, protože brzdí suroviny. Strop je hráč se stavitelem #3, VIP a dokupováním surovin: Radnice 10 kolem 21. dne, vše na maximu kolem 29. dne (kap. 8.2).</li>
+<li><strong>Náhrada mapy MF (Rozhodnuto 6. 11.):</strong> City V2 nahradí <code>MapBuilding</code> budovy v MF. Refund <em>(návrh)</em>: 100 % utracené <code>HardCurrency</code> zpět jako gemy a startovní Radnice podle nejvyšší dnešní budovy (max Radnice 5), kap. 11.</li>
+<li><strong>Celkový objem verze 1:</strong> 2&nbsp;461 hodin práce stavitelů a asi 12,1 milionu surovin.</li>
+</ul>
+<h2>2. Pilíře ekonomiky</h2>
+<table>
+<thead>
+<tr>
+<th>Pilíř</th>
+<th>Pravidlo</th>
+<th>Proč</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rychlý první den</td>
+<td>Radnice 2 a 3 v prvních 30 min, časovače do 5 min zdarma, kapitoly questů kryjí náklady prvního dne</td>
+<td>klon CoC a RoK: hráč musí hned vidět, že město roste</td>
+</tr>
+<tr>
+<td>Křivka časovačů</td>
+<td>jedna časová jednotka na tier Radnice, roste z 1 min (tier 1) na 34 h (tier 10), viz kapitola 10</td>
+<td>delší časovače = důvod se vracet a prostor pro zrychlení</td>
+</tr>
+<tr>
+<td>Radnice je nejdelší stavba tieru</td>
+<td>Radnice má váhu 3,0 (ostatní 0,8 až 1,4)</td>
+<td>jasný cíl každého tieru, jako CoC Town Hall</td>
+</tr>
+<tr>
+<td>2 stavitelé zdarma, 3. a 4. prémiově</td>
+<td>základní tempo je spočítané na 2 stavitele a 75 % vytížení</td>
+<td>stavitel #3 je nejčistší nákup (CoC, RoK)</td>
+</tr>
+<tr>
+<td>Produkce je doplněk</td>
+<td>pasivní produkce kryje asi 1/3 útraty, zbytek zápasy</td>
+<td>město tlačí hráče zpět do hry, ne naopak</td>
+</tr>
+<tr>
+<td>Sklad gatuje skoky</td>
+<td>kapacita Skladu na levelu L stačí na nejdražší jednotlivou stavbu tieru L s rezervou asi 25 %</td>
+<td>hráč musí upgradovat Sklad, než může zvednout Radnici</td>
+</tr>
+<tr>
+<td>Progres ve hře gatuje Radnici</td>
+<td>Radnice 4 a výš vyžaduje postup ve hře (MF stage index)</td>
+<td>hráč se vrací do gameplaye, design kap. 3.4</td>
+</tr>
+<tr>
+<td>Meta bonusy lineární a se stropem</td>
+<td>+1 % nebo +2 % za level, stropy 20 %</td>
+<td>čitelné, snadno se ladí přes RC, nerozbije balanc</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cílové tempo podle období</strong> (aktivní hráč, 2 stavitelé):</p>
+<table>
+<thead>
+<tr>
+<th>Období</th>
+<th>Kde hráč je</th>
+<th>Meta bonus Kasárna a Kovárna</th>
+<th>Efektivní síla z města</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Den 1</td>
+<td>Radnice 4, první produkční budovy na L3 až L4</td>
+<td>asi +7 %</td>
+<td>×1,15</td>
+</tr>
+<tr>
+<td>Den 7</td>
+<td>Radnice 6</td>
+<td>asi +11 %</td>
+<td>×1,23</td>
+</tr>
+<tr>
+<td>Den 14</td>
+<td>Radnice 7</td>
+<td>asi +13 %</td>
+<td>×1,28</td>
+</tr>
+<tr>
+<td>Den 30</td>
+<td>Radnice 8, blízko 9</td>
+<td>asi +15 %</td>
+<td>×1,32</td>
+</tr>
+<tr>
+<td>Den 50</td>
+<td>Radnice 10</td>
+<td>asi +18 %</td>
+<td>×1,39</td>
+</tr>
+<tr>
+<td>Den 68</td>
+<td>vše na maximu verze 1</td>
+<td>+20 %</td>
+<td>×1,44</td>
+</tr>
+</tbody>
+</table>
+<p>Vliv počtu stavitelů (jen čas, při 75 % vytížení): 2 stavitelé 68 dní, <strong>3 stavitelé 46 dní, 4 stavitelé 34 dní</strong>. Příjem surovin je ale spočítaný na 2 stavitele a 6 zápasů denně, takže 3. a 4. stavitel zrychlí jen hráče, kteří hrají víc nebo kupují suroviny. To je záměr: stavitel se vyplatí aktivním a platícím hráčům.</p>
+<h2>3. Suroviny</h2>
+<table>
+<thead>
+<tr>
+<th>Surovina</th>
+<th>Zdroj</th>
+<th>Sink</th>
+<th>Strop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Jídlo</strong></td>
+<td>Farma (od Radnice 1), zápasy, questy</td>
+<td>Pila, Lom, Zlatý důl, Radnice, Kasárna, Tržiště, Svatyně</td>
+<td>Radnice 1&nbsp;000 + Sklad</td>
+</tr>
+<tr>
+<td><strong>Dřevo</strong></td>
+<td>Pila (od Radnice 1), zápasy, questy, odstranění stromů</td>
+<td>Farma, Lom, Zlatý důl, Sklad, Radnice, Kasárna, Kovárna, Akademie, Tržiště</td>
+<td>Radnice 1&nbsp;000 + Sklad</td>
+</tr>
+<tr>
+<td><strong>Kámen</strong></td>
+<td>Lom (od Radnice 2), zápasy, questy, odstranění kamenů</td>
+<td>Farma, Pila, Zlatý důl, Sklad, Radnice, Kovárna, Akademie, Svatyně</td>
+<td>Radnice 1&nbsp;000 + Sklad</td>
+</tr>
+<tr>
+<td><strong>Zlato</strong></td>
+<td>Zlatý důl (od Radnice 3), zápasy, odměny z žebříčků</td>
+<td>Radnice, meta budovy (Kasárna, Kovárna, Akademie, Tržiště, Svatyně), dekorace</td>
+<td>Radnice 1&nbsp;000 + Sklad</td>
+</tr>
+<tr>
+<td><strong>Gemy</strong> (prémiová měna; v MF <code>HardCurrency</code>)</td>
+<td>IAP, questy kapitol, překážky, achievementy</td>
+<td>zrychlení, stavitelé #3 a #4, suroviny, prémiové dekorace</td>
+<td>bez stropu</td>
+</tr>
+<tr>
+<td><strong>Předměty zrychlení</strong> 5 min, 1 h, 8 h (v MF existuje <code>SkipItsCurrency</code>)</td>
+<td>questy, zápasy, nabídky</td>
+<td>zrychlení staveb</td>
+<td>bez stropu</td>
+</tr>
+</tbody>
+</table>
+<p>Pravidla stropů:</p>
+<ul>
+<li>Každá surovina má vlastní strop = <strong>1&nbsp;000 (Radnice) + kapacita Skladu</strong> na daném levelu. Nad strop se nic nepřičte, produkce v budově čeká.</li>
+<li>Produkční budova drží <strong>10 hodin produkce</strong>, pak se zastaví, dokud hráč nesebere (klon CoC sběračů).</li>
+<li>Odměny ze zápasů nad strop: přebytek propadá <em>(návrh: ukázat hráči "sklad plný" jako výzvu k upgradu Skladu)</em>.</li>
+<li>Jedna budova Sklad pro všechny 4 suroviny (jednodušší než CoC, kde má každá surovina vlastní sklad).</li>
+<li>Recepty cen: každá budova platí 2 až 3 surovinami podle receptu v kapitole 10. Surovina, která ještě není odemčená (kámen před Radnicí 2, zlato před Radnicí 3), se do ceny nepočítá a její podíl se rozdělí na ostatní.</li>
+</ul>
+<h2>4. Radnice</h2>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Zrychlení (gemy)</th>
+<th>Požadavek ve hře</th>
+<th>Odemyká</th>
+<th>Max level ostatních budov</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>start</td>
+<td></td>
+<td>0</td>
+<td>nic</td>
+<td>Farma, Pila, Sklad, Kasárna</td>
+<td>produkce, Sklad, Tržiště, Svatyně 1; Kasárna, Kovárna, Akademie 2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>75 jídla, 75 dřeva</td>
+<td>3 min</td>
+<td>0</td>
+<td>nic</td>
+<td>Lom, Kovárna</td>
+<td>produkce, Sklad, Tržiště, Svatyně 2; Kasárna, Kovárna, Akademie 4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>180 jídla, 180 dřeva, 100 kamene</td>
+<td>15 min</td>
+<td>5</td>
+<td>nic</td>
+<td>Zlatý důl, Tržiště</td>
+<td>produkce, Sklad, Tržiště, Svatyně 3; Kasárna, Kovárna, Akademie 6</td>
+</tr>
+<tr>
+<td>4</td>
+<td>630 jídla, 630 dřeva, 360 kamene, 180 zlata</td>
+<td>2 h</td>
+<td>21</td>
+<td>MF stage 5</td>
+<td>Akademie, +1 kus Farmy, Pily, Lomu a Dolu</td>
+<td>produkce, Sklad, Tržiště, Svatyně 4; Kasárna, Kovárna, Akademie 8</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2&nbsp;600 jídla, 2&nbsp;600 dřeva, 1&nbsp;500 kamene, 750 zlata</td>
+<td>9 h</td>
+<td>66</td>
+<td>MF stage 8</td>
+<td>Svatyně</td>
+<td>produkce, Sklad, Tržiště, Svatyně 5; Kasárna, Kovárna, Akademie 10</td>
+</tr>
+<tr>
+<td>6</td>
+<td>7&nbsp;300 jídla, 7&nbsp;300 dřeva, 4&nbsp;200 kamene, 2&nbsp;100 zlata</td>
+<td>18 h</td>
+<td>112</td>
+<td>MF stage 13</td>
+<td>-</td>
+<td>produkce, Sklad, Tržiště, Svatyně 6; Kasárna, Kovárna, Akademie 12</td>
+</tr>
+<tr>
+<td>7</td>
+<td>17&nbsp;000 jídla, 17&nbsp;000 dřeva, 9&nbsp;600 kamene, 4&nbsp;800 zlata</td>
+<td>1 d 6 h</td>
+<td>165</td>
+<td>MF stage 17</td>
+<td>+1 kus Farmy, Pily, Lomu a Dolu</td>
+<td>produkce, Sklad, Tržiště, Svatyně 7; Kasárna, Kovárna, Akademie 14</td>
+</tr>
+<tr>
+<td>8</td>
+<td>50&nbsp;000 jídla, 50&nbsp;000 dřeva, 29&nbsp;000 kamene, 14&nbsp;000 zlata</td>
+<td>1 d 18 h</td>
+<td>214</td>
+<td>MF stage 21</td>
+<td>-</td>
+<td>produkce, Sklad, Tržiště, Svatyně 8; Kasárna, Kovárna, Akademie 16</td>
+</tr>
+<tr>
+<td>9</td>
+<td>94&nbsp;000 jídla, 94&nbsp;000 dřeva, 54&nbsp;000 kamene, 27&nbsp;000 zlata</td>
+<td>2 d 12 h</td>
+<td>281</td>
+<td>MF stage 24</td>
+<td>-</td>
+<td>produkce, Sklad, Tržiště, Svatyně 9; Kasárna, Kovárna, Akademie 18</td>
+</tr>
+<tr>
+<td>10</td>
+<td>190&nbsp;000 jídla, 190&nbsp;000 dřeva, 110&nbsp;000 kamene, 54&nbsp;000 zlata</td>
+<td>3 d 6 h</td>
+<td>344</td>
+<td>MF stage 27</td>
+<td>-</td>
+<td>produkce, Sklad, Tržiště, Svatyně 10; Kasárna, Kovárna, Akademie 20</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Požadavky ve hře vychází z dnešních odemykacích stage indexů mapy MF (Zlatý důl v <code>MapBuilding</code> se odemyká na stage 8, upgrady na 13, 17, 21, 24, 27). Pro Hexapolis se při importu nahradí ekvivalentem (dobyté světy, PvP výhry), viz otevřené otázky.</li>
+<li>Sloupec "Zrychlení" je cena okamžitého dokončení celé stavby podle vzorce v kapitole 8.</li>
+</ul>
+<h2>5. Budovy verze 1</h2>
+<p>Sloupec "Radnice" = minimální level Radnice pro daný level budovy. Budova odemčená později (např. Akademie na Radnici 4) dožene nižší levely levně, protože cena a čas se řídí nominálním tierem levelu, ne tierem odemčení.</p>
+<h3>5.1 Produkce</h3>
+<p>Počet kusů od každé produkční budovy: <strong>1 na Radnici 1 až 3, 2 od Radnice 4, 3 od Radnice 7</strong> (Lom od Radnice 2, Zlatý důl od Radnice 3). Každý kus se staví a upgraduje zvlášť, cena a čas jsou stejné pro všechny kusy. Produkce je za hodinu na jeden kus.</p>
+<h4>Farma (jídlo)</h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Produkce / h</th>
+<th>Kapacita budovy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>30 dřeva</td>
+<td>50 s</td>
+<td>20</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>65 dřeva, 25 kamene</td>
+<td>3 min</td>
+<td>30</td>
+<td>300</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>250 dřeva, 110 kamene</td>
+<td>30 min</td>
+<td>40</td>
+<td>400</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>1&nbsp;000 dřeva, 450 kamene</td>
+<td>2 h 30 min</td>
+<td>55</td>
+<td>550</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>2&nbsp;900 dřeva, 1&nbsp;300 kamene</td>
+<td>5 h</td>
+<td>75</td>
+<td>750</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>6&nbsp;700 dřeva, 2&nbsp;900 kamene</td>
+<td>8 h</td>
+<td>110</td>
+<td>1&nbsp;100</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>20&nbsp;000 dřeva, 8&nbsp;600 kamene</td>
+<td>11 h</td>
+<td>150</td>
+<td>1&nbsp;500</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>38&nbsp;000 dřeva, 16&nbsp;000 kamene</td>
+<td>16 h</td>
+<td>210</td>
+<td>2&nbsp;100</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>76&nbsp;000 dřeva, 32&nbsp;000 kamene</td>
+<td>21 h</td>
+<td>300</td>
+<td>3&nbsp;000</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>150&nbsp;000 dřeva, 65&nbsp;000 kamene</td>
+<td>1 d 4 h</td>
+<td>410</td>
+<td>4&nbsp;100</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>294&nbsp;945 dřeva, 126&nbsp;385 kamene</td>
+<td>3 d 20 h 3 min</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>Pila (dřevo)</h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Produkce / h</th>
+<th>Kapacita budovy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>30 jídla</td>
+<td>50 s</td>
+<td>20</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>65 jídla, 25 kamene</td>
+<td>3 min</td>
+<td>30</td>
+<td>300</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>250 jídla, 110 kamene</td>
+<td>30 min</td>
+<td>40</td>
+<td>400</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>1&nbsp;000 jídla, 450 kamene</td>
+<td>2 h 30 min</td>
+<td>55</td>
+<td>550</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>2&nbsp;900 jídla, 1&nbsp;300 kamene</td>
+<td>5 h</td>
+<td>75</td>
+<td>750</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>6&nbsp;700 jídla, 2&nbsp;900 kamene</td>
+<td>8 h</td>
+<td>110</td>
+<td>1&nbsp;100</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>20&nbsp;000 jídla, 8&nbsp;600 kamene</td>
+<td>11 h</td>
+<td>150</td>
+<td>1&nbsp;500</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>38&nbsp;000 jídla, 16&nbsp;000 kamene</td>
+<td>16 h</td>
+<td>210</td>
+<td>2&nbsp;100</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>76&nbsp;000 jídla, 32&nbsp;000 kamene</td>
+<td>21 h</td>
+<td>300</td>
+<td>3&nbsp;000</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>150&nbsp;000 jídla, 65&nbsp;000 kamene</td>
+<td>1 d 4 h</td>
+<td>410</td>
+<td>4&nbsp;100</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>294&nbsp;945 jídla, 126&nbsp;385 kamene</td>
+<td>3 d 20 h 3 min</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>Lom (kámen)</h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Produkce / h</th>
+<th>Kapacita budovy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>15 jídla, 15 dřeva</td>
+<td>50 s</td>
+<td>20</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>45 jídla, 45 dřeva</td>
+<td>3 min</td>
+<td>30</td>
+<td>300</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>180 jídla, 180 dřeva</td>
+<td>30 min</td>
+<td>40</td>
+<td>400</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>750 jídla, 750 dřeva</td>
+<td>2 h 30 min</td>
+<td>55</td>
+<td>550</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>2&nbsp;100 jídla, 2&nbsp;100 dřeva</td>
+<td>5 h</td>
+<td>75</td>
+<td>750</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>4&nbsp;800 jídla, 4&nbsp;800 dřeva</td>
+<td>8 h</td>
+<td>110</td>
+<td>1&nbsp;100</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>14&nbsp;000 jídla, 14&nbsp;000 dřeva</td>
+<td>11 h</td>
+<td>150</td>
+<td>1&nbsp;500</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>27&nbsp;000 jídla, 27&nbsp;000 dřeva</td>
+<td>16 h</td>
+<td>210</td>
+<td>2&nbsp;100</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>54&nbsp;000 jídla, 54&nbsp;000 dřeva</td>
+<td>21 h</td>
+<td>300</td>
+<td>3&nbsp;000</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>110&nbsp;000 jídla, 110&nbsp;000 dřeva</td>
+<td>1 d 4 h</td>
+<td>410</td>
+<td>4&nbsp;100</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>212&nbsp;890 jídla, 212&nbsp;890 dřeva</td>
+<td>3 d 20 h 3 min</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>Zlatý důl (zlato)</h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Produkce / h</th>
+<th>Kapacita budovy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>10 jídla, 10 dřeva, 10 kamene</td>
+<td>50 s</td>
+<td>20</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>25 jídla, 35 dřeva, 25 kamene</td>
+<td>3 min</td>
+<td>30</td>
+<td>300</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>110 jídla, 140 dřeva, 110 kamene</td>
+<td>30 min</td>
+<td>40</td>
+<td>400</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>450 jídla, 600 dřeva, 450 kamene</td>
+<td>2 h 30 min</td>
+<td>55</td>
+<td>550</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>1&nbsp;300 jídla, 1&nbsp;700 dřeva, 1&nbsp;300 kamene</td>
+<td>5 h</td>
+<td>75</td>
+<td>750</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>2&nbsp;900 jídla, 3&nbsp;800 dřeva, 2&nbsp;900 kamene</td>
+<td>8 h</td>
+<td>110</td>
+<td>1&nbsp;100</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>8&nbsp;600 jídla, 12&nbsp;000 dřeva, 8&nbsp;600 kamene</td>
+<td>11 h</td>
+<td>150</td>
+<td>1&nbsp;500</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>16&nbsp;000 jídla, 22&nbsp;000 dřeva, 16&nbsp;000 kamene</td>
+<td>16 h</td>
+<td>210</td>
+<td>2&nbsp;100</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>32&nbsp;000 jídla, 43&nbsp;000 dřeva, 32&nbsp;000 kamene</td>
+<td>21 h</td>
+<td>300</td>
+<td>3&nbsp;000</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>65&nbsp;000 jídla, 86&nbsp;000 dřeva, 65&nbsp;000 kamene</td>
+<td>1 d 4 h</td>
+<td>410</td>
+<td>4&nbsp;100</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>126&nbsp;395 jídla, 169&nbsp;285 dřeva, 126&nbsp;395 kamene</td>
+<td>3 d 20 h 3 min</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>5.2 Sklad</h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Kapacita za každou surovinu (Sklad)</th>
+<th>Celkem s Radnicí</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>50 dřeva</td>
+<td>1 min</td>
+<td>500</td>
+<td>1&nbsp;500</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>75 dřeva, 75 kamene</td>
+<td>5 min</td>
+<td>650</td>
+<td>1&nbsp;650</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>300 dřeva, 300 kamene</td>
+<td>45 min</td>
+<td>840</td>
+<td>1&nbsp;840</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>1&nbsp;200 dřeva, 1&nbsp;200 kamene</td>
+<td>3 h</td>
+<td>2&nbsp;200</td>
+<td>3&nbsp;200</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>3&nbsp;500 dřeva, 3&nbsp;500 kamene</td>
+<td>6 h</td>
+<td>8&nbsp;100</td>
+<td>9&nbsp;100</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>8&nbsp;000 dřeva, 8&nbsp;000 kamene</td>
+<td>10 h</td>
+<td>20&nbsp;000</td>
+<td>21&nbsp;000</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>24&nbsp;000 dřeva, 24&nbsp;000 kamene</td>
+<td>14 h</td>
+<td>61&nbsp;000</td>
+<td>62&nbsp;000</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>45&nbsp;000 dřeva, 45&nbsp;000 kamene</td>
+<td>20 h</td>
+<td>120&nbsp;000</td>
+<td>121&nbsp;000</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>90&nbsp;000 dřeva, 90&nbsp;000 kamene</td>
+<td>1 d 2 h</td>
+<td>240&nbsp;000</td>
+<td>241&nbsp;000</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>180&nbsp;000 dřeva, 180&nbsp;000 kamene</td>
+<td>1 d 10 h</td>
+<td>310&nbsp;000</td>
+<td>311&nbsp;000</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>352&nbsp;125 dřeva, 352&nbsp;075 kamene</td>
+<td>4 d 17 h 51 min</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>5.3 Chata stavitele</h3>
+<p>Chaty se neupgradují, každá chata = jeden stavitel = jedna souběžná stavba (klon CoC Builder's Hut).</p>
+<table>
+<thead>
+<tr>
+<th>Stavitel</th>
+<th>Jak ho hráč získá</th>
+<th>Cena</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#1</td>
+<td>start</td>
+<td>zdarma</td>
+</tr>
+<tr>
+<td>#2</td>
+<td>start (dokončení prvního kroku tutoriálu)</td>
+<td>zdarma</td>
+</tr>
+<tr>
+<td>#3</td>
+<td>gemy, nebo startovní nabídka</td>
+<td>300 gemů, nebo nabídka 4,99 USD (stavitel + 180 gemů + suroviny na 1 den)</td>
+</tr>
+<tr>
+<td>#4</td>
+<td>gemy, nebo nabídka</td>
+<td>600 gemů, nebo nabídka 9,99 USD</td>
+</tr>
+</tbody>
+</table>
+<p>Stavby do 5 minut se dokončují zdarma (tlačítko "dokončit"), takže první hodiny neblokují stavitele.</p>
+<h3>5.4 Meta budovy</h3>
+<p>Bonusy se posílají hostitelské hře jako modifikátory na start zápasu (<code>ICityModifierSource</code>, design kap. 5). Hodnoty jsou kumulativní pro daný level, ne přírůstek. Stropy: HP +20 %, útok +20 %, XP +20 %, odměny +20 %, 6 talentových bodů a 2 sloty. <strong>PvP Skill only bonusy ignoruje</strong>, All-out-power je aplikuje celé.</p>
+<h4>Kasárna (+HP jednotek; v MF hradba a hrdinové)</h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Bonus (kumulativně)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>25 jídla, 15 dřeva</td>
+<td>1 min</td>
+<td>+1 % HP</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>30 jídla, 20 dřeva</td>
+<td>1 min</td>
+<td>+2 % HP</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>70 jídla, 50 dřeva</td>
+<td>5 min</td>
+<td>+3 % HP</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>85 jídla, 65 dřeva</td>
+<td>5 min</td>
+<td>+4 % HP</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>190 jídla, 140 dřeva, 140 zlata</td>
+<td>45 min</td>
+<td>+5 % HP</td>
+</tr>
+<tr>
+<td>6</td>
+<td>3</td>
+<td>240 jídla, 180 dřeva, 180 zlata</td>
+<td>45 min</td>
+<td>+6 % HP</td>
+</tr>
+<tr>
+<td>7</td>
+<td>4</td>
+<td>800 jídla, 600 dřeva, 600 zlata</td>
+<td>3 h</td>
+<td>+7 % HP</td>
+</tr>
+<tr>
+<td>8</td>
+<td>4</td>
+<td>1&nbsp;000 jídla, 750 dřeva, 750 zlata</td>
+<td>3 h 30 min</td>
+<td>+8 % HP</td>
+</tr>
+<tr>
+<td>9</td>
+<td>5</td>
+<td>2&nbsp;200 jídla, 1&nbsp;700 dřeva, 1&nbsp;700 zlata</td>
+<td>6 h</td>
+<td>+9 % HP</td>
+</tr>
+<tr>
+<td>10</td>
+<td>5</td>
+<td>2&nbsp;800 jídla, 2&nbsp;100 dřeva, 2&nbsp;100 zlata</td>
+<td>7 h</td>
+<td>+10 % HP</td>
+</tr>
+<tr>
+<td>11</td>
+<td>6</td>
+<td>5&nbsp;100 jídla, 3&nbsp;800 dřeva, 3&nbsp;800 zlata</td>
+<td>10 h</td>
+<td>+11 % HP</td>
+</tr>
+<tr>
+<td>12</td>
+<td>6</td>
+<td>6&nbsp;400 jídla, 4&nbsp;800 dřeva, 4&nbsp;800 zlata</td>
+<td>12 h</td>
+<td>+12 % HP</td>
+</tr>
+<tr>
+<td>13</td>
+<td>7</td>
+<td>15&nbsp;000 jídla, 12&nbsp;000 dřeva, 12&nbsp;000 zlata</td>
+<td>13 h</td>
+<td>+13 % HP</td>
+</tr>
+<tr>
+<td>14</td>
+<td>7</td>
+<td>19&nbsp;000 jídla, 14&nbsp;000 dřeva, 14&nbsp;000 zlata</td>
+<td>17 h</td>
+<td>+14 % HP</td>
+</tr>
+<tr>
+<td>15</td>
+<td>8</td>
+<td>29&nbsp;000 jídla, 22&nbsp;000 dřeva, 22&nbsp;000 zlata</td>
+<td>19 h</td>
+<td>+15 % HP</td>
+</tr>
+<tr>
+<td>16</td>
+<td>8</td>
+<td>36&nbsp;000 jídla, 27&nbsp;000 dřeva, 27&nbsp;000 zlata</td>
+<td>1 d</td>
+<td>+16 % HP</td>
+</tr>
+<tr>
+<td>17</td>
+<td>9</td>
+<td>58&nbsp;000 jídla, 43&nbsp;000 dřeva, 43&nbsp;000 zlata</td>
+<td>1 d</td>
+<td>+17 % HP</td>
+</tr>
+<tr>
+<td>18</td>
+<td>9</td>
+<td>72&nbsp;000 jídla, 54&nbsp;000 dřeva, 54&nbsp;000 zlata</td>
+<td>1 d 8 h</td>
+<td>+18 % HP</td>
+</tr>
+<tr>
+<td>19</td>
+<td>10</td>
+<td>120&nbsp;000 jídla, 86&nbsp;000 dřeva, 86&nbsp;000 zlata</td>
+<td>1 d 8 h</td>
+<td>+19 % HP</td>
+</tr>
+<tr>
+<td>20</td>
+<td>10</td>
+<td>140&nbsp;000 jídla, 110&nbsp;000 dřeva, 110&nbsp;000 zlata</td>
+<td>1 d 16 h</td>
+<td>+20 % HP</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>507&nbsp;940 jídla, 382&nbsp;220 dřeva, 382&nbsp;070 zlata</td>
+<td>10 d 4 h 12 min</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>Kovárna (+útok jednotek)</h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Bonus (kumulativně)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>15 dřeva, 25 kamene</td>
+<td>1 min</td>
+<td>+1 % útok</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>20 dřeva, 30 kamene</td>
+<td>1 min</td>
+<td>+2 % útok</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>50 dřeva, 70 kamene</td>
+<td>5 min</td>
+<td>+3 % útok</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>65 dřeva, 85 kamene</td>
+<td>5 min</td>
+<td>+4 % útok</td>
+</tr>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>140 dřeva, 190 kamene, 140 zlata</td>
+<td>45 min</td>
+<td>+5 % útok</td>
+</tr>
+<tr>
+<td>6</td>
+<td>3</td>
+<td>180 dřeva, 240 kamene, 180 zlata</td>
+<td>45 min</td>
+<td>+6 % útok</td>
+</tr>
+<tr>
+<td>7</td>
+<td>4</td>
+<td>600 dřeva, 800 kamene, 600 zlata</td>
+<td>3 h</td>
+<td>+7 % útok</td>
+</tr>
+<tr>
+<td>8</td>
+<td>4</td>
+<td>750 dřeva, 1&nbsp;000 kamene, 750 zlata</td>
+<td>3 h 30 min</td>
+<td>+8 % útok</td>
+</tr>
+<tr>
+<td>9</td>
+<td>5</td>
+<td>1&nbsp;700 dřeva, 2&nbsp;200 kamene, 1&nbsp;700 zlata</td>
+<td>6 h</td>
+<td>+9 % útok</td>
+</tr>
+<tr>
+<td>10</td>
+<td>5</td>
+<td>2&nbsp;100 dřeva, 2&nbsp;800 kamene, 2&nbsp;100 zlata</td>
+<td>7 h</td>
+<td>+10 % útok</td>
+</tr>
+<tr>
+<td>11</td>
+<td>6</td>
+<td>3&nbsp;800 dřeva, 5&nbsp;100 kamene, 3&nbsp;800 zlata</td>
+<td>10 h</td>
+<td>+11 % útok</td>
+</tr>
+<tr>
+<td>12</td>
+<td>6</td>
+<td>4&nbsp;800 dřeva, 6&nbsp;400 kamene, 4&nbsp;800 zlata</td>
+<td>12 h</td>
+<td>+12 % útok</td>
+</tr>
+<tr>
+<td>13</td>
+<td>7</td>
+<td>12&nbsp;000 dřeva, 15&nbsp;000 kamene, 12&nbsp;000 zlata</td>
+<td>13 h</td>
+<td>+13 % útok</td>
+</tr>
+<tr>
+<td>14</td>
+<td>7</td>
+<td>14&nbsp;000 dřeva, 19&nbsp;000 kamene, 14&nbsp;000 zlata</td>
+<td>17 h</td>
+<td>+14 % útok</td>
+</tr>
+<tr>
+<td>15</td>
+<td>8</td>
+<td>22&nbsp;000 dřeva, 29&nbsp;000 kamene, 22&nbsp;000 zlata</td>
+<td>19 h</td>
+<td>+15 % útok</td>
+</tr>
+<tr>
+<td>16</td>
+<td>8</td>
+<td>27&nbsp;000 dřeva, 36&nbsp;000 kamene, 27&nbsp;000 zlata</td>
+<td>1 d</td>
+<td>+16 % útok</td>
+</tr>
+<tr>
+<td>17</td>
+<td>9</td>
+<td>43&nbsp;000 dřeva, 58&nbsp;000 kamene, 43&nbsp;000 zlata</td>
+<td>1 d</td>
+<td>+17 % útok</td>
+</tr>
+<tr>
+<td>18</td>
+<td>9</td>
+<td>54&nbsp;000 dřeva, 72&nbsp;000 kamene, 54&nbsp;000 zlata</td>
+<td>1 d 8 h</td>
+<td>+18 % útok</td>
+</tr>
+<tr>
+<td>19</td>
+<td>10</td>
+<td>86&nbsp;000 dřeva, 120&nbsp;000 kamene, 86&nbsp;000 zlata</td>
+<td>1 d 8 h</td>
+<td>+19 % útok</td>
+</tr>
+<tr>
+<td>20</td>
+<td>10</td>
+<td>110&nbsp;000 dřeva, 140&nbsp;000 kamene, 110&nbsp;000 zlata</td>
+<td>1 d 16 h</td>
+<td>+20 % útok</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>382&nbsp;220 dřeva, 507&nbsp;940 kamene, 382&nbsp;070 zlata</td>
+<td>10 d 4 h 12 min</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>Akademie (+talentové body a sloty)</h4>
+<p>+1 talentový bod každé 3 levely, +1 talentový slot na L10 a L20.</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Bonus (kumulativně)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>15 dřeva, 15 kamene, 20 zlata</td>
+<td>1 min</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4</td>
+<td>20 dřeva, 20 kamene, 25 zlata</td>
+<td>1 min</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>45 dřeva, 45 kamene, 60 zlata</td>
+<td>5 min</td>
+<td>+1 talentový bod</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>55 dřeva, 55 kamene, 70 zlata</td>
+<td>5 min</td>
+<td>+1 talentový bod</td>
+</tr>
+<tr>
+<td>5</td>
+<td>4</td>
+<td>170 dřeva, 170 kamene, 230 zlata</td>
+<td>45 min</td>
+<td>+1 talentový bod</td>
+</tr>
+<tr>
+<td>6</td>
+<td>4</td>
+<td>220 dřeva, 220 kamene, 290 zlata</td>
+<td>1 h</td>
+<td>+2 talentové body</td>
+</tr>
+<tr>
+<td>7</td>
+<td>4</td>
+<td>720 dřeva, 720 kamene, 960 zlata</td>
+<td>3 h 30 min</td>
+<td>+2 talentové body</td>
+</tr>
+<tr>
+<td>8</td>
+<td>4</td>
+<td>900 dřeva, 900 kamene, 1&nbsp;200 zlata</td>
+<td>4 h</td>
+<td>+2 talentové body</td>
+</tr>
+<tr>
+<td>9</td>
+<td>5</td>
+<td>2&nbsp;000 dřeva, 2&nbsp;000 kamene, 2&nbsp;700 zlata</td>
+<td>7 h</td>
+<td>+3 talentové body</td>
+</tr>
+<tr>
+<td>10</td>
+<td>5</td>
+<td>2&nbsp;500 dřeva, 2&nbsp;500 kamene, 3&nbsp;400 zlata</td>
+<td>8 h</td>
+<td>+3 talentové body, +1 slot</td>
+</tr>
+<tr>
+<td>11</td>
+<td>6</td>
+<td>4&nbsp;600 dřeva, 4&nbsp;600 kamene, 6&nbsp;100 zlata</td>
+<td>11 h</td>
+<td>+3 talentové body, +1 slot</td>
+</tr>
+<tr>
+<td>12</td>
+<td>6</td>
+<td>5&nbsp;800 dřeva, 5&nbsp;800 kamene, 7&nbsp;700 zlata</td>
+<td>14 h</td>
+<td>+4 talentové body, +1 slot</td>
+</tr>
+<tr>
+<td>13</td>
+<td>7</td>
+<td>14&nbsp;000 dřeva, 14&nbsp;000 kamene, 18&nbsp;000 zlata</td>
+<td>16 h</td>
+<td>+4 talentové body, +1 slot</td>
+</tr>
+<tr>
+<td>14</td>
+<td>7</td>
+<td>17&nbsp;000 dřeva, 17&nbsp;000 kamene, 23&nbsp;000 zlata</td>
+<td>20 h</td>
+<td>+4 talentové body, +1 slot</td>
+</tr>
+<tr>
+<td>15</td>
+<td>8</td>
+<td>26&nbsp;000 dřeva, 26&nbsp;000 kamene, 35&nbsp;000 zlata</td>
+<td>22 h</td>
+<td>+5 talentových bodů, +1 slot</td>
+</tr>
+<tr>
+<td>16</td>
+<td>8</td>
+<td>32&nbsp;000 dřeva, 32&nbsp;000 kamene, 43&nbsp;000 zlata</td>
+<td>1 d 4 h</td>
+<td>+5 talentových bodů, +1 slot</td>
+</tr>
+<tr>
+<td>17</td>
+<td>9</td>
+<td>52&nbsp;000 dřeva, 52&nbsp;000 kamene, 69&nbsp;000 zlata</td>
+<td>1 d 6 h</td>
+<td>+5 talentových bodů, +1 slot</td>
+</tr>
+<tr>
+<td>18</td>
+<td>9</td>
+<td>65&nbsp;000 dřeva, 65&nbsp;000 kamene, 86&nbsp;000 zlata</td>
+<td>1 d 12 h</td>
+<td>+6 talentových bodů, +1 slot</td>
+</tr>
+<tr>
+<td>19</td>
+<td>10</td>
+<td>100&nbsp;000 dřeva, 100&nbsp;000 kamene, 140&nbsp;000 zlata</td>
+<td>1 d 14 h</td>
+<td>+6 talentových bodů, +1 slot</td>
+</tr>
+<tr>
+<td>20</td>
+<td>10</td>
+<td>130&nbsp;000 dřeva, 130&nbsp;000 kamene, 170&nbsp;000 zlata</td>
+<td>2 d</td>
+<td>+6 talentových bodů, +2 sloty</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>453&nbsp;045 dřeva, 453&nbsp;045 kamene, 606&nbsp;755 zlata</td>
+<td>11 d 23 h 27 min</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>Tržiště (+odměny ze zápasů)</h4>
+<p>Platí na suroviny a soft měnu ze zápasů, ne na gemy a ne na odměny z žebříčků <em>(návrh)</em>. Pozor na smyčku: Tržiště zvyšuje i příjem surovin pro město, model v kapitole 7 s tímto bonusem nepočítá (je to rezerva asi 10 až 20 % pro aktivní hráče).</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Bonus (kumulativně)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>15 jídla, 15 dřeva, 20 zlata</td>
+<td>1 min</td>
+<td>+2 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>40 jídla, 40 dřeva, 55 zlata</td>
+<td>5 min</td>
+<td>+4 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>160 jídla, 160 dřeva, 220 zlata</td>
+<td>45 min</td>
+<td>+6 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>680 jídla, 680 dřeva, 900 zlata</td>
+<td>3 h</td>
+<td>+8 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>1&nbsp;900 jídla, 1&nbsp;900 dřeva, 2&nbsp;500 zlata</td>
+<td>6 h</td>
+<td>+10 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>4&nbsp;300 jídla, 4&nbsp;300 dřeva, 5&nbsp;800 zlata</td>
+<td>10 h</td>
+<td>+12 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>13&nbsp;000 jídla, 13&nbsp;000 dřeva, 17&nbsp;000 zlata</td>
+<td>14 h</td>
+<td>+14 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>24&nbsp;000 jídla, 24&nbsp;000 dřeva, 32&nbsp;000 zlata</td>
+<td>20 h</td>
+<td>+16 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>49&nbsp;000 jídla, 49&nbsp;000 dřeva, 65&nbsp;000 zlata</td>
+<td>1 d 2 h</td>
+<td>+18 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>97&nbsp;000 jídla, 97&nbsp;000 dřeva, 130&nbsp;000 zlata</td>
+<td>1 d 10 h</td>
+<td>+20 % odměn ze zápasu</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>190&nbsp;095 jídla, 190&nbsp;095 dřeva, 253&nbsp;495 zlata</td>
+<td>4 d 17 h 51 min</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4>Svatyně (+XP ze zápasů)</h4>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Radnice</th>
+<th>Cena</th>
+<th>Čas</th>
+<th>Bonus (kumulativně)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>5</td>
+<td>15 jídla, 15 kamene, 20 zlata</td>
+<td>1 min</td>
+<td>+2 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5</td>
+<td>40 jídla, 40 kamene, 55 zlata</td>
+<td>5 min</td>
+<td>+4 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5</td>
+<td>160 jídla, 160 kamene, 220 zlata</td>
+<td>45 min</td>
+<td>+6 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>680 jídla, 680 kamene, 900 zlata</td>
+<td>3 h</td>
+<td>+8 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>1&nbsp;900 jídla, 1&nbsp;900 kamene, 2&nbsp;500 zlata</td>
+<td>6 h</td>
+<td>+10 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>4&nbsp;300 jídla, 4&nbsp;300 kamene, 5&nbsp;800 zlata</td>
+<td>10 h</td>
+<td>+12 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>13&nbsp;000 jídla, 13&nbsp;000 kamene, 17&nbsp;000 zlata</td>
+<td>14 h</td>
+<td>+14 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>24&nbsp;000 jídla, 24&nbsp;000 kamene, 32&nbsp;000 zlata</td>
+<td>20 h</td>
+<td>+16 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>9</td>
+<td>9</td>
+<td>49&nbsp;000 jídla, 49&nbsp;000 kamene, 65&nbsp;000 zlata</td>
+<td>1 d 2 h</td>
+<td>+18 % XP ze zápasu</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>97&nbsp;000 jídla, 97&nbsp;000 kamene, 130&nbsp;000 zlata</td>
+<td>1 d 10 h</td>
+<td>+20 % XP ze zápasu</td>
+</tr>
+<tr>
+<td><strong>Celkem 1 kus</strong></td>
+<td></td>
+<td>190&nbsp;095 jídla, 190&nbsp;095 kamene, 253&nbsp;495 zlata</td>
+<td>4 d 17 h 51 min</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>5.5 Dekorace</h3>
+<p>Bez stavitele, stavba okamžitá, bez meta bonusu (kosmetika a sink, design kap. 3.2).</p>
+<table>
+<thead>
+<tr>
+<th>Dekorace</th>
+<th>Odemyká Radnice</th>
+<th>Cena</th>
+<th>Poznámka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prapor</td>
+<td>2</td>
+<td>2&nbsp;000 dřeva</td>
+<td>max 4 kusy, barva podle erbu města</td>
+</tr>
+<tr>
+<td>Fontána</td>
+<td>4</td>
+<td>15&nbsp;000 zlata</td>
+<td>max 2 kusy</td>
+</tr>
+<tr>
+<td>Socha hrdiny</td>
+<td>6</td>
+<td>150 gemů</td>
+<td>max 1 kus, prémiový sink; varianta v nabídkách a battle passu</td>
+</tr>
+</tbody>
+</table>
+<h3>5.6 Překážky</h3>
+<table>
+<thead>
+<tr>
+<th>Parametr</th>
+<th>Hodnota <em>(návrh)</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Počet na startu</td>
+<td>30 (stromy a kameny)</td>
+</tr>
+<tr>
+<td>Odstranění</td>
+<td>10 s, potřebuje volného stavitele, zdarma</td>
+</tr>
+<tr>
+<td>Odměna</td>
+<td>strom: dřevo, kámen: kámen, množství = 1 h produkce jedné produkční budovy na aktuální Radnici; plus 0 až 2 gemy (průměr 0,9)</td>
+</tr>
+<tr>
+<td>Obnova</td>
+<td>1 nová překážka za 8 h, max 30 na mapě</td>
+</tr>
+</tbody>
+</table>
+<p>Překážky dají na startu asi 27 gemů a pak asi 2,7 gemu denně.</p>
+<h3>5.7 Questy kapitol (onboarding)</h3>
+<p>Kapitola končí zvednutím Radnice o level, odměny se vyplácí průběžně za jednotlivé úkoly. Odměny kryjí náklady prvního dne (chybějících asi 115 zlata dodají první zápasy), pak postupně klesají.</p>
+<table>
+<thead>
+<tr>
+<th>Kapitola</th>
+<th>Úkoly</th>
+<th>Odměna</th>
+<th>Pokrytí nákladů tieru</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start</td>
+<td></td>
+<td>500 jídla, 500 dřeva</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Farma, Pila, Sklad, Kasárna L2, Radnice 2</td>
+<td>500 jídla, 500 dřeva, 500 kamene, 12 gemů</td>
+<td>tier 1 a 2: 100 % i se startem</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Lom, Kovárna, Radnice 3</td>
+<td>600 jídla, 600 dřeva, 500 kamene, 18 gemů, 3× zrychlení 15 min</td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Zlatý důl, Tržiště, Radnice 4</td>
+<td>2&nbsp;000 jídla, 2&nbsp;000 dřeva, 1&nbsp;500 kamene, 1&nbsp;000 zlata, 30 gemů, 2× zrychlení 1 h</td>
+<td>tier 1 až 3 dohromady asi 100 % (náklady 8&nbsp;710 surovin)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Akademie, druhé kusy produkce, Radnice 5</td>
+<td>5&nbsp;000 jídla, 5&nbsp;000 dřeva, 4&nbsp;000 kamene, 3&nbsp;000 zlata, 30 gemů, 1× zrychlení 8 h</td>
+<td>tier 4: asi 40 %</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Svatyně, Radnice 6</td>
+<td>10&nbsp;000 jídla, 10&nbsp;000 dřeva, 8&nbsp;000 kamene, 6&nbsp;000 zlata, 60 gemů</td>
+<td>tier 5: asi 29 %</td>
+</tr>
+</tbody>
+</table>
+<p>Gemy zdarma za první týden: kapitoly 150 + překážky asi 45 = <strong>asi 195 gemů</strong>, tedy stavitel #3 je pro neplatícího hráče dosažitelný za asi 2 týdny (CoC podobně).</p>
+<h2>6. Souhrnné tabulky</h2>
+<h3>6.1 Po tierech Radnice</h3>
+<p>Tier = období, kdy má hráč daný level Radnice; obsahuje všechny upgrady dostupné na tom levelu včetně zvednutí Radnice na další level. "Kumulativně den" = kdy aktivní hráč dokončí celý tier (2 stavitelé, 75 % vytížení; tier 1 až 2 při 100 %). Hráč, který Radnici "rushuje", je v dalším tieru dřív.</p>
+<table>
+<thead>
+<tr>
+<th>Tier (Radnice)</th>
+<th>Práce stavitelů</th>
+<th>Dní se 2 staviteli</th>
+<th>Kumulativně den</th>
+<th>Cena tieru celkem</th>
+<th>Pasivní produkce / den</th>
+<th>Podíl produkce</th>
+<th>Gemy na zrychlení celého tieru</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0,1 h</td>
+<td>0</td>
+<td>0</td>
+<td>160 jídla, 190 dřeva</td>
+<td>770</td>
+<td>1 %</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0,9 h</td>
+<td>0</td>
+<td>0</td>
+<td>460 jídla, 645 dřeva, 435 kamene</td>
+<td>1&nbsp;600</td>
+<td>2 %</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>8,7 h</td>
+<td>0,2</td>
+<td>0,3</td>
+<td>1&nbsp;850 jídla, 2&nbsp;400 dřeva, 1&nbsp;455 kamene, 1&nbsp;115 zlata</td>
+<td>3&nbsp;000</td>
+<td>11 %</td>
+<td>113</td>
+</tr>
+<tr>
+<td>4</td>
+<td>59,7 h</td>
+<td>1,7</td>
+<td>1,9</td>
+<td>10&nbsp;210 jídla, 14&nbsp;795 dřeva, 9&nbsp;760 kamene, 7&nbsp;205 zlata</td>
+<td>8&nbsp;400</td>
+<td>33 %</td>
+<td>563</td>
+</tr>
+<tr>
+<td>5</td>
+<td>120,8 h</td>
+<td>3,4</td>
+<td>5,3</td>
+<td>29&nbsp;595 jídla, 38&nbsp;200 dřeva, 27&nbsp;795 kamene, 21&nbsp;995 zlata</td>
+<td>12&nbsp;000</td>
+<td>34 %</td>
+<td>948</td>
+</tr>
+<tr>
+<td>6</td>
+<td>193 h</td>
+<td>5,4</td>
+<td>10,6</td>
+<td>65&nbsp;900 jídla, 87&nbsp;500 dřeva, 61&nbsp;200 kamene, 47&nbsp;400 zlata</td>
+<td>17&nbsp;000</td>
+<td>34 %</td>
+<td>1&nbsp;333</td>
+</tr>
+<tr>
+<td>7</td>
+<td>376,3 h</td>
+<td>10,5</td>
+<td>21,1</td>
+<td>261&nbsp;430 jídla, 333&nbsp;120 dřeva, 222&nbsp;765 kamene, 141&nbsp;000 zlata</td>
+<td>35&nbsp;000</td>
+<td>38 %</td>
+<td>2&nbsp;565</td>
+</tr>
+<tr>
+<td>8</td>
+<td>448 h</td>
+<td>12,4</td>
+<td>33,5</td>
+<td>450&nbsp;000 jídla, 580&nbsp;000 dřeva, 390&nbsp;000 kamene, 267&nbsp;000 zlata</td>
+<td>49&nbsp;000</td>
+<td>36 %</td>
+<td>2&nbsp;665</td>
+</tr>
+<tr>
+<td>9</td>
+<td>586 h</td>
+<td>16,3</td>
+<td>49,8</td>
+<td>904&nbsp;000 jídla, 1&nbsp;159&nbsp;000 dřeva, 784&nbsp;000 kamene, 533&nbsp;000 zlata</td>
+<td>68&nbsp;000</td>
+<td>33 %</td>
+<td>3&nbsp;281</td>
+</tr>
+<tr>
+<td>10</td>
+<td>668 h</td>
+<td>18,6</td>
+<td>68,4</td>
+<td>1&nbsp;429&nbsp;000 jídla, 1&nbsp;937&nbsp;000 dřeva, 1&nbsp;352&nbsp;000 kamene, 962&nbsp;000 zlata</td>
+<td>95&nbsp;000</td>
+<td>31 %</td>
+<td>3&nbsp;625</td>
+</tr>
+<tr>
+<td><strong>Celkem</strong></td>
+<td>2&nbsp;461 h</td>
+<td></td>
+<td>68,4</td>
+<td>3&nbsp;152&nbsp;605 jídla, 4&nbsp;152&nbsp;850 dřeva, 2&nbsp;849&nbsp;410 kamene, 1&nbsp;980&nbsp;715 zlata (Σ 12&nbsp;135&nbsp;580)</td>
+<td></td>
+<td></td>
+<td>15&nbsp;098</td>
+</tr>
+</tbody>
+</table>
+<h3>6.2 Celkem na maximum podle budovy</h3>
+<table>
+<thead>
+<tr>
+<th>Budova</th>
+<th>Kusů</th>
+<th>Čas na max (1 kus)</th>
+<th>Cena na max (všechny kusy)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Radnice</td>
+<td>1</td>
+<td>9 d 23 h 18 min</td>
+<td>361&nbsp;785 jídla, 361&nbsp;785 dřeva, 208&nbsp;760 kamene, 102&nbsp;830 zlata</td>
+</tr>
+<tr>
+<td>Farma</td>
+<td>3</td>
+<td>3 d 20 h 3 min</td>
+<td>884&nbsp;835 dřeva, 379&nbsp;155 kamene</td>
+</tr>
+<tr>
+<td>Pila</td>
+<td>3</td>
+<td>3 d 20 h 3 min</td>
+<td>884&nbsp;835 jídla, 379&nbsp;155 kamene</td>
+</tr>
+<tr>
+<td>Lom</td>
+<td>3</td>
+<td>3 d 20 h 3 min</td>
+<td>638&nbsp;670 jídla, 638&nbsp;670 dřeva</td>
+</tr>
+<tr>
+<td>Zlatý důl</td>
+<td>3</td>
+<td>3 d 20 h 3 min</td>
+<td>379&nbsp;185 jídla, 507&nbsp;855 dřeva, 379&nbsp;185 kamene</td>
+</tr>
+<tr>
+<td>Sklad</td>
+<td>1</td>
+<td>4 d 17 h 51 min</td>
+<td>352&nbsp;125 dřeva, 352&nbsp;075 kamene</td>
+</tr>
+<tr>
+<td>Kasárna</td>
+<td>1</td>
+<td>10 d 4 h 12 min</td>
+<td>507&nbsp;940 jídla, 382&nbsp;220 dřeva, 382&nbsp;070 zlata</td>
+</tr>
+<tr>
+<td>Kovárna</td>
+<td>1</td>
+<td>10 d 4 h 12 min</td>
+<td>382&nbsp;220 dřeva, 507&nbsp;940 kamene, 382&nbsp;070 zlata</td>
+</tr>
+<tr>
+<td>Akademie</td>
+<td>1</td>
+<td>11 d 23 h 27 min</td>
+<td>453&nbsp;045 dřeva, 453&nbsp;045 kamene, 606&nbsp;755 zlata</td>
+</tr>
+<tr>
+<td>Tržiště</td>
+<td>1</td>
+<td>4 d 17 h 51 min</td>
+<td>190&nbsp;095 jídla, 190&nbsp;095 dřeva, 253&nbsp;495 zlata</td>
+</tr>
+<tr>
+<td>Svatyně</td>
+<td>1</td>
+<td>4 d 17 h 51 min</td>
+<td>190&nbsp;095 jídla, 190&nbsp;095 kamene, 253&nbsp;495 zlata</td>
+</tr>
+</tbody>
+</table>
+<h2>7. Příjem surovin, který musí dodat hostitelská hra</h2>
+<p>Aby tempo z kapitoly 6 sedělo, musí zápasy, odměny a questy dodávat zbytek po pasivní produkci. Toto je <strong>zadání pro reward config hostitelské hry</strong> (MF, Hex). Bonus Tržiště ani nákupy tu nejsou započítané.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Útrata / den (cíl)</th>
+<th>Pasivní produkce / den</th>
+<th>Ze zápasů a odměn / den</th>
+<th>Na zápas při 6 zápasech denně</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>28&nbsp;000</td>
+<td>3&nbsp;000</td>
+<td>25&nbsp;000</td>
+<td>4&nbsp;200</td>
+</tr>
+<tr>
+<td>4</td>
+<td>25&nbsp;000</td>
+<td>8&nbsp;400</td>
+<td>17&nbsp;000</td>
+<td>2&nbsp;800</td>
+</tr>
+<tr>
+<td>5</td>
+<td>35&nbsp;000</td>
+<td>12&nbsp;000</td>
+<td>23&nbsp;000</td>
+<td>3&nbsp;900</td>
+</tr>
+<tr>
+<td>6</td>
+<td>49&nbsp;000</td>
+<td>17&nbsp;000</td>
+<td>32&nbsp;000</td>
+<td>5&nbsp;400</td>
+</tr>
+<tr>
+<td>7</td>
+<td>92&nbsp;000</td>
+<td>35&nbsp;000</td>
+<td>57&nbsp;000</td>
+<td>9&nbsp;500</td>
+</tr>
+<tr>
+<td>8</td>
+<td>140&nbsp;000</td>
+<td>49&nbsp;000</td>
+<td>87&nbsp;000</td>
+<td>14&nbsp;000</td>
+</tr>
+<tr>
+<td>9</td>
+<td>210&nbsp;000</td>
+<td>68&nbsp;000</td>
+<td>140&nbsp;000</td>
+<td>23&nbsp;000</td>
+</tr>
+<tr>
+<td>10</td>
+<td>310&nbsp;000</td>
+<td>95&nbsp;000</td>
+<td>210&nbsp;000</td>
+<td>35&nbsp;000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Tier 3 je první den a kryjí ho kapitoly questů, ne zápasy.</li>
+<li>Odměny ze zápasů se mají škálovat podle levelu Radnice hráče (jinak hráč na Radnici 9 dostane stejně jako na Radnici 3), <em>(návrh)</em>: reward = základ tieru z tabulky / 6 × výkon v zápase.</li>
+<li>PvP odměny (design PvP kap. 8) jsou součást tohoto příjmu, ne navíc.</li>
+</ul>
+<h2>8. Monetizace</h2>
+<table>
+<thead>
+<tr>
+<th>Touchpoint</th>
+<th>Cena</th>
+<th>Poznámka</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zrychlení stavby</td>
+<td><code>gemy = ceil(12 × hodiny^0,77)</code>, do 5 min zdarma</td>
+<td>v dolarech blízko CoC (1 h = 12, 1 d = 139, 7 d = 621)</td>
+</tr>
+<tr>
+<td>Dokoupení chybějících surovin</td>
+<td><code>gemy = ceil(0,6 × (množství / 100)^0,695)</code> za každou surovinu zvlášť</td>
+<td>1&nbsp;000 = 3, 100&nbsp;000 = 73; levnější než čas, jako v CoC</td>
+</tr>
+<tr>
+<td>Stavitel #3</td>
+<td>300 gemů nebo nabídka 4,99 USD</td>
+<td>hlavní konverzní nákup prvního týdne</td>
+</tr>
+<tr>
+<td>Stavitel #4</td>
+<td>600 gemů nebo nabídka 9,99 USD</td>
+<td></td>
+</tr>
+<tr>
+<td>Balíček surovin podle tieru</td>
+<td>1 den příjmu ze zápasů (kapitola 7): 1,99 USD (Radnice 4 až 6), 4,99 USD (7 až 8), 9,99 USD (9 až 10)</td>
+<td>nabídka při "chybí suroviny" a při plném stavitelském slotu</td>
+</tr>
+<tr>
+<td>Předměty zrychlení</td>
+<td>v nabídkách a battle passu</td>
+<td>MF už má <code>SkipItsCurrency</code></td>
+</tr>
+<tr>
+<td>Prémiové dekorace</td>
+<td>150 gemů a víc</td>
+<td>čistá kosmetika</td>
+</tr>
+<tr>
+<td>Startovní bundle surovin</td>
+<td>60 gemů, jednorázově</td>
+<td>kap. 8.1 <em>(návrh)</em></td>
+</tr>
+<tr>
+<td>City VIP</td>
+<td>120 gemů / 7 dní, 450 gemů / 30 dní</td>
+<td>kap. 8.2 <em>(návrh)</em>: −15 % času staveb, +1 stavitelská fronta, denní zrychlení 30 min zdarma, +20 % produkce</td>
+</tr>
+</tbody>
+</table>
+<p>Ceny zrychlení:</p>
+<table>
+<thead>
+<tr>
+<th>Čas</th>
+<th>Gemy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 min</td>
+<td>0</td>
+</tr>
+<tr>
+<td>10 min</td>
+<td>4</td>
+</tr>
+<tr>
+<td>30 min</td>
+<td>8</td>
+</tr>
+<tr>
+<td>1 h</td>
+<td>12</td>
+</tr>
+<tr>
+<td>3 h</td>
+<td>28</td>
+</tr>
+<tr>
+<td>8 h</td>
+<td>60</td>
+</tr>
+<tr>
+<td>1 d</td>
+<td>139</td>
+</tr>
+<tr>
+<td>3 d</td>
+<td>324</td>
+</tr>
+<tr>
+<td>7 d</td>
+<td>621</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Suroviny</th>
+<th>Gemy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1&nbsp;000</td>
+<td>3</td>
+</tr>
+<tr>
+<td>10&nbsp;000</td>
+<td>15</td>
+</tr>
+<tr>
+<td>50&nbsp;000</td>
+<td>46</td>
+</tr>
+<tr>
+<td>100&nbsp;000</td>
+<td>73</td>
+</tr>
+<tr>
+<td>190&nbsp;000</td>
+<td>114</td>
+</tr>
+</tbody>
+</table>
+<p>Přepočet gemů na peníze: <strong>60 gemů = 1 USD</strong> (náš ceník, potvrzeno 5. 11.). Gemové ceny jsou proti CoC (asi 100 gemů za 1 USD) vynásobené 0,6, takže v dolarech stojí totéž. Zrychlení Radnice 10 stojí 344 gemů, zrychlení celé verze 1 asi 15&nbsp;100 gemů (asi 250 USD). Koeficient 12 ve vzorci odpovídá právě 60 gemům za 1 USD.</p>
+<h3>8.1 Startovní bundle surovin <em>(návrh)</em></h3>
+<p>Rozhodnuto 6. 11.: gemy kupují bundle surovin do začátku. Čísla jsou návrh.</p>
+<table>
+<thead>
+<tr>
+<th>Parametr</th>
+<th>Hodnota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Obsah</td>
+<td>10&nbsp;000 jídla, 15&nbsp;000 dřeva, 10&nbsp;000 kamene, 7&nbsp;000 zlata, 3× zrychlení 1 h</td>
+</tr>
+<tr>
+<td>Cena</td>
+<td><strong>60 gemů</strong> (1 USD), jednorázově na účet</td>
+</tr>
+<tr>
+<td>Kdy se nabízí</td>
+<td>od Radnice 3 do dokončení Radnice 5</td>
+</tr>
+<tr>
+<td>Hodnota podle ceníku</td>
+<td>suroviny 62 gemů (vzorec dokoupení surovin), zrychlení 36 gemů, celkem cca 98 gemů, tedy sleva cca 40 %</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Obsah odpovídá ceně celého tieru 4 (41&nbsp;970 surovin), tedy asi 2,5 dne příjmu ze zápasů na tieru 4 (kap. 7).</li>
+<li><strong>Tempo:</strong> tier 4 je se 2 staviteli časově omezený (1,7 dne), takže bundle zkrátí cestu jen o čekání na suroviny, odhadem pod 1 den. Hlavní účel je první nákup za gemy, ne zrychlení.</li>
+<li>Hráči MF s refundem (kap. 11) mají gemy hned, bundle je pro ně přirozený první nákup.</li>
+</ul>
+<h3>8.2 City VIP <em>(návrh)</em></h3>
+<p>Rozhodnuto 6. 11.: City VIP je gem sink se zrychlením stavby. Konkrétní hodnoty jsou návrh, ladí se přes RC.</p>
+<table>
+<thead>
+<tr>
+<th>Parametr</th>
+<th>Hodnota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cena</td>
+<td><strong>120 gemů na 7 dní</strong> (2 USD), <strong>450 gemů na 30 dní</strong> (7,50 USD)</td>
+</tr>
+<tr>
+<td>Čas staveb a upgradů</td>
+<td>−15 %</td>
+</tr>
+<tr>
+<td>Stavitelská fronta</td>
+<td>+1 po dobu VIP (sčítá se se staviteli #3 a #4)</td>
+</tr>
+<tr>
+<td>Denní zrychlení zdarma</td>
+<td>1× 30 min (hodnota 8 gemů denně, 240 gemů za 30 dní)</td>
+</tr>
+<tr>
+<td>Pasivní produkce</td>
+<td>+20 %</td>
+</tr>
+<tr>
+<td>Auto-sběr</td>
+<td>ne: sběr drží návraty do města (KPI 3+ návraty denně)</td>
+</tr>
+<tr>
+<td>Platnost</td>
+<td>vyprší bez obnovy; rozestavěné stavby ve frontě VIP doběhnou, novou už do ní hráč nezadá</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Proč 450, ne 300 gemů: stavitel #3 stojí trvale 300 gemů, takže VIP za 300 na měsíc by ho kanibalizovalo. Pořadí nákupů: bundle (60), stavitel #3 (300), pak VIP jako opakovaný nákup.</li>
+<li>VIP se hodí i jako prémiová odměna (PvP žebříčky, battle pass) v 7denní variantě.</li>
+</ul>
+<p><strong>Dopad na tempo</strong> (dny do dosažení, model z kap. 6.1: čas tieru = práce stavitelů × 0,85 / (fronty × 0,75 × 24 h + 0,5 h zdarma denně); dny podle surovin = dny základu / (1 + 0,2 × podíl produkce tieru); platí delší z obou):</p>
+<table>
+<thead>
+<tr>
+<th>Hráč</th>
+<th>Radnice 6</th>
+<th>Radnice 8</th>
+<th>Radnice 10</th>
+<th>Vše na max V1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Základ: 2 stavitelé, 6 zápasů denně, bez VIP</td>
+<td>5,3</td>
+<td>21,1</td>
+<td>49,8</td>
+<td>68,4</td>
+</tr>
+<tr>
+<td>VIP, 6 zápasů denně (brzdí suroviny)</td>
+<td>5,0</td>
+<td>19,7</td>
+<td>46,6</td>
+<td>64,0</td>
+</tr>
+<tr>
+<td>Stavitel #3 bez VIP, o 30 % víc příjmu (cca 8 zápasů denně)</td>
+<td>4,1</td>
+<td>16,2</td>
+<td>38,3</td>
+<td>52,6</td>
+</tr>
+<tr>
+<td>VIP, o 30 % víc příjmu</td>
+<td>3,9</td>
+<td>15,4</td>
+<td>36,4</td>
+<td>50,0</td>
+</tr>
+<tr>
+<td>VIP, suroviny nebrzdí (dokupuje)</td>
+<td>3,0</td>
+<td>11,8</td>
+<td>28,0</td>
+<td>38,4</td>
+</tr>
+<tr>
+<td>Stavitel #3 + VIP, suroviny nebrzdí</td>
+<td>2,2</td>
+<td>8,9</td>
+<td>21,0</td>
+<td>28,9</td>
+</tr>
+</tbody>
+</table>
+<p>Čtení:</p>
+<ul>
+<li><strong>Průměrný hráč s VIP je rychlejší jen o 6 %</strong>, protože příjem surovin je spočítaný na 2 stavitele (kap. 2). VIP tempo nerozbije a nepřeskočí gating stage indexem.</li>
+<li><strong>Aktivní a platící hráč</strong> se zkrátí výrazně, to je záměr (stejná logika jako stavitel #3).</li>
+<li><strong>Strop:</strong> stavitel #3 + VIP + dokupování surovin = vše na max V1 kolem 29. dne. Při lednovém releasu je to polovina února, před V2 (Radnice 11+, Q1 2027). Když V2 nebude do března, hlídat podíl hráčů na maximu a případně snížit −15 % na −10 % přes RC.</li>
+</ul>
+<h3>8.3 Hloubka monetizace a kolik to přinese <em>(návrh 9. 11.)</em></h3>
+<p><strong>Cíl (David, 9. 11.):</strong> plné město v řádu <strong>10 až 100 tis. USD</strong> za gemy, aby velryby měly kam růst, a průměrný platící hráč nechá <strong>aspoň desítky USD</strong>.</p>
+<p><strong>Kde jsme dnes:</strong> verze 1 (Radnice 1 až 10) se dá celá koupit za cca <strong>26&nbsp;100 gemů, tedy cca 440 USD</strong>: zrychlení všech staveb 15&nbsp;100 gemů (250 USD) a dokoupení všech surovin 11&nbsp;100 gemů (185 USD), plus stavitelé #3 a #4 (900 gemů, 15 USD). Na cíl to nestačí ani o dva řády. Vzorce cen (kap. 8 a 10) jsou konkávní, zdražují pomaleji než roste objem, takže hloubku musí dát <strong>obsah</strong>, ne vyšší ceny.</p>
+<p><strong>Jak hloubku postavit:</strong> roadmapa Radnice 11 až 25 a nové vrstvy z kap. 12 a designu kap. 4. Vzorce z kap. 10 platí beze změny, tabulky τ a C se prodlouží:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+<th>17</th>
+<th>18</th>
+<th>19</th>
+<th>20</th>
+<th>21</th>
+<th>22</th>
+<th>23</th>
+<th>24</th>
+<th>25</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>τ (h)</td>
+<td>42</td>
+<td>50</td>
+<td>60</td>
+<td>70</td>
+<td>80</td>
+<td>92</td>
+<td>104</td>
+<td>116</td>
+<td>130</td>
+<td>144</td>
+<td>160</td>
+<td>176</td>
+<td>192</td>
+<td>210</td>
+<td>228</td>
+</tr>
+<tr>
+<td>C (mil.)</td>
+<td>0,6</td>
+<td>0,9</td>
+<td>1,3</td>
+<td>1,8</td>
+<td>2,5</td>
+<td>3,4</td>
+<td>4,5</td>
+<td>6</td>
+<td>8</td>
+<td>10,5</td>
+<td>13,5</td>
+<td>17</td>
+<td>21</td>
+<td>26</td>
+<td>32</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Nová vrstva</th>
+<th>Od Radnice</th>
+<th>Kusů (Radnice 11 / 16 / 21)</th>
+<th>Váhy w / k</th>
+<th>Proč je to sink</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Výzkum (linie v Akademii, vlastní fronta laboratoře)</td>
+<td>6</td>
+<td>8 od Radnice 6, pak 14 / 20</td>
+<td>1,2 / 1,0</td>
+<td>dlouhé časovače mimo stavitele, RoK</td>
+</tr>
+<tr>
+<td>Obranné věže (s útoky na města, V3)</td>
+<td>11</td>
+<td>6 / 10 / 14</td>
+<td>1,0 / 0,8</td>
+<td>hodně kusů na každý level, CoC</td>
+</tr>
+<tr>
+<td>Hradby (segmenty, bez časovače)</td>
+<td>11</td>
+<td>100 / 175 / 250</td>
+<td>0 / 0,06</td>
+<td>čistý surovinový sink, v CoC největší útrata velryb</td>
+</tr>
+<tr>
+<td>Nemocnice</td>
+<td>11</td>
+<td>1</td>
+<td>1,2 / 1,0</td>
+<td></td>
+</tr>
+<tr>
+<td>Produkce: 4. a 5. kus</td>
+<td>11 a 16</td>
+<td></td>
+<td>jako dnes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hloubka podle verzí</strong> (gemy na zrychlení všeho a dokoupení všech surovin, 60 gemů = 1 USD; skript nad vzorci kap. 10):</p>
+<table>
+<thead>
+<tr>
+<th>Obsah</th>
+<th>Kdy <em>(návrh)</em></th>
+<th>Plné město za gemy</th>
+<th>z toho zrychlení / suroviny</th>
+<th>F2P hráč se 4 staviteli</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verze 1: Radnice 10</td>
+<td>leden 2027</td>
+<td><strong>cca 440 USD</strong></td>
+<td>250 / 185</td>
+<td>34 dní (68 se 2 staviteli)</td>
+</tr>
+<tr>
+<td>Radnice 15 + výzkum, věže, hradby</td>
+<td>Q2 2027</td>
+<td><strong>cca 5&nbsp;000 USD</strong></td>
+<td>1&nbsp;700 / 3&nbsp;300</td>
+<td>cca 190 dní</td>
+</tr>
+<tr>
+<td>Radnice 20</td>
+<td>Q4 2027</td>
+<td><strong>cca 20&nbsp;500 USD</strong></td>
+<td>4&nbsp;700 / 15&nbsp;800</td>
+<td>cca 550 dní</td>
+</tr>
+<tr>
+<td>Radnice 25</td>
+<td>2028</td>
+<td><strong>cca 58&nbsp;000 USD</strong></td>
+<td>8&nbsp;800 / 49&nbsp;100</td>
+<td>cca 1&nbsp;200 dní</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Největší sinky na Radnici 25: hradby cca 17,9 tis. USD, výzkum 14,4 tis., věže 7,9 tis., produkce celkem 9,5 tis. Hradby a výzkum jsou pro velryby, běžný hráč je dělá postupně.</li>
+<li><strong>Cíl 10 až 100 tis. USD splní Radnice 20 a víc.</strong> V roce 2027 tedy realisticky 5 až 20 tis. USD podle toho, kolik verzí stihneme. To stačí: velryba tolik neutratí za měsíc, hloubka je hlavně důvod pokračovat.</li>
+<li>Výzkum má vlastní frontu laboratoře, aby neblokoval stavitele. Při jedné laboratoři by výzkum na Radnici 25 trval přes 7 let, proto 2 laboratoře (druhá jako prémiový nákup, stejně jako stavitel #3).</li>
+<li><strong>VIP úrovně</strong> <em>(návrh)</em>: City VIP z kap. 8.2 doplnit o úrovně 1 až 10 podle celkové útraty gemů, s trvalými bonusy (RoK VIP). Hloubku v gemech nemění, ale dává velrybám viditelný cíl a status.</li>
+</ul>
+<p><strong>Průměrný platící hráč</strong> (žebříček nákupů, prvních 90 dní, ceny z kap. 8):</p>
+<table>
+<thead>
+<tr>
+<th>Nákup</th>
+<th>Cena</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Startovní bundle surovin</td>
+<td>1 USD</td>
+</tr>
+<tr>
+<td>Stavitel #3 (nabídka)</td>
+<td>4,99 USD</td>
+</tr>
+<tr>
+<td>City VIP 30 dní, 2×</td>
+<td>15 USD</td>
+</tr>
+<tr>
+<td>2 balíčky surovin na Radnici 7 až 8</td>
+<td>10 USD</td>
+</tr>
+<tr>
+<td>Zrychlení (cca 300 gemů)</td>
+<td>5 USD</td>
+</tr>
+<tr>
+<td><strong>Celkem za 90 dní</strong></td>
+<td><strong>cca 36 USD</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Za rok s 6 měsíci VIP a stavitelem #4 je to cca <strong>90 až 110 USD</strong>. Cíl „desítky USD“ tedy platí pro <strong>průměrného platícího hráče</strong> města.</li>
+<li><strong>Na všechny hráče města to neplatí:</strong> platí jen 1 až 3 % z nich měsíčně <em>(předpoklad)</em>, takže průměr na všechny hráče města je 0,1 až 0,9 USD měsíčně, v základu cca 0,3 USD. Desítky USD na každého hráče žádná F2P hra nemá, proto je potřeba cíl formulovat přes platící hráče a ARPDAU.</li>
+</ul>
+<p><strong>Kolik to přinese</strong> <em>(odhad, ověřit A/B testem)</em>:</p>
+<p>Předpoklady: Hexapolis cca 7 tis. DAU, MAU 2,5× DAU, město hraje 60 % (cca 10&nbsp;500 hráčů měsíčně). Dnešní IAP Hexu cca <strong>8,2 tis. USD měsíčně</strong>, MF cca <strong>11,8 tis. USD měsíčně</strong> (cashflow srpen až říjen 2026).</p>
+<table>
+<thead>
+<tr>
+<th>Scénář</th>
+<th>Platí měsíčně</th>
+<th>ARPPU měsíčně</th>
+<th>Hex: City za měsíc</th>
+<th>Hex: rok 2027 (11 měsíců)</th>
+<th>MF: čistý přírůstek za měsíc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nízký</td>
+<td>1 %</td>
+<td>12 USD</td>
+<td>1,3 tis. USD</td>
+<td>14 tis. USD</td>
+<td>0,9 tis. USD</td>
+</tr>
+<tr>
+<td><strong>Základ</strong></td>
+<td><strong>1,5 %</strong></td>
+<td><strong>18 USD</strong></td>
+<td><strong>2,8 tis. USD</strong></td>
+<td><strong>31 tis. USD</strong></td>
+<td><strong>2 tis. USD</strong></td>
+</tr>
+<tr>
+<td>Vysoký</td>
+<td>3 %</td>
+<td>30 USD</td>
+<td>9,5 tis. USD</td>
+<td>104 tis. USD</td>
+<td>6,8 tis. USD</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>MF: přepočet podle poměru IAP MF a Hexu (1,44×) a polovina odečtená za kanibalizaci dnešní mapy, která už gemy prodává (kap. 11).</li>
+<li><strong>Vysoký scénář táhnou velryby:</strong> jeden hráč, který dojde zrychlením na Radnici 15, udělá 5 tis. USD. Proto musí obsah (Radnice 11 až 15) přijít dřív, než první velryby dojdou na strop verze 1 (při stavitelích, VIP a dokupování cca 29. den, kap. 8.2).</li>
+<li>Základ znamená cca +34 % IAP Hexu. Měřit jako ARPDAU před a po jen na iOS a Androidu mimo Play Pass (KONCEPT_OBNOVA_HEXU kap. 6).</li>
+</ul>
+<h2>9. KPI pro ladění na stagingu MF</h2>
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Cíl</th>
+<th>Když je pod cílem</th>
+<th>Když je nad cílem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Den dosažení Radnice 4 / 6 / 8 / 10 (medián hráčů, kteří město hrají)</td>
+<td>1 / 5 až 7 / 21 až 25 / 50</td>
+<td>zkrátit časovou tabulku τ tieru, přidat odměny kapitol</td>
+<td>prodloužit τ vyšších tierů, zpomalit gating stage indexem</td>
+</tr>
+<tr>
+<td>Vytížení stavitelů (podíl času, kdy staví)</td>
+<td>70 až 80 %</td>
+<td>časovače jsou moc krátké vůči rytmu návštěv: prodloužit τ, nebo přidat notifikace "stavitel volný"</td>
+<td>v pořádku, hlídat churn</td>
+</tr>
+<tr>
+<td>Stavitel čeká na suroviny (podíl času)</td>
+<td>pod 25 %</td>
+<td></td>
+<td>snížit tabulku cen C, nebo zvýšit odměny ze zápasů</td>
+</tr>
+<tr>
+<td>Návraty do města za den</td>
+<td>3 a víc</td>
+<td>zkrátit kapacitu budovy (10 h → 8 h), push "sklad plný"</td>
+<td>v pořádku</td>
+</tr>
+<tr>
+<td>Podíl pasivní produkce na příjmu</td>
+<td>30 až 40 %</td>
+<td>zvýšit produkci (r1)</td>
+<td>snížit produkci, hráči přestávají hrát zápasy</td>
+</tr>
+<tr>
+<td>Hráči s plným Skladem (denně)</td>
+<td>pod 20 %</td>
+<td></td>
+<td>posílit kapacitu Skladu, nebo upozornit na upgrade</td>
+</tr>
+<tr>
+<td>Konverze na stavitele #3 do D7</td>
+<td>2 až 4 % hráčů města <em>(předpoklad)</em></td>
+<td>silnější startovní nabídka, víc gemů zdarma na ochutnání</td>
+<td>zvážit cenu 450 gemů</td>
+</tr>
+<tr>
+<td>Podíl síly z města na celkové síle (D30)</td>
+<td>15 až 25 %</td>
+<td>zvýšit procenta za level</td>
+<td>snížit procenta nebo strop přes RC</td>
+</tr>
+<tr>
+<td>Win rate PvE a All-out-power podle levelu Radnice</td>
+<td>rozdíl mezi Radnicí 5 a 10 do 10 p. b. ve stejné lize</td>
+<td></td>
+<td>snížit stropy bonusů, ligy podle síly</td>
+</tr>
+<tr>
+<td>D1 / D7 / D30 s městem proti bez (A/B)</td>
+<td>D7 a D30 nahoru, D1 bez poklesu</td>
+<td>zjednodušit první den, víc kapitol</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Ladí se jen parametry z kapitoly 10 (tabulky τ a C, váhy, r1, kapacita) přes Remote Config, pak se tabulky přepočítají.</p>
+<h2>10. Vzorce a parametry (pro přepočet)</h2>
+<p>Úkol = jeden level jedné budovy (u produkce pro každý kus zvlášť).</p>
+<ul>
+<li><strong>Nominální tier</strong> levelu L: produkce, Sklad, Tržiště, Svatyně: <code>n = L</code>; Kasárna, Kovárna, Akademie: <code>n = ceil(L / 2)</code>; Radnice: <code>n = L - 1</code> (staví se v předchozím tieru).</li>
+<li><strong>Gating</strong> (kdy jde postavit): <code>max(n, Radnice odemčení budovy nebo kusu)</code>, u Radnice tier <code>L - 1</code>.</li>
+<li><strong>Čas:</strong> <code>čas = w × f × τ(n)</code>, <strong>cena celkem:</strong> <code>cena = k × f × C(n)</code>, rozdělená podle receptu. <code>f = 0,8</code> pro lichý level u budov se 2 levely na tier, jinak 1,0.</li>
+<li><strong>Produkce:</strong> <code>r(L) = 20 × 1,4^(L - 1)</code> za hodinu, kapacita budovy = 10 × r(L). Do příjmu se počítá s účinností sběru 80 %.</li>
+<li><strong>Sklad:</strong> kapacita(L) = max(1,25 × nejdražší jednotlivá surovina v tieru L - 1&nbsp;000; 1,3 × kapacita(L - 1); 500).</li>
+<li><strong>Zaokrouhlení:</strong> ceny pod 100 na 5, jinak na 2 platné číslice; časy pod 1 h na 1, 2, 3, 5, 10, 15, 20, 30, 45 min, do 6 h na půl hodiny, do 24 h na hodiny, nad 24 h na 2 hodiny.</li>
+<li><strong>Dny tieru:</strong> <code>Σ časů tieru / (stavitelé × vytížení) / 24</code>, vytížení 0,75 (tier 1 až 2: 1,0).</li>
+<li><strong>Podíl produkce:</strong> <code>pasivní za den × dny tieru / cena tieru</code>, pasivní za den = r(tier) × 24 × 0,8 × kusů × počet odemčených surovin.</li>
+</ul>
+<p>Tabulky tierů:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>τ (časová jednotka)</td>
+<td>1 min</td>
+<td>5 min</td>
+<td>45 min</td>
+<td>3 h</td>
+<td>6 h</td>
+<td>10 h</td>
+<td>14 h</td>
+<td>20 h</td>
+<td>26 h</td>
+<td>34 h</td>
+</tr>
+<tr>
+<td>C (cenová jednotka)</td>
+<td>50</td>
+<td>150</td>
+<td>600</td>
+<td>2&nbsp;500</td>
+<td>7&nbsp;000</td>
+<td>16&nbsp;000</td>
+<td>48&nbsp;000</td>
+<td>90&nbsp;000</td>
+<td>180&nbsp;000</td>
+<td>360&nbsp;000</td>
+</tr>
+</tbody>
+</table>
+<p>Váhy a recepty:</p>
+<table>
+<thead>
+<tr>
+<th>Budova</th>
+<th>w (čas)</th>
+<th>k (cena)</th>
+<th>Recept ceny</th>
+<th>Odemčení</th>
+<th>Max level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Radnice</td>
+<td>3,0</td>
+<td>3,0</td>
+<td>jídlo 35 %, dřevo 35 %, kámen 20 %, zlato 10 %</td>
+<td>start</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Farma</td>
+<td>0,8</td>
+<td>0,6</td>
+<td>dřevo 70 %, kámen 30 %</td>
+<td>Radnice 1</td>
+<td>Radnice</td>
+</tr>
+<tr>
+<td>Pila</td>
+<td>0,8</td>
+<td>0,6</td>
+<td>jídlo 70 %, kámen 30 %</td>
+<td>Radnice 1</td>
+<td>Radnice</td>
+</tr>
+<tr>
+<td>Lom</td>
+<td>0,8</td>
+<td>0,6</td>
+<td>jídlo 50 %, dřevo 50 %</td>
+<td>Radnice 2</td>
+<td>Radnice</td>
+</tr>
+<tr>
+<td>Zlatý důl</td>
+<td>0,8</td>
+<td>0,6</td>
+<td>jídlo 30 %, dřevo 40 %, kámen 30 %</td>
+<td>Radnice 3</td>
+<td>Radnice</td>
+</tr>
+<tr>
+<td>Sklad</td>
+<td>1,0</td>
+<td>1,0</td>
+<td>dřevo 50 %, kámen 50 %</td>
+<td>Radnice 1</td>
+<td>Radnice</td>
+</tr>
+<tr>
+<td>Kasárna</td>
+<td>1,2</td>
+<td>1,0</td>
+<td>jídlo 40 %, dřevo 30 %, zlato 30 %</td>
+<td>Radnice 1</td>
+<td>2× Radnice</td>
+</tr>
+<tr>
+<td>Kovárna</td>
+<td>1,2</td>
+<td>1,0</td>
+<td>dřevo 30 %, kámen 40 %, zlato 30 %</td>
+<td>Radnice 2</td>
+<td>2× Radnice</td>
+</tr>
+<tr>
+<td>Akademie</td>
+<td>1,4</td>
+<td>1,2</td>
+<td>dřevo 30 %, kámen 30 %, zlato 40 %</td>
+<td>Radnice 4</td>
+<td>2× Radnice</td>
+</tr>
+<tr>
+<td>Tržiště</td>
+<td>1,0</td>
+<td>0,9</td>
+<td>jídlo 30 %, dřevo 30 %, zlato 40 %</td>
+<td>Radnice 3</td>
+<td>Radnice</td>
+</tr>
+<tr>
+<td>Svatyně</td>
+<td>1,0</td>
+<td>0,9</td>
+<td>jídlo 30 %, kámen 30 %, zlato 40 %</td>
+<td>Radnice 5</td>
+<td>Radnice</td>
+</tr>
+</tbody>
+</table>
+<p>Kalibrace: τ je nastavené tak, aby aktivní hráč došel na Radnici 10 kolem 50. dne; C tak, aby pasivní produkce kryla asi 35 % útraty tieru (tier 7 má C zvýšené kvůli třetím kusům produkce, které jinak podíl produkce vychýlí nahoru).</p>
+<h2>11. Vazba na dnešní mapu MF: náhrada a refund</h2>
+<p>V MF už existuje systém budov na mapě (<code>NoxFort/Assets/_Project/Entities/MapBuilding</code>): Gold Mine, Gem Mine, Stone Mine, Energy Generator, Jeweler, Wall (s talenty), Bestiary, Challenges. Moduly <code>ConstructionModule</code>, <code>UpgradingModule</code>, <code>CurrencyGeneratorModule</code>, <code>TalentModule</code> a <code>Modifiers</code> jsou dobrý základ pro City V2. Dnešní Gold Mine má 10 levelů, upgrady stojí 240 až 1&nbsp;080 <code>HardCurrency</code> a trvají 2 h až 2 d 8 h, odemyká se podle stage indexu.</p>
+<p><strong>Rozhodnuto 6. 11.:</strong> City V2 <strong>nahradí</strong> dnešní budovy na mapě MF a hráči dostanou refund investic. Dvě paralelní stavební mety nebudou.</p>
+<p><strong>Pravidlo refundu <em>(návrh, jednoduché)</em>:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Co</th>
+<th>Jak</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gemy</td>
+<td><strong>100 % <code>HardCurrency</code> utracené za stavbu, upgrady a zrychlení nahrazených budov</strong> se vrátí jako gemy (v MF <code>HardCurrency</code> = gemy)</td>
+</tr>
+<tr>
+<td>Startovní Radnice</td>
+<td>podle nejvyšší úrovně dnešní budovy na mapě: Radnice = nejvyšší level / 2, zaokrouhleno nahoru, <strong>min. 1, max. 5</strong> (Gold Mine 10 = Radnice 5, Gold Mine 5 = Radnice 3)</td>
+</tr>
+<tr>
+<td>Budovy na startu</td>
+<td>produkční budovy, Sklad a Kasárna na maximu pro startovní Radnici, ostatní od nuly; questy kapitol do startovní Radnice se označí jako splněné bez odměn</td>
+</tr>
+<tr>
+<td>Komunikace</td>
+<td>jedno okno "Mapa se mění na město" se souhrnem refundu, žádná volba hráče</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Hráč na Radnici 5 přeskočí asi 5 dní tempa (kumulativní den 5,3 v kap. 6.1), zbytek je stejný jako u nového hráče. Gemy z refundu může dát do bundle, stavitelů, VIP nebo zrychlení.</li>
+<li><strong>Riziko pro tempo:</strong> maxovaný hráč může mít refund v tisících gemů (u Gold Mine 240 až 1&nbsp;080 za level). Celá verze 1 se dá zrychlit za cca 15&nbsp;100 gemů. Je to vrácení vlastní investice, ale před releasem vytáhnout z dat rozložení utracené <code>HardCurrency</code> na mapě a podle něj potvrdit 100 %.</li>
+<li><strong>Ztráta produkce měn:</strong> Gold Mine a Gem Mine dnes vyrábí měny. City V2 gemy nevyrábí (jen překážky, questy, achievementy), takže se změní přírůstek gemů hráčům MF. Spočítat z dat, kolik gemů Gem Mine denně dává, a dorovnat přes questy nebo denní odměnu <em>(návrh)</em>.</li>
+<li><strong>Gem sink:</strong> upgrady mapy za <code>HardCurrency</code> zmizí; nahrazují je stavitelé, zrychlení, bundle a City VIP (kap. 8).</li>
+<li>Otevřené: co s talenty z Wall (návrh: převést na talentové body Akademie) a jestli Bestiary a Challenges zůstanou ve městě jako vstupy do featur bez upgradů.</li>
+</ul>
+<h2>12. Později (mimo verzi 1, podle designu kap. 4)</h2>
+<ul>
+<li>Radnice 11 a výš, víc kusů budov, nové budovy (V2); parametry a hloubka monetizace v kap. 8.3.</li>
+<li>Výroba jednotek a nemocnice, výzkum v Akademii.</li>
+<li>HP budov, obrana, hradby a štíty (až s útoky na města; ve verzi 1 nejsou, proto tu HP chybí).</li>
+<li>VIP úrovně a další výhody (City VIP ve verzi 1 je jedna nabídka, kap. 8.2).</li>
+<li>Síla města jako číslo pro žebříčky, aliance a pomoc se stavbou, návštěvy měst.</li>
+</ul>
+<h2>13. Otevřené otázky</h2>
+<ol>
+<li><strong>Ceník gemů:</strong> vyřešeno, 60 gemů = 1 USD (5. 11.). Zbývá ověřit, že <code>HardCurrency</code> v MF a gemy v Hexu mají stejný ceník.</li>
+<li><strong>Mapování surovin:</strong> MF má soft měnu, <code>HardCurrency</code>, kameny a další měny; Hex má vlastní. Které z nich jsou jídlo, dřevo, kámen a zlato, nebo zavádíme 4 nové suroviny jen pro město?</li>
+<li><strong>Dnešní mapa MF: Rozhodnuto 6. 11., City V2 ji nahradí s refundem.</strong> Zbývá potvrdit pravidlo refundu z kap. 11 (100 % gemů, startovní Radnice max 5), dorovnání produkce Gem Mine a talenty z Wall.</li>
+<li><strong>Meta staty v MF a Hexu:</strong> HP a útok čeho přesně (hradba, hrdinové, jednotky Hexu)? Co znamená talentový bod a slot v MF a v Hexu? Na čem se počítá XP ze Svatyně?</li>
+<li><strong>Stropy 20 %:</strong> sedí vůči ostatním zdrojům síly? Potřebujeme křivku síly hráče MF a Hexu na D1, D7, D30 (telemetrie), pak doladit procenta za level.</li>
+<li><strong>Odměny ze zápasů:</strong> dodá hostitelská hra příjem z kapitoly 7 (škálovaný podle Radnice), a kolik zápasů denně hraje medián aktivního hráče (model počítá 6)?</li>
+<li><strong>Gating Radnice v Hexu:</strong> jaké milníky (světy, PvP výhry) odpovídají MF stage 5 až 27?</li>
+<li><strong>Stavitel #3 a #4:</strong> cena 300 a 600 gemů, nebo jen přes nabídky. VIP dává stavitelskou frontu navíc jen po dobu VIP <em>(návrh, kap. 8.2)</em>.</li>
+<li><strong>City VIP a bundle</strong> <em>(návrh, kap. 8.1 a 8.2)</em>: potvrdit ceny 60 / 120 / 450 gemů a efekty, a jestli VIP zapnout už ve verzi 1 (návrh: ano, za RC flagem, nahrazuje gem sink mapy MF).</li>
+<li><strong>Hloubka monetizace</strong> (kap. 8.3): potvrdit roadmapu Radnice 11 až 25 a nové vrstvy (výzkum, věže, hradby). Kdy přijde Radnice 11 až 15, aby velryby nenarazily na strop verze 1?</li>
+</ol><div class="foot">NOXGAMES · interní podklad, důvěrné · City V2 / Mapa V2 · stav 21. 11. 2026</div></body></html>

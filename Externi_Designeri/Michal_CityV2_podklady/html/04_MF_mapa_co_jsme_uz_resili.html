@@ -1,0 +1,80 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mapa a budovy v Mecha Fortress: co jsme už řešili</title><style>
+@page { size: A4; margin: 16mm 14mm; }
+body { font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; font-size: 10.5pt; line-height: 1.5; color: #1a1d21; max-width: 900px; margin: 0 auto; padding: 24px; }
+h1 { font-size: 22pt; margin: 0 0 12px; border-bottom: 3px solid #e8a33d; padding-bottom: 8px; }
+h2 { font-size: 15pt; margin-top: 26px; color: #12304d; break-after: avoid; }
+h3, h4 { margin-top: 18px; color: #12304d; break-after: avoid; }
+blockquote { margin: 8px 0; padding: 6px 12px; background: #f5f2ea; border-left: 3px solid #e8a33d; color: #3b3f45; }
+blockquote p { margin: 4px 0; }
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 9.5pt; break-inside: auto; }
+tr { break-inside: avoid; }
+th, td { border: 1px solid #d5d8dc; padding: 4px 7px; text-align: left; vertical-align: top; }
+th { background: #12304d; color: #fff; }
+tr:nth-child(even) td { background: #f7f8f9; }
+code { background: #eef0f2; padding: 1px 4px; border-radius: 3px; font-size: 9pt; }
+pre { background: #eef0f2; padding: 8px; overflow-x: auto; font-size: 9pt; }
+.foot { margin-top: 30px; font-size: 8.5pt; color: #777; border-top: 1px solid #ddd; padding-top: 6px; }
+</style></head><body><h1>Mapa a budovy v Mecha Fortress: co jsme už řešili</h1>
+<blockquote>
+<p><strong>Co to je:</strong> výtah z interních porad (duben až květen 2026), kde se řešila dnešní mapa budov v Mecha Fortress. Jsou to názory a nápady z diskuzí, ne hotová rozhodnutí. Rozhodnutí, která z toho vzešla, jsou v dokumentu <em>City V2: design</em> (City V2 dnešní mapu nahradí).
+<strong>Popis dnešních budov a jejich čísel:</strong> HTML od Aldyho (<em>MechaFortress_mapa_budovy_standalone.html</em>).</p>
+</blockquote>
+<h2>1. Jak tým vnímá dnešní mapu</h2>
+<p>Z brainstormingu k budoucnosti MF (Q2/Q3 2026):</p>
+<ul>
+<li>Mapa je vnímaná jako <strong>nevyužitá, slepě převzatá z Boom Castle a narativně nesedící</strong>. Koncept budování města a dolů ve sci-fi mech světě nedává smysl.</li>
+<li><strong>Upgrady budov za HardCurrency (gemy)</strong> působí jako pay-to-win. Navíc hráč dostane většinu budov hned postavených, takže chybí pocit, že si základnu vybudoval.</li>
+<li>Mapa funguje hlavně jako <strong>zdroj offline příjmu</strong> (doly), ne jako místo, kam se hráč chce vracet.</li>
+</ul>
+<h2>2. Směry, které padly na stůl</h2>
+<table>
+<thead>
+<tr>
+<th>Směr</th>
+<th>Myšlenka</th>
+<th>Kdo / kde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Feature / crafting hub</strong></td>
+<td>Každá herní mechanika má na mapě svou budovu nebo terminál, mapa je přehledný rozcestník. V hlavním menu zůstanou rychlé ikony (hlavní menu jako hub funguje i v asijských hrách, každé zanoření je složitost navíc).</td>
+<td>brainstorm Q2/Q3</td>
+</tr>
+<tr>
+<td><strong>Hangár</strong></td>
+<td>Celé menu jako hangár s mechem uprostřed, body z mapy jako tlačítka v hangáru. Lépe sedí k narativu a konečně ukáže mecha, který je dnes schovaný.</td>
+<td>brainstorm, marketing</td>
+</tr>
+<tr>
+<td><strong>Zrušení</strong></td>
+<td>Když se nenajde smysluplné využití, mapu odstranit a offline earning přesunout jinam.</td>
+<td>brainstorm</td>
+</tr>
+<tr>
+<td><strong>Travian / CoC styl</strong></td>
+<td>Plnohodnotné město: stavím, těžím, crafting, oddělené materiály, chodím ho spravovat. <strong>Tímhle směrem jde City V2.</strong></td>
+<td>whiteboard, později rozhodnutí 6. 11.</td>
+</tr>
+</tbody>
+</table>
+<h2>3. Konkrétní návrhy k ekonomice budov</h2>
+<p>Z produkční porady 13. 4. 2026 a z rychlé porady dev + marketing:</p>
+<ul>
+<li><strong>Odstranit gemy z města.</strong> Stavět za vlastní stavební materiály (železo, beton, cihly), ne za HardCurrency. Odbourá to pocit pay-to-win.</li>
+<li><strong>Generátor stavební měny</strong> jako důvod vrátit se do hry.</li>
+<li><strong>Builder Pass:</strong> tematický battle pass na stavební materiály, po přestavbě měn na mapě.</li>
+<li><strong>Pacing a appointment mechaniky:</strong> první session v MF trvá až 90 minut a hráč "vyhoří". Časovače na stavbu mají hráče vracet víckrát denně místo jedné dlouhé session.</li>
+<li><strong>Krátké časovače na startu:</strong> 5, 10, 20, 30, 60 minut a menší přírůstky produkce.</li>
+<li><strong>Začínat s prázdnou základnou,</strong> kterou si hráč celou postaví, místo předpostavené mapy.</li>
+<li><strong>Víc levelů budov,</strong> aby měl hráč dlouhodobě co upgradovat a proč se vracet.</li>
+<li><strong>Notifikace</strong> na dokončené budovy a na nasbíranou produkci.</li>
+</ul>
+<h2>4. Co se nám osvědčilo jinde</h2>
+<ul>
+<li><strong>Quick Patrol / Auto-Patrol</strong> (offline odměny s okamžitým claimem): silný pozitivní moment první den, buduje návyk. "Claiming simulator", tedy hodně malých odměn napříč systémy, které si hráč chodí vybírat, je směr, který tým chce posílit.</li>
+<li><strong>Hexapolis:</strong> hráči dlouhodobě chtějí víc stavění a hloubku města. Proto se City V2 nejdřív ověří v původním Hexapolisu (leden 2027).</li>
+<li><strong>Více měn vs. jedna měna:</strong> v týmu je otevřená debata. Jedna strana chce specifické měny pro jednotlivé featury (tikety, klíče, stavební materiál), které jde rozdávat jako odměny bez rozbití hlavní ekonomiky. Druhá strana ukazuje na úspěšné hry (Habby), které jedou hlavně přes hard currency. City V2 jde cestou vlastních surovin, gemy jen na zrychlení, stavitele, bundle a VIP.</li>
+</ul>
+<h2>5. Prototypy</h2>
+<p>Máme early prototypy města (mimo jiné v interním prototypu Warcamp), design v nich je zatím placeholder. Na ukázku je můžeme poslat zvlášť.</p><div class="foot">NOXGAMES · interní podklad, důvěrné · City V2 / Mapa V2 · stav 21. 11. 2026</div></body></html>
